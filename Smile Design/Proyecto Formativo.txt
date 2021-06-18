@@ -1,0 +1,7 @@
+dbClinica 
+
+Procedimientos Almacenados 
+  - Calculo_Consultas
+  - Calculo_Saldo
+	
+Posibles funciones para calculos futuros en otras interfaces 
