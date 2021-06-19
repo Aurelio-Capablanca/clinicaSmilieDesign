@@ -25,10 +25,10 @@ Dashboard_Page::headerTemplate('Mantenimientos');
                 </div>                
                 <div class="col s12 m2">
                   <div class="card center-align" >
-                         <i class="large material-icons">face</i>
+                         <i class="large material-icons">description</i>
                         <div class="card-block">
                             <br></br>
-                            <a href="UsuarioAdminCli.php" class="card-title text-center">Cliente</a>                                                        
+                            <a href="expedientes.php" class="card-title text-center">Expedientes</a>                                                        
                             <br>
                         </div>
                     </div>
@@ -36,25 +36,54 @@ Dashboard_Page::headerTemplate('Mantenimientos');
 
                 <div class="col s12 m2">
                     <div class="card center-align" >
-                            <i class="large material-icons">local_shipping</i>
+                            <i class="large material-icons">medication</i>
                         <div class="card-block">
                             <br></br>
-                            <a href="proveedor.php" class="card-title text-center">Proveedor</a>                                                        
+                            <a href="doctores.php" class="card-title text-center">Doctores</a>                                                        
                             <br>                                     
                         </div>    
                     </div>
                 </div>                
                 <div class="col s12 m2">
                    <div class="card center-align" >
-                         <i class="large material-icons">shopping_bag</i>
+                         <i class="large material-icons">face</i>
                         <div class="card-block">
                             <br></br>
-                            <a  href="pacientes.php" class="card-title text-center">Productos</a>                                                    
+                            <a  href="pacientes.php" class="card-title text-center">Pacientes</a>                                                    
                             <br>
                     </div>
-                </div>                              
                 </div>
-                  
+            </div>
+            <div class="col s12 m2">
+                   <div class="card center-align" >
+                         <i class="large material-icons">file_present</i>
+                        <div class="card-block">
+                            <br></br>
+                            <a  href="tratamientos.php" class="card-title text-center">Tratamientos</a>                                                    
+                            <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m2">
+                   <div class="card center-align" >
+                         <i class="large material-icons">scatter_plot</i>
+                        <div class="card-block">
+                            <br></br>
+                            <a  href="causaConsulta.php" class="card-title text-center">Causa Consulta</a>                                                    
+                            <br>
+                    </div>
+                </div>               
+            </div>
+            <div class="col s12 m2">
+                   <div class="card center-align" >
+                         <i class="large material-icons">margin</i>
+                        <div class="card-block">
+                            <br></br>
+                            <a  href="especialidad.php" class="card-title text-center">Especialidad</a>                                                    
+                            <br>
+                    </div>
+                </div>               
+            </div>                              
             </div>                      
      </div>
 </div>

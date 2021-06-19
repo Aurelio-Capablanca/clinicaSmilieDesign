@@ -131,12 +131,8 @@ Dashboard_Page::headerTemplate('Doctores');
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                     <input class="hide" type="number" id="id_doctorE" name="id_doctorE"/>
                     <input class="hide" type="number" id="id_especialidaddoctor" name="id_especialidaddoctor"/>
-                    <div class="row">                        
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">account_box</i>
-                            <input id="nombre_doctorE" type="text" name="nombre_doctorE" class="validate"  required/>
-                            <label for="nombre_doctorE">Nombre Doctor</label>
-                        </div>
+                    <input  class="hide" id="nombre_doctorE" type="text" name="nombre_doctorE" class="validate"/>
+                    <div class="row">                                                
                         <div class="input-field col s6">
                             <select id="especialidad" name="especialidad">
                             </select>

@@ -34,10 +34,10 @@ class Dashboard_Page {
                            <li><a href="index.php"><i class="material-icons left">home</i>Home</a></li>
                         </ul>                       
                             <ul class="right right hide-on-med-and-down">
-                                <li><a href="homePrivate.php"><i class="material-icons left">check</i>Revisar</a></li>
-                                <li><a href="usuario.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
-                                <li><a href="usuarioVentas.php"><i class="material-icons left">assignment</i>Órdenes</a></li>
-                                <li><a href="empleadoMantenimiento.php"><i class="material-icons left">sentiment_very_satisfied</i>Valoraciones</a></li>
+                                <li><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
+                                <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
+                                <li><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
+                                <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li>
                                 <li><a href="login.php"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>
                                                             
                             </ul>
@@ -51,25 +51,18 @@ class Dashboard_Page {
                                 <img src="../../resources/img/fonfo12.jpg"> 
                             </div>
                             <a href="#user"><img class="circle" src="../../resources/img/default-user-image.png"></a>
-                            <a href="#name"><span class="white-text name">Usuario: <b>' . $_SESSION['usuario'] . '</b></span></a>
-                            <a href="#email"><span class="white-text email">Correo: <b>' . $_SESSION['correo'] . '</b></span></a>
+                            <a href="#name"><span class="white-text name">Usuario:<b></b></span></a>
+                            <a href="#email"><span class="white-text email">Correo:<b></b></span></a>
                             
-                        </div>
-                    <li>
-                        <li class="hide-on-large-only"><a href="index.php"><i class="material-icons left">home</i>Home</a></li>
-                        <div class="divider hide-on-large-only"></div>                                                         
-                    </li>                                               
-                    </li>                    
-                    <li>
-                        <li><a href="empleadoMantenimiento.php"><i class="material-icons left">sentiment_very_satisfied</i>Valoraciones</a></li>                                           
-                    </li>                         
+                        </div>                                         
                     <li>
                         <div class="divider"></div>
                     </li>              
-                        <li><a href="login.php"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>      
-                        <li class="hide-on-large-only" ><a href="homePrivate.php"><i class="material-icons left">check</i>Revisar</a></li>
-                        <li class="hide-on-large-only"><a href="usuario.php"><i class="material-icons left">desktop_mac</i>Mantenimiento</a></li>
-                        <li class="hide-on-large-only"><a href="usuarioVentas.php"><i class="material-icons left">assignment</i>Órdenes</a></li>
+                        <li><a href="login.php"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>                              
+                        <li class="hide-on-large-only" ><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
+                        <li class="hide-on-large-only" ><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
+                        <li class="hide-on-large-only" ><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
+                        <li class="hide-on-large-only" ><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a>
                 </ul> 
 
 
@@ -93,11 +86,7 @@ class Dashboard_Page {
                             <div class="col l6 s12">
                                 <h5 class="white-text">Farmastuff Administrativo</h5>                               
                             </div>
-                            <div class="col l4 offset-l2 s12">
-                                <h5 class="white-text">Sitio Público</h5>
-                                <ul>
-                                    <a href="../public/index.php" class="card-title center-align white-text">Ir</a>
-                                </ul>
+                            <div class="col l4 offset-l2 s12">                                
                             </div>
                         </div>
                     </div>
@@ -119,19 +108,4 @@ class Dashboard_Page {
         ');
     }                                                      
 }
-/*  
-                if (isset($_SESSION['idtipoempleado'])){
-                        switch($_SESSION['idtipoempleado'])) {
-                            case 1:
-                                header('location: index.php')
-                             break;
-
-                             case2:
-                                header('location: index.php')
-                            break;
-
-                            default: 
-                    }
-                }
-*/
 ?>
