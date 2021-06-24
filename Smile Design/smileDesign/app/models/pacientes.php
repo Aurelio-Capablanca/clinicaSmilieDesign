@@ -4,17 +4,19 @@ class Pacientes extends Validator{
 
     private $id = null;
     private $nombre = null;
-    private $precio = null;
-    private $cantidad = null;
-    private $existencia = null;
-    private $descripcion = null;
-    private $imagen = null;
-    private $tipo = null;
+    private $apellido = null;
+    private $fecha = null;
+    private $dui = null;
+    private $direccion=null;
+    private $telefono = null;
+    private $correo = null;
+    private $foto = null;
     private $estado = null;
-    private $proveedor = null;
-    private $pais = null;
-    private $revision = null;
+    private $imagen = null;
     private $ruta = '../../../resources/img/productos/';
+    private $respuesta =null;
+    private $iddoctor = null;
+
 
     public function setId($value)
     {
@@ -36,10 +38,11 @@ class Pacientes extends Validator{
         }
     }
 
-    public function setPrecio($value)
+
+    public function setApellido($value)
     {
-        if ($this->validateMoney($value)) {
-            $this->precio = $value;
+        if ($this->validateAlphanumeric($value, 1, 50)) {
+            $this->apellido = $value;
             return true;
         } else {
             return false;
@@ -47,30 +50,50 @@ class Pacientes extends Validator{
     }
 
 
-    public function setCantidad($value)
+    public function setFecha($value)
     {
-        if ($this->validateString($value, 1, 250)) {
-            $this->cantidad = $value;
+        if ($this->validateDate($value)) {
+            $this->fecha = $value;
             return true;
         } else {
             return false;
         }
     }
 
-    public function setExistencia($value)
+    public function setDireccion($value)
     {
-        if ($this->validateString($value, 1, 250)) {
-            $this->existencia = $value;
+        if ($this->validateString($value, 1, 50)) {
+            $this->direccion = $value;
             return true;
         } else {
             return false;
         }
     }
 
-    public function setDescripcion($value)
+    public function setDUI($value)
     {
-        if ($this->validateString($value, 1, 250)) {
-            $this->descripcion = $value;
+        if ($this->validateDUI($value)) {
+            $this->dui = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }   
+
+    public function setTelefono($value)
+    {
+        if ($this->validatePhone($value)) {
+            $this->telefono = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+   
+    public function setCorreo($value)
+    {
+        if ($this->validateEmail($value)) {
+            $this->correo = $value;
             return true;
         } else {
             return false;
@@ -87,10 +110,10 @@ class Pacientes extends Validator{
         }
     }
 
-    public function setTipo($value)
+    public function setRespuesta($value)
     {
-        if ($this->validateNaturalNumber($value)) {
-            $this->tipo = $value;
+        if ($this->validateAlphanumeric($value, 1, 50)) {
+            $this->respuesta = $value;
             return true;
         } else {
             return false;
@@ -107,20 +130,11 @@ class Pacientes extends Validator{
         }
     }
 
-    public function setProveedor($value)
-    {
-        if ($this->validateNaturalNumber($value)) {
-            $this->proveedor = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
 
-    public function setPais($value)
+    public function setidDoctor($value)
     {
         if ($this->validateNaturalNumber($value)) {
-            $this->pais = $value;
+            $this->iddoctor = $value;
             return true;
         } else {
             return false;
@@ -128,16 +142,8 @@ class Pacientes extends Validator{
     }
 
 
-    public function setRevision($value)
-    {
-        if ($this->validateNaturalNumber($value)) {
-            $this->revision = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+  // Llamados de get para concatenar con el backend  
+   
     public function getId()
     {
         return $this->id;
@@ -148,24 +154,34 @@ class Pacientes extends Validator{
         return $this->nombre;
     }
 
-    public function getPrecio()
+    public function getApellido()
     {
-        return $this->precio;
+        return $this->apellido;
     }
 
-    public function getCantidad()
+    public function getFecha()
     {
-        return $this->cantidad;
+        return $this->fecha;
     }
 
-    public function getExistencia()
+    public function getDUI()
     {
-        return $this->existencia;
+        return $this->dui;
     }
 
-    public function getDescripcion()
+    public function getDireccion()
     {
-        return $this->descripcion;
+        return $this ->direccion;
+    }
+
+    public function getTelefono()
+    {
+        return $this ->telefono;
+    }
+
+    public function getCorreo()
+    {
+        return $this ->correo;
     }
 
     public function getImagen()
@@ -173,260 +189,226 @@ class Pacientes extends Validator{
         return $this->imagen;
     }
 
-
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    public function getEstado()
-    {
-        return $this->estado;
-    }
-
-    public function getProveedor()
-    {
-        return $this->proveedor;
-    }
-
-
-    public function getPais()
-    {
-        return $this->pais;
-    }
-
-    public function getRevision()
-    {
-        return $this->revision;
-    }
-
-
     public function getRuta()
     {
         return $this->ruta;
     }
 
 
+    public function getEstado()
+    {
+        return $this ->estado;
+    }
+
+    public function getRespuesta()
+    {
+        return $this ->respuesta;
+    }
+
+    public function getIdDoctor()
+    {
+        return $this ->iddoctor;
+    }
 
     public function searchRows($value)
     {
-        $sql = 'SELECT idproducto, nombreproducto, descripcionproducto
-                FROM productos pr                                             
-                WHERE nombreproducto ILIKE ? OR descripcionproducto ILIKE ?';
-        $params = array("%$value%", "%$value%");
+        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                WHERE nombrepaciente ILIKE ? OR apellidopaciente ILIKE ? OR duipaciente ILIKE ?';
+        $params = array("%$value%", "%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }
 
     public function createRow()
     {
-        $sql = 'INSERT INTO productos (nombreproducto,descripcionproducto )
-                VALUES (?, ?)';
-        $params = array($this->nombre,$this->descripcion);
-        return Database::executeRow($sql, $params);
-    }
-
-
-    public function createRowP()
-    {
-        $sql = 'INSERT INTO productoproveedor(idproducto,idproveedor,idpais,idestadoproducto,idtipoproducto,existencias,precioporunidad,cantidadporunidad,fotoproducto)
+        $sql = 'INSERT INTO pacientes(nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->id,$this->proveedor,$this->pais,$this->estado,$this->tipo,$this->existencia,$this->precio,$this->cantidad,$this->imagen);
+        $params = array($this->nombre,$this->apellido,$this->fecha,$this->dui,$this->direccion,$this->telefono,$this->correo,$this->imagen,$this->estado);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT idproducto, nombreproducto, descripcionproducto
-                FROM productos pr                                                                
-                ORDER BY nombreproducto'; 
-        $params = null;
-        return Database::getRows($sql, $params);
-    }
-
-
-    public function readAll2()
-    {
-        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente
-                FROM pacientes                                                              
+        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)                                                               
                 ORDER BY nombrepaciente'; 
         $params = null;
         return Database::getRows($sql, $params);
     }
 
-
-    public function readOneShipper()
-    {
-        $sql = 'SELECT idproveedorproducto,idproducto ,nombreproducto , nombrecompania, representante, pais, existencias, precioporunidad, cantidadporunidad, codigoproducto, fotoproducto
-                FROM productoproveedor
-                INNER JOIN proveedor USING(idproveedor)
-                INNER JOIN pais USING(idpais)
-                INNER JOIN productos USING(idproducto)
-                WHERE idproducto = ?';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
-
-    public function readOneShipper1()
-    {
-        $sql = 'SELECT idproveedorproducto,idproducto ,nombreproducto , nombrecompania, representante, pais, existencias, precioporunidad, cantidadporunidad, codigoproducto, idproveedor, idpais, idestadoproducto, idtipoproducto, fotoproducto
-                FROM productoproveedor
-                INNER JOIN proveedor USING(idproveedor)
-                INNER JOIN pais USING(idpais)
-                INNER JOIN productos USING(idproducto)
-                INNER JOIN estadoproducto USING(idestadoproducto)
-                INNER JOIN tipoproducto USING(idtipoproducto)
-                WHERE idproveedorproducto = ?';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
-
-    public function readAllShipper()
-    {
-        $sql = 'SELECT idproveedorproducto,idproducto ,nombreproducto , nombrecompania, representante, pais, existencias, precioporunidad, cantidadporunidad, codigoproducto, fotoproducto
-                FROM productoproveedor
-                INNER JOIN proveedor USING(idproveedor)
-                INNER JOIN pais USING(idpais)
-                INNER JOIN productos USING(idproducto)';
-        $params = null;
-        return Database::getRows($sql, $params);
-    }
-
-    public function searchOneShipper($value)
-    {
-        $sql = 'SELECT idproveedorproducto,idproducto, nombreproducto , nombrecompania, representante, pais, existencias, precioporunidad, cantidadporunidad, codigoproducto, fotoproducto
-                FROM productoproveedor
-                INNER JOIN proveedor USING(idproveedor)
-                INNER JOIN pais USING(idpais)
-                INNER JOIN productos USING(idproducto)               
-                WHERE nombreproducto ILIKE ?';
-        $params = array("%$value%");
-        return Database::getRows($sql, $params);
-    }
-
-
-    public function readAllRevision()
-    {
-        $sql = 'SELECT idproveedorproducto, nombreproducto, precioporunidad, existencias, cantidadporunidad, descripcionproducto, fotoproducto, estadoproducto, tipoproducto ,nombrecompania , pais, codigoproducto ,idestadoproducto
-                FROM productoproveedor  
-                INNER JOIN productos USING(idproducto)
-                INNER JOIN estadoproducto USING(idestadoproducto)
-                INNER JOIN tipoproducto USING(idtipoproducto)
-                INNER JOIN proveedor USING(idproveedor)
-                INNER JOIN pais USING(idpais)        
-                WHERE idestadoproducto= 2
-                ORDER BY nombreproducto';
-        $params = null;
-        return Database::getRows($sql, $params);
-    }
-
-    public function readOneRev()
-    {
-        $sql = 'SELECT idproveedorproducto, nombreproducto, precioporunidad, existencias, cantidadporunidad, descripcionproducto, fotoproducto, estadoproducto, tipoproducto ,nombrecompania , pais , codigoproducto ,idestadoproducto
-                FROM productoproveedor  
-                INNER JOIN productos USING(idproducto)
-                INNER JOIN estadoproducto USING(idestadoproducto)
-                INNER JOIN tipoproducto USING(idtipoproducto)
-                INNER JOIN proveedor USING(idproveedor)
-                INNER JOIN pais USING(idpais)                
-                WHERE idproveedorproducto = ?
-                ORDER BY nombreproducto';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
-    
-
-
     public function readAllESTADO()
     {
-        $sql = 'SELECT idestadoproducto, estadoproducto
-                FROM estadoproducto';
+        $sql = 'SELECT idestadopaciente, estadopaciente
+                FROM estadopaciente
+                WHERE idestadopaciente'; 
         $params = null;
         return Database::getRows($sql, $params);
     }
 
-    public function readAllTIPO()
+    public function readAllDOCTOR()
     {
-        $sql = 'SELECT idtipoproducto, tipoproducto 
-                FROM tipoproducto';
+        $sql = 'SELECT iddoctor, nombredoctor
+                FROM doctores
+                INNER JOIN estadodoctor USING (idestadodoctor)'; 
         $params = null;
         return Database::getRows($sql, $params);
     }
-
-    public function readAllPROVEEDOR()
+    
+    public function readAllDOCTORI()
     {
-        $sql = 'SELECT idproveedor, nombrecompania
-                FROM proveedor';
+        $sql = 'SELECT iddoctor, nombredoctor
+                FROM doctores
+                INNER JOIN estadodoctor USING (idestadodoctor)
+                WHERE idestadodoctor=1'; 
         $params = null;
         return Database::getRows($sql, $params);
     }
-
-    public function readAllPAIS()
-    {
-        $sql = 'SELECT idpais, pais
-                FROM pais';
-        $params = null;
-        return Database::getRows($sql, $params);
-    }
-
 
     public function readOne()
     {
-        $sql = 'SELECT idproducto, nombreproducto, descripcionproducto                       
-                 FROM productos
-                WHERE idproducto = ?';
+        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                WHERE idpaciente = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
-    public function ReadDetail(){
-        $sql='SELECT tipoproducto, idproducto , idproveedorproducto, fotoproducto, nombreproducto, descripcionproducto, precioporunidad, idtipoproducto
-                        FROM productoproveedor
-                        INNER JOIN productos USING(idproducto)
-                        INNER JOIN tipoproducto USING(idtipoproducto) 
-                        WHERE idproveedorproducto=?';
-        $params = array($this->id);
-        return Database::getRow($sql,$params);
-    }
-
-
     public function updateRow()
-    {
-        // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
-        //($this->imagen) ? $this->deleteFile($this->getRuta(), $current_image) : $this->imagen = $current_image;
-        $sql = 'UPDATE productos
-                SET    nombreproducto = ?, descripcionproducto = ?
-                WHERE idproducto = ?';
-        $params = array($this->nombre, $this->descripcion, $this->id);
-        return Database::executeRow($sql, $params);
-    }
-
-    public function updateRowShipper()
     {        
-        $sql = 'UPDATE productoproveedor 
-                SET  idpais=?, idtipoproducto=?,precioporunidad=?, cantidadporunidad=? 
-                WHERE idproveedorproducto=?';
-        $params = array($this->pais, $this->tipo, $this->precio, $this->cantidad,$this->id);
+        $sql = 'UPDATE pacientes
+                SET    nombrepaciente = ?, apellidopaciente = ?, fechanacimiento=?, duipaciente=?, direccionpaciente=?, telefonopaciente=?, correopaciente=?, idestadopaciente=?
+                WHERE  idpaciente = ?';
+        $params = array($this->nombre, $this->apellido, $this->fecha, $this->dui, $this->direccion, $this->telefono, $this->correo, $this->estado, $this->id);
         return Database::executeRow($sql, $params);
-    }
-
-    public function updateRev()
-    {        
-        $sql = 'UPDATE productoproveedor SET idestadoproducto = ?, existencias = ? WHERE idproveedorproducto= ?';
-        $params = array($this->estado, $this->existencia, $this->id);
-        return Database::executeRow($sql, $params);
-    }
-
+    }  
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM productos
-                WHERE idproducto = ?';
+        $sql = 'DELETE FROM pacientes
+                WHERE idpaciente = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
 
+    public function readOneDoctor()
+    {
+        $sql = 'SELECT idpaciente, idpacienteasignado, nombrepaciente, nombredoctor, apellidodoctor 
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                INNER JOIN pacienteasignado USING (idpaciente)
+                INNER JOIN doctores USING (iddoctor)
+                WHERE idpaciente = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function searchOneDoctor($value)
+    {
+        $sql = 'SELECT idpaciente, idpacienteasignado, nombrepaciente, nombredoctor, apellidodoctor 
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                INNER JOIN pacienteasignado USING (idpaciente)
+                INNER JOIN doctores USING (iddoctor)
+                WHERE  nombrepaciente ILIKE ?';
+        $params = array("%$value%");
+        return Database::getRows($sql, $params);
+    }
+    
+    public function readAllAsignado()
+    {
+        $sql = 'SELECT idpacienteasignado, idpaciente, iddoctor, nombrepaciente, nombredoctor
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                INNER JOIN PacienteAsignado USING (idpaciente)
+                INNER JOIN doctores USING (iddoctor)';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readOneAsignado1()
+    {
+        $sql = 'SELECT idpacienteasignado, idpaciente, iddoctor, nombrepaciente, nombredoctor
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                INNER JOIN PacienteAsignado USING (idpaciente)
+                INNER JOIN doctores USING (iddoctor)
+                WHERE idpacienteasignado = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
 
 
+    public function updateRowassignement()
+    {        
+        $sql = 'UPDATE pacienteasignado SET iddoctor = ? WHERE idpacienteasignado = ?';
+        $params = array( $this->iddoctor, $this -> id);
+        return Database::executeRow($sql, $params);
+    }
 
+    public function createRowassignement()
+    {
+        $sql = 'INSERT INTO pacienteasignado(idpaciente, iddoctor)
+                VALUES (?,?)';
+        $params = array($this -> id, $this ->iddoctor);
+        return Database::executeRow($sql, $params);
+    }
 
+    public function readAllP1()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 1'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP2()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 2'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP3()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 3'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP4()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 4'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP5()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 5'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP6()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 6'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP7()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 7'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllP8()
+    {
+        $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 8'; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }

@@ -39,7 +39,7 @@ Dashboard_Page::headerTemplate('Pacientes');
         <th>DUI</th>
         <th>Teléfono Paciente</th>
         <th>Correo Paciente</th>
-        <th>Estado</th>
+        <th>Estado</th>        
             <th class="actions-column">Acciones</th>
         </tr>
     </thead>
@@ -65,7 +65,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                                     <th class="actions-column">Acciones</th>                                  
                                 </tr>
                             </thead>                            
-                            <tbody id="Shipper-rows">
+                            <tbody id="pregunta-rows">
                             </tbody>
                         </table>
                     <div class="row center-align">                    
@@ -73,7 +73,35 @@ Dashboard_Page::headerTemplate('Pacientes');
                 </form>
             </div>            
         </div>
+    </div>
+
+<div id="show-asignado-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4> </h4>                
+                <h4 id="modal-asignado-title" class="center-align"></h4>                
+                <form method="post" id="show-a-form">                   
+                    <input class="hide" type="number" id="id_pacienteA" name="id_pacienteA"/> 
+                    <input class="hide" type="number" id="id_pacienteAs" name="id_pacienteAs"/>  
+                    <input id="nombre_pacienteA" type="text" name="nombre_pacienteA"  class="hide" />                        
+                    <div class="row">
+                        <table class="responsive-table highlight">                           
+                            <thead>
+                                <tr>
+                                    <th>Nombre Doctor</th>
+                                    <th>Apellido Doctor</th>
+                                    <th class="actions-column">Acciones</th>                                  
+                                </tr>
+                            </thead>                            
+                            <tbody id="asignado-rows">
+                            </tbody>
+                        </table>
+                    <div class="row center-align">                    
+                    </div>           
+                </form>
+            </div>            
         </div>
+    </div>
+
 
 <div id="save-modal" class="modal">
             <div class="modal-content center-align">
@@ -83,8 +111,8 @@ Dashboard_Page::headerTemplate('Pacientes');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_paciente" name="id_paciente"/>
-                    <div class="row">                        
+                    <input class="" type="number" id="id_paciente" name="id_paciente"/>
+                    <div class="row">  
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
                             <input id="nombre_paciente" type="text" name="nombre_paciente" class="validate"  required/>
@@ -105,6 +133,11 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <input type="text" id="dui_paciente" name="dui_paciente" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required/>
                             <label for="dui_paciente">DUI</label>
                         </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">place</i>
+                            <input type="text" id="direccion_paciente" name="direccion_paciente" maxlength="200" class="validate" required/>
+                            <label for="direccion_paciente">Dirección</label>
+                        </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">phone</i>
                             <input type="text" id="telefono_paciente" name="telefono_paciente" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required/>
@@ -120,7 +153,14 @@ Dashboard_Page::headerTemplate('Pacientes');
                             </select>
                             <label>Estado</label>                            
                         </div>
-
+                        <div class="file-field input-field col s12 m6">
+                        <div class="btn waves-effect tooltipped" data-tooltip="Seleccione una imagen de al menos 500x500">
+                            <span><i class="material-icons">image</i></span>
+                            <input id="archivo_paciente" type="file" name="archivo_paciente" accept=".gif, .jpg, .png"/>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input type="text" class="file-path validate" placeholder="Formatos aceptados: gif, jpg y png"/>
+                        </div class="left">
                         <div>
                          <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                         <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
@@ -182,7 +222,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             </select>
                             <label>Tipo</label>
                          </div>                
-                         <div class="file-field input-field col s12 m6">
+                        <div class="file-field input-field col s12 m6">
                         <div class="btn waves-effect tooltipped" data-tooltip="Seleccione una imagen de al menos 500x500">
                             <span><i class="material-icons">image</i></span>
                             <input id="archivo_producto" type="file" name="archivo_producto" accept=".gif, .jpg, .png"/>
@@ -200,7 +240,6 @@ Dashboard_Page::headerTemplate('Pacientes');
         </div>
   	</div>
 </div>
-
 <div id="update-proveedor-modal" class="col s12 m6 modal">
             <div class="modal-content center-align">
             <h4></h4>
@@ -265,23 +304,113 @@ Dashboard_Page::headerTemplate('Pacientes');
             <div class="modal-content center-align">
             <h4></h4>
                 <!-- Título para la caja de dialogo -->
-                <h4 id="modal-title" class="center-align"></h4>
+                <h4 id="modal-title-a" class="center-align"></h4>
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-asignado-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_producto" name="id_producto"/>
+                    <input class="" type="number" id="id_pacientesD" name="id_pacientesD"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">person</i>
-                            <input id="nombre_pacienteA" type="text" name="nombre_pacienteA" class="validate"  required/>
-                            <label for="nombre_pacienteA">Nombre Paciente</label>
+                            <input id="nombre_pacientesA" type="text" name="nombre_pacientesA" class="validate"  required/>
+                            <label for="nombre_pacientesA">Nombre Paciente</label>
                         </div>                        
                         <div class="input-field col s6">
-                            <select id="doctor" name="doctor">
+                            <select id="nombre_doctor" name="nombre_doctor">
                             </select>
                             <label>Doctor</label>                            
                          </div>
                       
+                         <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
+                        <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
+                        </div>
+                    </div>           
+                </form>
+            </div>            
+        </div>
+  	</div>
+</div>
+<div id="save-asignados-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4></h4>
+                <!-- Título para la caja de dialogo -->
+                <h4 id="modal-title-as" class="center-align"></h4>
+                <!-- Formulario para crear o actualizar un registro -->
+                <form method="post" id="save-asignados-form">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input class="" type="number" id="id_pacientesDA" name="id_pacientesDA"/>
+                    <div class="row">                        
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">person</i>
+                            <input id="nombre_pacientesAg" type="text" name="nombre_pacientesAg" class="validate"  required/>
+                            <label for="nombre_pacientesAg">Nombre Paciente</label>
+                        </div>                        
+                        <div class="input-field col s6">
+                            <select id="nombre_doctores" name="nombre_doctores">
+                            </select>
+                            <label>Doctor</label>                            
+                         </div>
+                      
+                         <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
+                        <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
+                        </div>
+                    </div>           
+                </form>
+            </div>            
+        </div>
+  	</div>
+</div>
+
+<div id="save-preguntas-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4></h4>
+                <!-- Título para la caja de dialogo -->
+                <h4 id="modal-title-pr" class="center-align"></h4>
+                <!-- Formulario para crear o actualizar un registro -->
+                <form method="post" id="save-preguntas-form">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input class="" type="number" id="id_pacientesP" name="id_pacientesP"/>
+                    <div class="row">                                               
+                        <div class="input-field col s6">
+                            <select id="pregunta1" name="pregunta1">
+                            </select>
+                            <label>Pregunta #1</label>
+                         </div>
+                        <div class="input-field col s6">
+                            <select id="pregunta2" name="pregunta2">
+                            </select>
+                            <label>Pregunta #2</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="pregunta3" name="pregunta3">
+                            </select>
+                            <label>Pregunta #3</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="pregunta4" name="pregunta4">
+                            </select>
+                            <label>Pregunta #4</label>
+                         </div>
+                         <div class="input-field col s6">
+                            <select id="pregunta5" name="pregunta5">
+                            </select>
+                            <label>Pregunta #5</label>
+                         </div>
+                        <div class="input-field col s6">
+                            <select id="pregunta6" name="pregunta6">
+                            </select>
+                            <label>Pregunta #6</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="pregunta7" name="pregunta7">
+                            </select>
+                            <label>Pregunta #7</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="pregunta8" name="pregunta8">
+                            </select>
+                            <label>Pregunta #8</label>
+                        </div>
                          <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                         <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
                         </div>

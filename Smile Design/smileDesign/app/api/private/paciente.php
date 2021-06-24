@@ -8,7 +8,7 @@ if (isset($_GET['action'])) {
 	 // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
 //session_start();
 	 // Se instancia la clase correspondiente. 
-	 $producto = new Pacientes;
+	 $paciente = new Pacientes;
 	 // Se declara e inicializa un arreglo para guardar el resultado que retorna la API. 
 	 $result = array('status' => 0, 'message' => null, 'exception' => null);
 	 // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -16,85 +16,130 @@ if (isset($_GET['action'])) {
 		  // Se compara la acción a realizar cuando un administrador ha iniciado sesión. El socialismo no funciona 
 		  switch ($_GET['action']) {
 				case 'readAll':
-					 if ($result['dataset'] = $producto->readAll()) {
+					 if ($result['dataset'] = $paciente->readAll()) {
 						  $result['status'] = 1;
 					 } else {
 						  if (Database::getException()) {
 								$result['exception'] = Database::getException();
 						  } else {
-								$result['exception'] = 'No hay productos registrados';
+								$result['exception'] = 'No hay Pacientes registrados';
 						  }
 					 }
-					 case 'readAll2':
-						if ($result['dataset'] = $producto->readAll2()) {
+					 break;
+					 case 'readAllESTADO':
+						if ($result['dataset'] = $paciente->readAllESTADO()) {
 							 $result['status'] = 1;
 						} else {
 							 if (Database::getException()) {
 								   $result['exception'] = Database::getException();
 							 } else {
-								   $result['exception'] = 'No hay productos registrados';
+								   $result['exception'] = 'No hay Estados para pacientes registrados';
 							 }
 						}
-					 break;
-					 case 'readAllESTADO':
-						  if ($result['dataset'] = $producto->readAllESTADO()) {
-								$result['status'] = 1;
-						  } else {
-								if (Database::getException()) {
-									 $result['exception'] = Database::getException();
-								} else {
-									 $result['exception'] = 'No hay productos registrados';
-								}
-						  }
-						  break;
-						  case 'readAllTIPO':
-								if ($result['dataset'] = $producto->readAllTIPO()) {
+						break;
+						case 'readAllDOCTOR':
+							if ($result['dataset'] = $paciente->readAllDOCTOR()) {
+								 $result['status'] = 1;
+							} else {
+								 if (Database::getException()) {
+									   $result['exception'] = Database::getException();
+								 } else {
+									   $result['exception'] = 'No hay Estados para pacientes registrados';
+								 }
+							}
+							break;
+						case 'readAllP1':
+							if ($result['dataset'] = $paciente->readAllP1()) {
+								 $result['status'] = 1;
+							} else {
+								 if (Database::getException()) {
+									   $result['exception'] = Database::getException();
+								 } else {
+									   $result['exception'] = 'No hay Estados para pacientes registrados';
+								 }
+							}
+							break;
+							case 'readAllP2':
+								if ($result['dataset'] = $paciente->readAllP2()) {
 									 $result['status'] = 1;
 								} else {
 									 if (Database::getException()) {
-										  $result['exception'] = Database::getException();
+										   $result['exception'] = Database::getException();
 									 } else {
-										  $result['exception'] = 'No hay productos registrados';
+										   $result['exception'] = 'No hay Estados para pacientes registrados';
 									 }
 								}
-						  break;
-								case 'readAllPROVEEDOR':
-									 if ($result['dataset'] = $producto->readAllPROVEEDOR()) {
-										  $result['status'] = 1;
-									 } else {
-										  if (Database::getException()) {
-												$result['exception'] = Database::getException();
-										  } else {
-												$result['exception'] = 'No hay productos registrados';
-										  }
-									 }
 								break;
-									 case 'readAllPAIS':
-										  if ($result['dataset'] = $producto->readAllPAIS()) {
-												$result['status'] = 1;
-										  } else {
-												if (Database::getException()) {
-													 $result['exception'] = Database::getException();
-												} else {
-													 $result['exception'] = 'No hay productos registrados';
-												}
-										  }
-									 break;
-										  case 'readAllRevision':
-												if ($result['dataset'] = $producto->readAllRevision()) {
-													 $result['status'] = 1;
-												} else {
-													 if (Database::getException()) {
-														  $result['exception'] = Database::getException();
-													 } else {
-														  $result['exception'] = 'No hay productos registrados';
-													 }
-												}
-										  break;
+								case 'readAllP3':
+									if ($result['dataset'] = $paciente->readAllP3()) {
+										 $result['status'] = 1;
+									} else {
+										 if (Database::getException()) {
+											   $result['exception'] = Database::getException();
+										 } else {
+											   $result['exception'] = 'No hay Estados para pacientes registrados';
+										 }
+									}
+								break;
+								case 'readAllP4':
+									if ($result['dataset'] = $paciente->readAllP4()) {
+										 $result['status'] = 1;
+									} else {
+										 if (Database::getException()) {
+											   $result['exception'] = Database::getException();
+										 } else {
+											   $result['exception'] = 'No hay Estados para pacientes registrados';
+										 }
+									}
+								break;
+								case 'readAllP5':
+									if ($result['dataset'] = $paciente->readAllP5()) {
+										 $result['status'] = 1;
+									} else {
+										 if (Database::getException()) {
+											   $result['exception'] = Database::getException();
+										 } else {
+											   $result['exception'] = 'No hay Estados para pacientes registrados';
+										 }
+									}
+									break;
+									case 'readAllP6':
+										if ($result['dataset'] = $paciente->readAllP6()) {
+											 $result['status'] = 1;
+										} else {
+											 if (Database::getException()) {
+												   $result['exception'] = Database::getException();
+											 } else {
+												   $result['exception'] = 'No hay Estados para pacientes registrados';
+											 }
+										}
+										break;
+										case 'readAllP7':
+											if ($result['dataset'] = $paciente->readAllP7()) {
+												 $result['status'] = 1;
+											} else {
+												 if (Database::getException()) {
+													   $result['exception'] = Database::getException();
+												 } else {
+													   $result['exception'] = 'No hay Estados para pacientes registrados';
+												 }
+											}
+										break;
+										case 'readAllP8':
+											if ($result['dataset'] = $paciente->readAllP8()) {
+												 $result['status'] = 1;
+											} else {
+												 if (Database::getException()) {
+													   $result['exception'] = Database::getException();
+												 } else {
+													   $result['exception'] = 'No hay Estados para pacientes registrados';
+												 }
+											}
+										break;
 					 case 'search':
-					 $_POST = $producto->validateForm($_POST);
+					 $_POST = $paciente->validateForm($_POST);
 					 if ($_POST['search'] != '') {
-						  if ($result['dataset'] = $producto->searchRows($_POST['search'])) {
+						  if ($result['dataset'] = $paciente->searchRows($_POST['search'])) {
 								$result['status'] = 1;
 								$rows = count($result['dataset']);
 								if ($rows > 1) {
@@ -114,246 +159,152 @@ if (isset($_GET['action'])) {
 					 }
 					 break;
 				case 'create':
-					 $_POST = $producto->validateForm($_POST);
-					 if ($producto->setNombre($_POST['nombre_producto'])) {
-							if ($producto->setDescripcion($_POST['descripcion_producto'])) {							    															  													                                                       
-								if ($producto->createRow()) {
-									$result['status'] = 1;
-									$result['message'] = 'Producto registrado correctamente';                                                        
+					 $_POST = $paciente->validateForm($_POST);
+					 if ($paciente->setNombre($_POST['nombre_paciente'])) {
+						if ($paciente->setApellido($_POST['apellido_paciente'])) {
+							if ($paciente->setFecha($_POST['fecha_nacimiento'])) {
+							 if ($paciente->setDUI($_POST['dui_paciente'])) {
+								if ($paciente->setDireccion($_POST['direccion_paciente'])) { 
+								if ($paciente->setTelefono($_POST['telefono_paciente'])) {
+									if ($paciente->setCorreo($_POST['correo_cliente'])) 
+									{if (is_uploaded_file($_FILES['archivo_paciente']['tmp_name'])) {
+										if ($paciente->setImagen($_FILES['archivo_paciente'])) {
+											if (isset($_POST['estado_paciente'])) {
+											if ($paciente->setEstado($_POST['estado_paciente'])) {
+											if ($paciente->createRow()) {
+												$result['status'] = 1;
+												if ($paciente->saveFile($_FILES['archivo_paciente'], $paciente->getRuta(), $paciente->getImagen())) {
+													$result['message'] = 'Paciente creado correctamente';
+												} else {
+													$result['message'] = 'Paciente creado pero no se guardó la imagen';
+												}											
+												
+											} else {
+												$result['exception'] = Database::getException();;
+											}
+										} else {
+											$result['exception'] = 'Categoría incorrecta';
+										}
+									} else {
+										$result['exception'] = 'Seleccione una categoría';
+									}											
+										} else {
+											$result['exception'] = $paciente->getImageError();
+										}
+									} else {
+										$result['exception'] = 'Seleccione una imagen';
+									} 							
+							} else {
+								$result['exception'] = 'Correo incorrecto';
+							}
 								} else {
-									$result['exception'] = Database::getException();                                                        
-								} 																																																																																			
-								  } else {
-									$result['exception'] = 'Descripcion incorrecto';
-								  }                            
-								} else {
-									 $result['exception'] = 'Nombre incorrecto';
+									$result['exception'] = 'Dirección incorrecto';
+								}	
+							   } else {
+									$result['exception'] = 'Teléfono incorrecto';
 								}
+								} else {
+									$result['exception'] = 'DUI incorrecto';
+								}																																																																																			
+								  } else {
+									$result['exception'] = 'Fecha incorrecto';
+								  }
+								} else {
+									$result['exception'] = 'Apellido incorrecto';
+							   }                            
+							} else {
+							 $result['exception'] = 'Nombre incorrecto';
+							}
 					 break;
 				case 'readOne':
-					 if ($producto->setId($_POST['id_producto'])) {
-						  if ($result['dataset'] = $producto->readOne()) {
+					 if ($paciente->setId($_POST['id_paciente'])) {
+						  if ($result['dataset'] = $paciente->readOne()) {
 								$result['status'] = 1;
 						  } else {
 								if (Database::getException()) {
 									 $result['exception'] = Database::getException();
 								} else {
-									 $result['exception'] = 'Producto inexistente';
+									 $result['exception'] = 'Paciente inexistente';
 								}
 						  }
 					 } else {
 						  $result['exception'] = 'Producto incorrecto';
 					 }
 					 break;
-					 case 'readOneP':
-						  if ($producto->setId($_POST['id_productoP'])) {
-								if ($result['dataset'] = $producto->readOne()) {
-									 $result['status'] = 1;
-								} else {
-									 if (Database::getException()) {
-										  $result['exception'] = Database::getException();
-									 } else {
-										  $result['exception'] = 'Producto inexistente';
-									 }
-								}
-						  } else {
-								$result['exception'] = 'Producto incorrecto';
-						  }
-						  break;
-						  case 'readAllShipper':
-							if ($producto->setId($_POST['id_productoC'])) {
-								  if ($result['dataset'] = $producto->readAllShipper()) {
-									   $result['status'] = 1;
-								  } else {
-									   if (Database::getException()) {
-											$result['exception'] = Database::getException();
-									   } else {
-											$result['exception'] = 'Producto inexistente';
-									   }
-								  }
-							} else {
-								  $result['exception'] = 'Producto incorrecto';
-							}
-							break;
-							case 'readOneShipper1':
-								if ($producto->setId($_POST['id_productosP'])) {
-									  if ($result['dataset'] = $producto->readOneShipper1()) {
-										   $result['status'] = 1;
-									  } else {
-										   if (Database::getException()) {
-												$result['exception'] = Database::getException();
-										   } else {
-												$result['exception'] = 'Producto inexistente';
-										   }
-									  }
-								} else {
-									  $result['exception'] = 'Producto incorrecto';
-								}
-								break;
-
-					 case 'readOneRev':
-						  if ($producto->setId($_POST['id_productoR1'])) {
-								if ($result['dataset'] = $producto->readOneRev()) {
-									 $result['status'] = 1;
-								} else {
-									 if (Database::getException()) {
-										  $result['exception'] = Database::getException();
-									 } else {
-										  $result['exception'] = 'Producto inexistente';
-									 }
-								}
-						  } else {
-								$result['exception'] = 'Producto incorrecto';
-						  }
-						  break;
-								case 'update':
-									 $_POST = $producto->validateForm($_POST);
-									 if ($producto->setId($_POST['id_producto'])) {
-										  if ($data = $producto->readOne()) {
-												if ($producto->setNombre($_POST['nombre_producto'])) {                            
-													 if ($producto->setDescripcion($_POST['descripcion_producto'])) {														  																	 																				                                                             																																			  
-														  if ($producto->updateRow()) {
-														      $result['status'] = 1;
-															  $result['message'] = 'Cliente Actualizado correctamente';                                                        
-															} else {
-																$result['exception'] = Database::getException();                                                        
-															}   
-													 } else {
-														  $result['exception'] = 'Descripcion incorrecto';
-													 }
-																	 
-													 } else {
-														  $result['exception'] = 'Nombre incorrecto';
-													 }
-												} else {
-													 $result['exception'] = 'Producto inexistente';
-												}
-										  } else {
-												$result['exception'] = 'Producto incorrecto';
-										  }
-									 break;
-
-									 case 'updateRowShipper':
-										$_POST = $producto->validateForm($_POST);
-										if ($producto->setId($_POST['id_productosP'])) {
-											 if ($data = $producto->readOneShipper1()) {
-												if (isset($_POST['pais_productosa'])) {
-													if ($producto->setPais($_POST['pais_productosa'])) {
-														if (isset($_POST['tipo_productosa'])) {
-															if ($producto->setTipo($_POST['tipo_productosa'])){ 												                              
-														       if ($producto->setPrecio($_POST['precio_productosa'])) {
-															     if ($producto->setCantidad($_POST['cantidad_productosa'])) {
-																	if ($producto->updateRowShipper()) {
+					 case 'readOneAnswer':
+						if ($paciente->setId($_POST['id_pacientesP'])) {
+							 if ($result['dataset'] = $paciente->readOne()) {
+								   $result['status'] = 1;
+							 } else {
+								   if (Database::getException()) {
+										$result['exception'] = Database::getException();
+								   } else {
+										$result['exception'] = 'Paciente inexistente';
+								   }
+							 }
+						} else {
+							 $result['exception'] = 'Producto incorrecto';
+						}
+						break;										 
+						case 'update':
+							$_POST = $paciente->validateForm($_POST);
+							  if ($paciente->setId($_POST['id_paciente'])) {
+								  if ($data = $paciente->readOne()) {
+							     	if ($paciente->setNombre($_POST['nombre_paciente'])) {                            
+								    	 if ($paciente->setApellido($_POST['apellido_paciente'])) {	
+											if ($paciente->setFecha($_POST['fecha_nacimiento'])) {
+												if ($paciente->setDUI($_POST['dui_paciente'])) {
+													if ($paciente->setDireccion($_POST['direccion_paciente'])) {
+													if ($paciente->setTelefono($_POST['telefono_paciente'])) {
+														if ($paciente->setCorreo($_POST['correo_cliente'])) {		
+															if (isset($_POST['estado_paciente'])) {
+																if ($paciente->setEstado($_POST['estado_paciente'])) {
+																	if ($paciente->updateRow()) {
 																		$result['status'] = 1;
-																		$result['message'] = 'Datos Actualizados correctamente';                                                        
-																	} else {
-																		$result['exception'] = Database::getException();                                                        
-																	} 
-
+																		$result['message'] = 'Datos del Paciente Actualizados correctamente';                                                        
 																		} else {
-																			$result['exception'] = 'Seleccione una imagen';
-																		}                                                        
-																	} else {
-																		$result['exception'] = 'Cantidad Tipo';
-																	}
-																} else {
-																	$result['exception'] = 'Seleccione una imagen';
-																  }                                                        
-															  } else {
-																   $result['exception'] = 'Cantidad incorrectos';
-															  }		 
+																		$result['exception'] = Database::getException();                                                        
+																		}   
 															} else {
-																$result['exception'] = 'Descripcion incorrecto';
+																$result['exception'] = 'Categoría incorrecta';
 															}
-																		
 														} else {
-															 $result['exception'] = 'Nombre incorrecto';
+															$result['exception'] = 'Seleccione una categoría';
 														}
-												   } else {
-														$result['exception'] = 'Producto inexistente';
-												   }
-											 } else {
-												   $result['exception'] = 'Producto incorrecto';
-											 }
-										break;
-					      case 'createRowP':
-						  $_POST = $producto->validateForm($_POST);
-						  if ($producto->setId($_POST['id_productoP'])) {
-                           if (isset($_POST['proveedor_productos'])) {                              
-                            if ($producto->setProveedor($_POST['proveedor_productos'])) {
-                                if (isset($_POST['pais_productos'])) {
-                                     if ($producto->setPais($_POST['pais_productos'])) {
-										if (isset($_POST['estado_prodcuto'])) {
-											if ($producto->setEstado($_POST['estado_prodcuto'])){
-												if (isset($_POST['tipo_producto'])) {
-													if ($producto->setTipo($_POST['tipo_producto'])){   
-													if ($producto->setExistencia($_POST['existencia_productos'])) {                                          																                               
-														if ($producto->setPrecio($_POST['precio_productos'])) {										  
-															if ($producto->setCantidad($_POST['cantidad_productos'])) {	
-																if (is_uploaded_file($_FILES['archivo_producto']['tmp_name'])) {                                            
-																	if ($producto->setImagen($_FILES['archivo_producto'])) {																
-																		if ($producto->createRowP()) {
-																			$result['status'] = 1;
-																	   if ($producto->saveFile($_FILES['archivo_producto'], $producto->getRuta(), $producto->getImagen())) {
-																			$result['message'] = 'Producto creado correctamente';
-																	   } else {
-																			$result['message'] = 'Producto creado pero no se guardó la imagen';
-																	   }
-																	   } 
-																		else {
-																		 $result['exception'] = Database::getException();
-																		}
-															} else {
-																$result['exception'] = $producto->getImageError();
-																}
-															} else {
-															$result['exception'] = 'Seleccione una imagen';
-															}                                                       
-															} else {
-																$result['exception'] = 'Seleccione una imagen';
-																}                                               
-															} else {
-															$result['exception'] = 'Seleccione una imagen';
-															}
-															} else {
-															$result['exception'] = 'Seleccione una imagen';
-															}                                               
-														} else {
-														$result['exception'] = 'Seleccione una imagen';
-														}
-														} else {
-														$result['exception'] = 'Seleccione una imagen';
-														} 
 													} else {
-														$result['exception'] = 'Seleccione una imagen';
-														}
-														} else {
-														$result['exception'] = 'Seleccione una imagen';
-														}                                               
+														$result['exception'] = 'Correo incorrecto';
+													}
 													} else {
-													  $result['exception'] = 'Seleccione una imagen';
-													}                                                        
+														$result['exception'] = 'Dirección incorrecta';
+													}	
+													} else {
+														$result['exception'] = 'Teléfono incorrecto';
+													}	
 												} else {
-													 $result['exception'] = 'Cantidad incorrecto';
+													$result['exception'] = 'DUI incorrecto';
 												}
-										  } else {
-												$result['exception'] = 'Existencias incorrecto';
-										  }
-									 } else {
-										  $result['exception'] = 'Precio incorrecto';
-									 }
+											} else {
+											  $result['exception'] = 'Fecha incorrecta';
+									     	}																 
+										 } else {
+											$result['exception'] = 'Apellido incorrecto';
+									     } 
+									} else {
+									  $result['exception'] = 'Nombre incorrecto';
+									}
 								} else {
-									 $result['exception'] = 'Producto inexistente';
-								}						 					                                           
-					 break;        
-					 
-					 
-				case 'delete':
-					 if ($producto->setId($_POST['id_producto'])) {
-						  if ($data = $producto->readOne()) {
-								if ($producto->deleteRow()) {
+								  $result['exception'] = 'Paciente inexistente';
+								}
+							  } else {
+								$result['exception'] = 'Paciente incorrecto';
+							   }
+							  break;				 
+					case 'delete':
+					 if ($paciente->setId($_POST['id_paciente'])) {
+						  if ($data = $paciente->readOne()) {
+								if ($paciente->deleteRow()) {
 									 $result['status'] = 1;									 
-									$result['message'] = 'Producto eliminado correctamente';									  
+									$result['message'] = 'Datos del Paciente eliminados correctamente';									  
 								} else {
 									 $result['exception'] = Database::getException();
 								}
@@ -364,36 +315,10 @@ if (isset($_GET['action'])) {
 						  $result['exception'] = 'Producto incorrecto';
 					 }
 					 break;
-					 case 'revision':
-						  $_POST = $producto->validateForm($_POST);
-								if ($producto->setId($_POST['id_productoR1'])) {
-									 if ($data = $producto->readOneRev()) {
-										  if ($producto->setEstado($_POST['nombre_producto'])){
-												if ($producto->setExistencia($_POST['existencia_producto'])){
-												if ($producto->updateRev()) {
-													 $result['status'] = 1;
-													 $result['message'] = 'Stock Configurado con exito';                                                        
-												} else {
-													 $result['exception'] = Database::getException();                                                        
-												} 
-
-										  } else {
-												$result['exception'] = 'Ha Surgido un problema';
-												}
-										  } else {
-												$result['exception'] = 'Ha Surgido un problema';
-												}                            
-								} else {
-									 $result['exception'] = 'Producto inexistente';
-								}
-						  } else {
-								$result['exception'] = 'Producto incorrecto';
-						  }
-					 break;
-					 case 'searchOneShipper':
-						$_POST = $producto->validateForm($_POST);
-						if ($_POST['nombre_productoS'] != '') {
-							if ($result['dataset'] = $producto->searchOneShipper($_POST['nombre_productoS'])) {
+					 case 'searchOneDoctor':
+						$_POST = $paciente->validateForm($_POST);
+						if ($_POST['nombre_pacienteA'] != '') {
+							if ($result['dataset'] = $paciente->searchOneDoctor($_POST['nombre_pacienteA'])) {
 								$result['status'] = 1;
 								$rows = count($result['dataset']);
 								if ($rows > 1) {
@@ -412,10 +337,9 @@ if (isset($_GET['action'])) {
 							$result['exception'] = 'Ingrese un valor para buscar';
 						}
 						break;
-
-				case 'readOneShipper':      
-					if ($producto->setId($_POST['id_productoS'])) {                            
-						if ($result['dataset'] = $producto->readOneShipper()) {
+				case 'readOneDoctor':      
+					if ($paciente->setId($_POST['id_pacienteA'])) {                            
+						if ($result['dataset'] = $paciente->readOneDoctor()) {
 							$result['status'] = 1;                                
 						} else {
 							if (Database::getException()) {
@@ -428,8 +352,99 @@ if (isset($_GET['action'])) {
 						$result['exception'] = 'Cliente incorrecto Orden';
 					}                    
 					break;
+					case 'readOneA':
+						if ($paciente->setId($_POST[''])) {
+							  if ($result['dataset'] = $paciente->readOne()) {
+								   $result['status'] = 1;
+							  } else {
+								   if (Database::getException()) {
+										$result['exception'] = Database::getException();
+								   } else {
+										$result['exception'] = 'Producto inexistente';
+								   }
+							  }
+						} else {
+							  $result['exception'] = 'Producto incorrecto';
+						}
+						break;
+						case 'readOneAsignado1':
+							if ($paciente->setId($_POST['id_pacientesD'])) {
+								  if ($result['dataset'] = $paciente->readOneAsignado1()) {
+									   $result['status'] = 1;
+								  } else {
+									   if (Database::getException()) {
+											$result['exception'] = Database::getException();
+									   } else {
+											$result['exception'] = 'Paciente inexistente';
+									   }
+								  }
+							} else {
+								  $result['exception'] = 'Paciente incorrecto';
+							}							
+							break;
+							case 'readOneAsignado2':
+								if ($paciente->setId($_POST['id_pacientesDA'])) {
+									  if ($result['dataset'] = $paciente->readOne()) {
+										   $result['status'] = 1;
+									  } else {
+										   if (Database::getException()) {
+												$result['exception'] = Database::getException();
+										   } else {
+												$result['exception'] = 'Paciente inexistente';
+										   }
+									  }
+								} else {
+									  $result['exception'] = 'Paciente incorrecto';
+								}							
+								break;
+							case'updateRowassignement':
+								$_POST = $paciente->validateForm($_POST);
+								if ($paciente->setId($_POST['id_pacientesD'])) {
+									if ($data = $paciente->readOneAsignado1()) {
+										if (isset($_POST['nombre_doctor'])) {
+											if ($paciente->setidDoctor($_POST['nombre_doctor'])) {
 
-					 
+												if ($paciente->updateRowassignement()) {
+													$result['status'] = 1;
+													$result['message'] = 'Asignación Actualizada Correctamente';                                                        
+												  } else {
+													  $result['exception'] = Database::getException();                                                        
+												  }
+	
+										} else {
+											$result['exception'] = 'Paciente inexistente';
+										}
+								} else {
+								  $result['exception'] = 'Paciente inexistente';
+								}	
+							} else {
+						      $result['exception'] = 'Paciente inexistente';
+						    }
+						} else {
+						  $result['exception'] = 'Paciente inexistente';
+					    }														
+						break;
+						case 'createRowassignement':
+							$_POST = $paciente->validateForm($_POST);
+							if ($paciente->setId($_POST['id_pacientesDA'])) {
+								if (isset($_POST['nombre_doctores'])) {
+									if ($paciente->setidDoctor($_POST['nombre_doctores'])) {
+										if ($paciente->createRowassignement()) {
+											$result['status'] = 1;
+											$result['message'] = 'Asignación Creada Correctamente';                                                        
+										  } else {
+											  $result['exception'] = Database::getException();                                                        
+										  }
+								} else {
+									$result['exception'] = 'Paciente inexistente';
+								}	
+						  }else {
+						   $result['exception'] = 'Paciente inexistente';
+						  }		
+						} else {
+					      $result['exception'] = 'Paciente inexistente';
+					    }
+						break;	
 					default:
 					 $result['exception'] = 'Acción no disponible dentro de la sesión';
 		  }

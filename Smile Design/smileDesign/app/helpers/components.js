@@ -34,32 +34,6 @@ function readRows(api) {
     });
 }
 
-
-function readRowscli(api) {
-    fetch(api + 'readAll2', {
-        method: 'get'
-    }).then(function (request) {
-        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
-        if (request.ok) {
-            request.json().then(function (response) {
-                let data = [];
-                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
-                    data = response.dataset;
-                } else {
-                    sweetAlert(4, response.exception, null);
-                }
-                // Se envían los datos a la función del controlador para que llene la tabla en la vista.
-                fillTable(data);
-            });
-        } else {
-            console.log(request.status + ' ' + request.statusText);
-        }
-    }).catch(function (error) {
-        console.log(error);
-    });
-}
-
 function readRows2(api) {
     fetch(api + 'readAllRevision', {
         method: 'get'
@@ -172,7 +146,7 @@ function searchRows1(api, form) {
 }
 
 function searchRows2(api, form) {
-    fetch(api + 'searchOneShipper', {
+    fetch(api + 'searchOneDoctor', {
         method: 'post',
         body: new FormData(document.getElementById(form))
     }).then(function (request) {
@@ -490,6 +464,47 @@ function fillSelect(endpoint, select, selected) {
     });
 }
 
+
+function fillSelect2(endpoint, select, selected) {
+    fetch(endpoint, {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let content = '';
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    // Si no existe un valor para seleccionar, se muestra una opción para indicarlo.
+                   
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se obtiene el dato del primer campo de la sentencia SQL (valor para cada opción).
+                        value = Object.values(row)[0];
+                        // Se obtiene el dato del segundo campo de la sentencia SQL (texto para cada opción).
+                        text = Object.values(row)[1];
+                        // Se verifica si el valor de la API es diferente al valor seleccionado para enlistar una opción, de lo contrario se establece la opción como seleccionada.
+                        if (value != selected) {
+                            content += `<option value="${value}">${text}</option>`;
+                        } else {
+                            content += `<option value="${value}" selected>${text}</option>`;
+                        }
+                    });
+                } else {
+                    content += '<option>No hay opciones disponibles</option>';
+                }
+                // Se agregan las opciones a la etiqueta select mediante su id.
+                document.getElementById(select).innerHTML = content;
+                // Se inicializa el componente Select del formulario para que muestre las opciones.
+                M.FormSelect.init(document.querySelectorAll('select'));
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
 /*
 *   Función para generar una gráfica de barras verticales. Requiere el archivo chart.js para funcionar.
 *
