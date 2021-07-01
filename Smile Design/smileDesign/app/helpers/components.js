@@ -120,7 +120,7 @@ function searchRows44(api, form) {
 
 
 function searchRows1(api, form) {
-    fetch(api + 'search1', {
+    fetch(api + 'searchOneProcedure', {
         method: 'post',
         body: new FormData(document.getElementById(form))
     }).then(function (request) {

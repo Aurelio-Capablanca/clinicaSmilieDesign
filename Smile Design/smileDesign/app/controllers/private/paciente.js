@@ -99,7 +99,9 @@ function openCreateDialog() {
 function openAnswerDialog(id) {
     // Se restauran los elementos del formulario.
     document.getElementById('save-preguntas-form').reset();
-    // Se abre la caja de dialogo (modal) que contiene el formulario.
+    // Variables y procesos para evaluar las respuestas.
+
+     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('save-preguntas-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
@@ -127,7 +129,7 @@ function openAnswerDialog(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-                    document.getElementById('id_pacientesP').value = response.dataset.idpaciente;                                       
+                    document.getElementById('id_pacientesP').value = response.dataset.idpaciente;                                                           
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();                    
                 } else {
@@ -141,6 +143,85 @@ function openAnswerDialog(id) {
         console.log(error);
     });
 }
+
+document.getElementById('save-preguntas-form').addEventListener('submit', function (event) {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se define una variable para establecer la acción a realizar en la API.
+    let action = 'createRowAnswers';
+
+    //-----------------------------------------------------
+    // if(s1.checked==true && s2.checked==true && s3.checked==true && s4.checked==true && s5.checked==true && s6.checked==true && s7.checked==true && s8.checked==true 
+    //     && n1.checked==false && n2.checked==false && n3.checked==false && n4.checked==false && n5.checked==false && n6.checked==false && n7.checked==false && n8.checked==false){
+
+    //     document.getElementById('respuesta1').value="Si";
+    //     document.getElementById('respuesta2').value="Si";
+    //     document.getElementById('respuesta3').value="Si";
+    //     document.getElementById('respuesta4').value="Si";
+    //     document.getElementById('respuesta5').value="Si";
+    //     document.getElementById('respuesta6').value="Si";
+    //     document.getElementById('respuesta7').value="Si";
+    //     document.getElementById('respuesta8').value="Si";
+    //     document.getElementById('notas').required = true;
+    // }
+    // if(s1.checked==true && s2.checked==true && s3.checked==true && s4.checked==true && s5.checked==true && s6.checked==true && s7.checked==true && s8.checked==true){
+
+    // }
+    if(s1.checked==true && n1.checked==false){        
+        document.getElementById('respuesta1').value="Si";                
+    }
+    if(s1.checked==false && n1.checked==true){
+        document.getElementById('respuesta1').value="No";
+    }
+    if(s2.checked==true && n2.checked==false){
+        document.getElementById('respuesta2').value="Si";
+    }
+    if(s2.checked==false && n2.checked==true){
+        document.getElementById('respuesta2').value="No";
+    }
+    if(s3.checked==true && n3.checked==false){
+        document.getElementById('respuesta3').value="Si";
+    }
+    if(s3.checked==false && n3.checked==true){
+        document.getElementById('respuesta3').value="No";
+    }
+    if(s4.checked==true && n4.checked==false){
+        document.getElementById('respuesta4').value="Si";
+    }
+    if(s4.checked==false && n4.checked==true){
+        document.getElementById('respuesta4').value="No";
+    }    
+    if(s5.checked==true && n5.checked==false){
+        document.getElementById('respuesta5').value="Si";
+    }
+    if(s5.checked==false && n5.checked==true){
+        document.getElementById('respuesta5').value="No";
+    }
+    if(s6.checked==true && n6.checked==false){
+        document.getElementById('respuesta6').value="Si";
+    }
+    if(s6.checked==false && n6.checked==true){
+        document.getElementById('respuesta6').value="No";
+    }
+    if(s7.checked==true && n7.checked==false){
+        document.getElementById('respuesta7').value="Si";
+    }
+    if(s7.checked==false && n7.checked==true){
+        document.getElementById('respuesta7').value="No";
+    }
+    if(s8.checked==true && n8.checked==false){
+        document.getElementById('respuesta8').value="Si";
+    }
+    if(s8.checked==false && n8.checked==true){
+        document.getElementById('respuesta8').value="No";
+    }
+    // if(document.getElementById('notas').value=""){
+    //     document.getElementById('notas').value="-"
+    // }
+    
+    saveRow(API_PACIENTES, action, 'save-preguntas-form', 'save-preguntas-modal');
+});
+
 
 // Función para preparar el formulario al momento de modificar un registro.
 function openUpdateDialog(id) {

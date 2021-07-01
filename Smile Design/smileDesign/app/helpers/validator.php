@@ -151,7 +151,7 @@ class Validator
     public function validateString($value, $minimum, $maximum)
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \#\-]{'.$minimum.','.$maximum.'}$/', $value)) {
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \:\#\-]{'.$minimum.','.$maximum.'}$/', $value)) {
             return true;
         } else {
             return false;
@@ -273,6 +273,17 @@ class Validator
         // Se dividen las partes de la fecha y se guardan en un arreglo en el siguiene orden: año, mes y día.
         $date = explode('-', $value);
         if (checkdate($date[1], $date[2], $date[0])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function validateTime($value)
+    {
+        // Se dividen las partes de la fecha y se guardan en un arreglo en el siguiene orden: año, mes y día.
+        $date = explode(':', $value);
+        if (checktime($date[1], $date[0])) {
             return true;
         } else {
             return false;

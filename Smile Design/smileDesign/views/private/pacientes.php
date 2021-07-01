@@ -111,7 +111,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_paciente" name="id_paciente"/>
+                    <input class="hide" type="number" id="id_paciente" name="id_paciente"/>
                     <div class="row">  
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
@@ -172,133 +172,6 @@ Dashboard_Page::headerTemplate('Pacientes');
   	</div>
 </div>
 
-<div id="save-proveedor-modal" class="modal">
-            <div class="modal-content center-align">
-            <h4></h4>
-                <!-- Título para la caja de dialogo -->
-                <h4 id="modal-title-P" class="center-align"></h4>
-                <!-- Formulario para crear o actualizar un registro -->
-                <form method="post" id="save-proveedor-form">
-                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_productoP" name="id_productoP"/>
-                    <div class="row"> 
-                    <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">shopping_bag</i>
-                            <input id="nombre_productoa" type="text" name="nombre_productoa" class="Disabled"/>
-                            <label for="nombre_productoa">Nombre Producto</label>
-                        </div>                                               
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">shopping_basket</i>
-                            <input id="cantidad_productos" type="number" name="cantidad_productos" class="validate" max="999" min="1" step="any" required/>
-                            <label for="cantidad_productos">Cantidad</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">attach_money</i>
-                            <input id="precio_productos" type="number" name="precio_productos" class="validate" max="999.99" min="0.01" step="any" required/>
-                            <label for="precio_productos">Precio</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">shopping_basket</i>
-                            <input id="existencia_productos" type="number" name="existencia_productos" class="validate" max="999" min="1" step="any"  required/>
-                            <label for="existencia_productos">Existencias</label>
-                        </div>                                                                   
-                         <div class="input-field col s6 right">
-                            <select id="proveedor_productos" name="proveedor_productos">
-                            </select>
-                            <label>Proveedor</label>
-                         </div>
-                         <div class="input-field col s6 right">
-                            <select id="pais_productos" name="pais_productos">
-                            </select>
-                            <label>País</label>                           
-                         </div> 
-                         <div class="input-field col s6">
-                            <select id="estado_prodcuto" name="estado_prodcuto">
-                            </select>
-                            <label>Estado</label>                            
-                         </div>
-                         <div class="input-field col s6 right">
-                            <select id="tipo_producto" name="tipo_producto">
-                            </select>
-                            <label>Tipo</label>
-                         </div>                
-                        <div class="file-field input-field col s12 m6">
-                        <div class="btn waves-effect tooltipped" data-tooltip="Seleccione una imagen de al menos 500x500">
-                            <span><i class="material-icons">image</i></span>
-                            <input id="archivo_producto" type="file" name="archivo_producto" accept=".gif, .jpg, .png"/>
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input type="text" class="file-path validate" placeholder="Formatos aceptados: gif, jpg y png"/>
-                        </div class="left">
-                        <div>
-                         <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
-                        <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
-                        </div>
-                    </div>           
-                </form>
-            </div>            
-        </div>
-  	</div>
-</div>
-<div id="update-proveedor-modal" class="col s12 m6 modal">
-            <div class="modal-content center-align">
-            <h4></h4>
-                <!-- Título para la caja de dialogo -->
-                <h4 id="modal-title-P" class="center-align"></h4>
-                <!-- Formulario para crear o actualizar un registro --> 
-                <form method="post" id="update-proveedor-form">
-                    <!-- Campo oculto para asignar el id del registro al momento de modificar --> 
-                    <input class="hide" type="number" id="id_productosP" name="id_productosP"/>
-                    <div class="row"> 
-                    <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">shopping_bag</i>
-                            <input id="nombre_productosa" type="text" name="nombre_productosa" class="Disabled"/>
-                            <label for="nombre_productosa">Nombre Producto</label>
-                        </div>                                               
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">shopping_basket</i>
-                            <input id="cantidad_productosa" type="number" name="cantidad_productosa" class="validate" max="999" min="1" step="any" required/>
-                            <label for="cantidad_productosa">Cantidad</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">attach_money</i>
-                            <input id="precio_productosa" type="number" name="precio_productosa" class="validate" max="999.99" min="0.01" step="any" required/>
-                            <label for="precio_productosa">Precio</label>
-                        </div>
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">shopping_basket</i>
-                            <input id="existencia_productosa" type="number" name="existencia_productosa" class="validate" max="999" min="1" step="any"  required/>
-                            <label for="existencia_productosa">Existencias</label>
-                        </div>                                                                   
-                         <div class="input-field col s6 right">
-                            <select id="proveedor_productosa" name="proveedor_productosa">
-                            </select>
-                            <label>Proveedor</label>
-                         </div>
-                         <div class="input-field col s6 right">
-                            <select id="pais_productosa" name="pais_productosa">
-                            </select>
-                            <label>País</label>                           
-                         </div> 
-                         <div class="input-field col s6">
-                            <select id="estado_prodcutoa" name="estado_prodcutoa">
-                            </select>
-                            <label>Estado</label>                            
-                         </div>
-                         <div class="input-field col s6 right">
-                            <select id="tipo_productosa" name="tipo_productosa">
-                            </select>
-                            <label>Tipo</label>
-                         </div>                       
-                         <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
-                        <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
-                        </div>
-                    </div>           
-                </form>
-            </div>            
-        </div>
-  	</div>
-</div>
 
 <div id="save-asignado-modal" class="modal">
             <div class="modal-content center-align">
@@ -308,7 +181,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-asignado-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_pacientesD" name="id_pacientesD"/>
+                    <input class="hide" type="number" id="id_pacientesD" name="id_pacientesD"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">person</i>
@@ -338,7 +211,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-asignados-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_pacientesDA" name="id_pacientesDA"/>
+                    <input class="hide" type="number" id="id_pacientesDA" name="id_pacientesDA"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">person</i>
@@ -349,8 +222,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <select id="nombre_doctores" name="nombre_doctores">
                             </select>
                             <label>Doctor</label>                            
-                         </div>
-                      
+                         </div>                      
                          <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                         <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
                         </div>
@@ -370,47 +242,166 @@ Dashboard_Page::headerTemplate('Pacientes');
                 <form method="post" id="save-preguntas-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                     <input class="" type="number" id="id_pacientesP" name="id_pacientesP"/>
-                    <div class="row">                                               
-                        <div class="input-field col s6">
+                    <div class="row">
+                    <div class="input-field col s6 left">
                             <select id="pregunta1" name="pregunta1">
                             </select>
                             <label>Pregunta #1</label>
                          </div>
+                        <div class="input-field col s6"> 
+                        <label>                      
+                            <input type="checkbox" id="s1"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n1"/>
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta1" name="respuesta1"/>
+
                         <div class="input-field col s6">
                             <select id="pregunta2" name="pregunta2">
                             </select>
                             <label>Pregunta #2</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s6">                                             
+                        <label>                      
+                            <input type="checkbox" id="s2"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n2" />
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta2" name="respuesta2"/>
+
+                        <div class="input-field col s6 ">
                             <select id="pregunta3" name="pregunta3">
                             </select>
                             <label>Pregunta #3</label>
-                        </div>
+                        </div> 
+                        <div class="input-field col s6">                          
+                        <label>                      
+                            <input type="checkbox" id="s3"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n3" />
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta3" name="respuesta3"/>
+                                                                
                         <div class="input-field col s6">
                             <select id="pregunta4" name="pregunta4">
                             </select>
                             <label>Pregunta #4</label>
                          </div>
+                         <div class="input-field col s6">   
+                         <label>                                                 
+                            <input type="checkbox" id="s4"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n4"/>
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta4" name="respuesta4"/>
+
                          <div class="input-field col s6">
                             <select id="pregunta5" name="pregunta5">
                             </select>
                             <label>Pregunta #5</label>
-                         </div>
+                         </div>  
+                         <div class="input-field col s6">                          
+                         <label>                      
+                            <input type="checkbox" id="s5"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n5"/>
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta5" name="respuesta5"/>
+                        
                         <div class="input-field col s6">
                             <select id="pregunta6" name="pregunta6">
                             </select>
                             <label>Pregunta #6</label>
                         </div>
+                        <div class="input-field col s6">                           
+                        <label>                      
+                            <input type="checkbox" id="s6"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n6"/>
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta6" name="respuesta6"/>
+
                         <div class="input-field col s6">
                             <select id="pregunta7" name="pregunta7">
                             </select>
                             <label>Pregunta #7</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s6">                           
+                        <label>                      
+                            <input type="checkbox" id="s7"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n7"/>
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta7" name="respuesta7"/>
+                       
+                        <div class="input-field col s6 ">
                             <select id="pregunta8" name="pregunta8">
                             </select>
-                            <label>Pregunta #8</label>
+                            <label>Pregunta #8</label>                                           
                         </div>
+                        <div class="input-field col s6">                          
+                        <label>                      
+                            <input type="checkbox" id="s8"/>
+                            <span>Si</span>   
+                        </label>                         
+                       </div>
+                       <div class="input-field col s6">                       
+                       <label>
+                            <input type="checkbox" id="n8"/>
+                            <span>No</span>
+                        </label>                            
+                       </div>
+                       <input class="" type="text" id="respuesta8" name="respuesta8"/>
+                       
+                       <div class="input-field col s12">
+                            <i class="material-icons prefix">place</i>
+                            <input type="text" id="notas" name="notas" maxlength="2100" class="validate" required/>
+                            <label for="notas">Notas</label>
+                        </div>
+
+                       <div>
                          <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                         <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
                         </div>

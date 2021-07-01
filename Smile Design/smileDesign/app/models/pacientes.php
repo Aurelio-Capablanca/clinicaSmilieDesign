@@ -13,10 +13,25 @@ class Pacientes extends Validator{
     private $foto = null;
     private $estado = null;
     private $imagen = null;
-    private $ruta = '../../../resources/img/productos/';
-    private $respuesta =null;
+    private $ruta = '../../../resources/img/productos/';    
     private $iddoctor = null;
-
+    private $r1 = null;
+    private $p1 = null;
+    private $r2 = null;
+    private $p2 = null;
+    private $r3 = null;
+    private $p3 = null;
+    private $r4 = null;
+    private $p4 = null;
+    private $r5 = null;
+    private $p5 = null;
+    private $r6 = null;
+    private $p6 = null;
+    private $r7 = null;
+    private $p7 = null;
+    private $r8 = null;
+    private $p8 = null;
+    private $respuesta =null;
 
     public function setId($value)
     {
@@ -109,16 +124,7 @@ class Pacientes extends Validator{
             return false;
         }
     }
-
-    public function setRespuesta($value)
-    {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
-            $this->respuesta = $value;
-            return true;
-        } else {
-            return false;
-        }
-    }
+   
 
     public function setEstado($value)
     {
@@ -135,6 +141,183 @@ class Pacientes extends Validator{
     {
         if ($this->validateNaturalNumber($value)) {
             $this->iddoctor = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public function setRespuesta($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->respuesta = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+ // -----------------------------------------------------------------------------------------
+
+    public function setP1($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p1 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setP2($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p2 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setP3($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p3 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setP4($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p4 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setP5($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p5 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setP6($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p6 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setP7($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p7 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function setP8($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->p8 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
+// -----------------------------------------------------------------
+
+    public function setR1($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r1 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setR2($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r2 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setR3($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r3 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setR4($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r4 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setR5($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r5 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setR6($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r6 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setR7($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r7 = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function setR8($value)
+    {
+        if ($this->validateString($value, 1, 50)) {
+            $this->r8 = $value;
             return true;
         } else {
             return false;
@@ -210,6 +393,93 @@ class Pacientes extends Validator{
         return $this ->iddoctor;
     }
 
+    //-------------------------------------
+
+    public function getP1()
+    {
+        return $this ->p1;
+    }
+
+    public function getP2()
+    {
+        return $this ->p2;
+    }
+
+    public function getP3()
+    {
+        return $this ->p3;
+    }
+
+    public function getP4()
+    {
+        return $this ->p4;
+    }
+
+    public function getP5()
+    {
+        return $this ->p5;
+    }
+
+    public function getP6()
+    {
+        return $this ->p6;
+    }
+
+    public function getP7()
+    {
+        return $this ->p7;
+    }
+
+    public function getP8()
+    {
+        return $this ->p8;
+    }
+
+
+    // ---------------------------
+
+    public function getR1()
+    {
+        return $this ->r1;
+    }
+
+    public function getR2()
+    {
+        return $this ->r2;
+    }
+
+    public function getR3()
+    {
+        return $this ->r3;
+    }
+
+    public function getR4()
+    {
+        return $this ->r4;
+    }
+
+    public function getR5()
+    {
+        return $this ->r5;
+    }
+
+    public function getR6()
+    {
+        return $this ->r6;
+    }
+
+    public function getR7()
+    {
+        return $this ->r7;
+    }
+
+    public function getR8()
+    {
+        return $this ->r8;
+    }
+
+    /// ---------------------------------------------------------------------------------------
+
     public function searchRows($value)
     {
         $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
@@ -241,8 +511,7 @@ class Pacientes extends Validator{
     public function readAllESTADO()
     {
         $sql = 'SELECT idestadopaciente, estadopaciente
-                FROM estadopaciente
-                WHERE idestadopaciente'; 
+                FROM estadopaciente'; 
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -410,5 +679,13 @@ class Pacientes extends Validator{
         $sql = 'SELECT idpregunta, pregunta FROM Preguntas WHERE idpregunta = 8'; 
         $params = null;
         return Database::getRows($sql, $params);
+    }
+
+    public function createRowRespuesta()
+    {
+        $sql = 'INSERT INTO respuestas(respuesta1, idpregunta1, respuesta2, idpregunta2, respuesta3, idpregunta3, respuesta4, idpregunta4, respuesta5, idpregunta5, respuesta6, idpregunta6, respuesta7, idpregunta7, respuesta8, idpregunta8, pacientemedicamento, idpaciente)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        $params = array($this->r1,$this->p1,$this->r2,$this->p2,$this->r3,$this->p3,$this->r4,$this->p4,$this->r5,$this->p5,$this->r6,$this->p6,$this->r7,$this->p7,$this->r8,$this->p8,$this->respuesta,$this->id);
+        return Database::executeRow($sql, $params);
     }
 }

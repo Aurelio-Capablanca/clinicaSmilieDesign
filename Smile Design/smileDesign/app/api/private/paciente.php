@@ -216,7 +216,7 @@ if (isset($_GET['action'])) {
 							 $result['exception'] = 'Nombre incorrecto';
 							}
 					 break;
-				case 'readOne':
+					case 'readOne':
 					 if ($paciente->setId($_POST['id_paciente'])) {
 						  if ($result['dataset'] = $paciente->readOne()) {
 								$result['status'] = 1;
@@ -245,6 +245,119 @@ if (isset($_GET['action'])) {
 						} else {
 							 $result['exception'] = 'Producto incorrecto';
 						}
+						break;
+						case 'createRowAnswers':
+						$_POST = $paciente->validateForm($_POST);
+						if ($paciente->setR1($_POST['respuesta1'])) {
+						 if (isset($_POST['pregunta1'])) {
+						  if ($paciente->setP1($_POST['pregunta1'])) {
+						  if ($paciente->setR2($_POST['respuesta2'])) {
+							if (isset($_POST['pregunta2'])) {
+							   if ($paciente->setP2($_POST['pregunta2'])) {
+							if ($paciente->setR3($_POST['respuesta3'])) {
+								if (isset($_POST['pregunta3'])) {
+								  if ($paciente->setP3($_POST['pregunta3'])) {
+							  if ($paciente->setR4($_POST['respuesta4'])) {
+								if (isset($_POST['pregunta4'])) {
+									if ($paciente->setP4($_POST['pregunta4'])) {			
+								if ($paciente->setR5($_POST['respuesta5'])) {
+								   if (isset($_POST['pregunta5'])) {
+									  if ($paciente->setP5($_POST['pregunta5'])) {
+								  if ($paciente->setR6($_POST['respuesta6'])) {
+									if (isset($_POST['pregunta6'])) {
+										if ($paciente->setP6($_POST['pregunta6'])) {
+									if ($paciente->setR7($_POST['respuesta7'])) {
+										if (isset($_POST['pregunta7'])) {
+											if ($paciente->setP7($_POST['pregunta7'])) {
+									  if ($paciente->setR8($_POST['respuesta8'])) {
+										if (isset($_POST['pregunta8'])) {
+											if ($paciente->setP8($_POST['pregunta8'])) {		 
+												if ($paciente->setRespuesta($_POST['notas'])) {
+													if ($paciente->setId($_POST['id_pacientesP'])) {				
+														if ($paciente->createRowRespuesta()) {
+															$result['status'] = 1;
+															$result['message'] = 'Datos Ingresados correctamente';                                                        
+															} else {
+															$result['exception'] = Database::getException();                                                        
+															}									
+													} else {
+														$result['exception'] = 'Paciente incorrecto';
+														}		
+													} else {
+													  $result['exception'] = 'Notas incorrecto';
+													}
+											} else {
+												$result['exception'] = 'Producto incorrecto';
+												}		
+											} else {
+											  $result['exception'] = 'Producto incorrecto';
+											}
+											} else {
+												$result['exception'] = 'Respuesta 8 incorrecto';
+												}		
+											} else {
+											  $result['exception'] = 'Producto incorrecto';
+											}		
+										} else {
+											$result['exception'] = 'Producto incorrecto';
+											}		
+										} else {
+										  $result['exception'] = 'Respuesta 7 incorrecto';
+										}	
+										} else {
+											$result['exception'] = 'Producto incorrecto';
+											}		
+										} else {
+										  $result['exception'] = 'Producto incorrecto';
+										}
+									} else {
+										$result['exception'] = 'Respuesta 6 incorrecto';
+										}		
+									} else {
+									  $result['exception'] = 'Producto incorrecto';
+									}
+									} else {
+										$result['exception'] = 'Producto incorrecto';
+										}		
+									} else {
+									  $result['exception'] = 'Respuesta 5 incorrecto';
+									}		
+								} else {
+									$result['exception'] = 'Producto incorrecto';
+									}		
+								} else {
+								  $result['exception'] = 'Producto incorrecto';
+								}	
+								} else {
+									$result['exception'] = 'Respuesta 4 incorrecto';
+									}		
+								} else {
+								  $result['exception'] = 'Producto incorrecto';
+								}	
+								} else {
+									$result['exception'] = 'Producto incorrecto';
+									}		
+								} else {
+								  $result['exception'] = 'Respuesta 3 incorrecto';
+								}	
+								} else {
+									$result['exception'] = 'Producto incorrecto';
+									}		
+								} else {
+								  $result['exception'] = 'Producto incorrecto';
+								}
+								} else {
+									$result['exception'] = 'Respuesta 2 incorrecto';
+									}		
+								} else {
+								  $result['exception'] = 'Producto incorrecto';
+								}
+							} else {
+							$result['exception'] = 'Producto incorrecto';
+							}		
+					    } else {
+						  $result['exception'] = 'Respuesta 1 incorrecto';
+					    }						
 						break;										 
 						case 'update':
 							$_POST = $paciente->validateForm($_POST);
@@ -444,7 +557,8 @@ if (isset($_GET['action'])) {
 						} else {
 					      $result['exception'] = 'Paciente inexistente';
 					    }
-						break;	
+						break;
+							
 					default:
 					 $result['exception'] = 'Acción no disponible dentro de la sesión';
 		  }

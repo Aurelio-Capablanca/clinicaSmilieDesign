@@ -11,6 +11,7 @@ Dashboard_Page::headerTemplate('Consultas');
         <div class="row card-panel" style="text-align:center;">
         <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Consultas</a>
         <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
+        
         <form method="post" id="search-form">
         <div class="input-field col s6 m4">
             <i class="material-icons prefix">search</i>
@@ -20,6 +21,7 @@ Dashboard_Page::headerTemplate('Consultas');
         <div class="input-field col s6 m4">
             <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">check_circle</i></button>
         </div>
+
     </form>
     </div>
     </div>
@@ -42,6 +44,35 @@ Dashboard_Page::headerTemplate('Consultas');
 </table>
 </div>
 
+<div id="show-proced-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4> </h4>                
+                <h4 id="modal-proced-title" class="center-align"></h4>                
+                <form method="post" id="show-a-form">                   
+                    <input class="hide" type="number" id="id_consultaP" name="id_consultaP"/> 
+                    <input class="hide" type="number" id="id_pacienteAs" name="id_pacienteAs"/>  
+                    <input id="notas_consultaP" type="text" name="notas_consultaP"  class="hide" />                        
+                    <div class="row">
+                        <table class="responsive-table highlight">                           
+                            <thead>
+                                <tr>
+                                    <th>Hora Consulta</th>
+                                    <th>Nombre Procedimiento</th>                                    
+                                    <th>Descripción Procedimiento</th>                                    
+                                    <th class="actions-column">Acciones</th>                                  
+                                </tr>
+                            </thead>                            
+                            <tbody id="proced-rows">
+                            </tbody>
+                        </table>
+                    <div class="row center-align">                    
+                    </div>           
+                </form>
+            </div>            
+        </div>
+    </div>
+
+
 <div id="save-modal" class="modal">
             <div class="modal-content center-align">
             <h4></h4>
@@ -52,21 +83,31 @@ Dashboard_Page::headerTemplate('Consultas');
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                     <input class="hide" type="number" id="id_consulta" name="id_consulta"/>
                     <div class="row">                        
-                        <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">account_box</i>
-                            <input id="nombre_doctor" type="text" name="nombre_doctor" class="validate"  required/>
-                            <label for="nombre_doctor">Nombre Doctor</label>
+                    <div class="input-field col s12">
+                            <i class="material-icons prefix">place</i>
+                            <input type="text" id="notas_consulta" name="notas_consulta" maxlength="1000" class="validate" required/>
+                            <label for="notas_consulta">Notas Consulta</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">attach_money</i>
-                            <input id="precio_productos" type="number" name="precio_productos" class="validate" max="999.99" min="0.01" step="any" required/>
-                            <label for="precio_productos">Precio</label>
+                            <input id="precio_consulta" type="number" name="precio_consulta" class="validate" max="999.99" min="0.01" step="any" required/>
+                            <label for="precio_consulta">Precio</label>
+                        </div>                        
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">cake</i>
+                            <input id="fecha_consulta" type="date" name="fecha_consulta" class="validate"  required/>
+                            <label for="fecha_consulta">Fecha Consulta</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">cake</i>
-                            <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="validate"  required/>
-                            <label for="fecha_nacimiento">Fecha Nacimiento</label>
-                        </div>      
+                            <input id="hora_consulta" type="time" name="hora_consulta" class="validate"  required/>
+                            <label for="hora_consulta">Hora Consulta</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="causa_consulta" name="causa_consulta">
+                            </select>
+                            <label>Causa Consulta</label>                            
+                        </div>       
                         <div>
                          <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                         <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
@@ -84,13 +125,46 @@ Dashboard_Page::headerTemplate('Consultas');
                 <!-- Título para la caja de dialogo -->
                 <h4 id="modal-procedimiento-title" class="center-align"></h4>
                 <!-- Formulario para crear o actualizar un registro -->
-                <form method="post" id="save-form">
+                <form method="post" id="save-procedimiento-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_consultasC" name="id_consultasC"/>
-                    <input class="hide" type="number" id="id_consultasCn" name="id_consultasCn"/>
-                    <div class="row">                        
+                    <input class="hide" type="number" id="id_consultasP" name="id_consultasP"/>                    
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">cake</i>
+                            <input id="fecha_consultas" type="text" name="fecha_consultas" class="validate"  required/>                            
+                        </div>                        
                         <div class="input-field col s6">
                             <select id="procedimiento" name="procedimiento">
+                            </select>
+                            <label>Procedimiento</label>                            
+                        </div>                          
+                        <div>
+                         <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
+                        <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>                                
+                        </div>
+                    </div>           
+                </form>
+            </div>            
+        </div>
+  	</div>
+</div>
+
+<div id="save-procedimientos-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4></h4>
+                <!-- Título para la caja de dialogo -->
+                <h4 id="modal-procedimientos-title" class="center-align"></h4>
+                <!-- Formulario para crear o actualizar un registro -->
+                <form method="post" id="save-procedimientos-form">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input class="hide" type="number" id="id_consultasPr" name="id_consultasPr"/>                    
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <i class="material-icons prefix">cake</i>
+                            <input id="fecha_consultasa" type="text" name="fecha_consultasa" class="validate"  required/>                            
+                        </div>                        
+                        <div class="input-field col s6">
+                            <select id="procedimientos" name="procedimientos">
                             </select>
                             <label>Procedimiento</label>                            
                         </div>                          
@@ -110,5 +184,5 @@ Dashboard_Page::headerTemplate('Consultas');
 </div>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('init.js');
+Dashboard_Page::footerTemplate('consulta.js');
 ?>  
