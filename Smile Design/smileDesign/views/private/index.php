@@ -13,5 +13,5 @@ Dashboard_Page::headerTemplate('Home');
 
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('index.js');
+Dashboard_Page::footerTemplate('main.js');
 ?>

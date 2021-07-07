@@ -38,7 +38,7 @@ class Dashboard_Page {
                                 <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
                                 <li><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
                                 <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li>
-                                <li><a href="login.php"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>
+                                <li><a href="#" onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>
                                                             
                             </ul>
                         </div>  
@@ -51,14 +51,13 @@ class Dashboard_Page {
                                 <img src="../../resources/img/fonfo12.jpg"> 
                             </div>
                             <a href="#user"><img class="circle" src="../../resources/img/default-user-image.png"></a>
-                            <a href="#name"><span class="white-text name">Usuario:<b></b></span></a>
-                            <a href="#email"><span class="white-text email">Correo:<b></b></span></a>
-                            
+                            <a href="#name"><span class="white-text name">Usuario:<b> '. $_SESSION['aliasusuario'].'</b></span></a>
+                            <br>
                         </div>                                         
                     <li>
                         <div class="divider"></div>
                     </li>              
-                        <li><a href="login.php"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>                              
+                        <li><a href="#"  onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>                              
                         <li class="hide-on-large-only" ><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
                         <li class="hide-on-large-only" ><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
                         <li class="hide-on-large-only" ><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
@@ -101,7 +100,8 @@ class Dashboard_Page {
                 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
                 <script type="text/javascript" src="../../app/helpers/components.js"></script>                
                 <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>              
-                <script src="../../resources/js/init.js"></script>                
+                <script src="../../resources/js/init.js"></script>        
+                <script type="text/javascript" src="../../app/controllers/private/account.js"></script>        
                 <script type="text/javascript" src="../../app/controllers/private/' . $controller . '"></script>
             </body>
             </html>
