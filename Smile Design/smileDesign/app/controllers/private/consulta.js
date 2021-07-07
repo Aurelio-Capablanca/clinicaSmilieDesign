@@ -26,8 +26,8 @@ function fillTable(dataset) {
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.idconsulta})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>                    
                     <a href="#" onclick="openDeleteDialog(${row.idconsulta})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                    <a href="#" onclick="openInsertProcedures(${row.idconsulta})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Doctor"><i class="material-icons">assignment</i></a>
-                    <a href="#" onclick="openProcedures(${row.idconsulta})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a>                    
+                    <a href="#" onclick="openInsertProcedures(${row.idconsulta})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Procedimientos"><i class="material-icons">assignment</i></a>
+                    <a href="#" onclick="openProcedures(${row.idconsulta})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Procedimientos"><i class="material-icons">search</i></a>                    
                 </td>
             </tr>
         `;
@@ -85,52 +85,6 @@ function openCreateDialog() {
     // Se llama a la función para llenar el select del estado cliente         
     fillSelect(ENDPOINT_CAUSA, 'causa_consulta', null);
 } 
-
-// function openAnswerDialog(id) {
-//     // Se restauran los elementos del formulario.
-//     document.getElementById('save-preguntas-form').reset();
-//     // Se abre la caja de dialogo (modal) que contiene el formulario.
-//     let instance = M.Modal.getInstance(document.getElementById('save-preguntas-modal'));
-//     instance.open();
-//     // Se asigna el título para la caja de dialogo (modal).
-//     document.getElementById('modal-title-pr').textContent = 'Guardar Preguntas';
-//     // Se llama a la función para llenar el select del estado cliente         
-//     fillSelect2(ENDPOINT_P1, 'pregunta1', null);
-//     fillSelect2(ENDPOINT_P2, 'pregunta2', null);
-//     fillSelect2(ENDPOINT_P3, 'pregunta3', null);
-//     fillSelect2(ENDPOINT_P4, 'pregunta4', null);
-//     fillSelect2(ENDPOINT_P5, 'pregunta5', null);
-//     fillSelect2(ENDPOINT_P6, 'pregunta6', null);
-//     fillSelect2(ENDPOINT_P7, 'pregunta7', null);
-//     fillSelect2(ENDPOINT_P8, 'pregunta8', null);
-
-//     const data = new FormData();
-//     data.append('id_pacientesP', id);
-
-//     fetch(API_PACIENTES + 'readOneAnswer', {
-//         method: 'post',
-//         body: data
-//     }).then(function (request) {
-//         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
-//         if (request.ok) {
-//             request.json().then(function (response) {
-//                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-//                 if (response.status) {
-//                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
-//                     document.getElementById('id_pacientesP').value = response.dataset.idpaciente;                                       
-//                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
-//                     M.updateTextFields();                    
-//                 } else {
-//                     sweetAlert(2, response.exception, null);
-//                 }
-//             });
-//         } else {
-//             console.log(request.status + ' ' + request.statusText);
-//         }
-//     }).catch(function (error) {
-//         console.log(error);
-//     });
-// }
 
 // Función para preparar el formulario al momento de modificar un registro.
 
@@ -260,7 +214,7 @@ function openInsertProcedures(id) {
                 if (response.status) {
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id_consultasPr').value = response.dataset.idconsulta;
-                    document.getElementById('fecha_consultasa').value = response.dataset.horaconsulta;
+                    document.getElementById('fecha_consultasa').value = response.dataset.fechaconsulta;
                     fillSelect(ENDPOINT_PROCEDIMIENTO, 'procedimientos', null);                   
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.                    
                     M.updateTextFields();                    
@@ -278,7 +232,7 @@ function openInsertProcedures(id) {
 
 function openProcedures(id) {
     // Se restauran los elementos del formulario.
-    //document.getElementById('show-form').reset();
+    document.getElementById('show-a-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('show-proced-modal'));
     instance.open();
@@ -312,7 +266,7 @@ function openProcedures(id) {
     }).catch(function (error) {
         console.log(error);
     });
-} 
+}
 
 
 function openUpdateprocedures(id) {

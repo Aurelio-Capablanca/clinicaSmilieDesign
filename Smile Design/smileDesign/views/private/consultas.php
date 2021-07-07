@@ -157,7 +157,7 @@ Dashboard_Page::headerTemplate('Consultas');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-procedimientos-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_consultasPr" name="id_consultasPr"/>                    
+                    <input class="" type="number" id="id_consultasPr" name="id_consultasPr"/>                    
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">cake</i>

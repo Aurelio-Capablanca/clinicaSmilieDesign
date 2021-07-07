@@ -259,7 +259,7 @@ if (isset($_GET['action'])) {
                     if ($consulta->setProcedimiento($_POST['procedimientos'])) { 
                         if ($consulta->createRowprocedure()) {
                             $result['status'] = 1;
-                            $result['message'] = 'Procedimiento Creada Correctamente';                                                        
+                            $result['message'] = 'Procedimiento Creado Correctamente';                                                        
                           } else {
                               $result['exception'] = Database::getException();                                                        
                           }
