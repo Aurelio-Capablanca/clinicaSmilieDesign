@@ -368,7 +368,7 @@ function openInsertDoctor(id) {
 
 function openAssignements(id) {
     // Se restauran los elementos del formulario.
-    //document.getElementById('show-form').reset();
+    document.getElementById('show-a-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('show-asignado-modal'));
     instance.open();

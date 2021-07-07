@@ -34,7 +34,7 @@ function fillTable(dataset) {
                     <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                     <a href="#" onclick="openInsertCalculo(${row.idpago})" class="btn waves-effect green tooltipped" data-tooltip="Realizar Calculo"><i class="material-icons">credit_score</i></a>
                     <a href="#" onclick="openCount(${row.idpago})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Pagos"><i class="material-icons">search</i></a>
-                    <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a>
+                    <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->
                 </td>
             </tr>
         `;
@@ -54,7 +54,12 @@ function fillTables(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `                           
             <tr>
-                <td>${row.debe}</td>
+                <td>${row.pagodebeh}</td>
+                <td>${row.pagodebeh}</td>
+                <td>${row.pagodebeh}</td>
+                <td>${row.pagodebeh}</td>
+                <td>${row.pagodebeh}</td>
+                <td>${row.pagodebeh}</td>
             </tr>
         `;
       });
@@ -174,7 +179,7 @@ function openInsertSaldo(id) {
 
 function openCount(id) {
     // Se restauran los elementos del formulario.
-    //document.getElementById('show-form').reset();
+    document.getElementById('show-a-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('show-cuenta-modal'));
     instance.open();
@@ -185,7 +190,7 @@ function openCount(id) {
     const data = new FormData();
     data.append('id_pagoSD', id);
 
-    fetch(API_PAGOS + 'readOneCuentas', {
+    fetch(API_PAGOS + 'readOneCount', {
         method: 'post',
         body: data
     }).then(function (request) {
@@ -194,8 +199,9 @@ function openCount(id) {
             request.json().then(function (response) {               
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
                 if (response.status) {                    
-                    document.getElementById('id_pagoSD').value = response.dataset.tr;
-                    readRowsCuenta(API_PAGOS);
+                    document.getElementById('id_pagoSD').value = response.dataset.tratamiento;
+                    document.getElementById('nombre').value = response.dataset.nombrepaciente;
+                    searchRowsCount(API_PAGOS, 'show-a-form');
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

@@ -458,11 +458,11 @@ if (isset($_GET['action'])) {
 							if (Database::getException()) {
 								$result['exception'] = Database::getException();
 							} else {
-								$result['exception'] = 'Cliente inexistente Orden';
+								$result['exception'] = 'Paciente no posee doctores asignados';
 							}
 						}                           
 					} else {
-						$result['exception'] = 'Cliente incorrecto Orden';
+						$result['exception'] = 'Paciente sin datos';
 					}                    
 					break;
 					case 'readOneA':

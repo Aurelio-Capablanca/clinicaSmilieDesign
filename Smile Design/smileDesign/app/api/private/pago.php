@@ -184,45 +184,8 @@ if (isset($_GET['action'])) {
 						} else {
 							$result['exception'] = 'Cuenta no valido';
 						}			 
-					break;	
-					case 'searchOneCount':
-						$_POST = $consulta->validateForm($_POST);
-						if ($_POST['notas_consultaP'] != '') {
-							if ($result['dataset'] = $consulta->searchOneCount($_POST['notas_consultaP'])) {
-								$result['status'] = 1;
-								$rows = count($result['dataset']);
-								if ($rows > 1) {
-									$result['message'] = 'Se encontraron ' . $rows . ' coincidencias';
-								} else {
-									$result['message'] = 'Solo existe una coincidencia';
-								}
-							} else {
-								if (Database::getException()) {
-									$result['exception'] = Database::getException();
-								} else {
-									$result['exception'] = 'No hay coincidencias';
-								}
-							}
-						} else {
-							$result['exception'] = 'Ingrese un valor para buscar';
-						}
-						break;
-						case 'readOneCount':      
-							if ($consulta->setId($_POST['id_consultaP'])) {                            
-								if ($result['dataset'] = $consulta->readOneProcedure()) {
-									$result['status'] = 1;                                
-								} else {
-									if (Database::getException()) {
-										$result['exception'] = Database::getException();
-									} else {
-										$result['exception'] = 'Cliente inexistente Orden';
-									}
-								}                           
-							} else {
-								$result['exception'] = 'Cliente incorrecto Orden';
-							}							              
-							break;	
-							case 'update':
+					break;						
+					case 'update':
 								$_POST = $pagos->validateForm($_POST); 
 								if ($pagos->setId($_POST['id_pagoT'])) {
 								 if ($data = $pagos->readOnes()) {
@@ -271,7 +234,44 @@ if (isset($_GET['action'])) {
 	   } else {
 		 $result['exception'] = 'Pago inexistente';
 	   }								
-	   break;	
+	   break;
+	   case 'searchOneCount':
+		$_POST = $pagos->validateForm($_POST);
+		if ($_POST['nombre'] != '') {
+			if ($result['dataset'] = $pagos->searchOneCount($_POST['nombre'])) {
+				$result['status'] = 1;
+				$rows = count($result['dataset']);
+				if ($rows > 1) {
+					$result['message'] = 'Se encontraron ' . $rows . ' coincidencias';
+				} else {
+					$result['message'] = 'Solo existe una coincidencia';
+				}
+			} else {
+				if (Database::getException()) {
+					$result['exception'] = Database::getException();
+				} else {
+					$result['exception'] = 'No hay coincidencias';
+				}
+			}
+		} else {
+			$result['exception'] = 'Ingrese un valor para buscar';
+		}
+		break;
+		case 'readOneCount':      
+		if ($pagos->setId($_POST['id_pagoSD'])) {                            
+			if ($result['dataset'] = $pagos->readOneCount()) {
+				$result['status'] = 1;                                
+			} else {
+				if (Database::getException()) {
+					$result['exception'] = Database::getException();
+				} else {
+					$result['exception'] = 'Pago inexistente Orden';
+				}
+			}                           
+		} else {
+			$result['exception'] = 'Pago incorrecto Orden';
+		}                    
+		break;	
 			default:
 			$result['exception'] = 'Acción no disponible dentro de la sesión';
 		  }

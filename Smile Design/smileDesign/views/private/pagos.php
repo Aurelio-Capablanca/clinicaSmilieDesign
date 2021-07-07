@@ -56,7 +56,8 @@ Dashboard_Page::headerTemplate('Pagos');
             <h4> </h4>                
                 <h4 id="modal-cuenta-title" class="center-align"></h4>                
                 <form method="post" id="show-a-form">                   
-                    <input class="" type="number" id="id_pagoSD" name="id_pagoSD"/>                     
+                    <input class="" type="number" id="id_pagoSD" name="id_pagoSD"/> 
+                    <input class="" type="text" id="nombre" name="nombre"/>                     
                     <div class="row">
                         <table class="responsive-table highlight">                           
                             <thead>
@@ -138,7 +139,7 @@ Dashboard_Page::headerTemplate('Pagos');
                 <form method="post" id="save-Cuenta-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                     <input class="" type="number" id="id_pagos" name="id_pagos"/>
-                    <input class="" id="nombres" type="text" name="nombres" />
+                    <input class="" id="nombres" type="text" name="nombres" />                    
                     <div>
                     <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                     <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>
