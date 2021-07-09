@@ -200,7 +200,7 @@ function openCount(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
                 if (response.status) {                    
                     document.getElementById('id_pagoSD').value = response.dataset.tratamiento;
-                    document.getElementById('nombre').value = response.dataset.nombrepaciente;
+                    document.getElementById('nombre').value = response.dataset.codigotratamientoh;
                     searchRowsCount(API_PAGOS, 'show-a-form');
                 } else {
                     sweetAlert(2, response.exception, null);

@@ -155,17 +155,17 @@ class Pagos extends Validator{
 
     public function searchOneCount($value)
     {
-        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento
+        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
                 FROM historialpagos hg
                 WHERE pagodebeh >= 0
-                AND nombrepaciente ILIKE ?';
+                AND codigotratamientoh ILIKE ?';
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
     
     public function readAllCount()
     {
-        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento
+        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
                 FROM historialpagos hg
                 Where pagodebeh >= 0';
         $params = null;
@@ -174,7 +174,7 @@ class Pagos extends Validator{
 
     public function readOneCount()
     {
-        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento
+        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
                 FROM historialpagos hg
                 WHERE pagodebeh >= 0
                 AND tratamiento = ?';
