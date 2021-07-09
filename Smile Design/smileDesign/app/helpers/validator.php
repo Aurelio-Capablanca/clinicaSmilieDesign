@@ -279,17 +279,6 @@ class Validator
         }
     }
 
-    public function validateTime($value)
-    {
-        // Se dividen las partes de la fecha y se guardan en un arreglo en el siguiene orden: año, mes y día.
-        $date = explode(':', $value);
-        if (checktime($date[1], $date[0])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /*
     *   Método para validar la ubicación de un archivo antes de subirlo al servidor.
     *

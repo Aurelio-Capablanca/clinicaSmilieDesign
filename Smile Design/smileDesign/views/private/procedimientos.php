@@ -9,7 +9,7 @@ Dashboard_Page::headerTemplate('Procedimientos');
      <h4 style="text-align:center;"> Gestion de Procedimientos </h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
-        <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Procedimiento</a>
+        <a href="#save-modal" onclick="openCreateDialog()"  class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Procedimiento</a>
         <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
         <form method="post" id="search-form">
         <div class="input-field col s6 m4">
@@ -63,8 +63,8 @@ Dashboard_Page::headerTemplate('Procedimientos');
                         </div>                                                
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">attach_money</i>
-                            <input id="precio_procedimieno" type="number" name="precio_procedimieno" class="validate" max="999.99" min="0.01" step="any" required/>
-                            <label for="precio_procedimieno">Precio</label>
+                            <input id="precio_procedimiento" type="number" name="precio_procedimiento" class="validate" max="999.99" min="0.01" step="any" required/>
+                            <label for="precio_procedimiento">Precio</label>
                         </div>
                          <div>
                          <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
@@ -82,5 +82,5 @@ Dashboard_Page::headerTemplate('Procedimientos');
 </div>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('init.js');
+Dashboard_Page::footerTemplate('procedimientos.js');
 ?>  
