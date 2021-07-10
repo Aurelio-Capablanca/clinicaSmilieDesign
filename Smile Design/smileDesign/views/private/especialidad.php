@@ -10,7 +10,7 @@ Dashboard_Page::headerTemplate('Especialidad');
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
         <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Especialidad</a>
-        <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
+        <a class="waves-effect waves-light btn-small" onclick="cargarDatos()"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
         <form method="post" id="search-form">
         <div class="input-field col s6 m4">
             <i class="material-icons prefix">search</i>
@@ -29,6 +29,7 @@ Dashboard_Page::headerTemplate('Especialidad');
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>
+        <th>ID</th>              
         <th>Especialidad</th>              
         <th class="actions-column">Acciones</th>
         </tr>
@@ -69,5 +70,5 @@ Dashboard_Page::headerTemplate('Especialidad');
 </div>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('init.js');
+Dashboard_Page::footerTemplate('especialidad.js');
 ?> 

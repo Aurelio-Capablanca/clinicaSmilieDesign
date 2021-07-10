@@ -9,19 +9,19 @@ Dashboard_Page::headerTemplate('Expedientes');
      <h4 style="text-align:center;"> Gestion de Expedientes </h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
-        <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Expediente</a>
-        <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
-        <form method="post" id="search-form">
-        <div class="input-field col s6 m4">
-            <i class="material-icons prefix">search</i>
-            <input id="search" type="text" name="search" required/>
-            <label for="search">Buscador</label>
+        <a href="#" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Expediente</a>
+        <a onclick="cargarDatos()" class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
+            <form method="post" id="search-form">
+                <div class="input-field col s6 m4">
+                    <i class="material-icons prefix">search</i>
+                    <input id="search" type="text" name="search" required/>
+                    <label for="search">Buscador</label>
+                </div>
+                <div class="input-field col s6 m4">
+                    <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar por nombre o apellido del paciente"><i class="material-icons">check_circle</i></button>
+                </div>
+            </form>
         </div>
-        <div class="input-field col s6 m4">
-            <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">check_circle</i></button>
-        </div>
-    </form>
-    </div>
     </div>
 <br>
 <div class="col s12 m12 12">
@@ -34,7 +34,7 @@ Dashboard_Page::headerTemplate('Expedientes');
         <th>Observaciones</th>                   
         <th>Nombre Paciente</th>
         <th>Apellido Paciente</th>
-        <th class="actions-column">Acciones</th>
+        <th>Acciones</th>
         </tr>
     </thead>
     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
@@ -43,15 +43,14 @@ Dashboard_Page::headerTemplate('Expedientes');
 </table>
 </div>
 
+<!-- Componente Modal para mostrar una caja de dialogo -->
 <div id="save-modal" class="modal">
-            <div class="modal-content center-align">
-            <h4></h4>
-                <!-- Título para la caja de dialogo -->
-                <h4 id="modal-title" class="center-align"></h4>
+    <div class="modal-content">
+    <h4 id="modal-title" class="center-align"></h4>
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_expediente" name="id_expediente"/>
+                    <input class="hide" type="number" id="txtId" name="txtId"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">how_to_reg</i>
@@ -60,8 +59,8 @@ Dashboard_Page::headerTemplate('Expedientes');
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <input id="periodontograma" type="text" name="periodontograma" class="validate"  required/>
-                            <label for="periodontograma">Observaciones periodontograma</label>
+                            <input id="observaciones" type="text" name="observaciones" class="validate"  required/>
+                            <label for="observaciones">Observaciones periodontograma</label>
                         </div>                                                
                                                 
                         <div class="input-field col s6">
@@ -93,14 +92,12 @@ Dashboard_Page::headerTemplate('Expedientes');
                         </div>
                     </div>           
                 </form>
-            </div>            
-        </div>
-  	</div>
+    </div>
 </div>
 
 </div>
 </div>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('init.js');
+Dashboard_Page::footerTemplate('expedientes.js');
 ?>  
