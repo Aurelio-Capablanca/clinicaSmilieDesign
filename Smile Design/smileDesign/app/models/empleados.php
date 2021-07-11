@@ -42,7 +42,7 @@ class Usuarios extends Validator
 
     public function setDireccion($value)
     {
-        if ($this->validateAlphabetic($value, 1, 50)) {
+        if ($this->validateString($value, 1, 250)) {
             $this->direccion = $value;
             return true;
         } else {
