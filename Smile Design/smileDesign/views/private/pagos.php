@@ -62,10 +62,11 @@ Dashboard_Page::headerTemplate('Pagos');
                         <table class="responsive-table highlight">                           
                             <thead>
                                 <tr>
-                                    <th>Hora Consulta</th>
-                                    <th>Nombre Procedimiento</th>                                    
-                                    <th>Descripción Procedimiento</th>                                    
-                                    <th class="actions-column">Acciones</th>                                  
+                                    <th>Fecha Registro</th>
+                                    <th>Debe</th>
+                                    <th>Abono</th>
+                                    <th>Total</th>
+                                    <th>Saldo</th>                                                                    
                                 </tr>
                             </thead>                            
                             <tbody id="count-rows">
@@ -86,7 +87,7 @@ Dashboard_Page::headerTemplate('Pagos');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_pagoT" name="id_pagoT"/>
+                    <input class="hide" type="number" id="id_pagoT" name="id_pagoT"/>
                     <div class="row">
                         <div class="input-field col s6">
                             <select id="tipo" name="tipo">
@@ -112,7 +113,7 @@ Dashboard_Page::headerTemplate('Pagos');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-formE">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_pagoE" name="id_pagoE"/>
+                    <input class="hide" type="number" id="id_pagoE" name="id_pagoE"/>
                     <div class="row">
                         <div class="input-field col s6">
                             <select id="estado" name="estado">
@@ -138,8 +139,9 @@ Dashboard_Page::headerTemplate('Pagos');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-Cuenta-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_pagos" name="id_pagos"/>
-                    <input class="" id="nombres" type="text" name="nombres" />                    
+                    <input class="hide" type="number" id="id_pagos" name="id_pagos"/>
+                    <input class="" id="nombres" type="text" name="nombres" /> 
+                    <label for="nombres">Nombre Paciente</label>                   
                     <div>
                     <a href="#" class="btn waves-effect grey tooltipped modal-close" data-tooltip="Cancelar"><i class="material-icons center-align">cancel</i></a>
                     <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Guardar"><i class="material-icons center-align">save</i></button>

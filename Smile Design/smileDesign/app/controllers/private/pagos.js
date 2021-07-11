@@ -54,12 +54,11 @@ function fillTables(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `                           
             <tr>
+                <td>${row.fecharegistro}</td>
                 <td>${row.pagodebeh}</td>
-                <td>${row.pagodebeh}</td>
-                <td>${row.pagodebeh}</td>
-                <td>${row.pagodebeh}</td>
-                <td>${row.pagodebeh}</td>
-                <td>${row.pagodebeh}</td>
+                <td>${row.pagoabonoh}</td>
+                <td>${row.pagototalh}</td>
+                <td>${row.pagosaldoh}</td>                
             </tr>
         `;
       });
