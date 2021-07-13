@@ -11,6 +11,7 @@ const ENDPOINT_P6 = '../../app/api/private/paciente.php?action=readAllP6';
 const ENDPOINT_P7 = '../../app/api/private/paciente.php?action=readAllP7';
 const ENDPOINT_P8 = '../../app/api/private/paciente.php?action=readAllP8';
 
+
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Se llama a la función que obtiene los registros para llenar la tabla. Se encuentra en el archivo components.js 
@@ -278,7 +279,64 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     // Se define una variable para establecer la acción a realizar en la API.
     let action = '';
     // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
-    if (document.getElementById('id_paciente').value) {
+    
+    var nombre, apellido, dui, direccion, telefono, email;
+    var exnombre, exapellido, exdui, exdireccion, extelefono, exemail;
+    nombre = document.getElementById('nombre_paciente').value;
+    apellido = document.getElementById('apellido_paciente').value;
+    dui= document.getElementById('dui_paciente').value;
+    direccion= document.getElementById('direccion_paciente').value;
+    telefono= document.getElementById('telefono_paciente').value;
+    email= document.getElementById('correo_cliente').value;
+
+    exnombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+    exapellido = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+	email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+	extelefono = /^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/;
+    dexirecion = /^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \:\#\-]{}$/;
+    exdui = /^[0-9]{8}[-][0-9]{1}$/;
+
+    if(nombre === " " || apellido === " " || dui === " " || direccion === " " || telefono === " " || email === " "){
+        sweetAlert(2, 'Todos los campos son obligatorios', null);
+    }
+    else if(nombre === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo nombre', null);
+    }
+    else if (!exnombre.test(nombre)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+    }
+    else if(apellido === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo apellido', null);
+    }
+    else if (!exapellido.test(apellido)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+    }
+    else if(dui === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo dui', null);
+    }
+    else if (!exdui.test(dui)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+    }
+    else if(direccion === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo direccion', null);
+    }
+    else if (!exdireccion.test(direccion)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+    }
+    else if(telefono === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo telefono', null);
+    }
+    else if (!extelefono.test(telefono)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+    }
+    else if(email === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo correo', null);
+    }
+    else if (!exemail.test(email)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+    }
+
+    else if (document.getElementById('id_paciente').value) {
         action = 'update';
     } else {
         action = 'create';
@@ -445,3 +503,47 @@ function openUpdateasignements(id) {
         console.log(error);
     });
 }  
+
+// --------------------------- validaciones ---------------------------------------------
+
+
+const expresiones = {	
+	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.	
+	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+	telefono: /^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/, // 7 a 14 numeros.
+    direcion: /^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \:\#\-]{}$/,
+    dui: /^[0-9]{8}[-][0-9]{1}$/,
+}
+
+
+
+function validar(){
+    var nombre, apellido, dui, direccion, telefono, email;
+    var exnombre, exapellido, exdui, exdireccion, extelefono, exemail;
+    nombre = document.getElementById('nombre_paciente').value;
+    apellido = document.getElementById('apellido_paciente').value;
+    dui= document.getElementById('dui_paciente').value;
+    direccion= document.getElementById('direccion_paciente').value;
+    telefono= document.getElementById('telefono_paciente').value;
+    email= document.getElementById('correo_cliente').value;
+
+    exnombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+
+    if(nombre === " " || apellido === " " || dui === " " || direccion === " " || telefono === " " || email === " "){
+        sweetAlert(2, 'Todos los campos son obligatorios', null);
+        return false;
+
+    }
+    else if(nombre === " " ){
+        sweetAlert(2, 'no se puede dejar vacio el campo nombre', null);
+        return false;
+
+    }
+    else if (!exnombre.test(nombre)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        return true;
+    }
+
+
+}
