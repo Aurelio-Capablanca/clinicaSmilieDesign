@@ -139,11 +139,34 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     // Se define una variable para establecer la acción a realizar en la API.
     let action = '';
     // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
-    if (document.getElementById('id_consulta').value) {
-        action = 'update';
-    } else {
-        action = 'create';
-    } 
+    
+    var notas, precio;
+    var exnotas, exprecio;    
+    notas = document.getElementById('notas_consulta').value;
+    precio = document.getElementById('precio_consulta').values;
+    
+    exnotas = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+        
+    if(notas === " " || precio === " "){
+        sweetAlert(2, 'Todos los campos son obligatorios', null);        
+    }
+    if(notas === " "){
+        sweetAlert(2, 'no se puede dejar vacio el campo de las notas', null);
+    }
+    else if(!exnotas.test(notas)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados para notas', null);
+        return false;
+    }
+    else if(precio === " "){
+        sweetAlert(2, 'no se puede dejar vacio el campo del precio', null); 
+    }    
+    else if (notas !== " " || precio !== " "){
+        if (document.getElementById('id_consulta').value) {
+            action = 'update';
+        } else {
+            action = 'create';
+        }
+    }     
    
     saveRow(API_CONSULTAS, action, 'save-form', 'save-modal');
 });

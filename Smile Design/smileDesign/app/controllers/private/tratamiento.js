@@ -89,11 +89,27 @@ function openUpdateDialog(id) {
 document.getElementById('save-form').addEventListener('submit', function (event) {
     event.preventDefault();
     let action = '';
-    if (document.getElementById('txtId').value) {
-        action = 'update';
-    } else {
-        action = 'create';
+
+    var tratamiento;
+    var extratamiento;
+
+    tratamiento = document.getElementById('descripcion').value;
+    extratamiento = /^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \:\#\-]{}$/;
+    
+    if(tratamiento === " "){
+        sweetAlert(2, 'Todos los campos son obligatorios', null);
     }
+    // else if(!extratamiento.test(tratamiento)){
+    //     sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null); 
+    //}
+    else if(tratamiento !== " "){
+        if (document.getElementById('txtId').value) {
+            action = 'update';
+        } else {
+            action = 'create';
+        }
+    }
+    
     saveRow(API_PRODUCTOS, action, 'save-form', 'save-modal');
 });
 

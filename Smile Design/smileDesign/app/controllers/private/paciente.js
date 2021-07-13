@@ -291,56 +291,64 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 
     exnombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
     exapellido = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-	email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+	exemail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 	extelefono = /^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/;
-    dexirecion = /^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \:\#\-]{}$/;
+    exdireccion = /^[0-9-a-zA-ZÀ-ÿ\s]{1,440}$/;;
     exdui = /^[0-9]{8}[-][0-9]{1}$/;
 
     if(nombre === " " || apellido === " " || dui === " " || direccion === " " || telefono === " " || email === " "){
         sweetAlert(2, 'Todos los campos son obligatorios', null);
     }
-    else if(nombre === " " ){
+     if(nombre === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo nombre', null);
     }
     else if (!exnombre.test(nombre)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el nombre', null);
+        return false;
     }
-    else if(apellido === " " ){
+    if(apellido === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo apellido', null);
     }
     else if (!exapellido.test(apellido)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el apellido', null);
+        return false;
     }
-    else if(dui === " " ){
+    if(dui === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo dui', null);
     }
     else if (!exdui.test(dui)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el DUI', null);
+        return false;
     }
-    else if(direccion === " " ){
+    if(direccion === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo direccion', null);
     }
     else if (!exdireccion.test(direccion)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con la Direccion', null);
+        return false;
     }
-    else if(telefono === " " ){
+    if(telefono === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo telefono', null);
     }
     else if (!extelefono.test(telefono)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados en Telefono', null);
+        return false;
     }
-    else if(email === " " ){
+    if(email === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo correo', null);
     }
     else if (!exemail.test(email)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null);
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el Correo', null);
+        return false;
     }
-
-    else if (document.getElementById('id_paciente').value) {
-        action = 'update';
-    } else {
-        action = 'create';
-    } 
+    if(nombre !== " " || apellido !== " " || dui !== " " || direccion !== " " || telefono !== " " || email !== " "){
+        if (document.getElementById('id_paciente').value) {
+            action = 'update';
+        } else {
+            action = 'create';
+        } 
+    }
+    
    
     saveRow(API_PACIENTES, action, 'save-form', 'save-modal');
 });
