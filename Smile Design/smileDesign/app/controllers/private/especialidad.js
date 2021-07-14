@@ -86,8 +86,9 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     if(especialidad === " "){
         sweetAlert(2, 'el campo es obligatorio', null);
     }
-    else if(!exespecialiadd.test(especialidad)){
+    if(!exespecialiadd.test(especialidad)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados, solo debe ingresar letras', null);        
+        return false;
     }
     else if(especialidad !== " ") {
         if (document.getElementById('id_especialidad').value) {

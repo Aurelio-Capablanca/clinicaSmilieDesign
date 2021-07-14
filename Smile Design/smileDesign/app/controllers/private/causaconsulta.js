@@ -75,10 +75,24 @@ function openUpdateDialog(id) {
 document.getElementById('save-form').addEventListener('submit', function (event) {
     event.preventDefault();
     let action = '';
-    if (document.getElementById('id_causa').value) {
-        action = 'update';
-    } else {
-        action = 'create';
+
+    var causa, excausa;
+    causa = document.getElementById('causa').value;
+    excausa = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+
+    if(causa === " "){
+        sweetAlert(2, 'Todos los campos son obligatorios', null);  
+    }
+    if (!excausa.test(causa)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con la causa', null);
+        return false;
+    }
+    else if(causa !== " "){        
+        if (document.getElementById('id_causa').value) {
+            action = 'update';
+        } else {
+            action = 'create';
+        }
     }
     saveRow(API_PRODUCTOS, action, 'save-form', 'save-modal');
 });

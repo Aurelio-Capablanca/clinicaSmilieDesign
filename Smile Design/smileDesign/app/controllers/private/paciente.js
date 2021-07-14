@@ -322,11 +322,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if(direccion === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo direccion', null);
-    }
-    else if (!exdireccion.test(direccion)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con la Direccion', null);
-        return false;
-    }
+    }    
     if(telefono === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo telefono', null);
     }

@@ -98,10 +98,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     
     if(tratamiento === " "){
         sweetAlert(2, 'Todos los campos son obligatorios', null);
-    }
-    // else if(!extratamiento.test(tratamiento)){
-    //     sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados', null); 
-    //}
+    }    
     else if(tratamiento !== " "){
         if (document.getElementById('txtId').value) {
             action = 'update';
