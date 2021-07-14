@@ -75,11 +75,28 @@ function openUpdateDialog(id) {
 document.getElementById('save-form').addEventListener('submit', function (event) {
     event.preventDefault();
     let action = '';
-    if (document.getElementById('id_especialidad').value) {
-        action = 'update';
-    } else {
-        action = 'create';
+
+    var especialidad;
+    var exespecialiadd;
+
+    especialidad = document.getElementById('especialidad').value;
+
+    exespecialiadd = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+
+    if(especialidad === " "){
+        sweetAlert(2, 'el campo es obligatorio', null);
     }
+    else if(!exespecialiadd.test(especialidad)){
+        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados, solo debe ingresar letras', null);        
+    }
+    else if(especialidad !== " ") {
+        if (document.getElementById('id_especialidad').value) {
+            action = 'update';
+        } else {
+            action = 'create';
+        }
+    }
+    
     saveRow(API_PRODUCTOS, action, 'save-form', 'save-modal');
 });
 
