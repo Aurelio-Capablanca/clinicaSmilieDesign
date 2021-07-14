@@ -83,11 +83,23 @@ function openUpdateDialog(id) {
 document.getElementById('save-form').addEventListener('submit', function (event) {
     event.preventDefault();
     let action = '';
-    if (document.getElementById('txtId').value) {
-        action = 'update';
-    } else {
-        action = 'create';
+
+    var obser, notasm;
+    obser = document.getElementById('notas_medicas').value;
+    notasm = document.getElementById('observaciones').value;
+
+
+    if(obser === " " || notasm === " "){
+        sweetAlert(2, 'Todos los campos son obligatorios', null);
     }
+    else if(obser !== " " || notasm !== " "){
+        if (document.getElementById('txtId').value) {
+            action = 'update';
+        } else {
+            action = 'create';
+        }
+    }
+        
     saveRow(API_PRODUCTOS, action, 'save-form', 'save-modal');
 });
 
