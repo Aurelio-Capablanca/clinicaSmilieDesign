@@ -56,8 +56,8 @@ Dashboard_Page::headerTemplate('Pagos');
             <h4> </h4>                
                 <h4 id="modal-cuenta-title" class="center-align"></h4>                
                 <form method="post" id="show-a-form">                   
-                    <input class="" type="number" id="id_pagoSD" name="id_pagoSD"/> 
-                    <input class="" type="text" id="nombre" name="nombre"/>                     
+                    <input class="hide" type="number" id="id_pagoSD" name="id_pagoSD"/> 
+                    <input class="hide" type="text" id="nombre" name="nombre"/>                     
                     <div class="row">
                         <table class="responsive-table highlight">                           
                             <thead>
