@@ -37,7 +37,7 @@ class Dashboard_Page {
                                 <li><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
                                 <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
                                 <li><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
-                                <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li>
+                                <!-- <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li> -->
                                 <li><a href="#" onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>
                                                             
                             </ul>
