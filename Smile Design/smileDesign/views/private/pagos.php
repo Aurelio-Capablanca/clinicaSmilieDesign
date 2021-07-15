@@ -160,7 +160,7 @@ Dashboard_Page::headerTemplate('Pagos');
                 <form method="post" id="save-Saldo-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                     <input class="hide" type="number" id="id_pago" name="id_pago"/>
-                    <input class="" id="nombress" type="text" name="nombress" />
+                    <input class="hide" id="nombress" type="text" name="nombress" />
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">attach_money</i>

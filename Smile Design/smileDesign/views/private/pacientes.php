@@ -260,7 +260,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta1" name="respuesta1"/>
+                       <input class="hide" type="text" id="respuesta1" name="respuesta1"/>
 
                         <div class="input-field col s6">
                             <select id="pregunta2" name="pregunta2">
@@ -279,7 +279,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta2" name="respuesta2"/>
+                       <input class="hide" type="text" id="respuesta2" name="respuesta2"/>
 
                         <div class="input-field col s6 ">
                             <select id="pregunta3" name="pregunta3">
@@ -298,7 +298,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta3" name="respuesta3"/>
+                       <input class="hide" type="text" id="respuesta3" name="respuesta3"/>
                                                                 
                         <div class="input-field col s6">
                             <select id="pregunta4" name="pregunta4">
@@ -317,7 +317,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta4" name="respuesta4"/>
+                       <input class="hide" type="text" id="respuesta4" name="respuesta4"/>
 
                          <div class="input-field col s6">
                             <select id="pregunta5" name="pregunta5">
@@ -336,7 +336,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta5" name="respuesta5"/>
+                       <input class="hide" type="text" id="respuesta5" name="respuesta5"/>
                         
                         <div class="input-field col s6">
                             <select id="pregunta6" name="pregunta6">
@@ -355,7 +355,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta6" name="respuesta6"/>
+                       <input class="hide" type="text" id="respuesta6" name="respuesta6"/>
 
                         <div class="input-field col s6">
                             <select id="pregunta7" name="pregunta7">
@@ -374,7 +374,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta7" name="respuesta7"/>
+                       <input class="hide" type="text" id="respuesta7" name="respuesta7"/>
                        
                         <div class="input-field col s6 ">
                             <select id="pregunta8" name="pregunta8">
@@ -393,7 +393,7 @@ Dashboard_Page::headerTemplate('Pacientes');
                             <span>No</span>
                         </label>                            
                        </div>
-                       <input class="" type="text" id="respuesta8" name="respuesta8"/>
+                       <input class="hide" type="text" id="respuesta8" name="respuesta8"/>
                        
                        <div class="input-field col s12">
                             <i class="material-icons prefix">place</i>

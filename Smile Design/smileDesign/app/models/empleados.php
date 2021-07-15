@@ -180,10 +180,10 @@ class Usuarios extends Validator
     public function searchRows($value)
     {
         $sql = 'SELECT idusuario,nombreusuario,apellidousuario,direccionusuario,telefonousuario,correousuario,
-                aliasusuario,e.estadousuario,t.tipousuario
+                aliasusuario,estadousuario,tipousuario, idestadousuario,idtipousuario
                 from usuarios u
-                INNER JOIN estadousuario e ON e.idestadousuario = u.idestadousuario
-                INNER JOIN tipousuario t ON u.idtipousuario = t.idtipousuario
+                INNER JOIN estadousuario USING(idestadousuario)
+                INNER JOIN tipousuario USING(idtipousuario)
                 WHERE apellidousuario ILIKE ? OR nombreusuario ILIKE ?
                 order by estadousuario desc';
         $params = array("%$value%", "%$value%");
@@ -204,10 +204,10 @@ class Usuarios extends Validator
     public function readAll()
     {
         $sql = 'SELECT idusuario,nombreusuario,apellidousuario,direccionusuario,telefonousuario,correousuario,
-        aliasusuario,e.estadousuario,t.tipousuario
+        aliasusuario,estadousuario,tipousuario, idestadousuario,idtipousuario
         from usuarios u
-        INNER JOIN estadousuario e ON e.idestadousuario = u.idestadousuario
-        INNER JOIN tipousuario t ON u.idtipousuario = t.idtipousuario
+        INNER JOIN estadousuario USING(idestadousuario)
+        INNER JOIN tipousuario USING(idtipousuario)
         order by estadousuario desc';
         $params = null;
         return Database::getRows($sql, $params);
@@ -216,10 +216,10 @@ class Usuarios extends Validator
     public function readOne()
     {
         $sql = 'SELECT idusuario,nombreusuario,apellidousuario,direccionusuario,telefonousuario,correousuario,
-                aliasusuario,e.estadousuario,t.tipousuario
+                aliasusuario,estadousuario,tipousuario, idestadousuario,idtipousuario
                 from usuarios u
-                INNER JOIN estadousuario e ON e.idestadousuario = u.idestadousuario
-                INNER JOIN tipousuario t ON u.idtipousuario = t.idtipousuario
+                INNER JOIN estadousuario USING(idestadousuario)
+                INNER JOIN tipousuario USING(idtipousuario)
                 WHERE idusuario = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);

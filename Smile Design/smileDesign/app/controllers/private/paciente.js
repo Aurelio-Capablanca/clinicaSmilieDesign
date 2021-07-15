@@ -150,24 +150,7 @@ document.getElementById('save-preguntas-form').addEventListener('submit', functi
     event.preventDefault();
     // Se define una variable para establecer la acción a realizar en la API.
     let action = 'createRowAnswers';
-
-    //-----------------------------------------------------
-    // if(s1.checked==true && s2.checked==true && s3.checked==true && s4.checked==true && s5.checked==true && s6.checked==true && s7.checked==true && s8.checked==true 
-    //     && n1.checked==false && n2.checked==false && n3.checked==false && n4.checked==false && n5.checked==false && n6.checked==false && n7.checked==false && n8.checked==false){
-
-    //     document.getElementById('respuesta1').value="Si";
-    //     document.getElementById('respuesta2').value="Si";
-    //     document.getElementById('respuesta3').value="Si";
-    //     document.getElementById('respuesta4').value="Si";
-    //     document.getElementById('respuesta5').value="Si";
-    //     document.getElementById('respuesta6').value="Si";
-    //     document.getElementById('respuesta7').value="Si";
-    //     document.getElementById('respuesta8').value="Si";
-    //     document.getElementById('notas').required = true;
-    // }
-    // if(s1.checked==true && s2.checked==true && s3.checked==true && s4.checked==true && s5.checked==true && s6.checked==true && s7.checked==true && s8.checked==true){
-
-    // }
+   
     if(s1.checked==true && n1.checked==false){        
         document.getElementById('respuesta1').value="Si";                
     }

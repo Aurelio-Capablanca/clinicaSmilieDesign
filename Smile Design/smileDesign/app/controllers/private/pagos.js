@@ -98,6 +98,7 @@ function openInsertCalculo(id) {
     // Se asigna el título para la caja de dialogo (modal).
     document.getElementById('modal-title-c').textContent = 'Calcular Total';        
     // Se define un objeto con los datos del registro seleccionado.     
+    document.getElementById('nombres').disabled = true;  
 
     const data = new FormData();
     data.append('id_pagos', id);
@@ -145,7 +146,8 @@ function openInsertSaldo(id) {
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
     document.getElementById('modal-title-S').textContent = 'Ingresar Abono o Pago';        
-    // Se define un objeto con los datos del registro seleccionado.     
+    // Se define un objeto con los datos del registro seleccionado.
+    document.getElementById('nombress').disabled = true;      
 
     const data = new FormData();
     data.append('id_pago', id);
