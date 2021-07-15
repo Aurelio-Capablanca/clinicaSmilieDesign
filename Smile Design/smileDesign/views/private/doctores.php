@@ -29,12 +29,12 @@ Dashboard_Page::headerTemplate('Doctores');
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>
+        <th>Foto</th>
         <th>Nombre Doctor</th>      
         <th>Apellido Doctor</th>                   
         <th>Dirección Doctor</th>
         <th>Teléfono Doctor</th>
-        <th>Correo Doctor</th>
-        <th>Foto</th>        
+        <th>Correo Doctor</th>                
         <th>Estado</th>
         <th class="actions-column">Acciones</th>
         </tr>

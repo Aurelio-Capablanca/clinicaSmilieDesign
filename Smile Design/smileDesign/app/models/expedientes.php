@@ -50,7 +50,7 @@ class Productos extends Validator
             return true;
         } else {
             return false;
-        }
+        }   
     }
 
     public function setObservaciones($value)
