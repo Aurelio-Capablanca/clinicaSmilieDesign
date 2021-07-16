@@ -25,7 +25,7 @@ class Dashboard_Page {
             <body>
                 <!--Encabezado del documento-->
                 <header>
-                    <nav class="blue-grey darken-2">
+                    <nav class="blue-grey">
                         <div class="nav-wrapper">
                         <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large">
                         <i class="material-icons">menu</i>
@@ -78,11 +78,11 @@ class Dashboard_Page {
         print('
                 </main>
                 <!--Pie del documento-->
-                <footer class="page-footer blue-grey darken-2">
+                <footer class="page-footer blue-grey ">
                     <div class="container">
                         <div class="row">
                             <div class="col l6 s12">
-                                <h5 class="white-text">Farmastuff Administrativo</h5>                               
+                                <h5 class="white-text">Smile Design</h5>                               
                             </div>
                             <div class="col l4 offset-l2 s12">                                
                             </div>
