@@ -2,7 +2,7 @@
 /*
     Clase que maneja el combobox de estado usuarios
 */
-class Categorias extends Validator
+class Doctores extends Validator
 {
     public function readAll()
     {

@@ -198,16 +198,16 @@ class Doctores extends Validator {
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $sql = 'INSERT INTO doctores(iddoctor, nombredoctor, apellidodoctor, direcciondoctor, telefonodoctor, correodoctor, fotodoctor, aliasdoctor, clavedoctor, idestadodoctor)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $this->foto, $this->alias, $this->clave, $hash, $this->estado );
+        $sql = 'INSERT INTO doctores(nombredoctor, apellidodoctor, direcciondoctor, telefonodoctor, correodoctor, fotodoctor, aliasdoctor, clavedoctor, idestadodoctor)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $this->foto, $this->alias, $hash, $this->estado );
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT iddoctor, nombredoctor, apellidodoctor, direcciondoctor, telefonodoctor, correodoctor, fotodoctor, aliasdoctor, clavedoctor, idestadodoctor
-                FROM doctores inner join estadodoctor Using(idestadodoctor)
+        $sql = 'SELECT iddoctor, nombredoctor, apellidodoctor, direcciondoctor, telefonodoctor, correodoctor, fotodoctor, aliasdoctor, clavedoctor, estadodoctor
+                FROM doctores inner join estadodoctor ON doctores.idestadodoctor = estadodoctor.idestadodoctor
                 ORDER BY apellidodoctor';
         $params = null;
         return Database::getRows($sql, $params);
@@ -216,7 +216,7 @@ class Doctores extends Validator {
     public function readOne()
     {
         $sql = 'SELECT iddoctor, nombredoctor, apellidodoctor, direcciondoctor, telefonodoctor, correodoctor, fotodoctor, aliasdoctor, clavedoctor, idestadodoctor
-                FROM doctores inner join estadodoctor Using(idestadodoctor)
+                FROM doctores
                 WHERE iddoctor = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
@@ -225,12 +225,12 @@ class Doctores extends Validator {
     public function updateRow($current_image) {
 
         // Se verifica si existe una nueva imagen para borrar la actual, de lo contrario se mantiene la actual.
-        ($this->imagen) ? $this->deleteFile($this->getRuta(), $current_image) : $this->imagen = $current_image;
+        ($this->foto) ? $this->deleteFile($this->getRuta(), $current_image) : $this->foto = $current_image;
 
         $sql = 'UPDATE doctores
-                SET nombredoctor = ?, apellidodoctor = ?, direcciondoctor = ?, telefonodoctor = ?, correodoctor = ?, fotodoctor = ?, aliasdoctor = ?, clavedoctor = ?, idestadodoctor = ?
-                WHERE idproducto = ?';
-        $params = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $this->foto, $this->alias, $this->clave, $this->estado, $this->id);
+                SET nombredoctor = ?, apellidodoctor = ?, direcciondoctor = ?, telefonodoctor = ?, correodoctor = ?, fotodoctor = ?, idestadodoctor = ?
+                WHERE iddoctor = ?';
+        $params = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $this->foto, $this->estado, $this->id);
         return Database::executeRow($sql, $params);
     }
 

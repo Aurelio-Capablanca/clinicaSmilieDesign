@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
         case 'create':
             $_POST = $procedimiento->validateForm($_POST);
             if ($procedimiento->setNombre($_POST['nombre_procedimiento'])) {
-                if ($procedimiento->setDescripcion([$_POST['descripcion']])) {
+                if ($procedimiento->setDescripcion($_POST['descripcion'])) {
                     if ($procedimiento->setCosto($_POST['precio_procedimiento'])) {
                         if ($procedimiento->createRow()) {
                             $result['status'] = 1;
@@ -92,7 +92,7 @@ if (isset($_GET['action'])) {
             if ($procedimiento->setId($_POST['id_procedimiento'])) {
                 if ($data = $procedimiento->readOne()) {
                     if ($procedimiento->setNombre($_POST['nombre_procedimiento'])) {
-                        if ($procedimiento->setDescripcion([$_POST['descripcion']])) {
+                        if ($procedimiento->setDescripcion($_POST['descripcion'])) {
                             if ($procedimiento->setCosto($_POST['precio_procedimiento'])) {
                                 if ($procedimiento->updateRow()) {
                                     $result['status'] = 1;

@@ -154,5 +154,5 @@ Dashboard_Page::headerTemplate('Doctores');
 </div>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('init.js');
+Dashboard_Page::footerTemplate('doctores.js');
 ?>  

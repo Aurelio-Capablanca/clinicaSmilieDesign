@@ -22,7 +22,7 @@ function fillTable(dataset) {
                 <td>${row.direcciondoctor}</td>
                 <td>${row.telefonodoctor}</td>
                 <td>${row.correodoctor}</td>
-                <td>${row.idestadodoctor}</td>
+                <td>${row.estadodoctor}</td>
                 <td>
                 <a href="#" onclick="openUpdateDialog(${row.iddoctor})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
                 <a href="#" onclick="openDeleteDialog(${row.iddoctor})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
@@ -59,6 +59,9 @@ function openCreateDialog() {
     document.getElementById('foto_doctor').required = true;
     // Se llama a la función que llena el select del formulario. Se encuentra en el archivo components.js
     fillSelect(ENDPOINT_ESTADO, 'estado_doctor', null);
+    document.getElementById('alias_doctor').disabled = false;
+    document.getElementById('clave_doctor').disabled = false;
+    document.getElementById('confirmar_doctor').disabled = false;
 }
 
 // Función para preparar el formulario al momento de modificar un registro.
@@ -72,10 +75,13 @@ function openUpdateDialog(id) {
     document.getElementById('modal-title').textContent = 'Actualizar doctor';
     // Se establece el campo de archivo como opcional.
     document.getElementById('foto_doctor').required = false;
+    document.getElementById('alias_doctor').disabled = true;
+    document.getElementById('clave_doctor').disabled = true;
+    document.getElementById('confirmar_doctor').disabled = true;
 
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();
-    data.append('iddoctor', id);
+    data.append('id_doctor', id);
 
     fetch(API_DOCTORES + 'readOne', {
         method: 'post',
@@ -92,7 +98,8 @@ function openUpdateDialog(id) {
                     document.getElementById('apellido_doctor').value = response.dataset.apellidodoctor;
                     document.getElementById('direccion_doctor').value = response.dataset.direcciondoctor;
                     document.getElementById('telefono_doctor').value = response.dataset.telefonodoctor;
-                    document.getElementById('correo_doctor').value = response.dataset.correodoctor;
+                    document.getElementById('alias_doctor').value = response.dataset.aliasdoctor;
+                    document.getElementById('correo_doctor').value = response.dataset.correodoctor;                    
                     fillSelect(ENDPOINT_ESTADO, 'estado_doctor', response.dataset.idestadodoctor);
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     M.updateTextFields();
@@ -127,7 +134,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 function openDeleteDialog(id) {
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();
-    data.append('iddoctor', id);
+    data.append('id_doctor', id);
     // Se llama a la función que elimina un registro. Se encuentra en el archivo components.js
     confirmDelete(API_DOCTORES, data);
 }

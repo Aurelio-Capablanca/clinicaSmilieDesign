@@ -54,7 +54,7 @@ class Procedimientos extends Validator
 
     public function setDescripcion($value)
     {
-        if ($this->validateString($value, 1, 250)) {
+        if ($this->validateAlphanumeric($value, 1, 250)) {
             $this->descripcion = $value;
             return true;
         } else {

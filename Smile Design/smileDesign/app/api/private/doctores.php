@@ -58,27 +58,31 @@ if (isset($_GET['action'])) {
                                 if (is_uploaded_file($_FILES['foto_doctor']['tmp_name'])) {
                                     if ($doctores->setFoto($_FILES['foto_doctor'])) {
                                         if ($doctores->setAlias($_POST['alias_doctor'])) {
-                                            if ($doctores->setClave($_POST['clave_doctor'])) {
-                                                if (isset($_POST['estado_doctor'])) {
-                                                    if ($doctores->setEstado($_POST['estado_doctor'])) {
-                                                        if ($doctores->createRow()) {
-                                                            $result['status'] = 1;
-                                                            if ($doctores->saveFile($_FILES['foto_doctor'], $doctores->getRuta(), $doctores->getFoto())) {
-                                                                $result['message'] = 'El producto fue creado exitosamente';
+                                            if ($_POST['clave_doctor'] == $_POST['confirmar_doctor']) {
+                                                if ($doctores->setClave($_POST['clave_doctor'])) {
+                                                    if (isset($_POST['estado_doctor'])) {
+                                                        if ($doctores->setEstado($_POST['estado_doctor'])) {
+                                                            if ($doctores->createRow()) {
+                                                                $result['status'] = 1;
+                                                                if ($doctores->saveFile($_FILES['foto_doctor'], $doctores->getRuta(), $doctores->getFoto())) {
+                                                                    $result['message'] = 'El producto fue creado exitosamente';
+                                                                } else {
+                                                                    $result['message'] = 'El producto fue creado, pero la imagen no fue guardada';
+                                                                }
                                                             } else {
-                                                                $result['message'] = 'El producto fue creado, pero la imagen no fue guardada';
+                                                                $result['exception'] = 'Talla incorrecta';
                                                             }
                                                         } else {
-                                                            $result['exception'] = Database::getException();
+                                                            $result['exception'] = 'Talla incorrecta';
                                                         }
                                                     } else {
-                                                        $result['exception'] = 'Talla incorrecta';
+                                                        $result['exception'] = 'Seleccione una imagen';
                                                     }
                                                 } else {
                                                     $result['exception'] = 'Seleccione una imagen';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Seleccione una imagen';
+                                                $result['exception'] = 'Talla incorrecta';
                                             }
                                         } else {
                                             $result['exception'] = 'Talla incorrecta';
@@ -130,31 +134,23 @@ if (isset($_GET['action'])) {
                                 if ($doctores->setTelefono($_POST['telefono_doctor'])) {
                                     if ($doctores->setCorreo($_POST['correo_doctor'])) {
                                         if (is_uploaded_file($_FILES['foto_doctor']['tmp_name'])) {
-                                            if ($doctores->setAlias($_POST['alias_doctor'])) {
-                                                if ($doctores->setClave($_FILES['clave_doctor'])) {
-                                                    if ($doctores->updateRow($data['foto_doctor'])) {
-                                                        $result['status'] = 1;
-                                                        if ($doctores->saveFile($_FILES['foto_doctor'], $doctores->getRuta(), $doctores->getFoto())) {
-                                                            $result['message'] = 'El producto fue modificado exitosamente';
-                                                        } else {
-                                                            $result['message'] = 'El producto fue modificado, pero la imagen no fue guardada';
-                                                        }
-                                                    } else {
-                                                        $result['exception'] = Database::getException();
-                                                    }
+                                            if ($doctores->updateRow($data['fotodoctor'])) {
+                                                $result['status'] = 1;
+                                                if ($doctores->saveFile($_FILES['foto_doctor'], $doctores->getRuta(), $doctores->getFoto())) {
+                                                    $result['message'] = 'El producto fue modificado exitosamente';
                                                 } else {
-                                                    $result['exception'] = 'Seleccione una talla';
+                                                    $result['message'] = 'El producto fue modificado, pero la imagen no fue guardada';
                                                 }
                                             } else {
-                                                if ($doctores->updateRow($data['foto_doctor'])) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Producto modificado correctamente';
-                                                } else {
-                                                    $result['exception'] = Database::getException();
-                                                }
+                                                $result['exception'] = 'No se pudieron modificar los datos';
                                             }
                                         } else {
-                                            $result['exception'] = $doctores->getImageError();                                            
+                                            if ($doctores->updateRow($data['fotodoctor'])) {
+                                                $result['status'] = 1;
+                                                $result['message'] = 'Imagen modificada correctamente';
+                                            } else {
+                                                $result['exception'] = Database::getException();
+                                            }
                                         }
                                     } else {
                                         $result['exception'] = 'Estado incorrecto';
@@ -183,7 +179,7 @@ if (isset($_GET['action'])) {
                 if ($data = $doctores->readOne()) {
                     if ($doctores->deleteRow()) {
                         $result['status'] = 1;
-                        if ($doctores->deleteFile($doctores->getRuta(), $data['foto_doctor'])) {
+                        if ($doctores->deleteFile($doctores->getRuta(), $data['fotodoctor'])) {
                             $result['message'] = 'El Doctor fue eliminado exitosamente';
                         } else {
                             $result['message'] = 'El Doctor fue eliminado, pero no se borro la imagen';

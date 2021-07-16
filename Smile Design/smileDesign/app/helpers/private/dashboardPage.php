@@ -37,7 +37,7 @@ class Dashboard_Page {
                                 <li><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
                                 <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
                                 <li><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
-                                <!-- <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li> -->
+                                <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li>
                                 <li><a href="#" onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>
                                                             
                             </ul>
@@ -50,8 +50,7 @@ class Dashboard_Page {
                             <div class="background">
                                 <img src="../../resources/img/fonfo12.jpg"> 
                             </div>
-                            <a href="#user"><img class="circle" src="../../resources/img/default-user-image.png"></a>
-                            <a href="#name"><span class="white-text name">Usuario:<b> '. $_SESSION['aliasusuario'].'</b></span></a>
+                            <a href="#user"><img class="circle" src="../../resources/img/default-user-image.png"></a>                            
                             <br>
                         </div>                                         
                     <li>
