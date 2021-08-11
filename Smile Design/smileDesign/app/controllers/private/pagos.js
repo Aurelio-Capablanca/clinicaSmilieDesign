@@ -53,12 +53,14 @@ function fillTables(dataset) {
    dataset.map(function (row) {   
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `                           
-            <tr>
-                <td>${row.fecharegistro}</td>
+            <tr>                
                 <td>${row.pagodebeh}</td>
                 <td>${row.pagoabonoh}</td>
                 <td>${row.pagototalh}</td>
-                <td>${row.pagosaldoh}</td>                
+                <td>${row.pagosaldoh}</td>
+                <td>
+                <a href="../../app/reports/factura.php?id=${row.tratamiento}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
+                </td>                
             </tr>
         `;
       });

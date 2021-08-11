@@ -6,6 +6,7 @@ class Pagos extends Validator{
     private $saldo = null;
     private $tipo = null;
     private $estado = null;
+    private $codigo = null;
 
     
     public function setId($value)
@@ -49,6 +50,16 @@ class Pagos extends Validator{
         }
     }
 
+    public function setCodigo($value)
+    {
+        if ($this->validateString($value, 1, 200)) {
+            $this->codigo = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // ----------------------------------------------
 
     public function getId()
@@ -69,6 +80,11 @@ class Pagos extends Validator{
     public function getTipo()
     {
         return $this->tipo;
+    }
+
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
     // ------------------------------------------
 
@@ -155,29 +171,35 @@ class Pagos extends Validator{
 
     public function searchOneCount($value)
     {
-        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
-                FROM historialpagos hg
-                WHERE pagodebeh >= 0
-                AND codigotratamientoh ILIKE ?';
+        $sql = 'SELECT  nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        from historialpagos 
+        Where codigotratamientoh ILIKE ?
+        and pagoabonoh >0  and pagosaldoh >=0                 
+        group by  nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        having count(pagodebeh)>=1 and count(pagoabonoh)>=1';
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
     
     public function readAllCount()
     {
-        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
-                FROM historialpagos hg
-                Where pagodebeh >= 0';
+        $sql = 'SELECT nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        from historialpagos 
+        Where pagoabonoh >0  and pagosaldoh >=0                 
+        group by  nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        having count(pagoabonoh)>=1 and count(pagodebeh)>=1';
         $params = null;
         return Database::getRows($sql, $params);
     }
 
     public function readOneCount()
     {
-        $sql = 'SELECT idhistorial, nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
-                FROM historialpagos hg
-                WHERE pagodebeh >= 0
-                AND tratamiento = ?';
+        $sql = 'SELECT nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        from historialpagos 
+        Where tratamiento = ?
+        and pagoabonoh >0  and pagosaldoh >=0                 
+        group by  nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        having count(pagoabonoh)>=1 and count(pagodebeh)>=1 ';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
@@ -201,6 +223,34 @@ class Pagos extends Validator{
         $sql = 'SELECT * From Actualizar_Pagos(?)';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function readOnePayment()
+    {
+        $sql = 'SELECT count(cl.idconsulta) as idconsulta, costoprocedimiento, descripcionprocedimiento, nombreprocedimiento ,nombrepaciente, pagoabono,pagoabonoh, tratamiento
+        from historialpagos ph
+        inner join pagos pg on pg.idpago = ph.tratamiento
+        inner join tratamientos tr on tr.idtratamiento = ph.tratamiento
+        inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
+        inner join consultas cl on cl.idconsulta = cc.idconsulta
+        inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
+        inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
+        Where idpago = ?
+        group by  costoprocedimiento,descripcionprocedimiento, nombrepaciente, pagoabonoh, pagoabono, nombreprocedimiento, tratamiento';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readOnepaciente()
+    {
+        $sql = 'SELECT pc.nombrepaciente as nombrepaciente, apellidopaciente, telefonopaciente, duipaciente, direccionpaciente, correopaciente, tratamiento
+        from pacientes pc
+        inner join pacienteasignado pp on pp.idpaciente = pc.idpaciente
+        inner join tratamientos tr on tr.idpacienteasignado = pp.idpacienteasignado
+        inner join historialpagos hp on hp.tratamiento = tr.idtratamiento
+        Where idpago = ? limit 1';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
     }
 
 }

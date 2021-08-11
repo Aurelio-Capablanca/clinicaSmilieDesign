@@ -193,7 +193,7 @@ if (isset($_GET['action'])) {
             } else {
                 $result['exception'] = 'Producto incorrecto';
             }
-            break;
+            break;            
         default:
             $result['exception'] = 'Acción no disponible dentro de la sesión';
     }

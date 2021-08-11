@@ -5,7 +5,7 @@ require_once('../../models/tratamientos.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
-    session_start();
+    //session_start();
     $producto = new Productos;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
@@ -101,6 +101,33 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Tratamiento incorrecto';
                 }
                 break;
+                case 'readOneC': 
+                    if ($producto->setId($_POST['id_t'])) {
+                        if ($result['dataset'] = $producto->readRow()) {
+                            $result['status'] = 1;
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Tratamiento inexistente';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Tratamiento incorrecto';
+                    }
+                    break;
+                    case 'createConsulta':
+                        if ($producto->setId($_POST['id_t'])) {  
+                            if ($producto->createRowsCantidad()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Consulta Agregada correctamente';
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                        } else {
+                            $result['exception'] = 'id incorrecto';
+                        }      
+                    break;    
             case 'update':
                 $_POST = $producto->validateForm($_POST);   
                 if ($producto->setId($_POST['txtId'])) {
@@ -165,7 +192,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Producto incorrecto';
                 }
-                break;
+                break;                
             default: 
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

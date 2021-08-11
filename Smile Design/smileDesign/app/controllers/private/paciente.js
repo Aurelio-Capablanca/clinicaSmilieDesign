@@ -28,7 +28,7 @@ function fillTable(dataset) {
         content += `
             <tr>
                 <td>${row.nombrepaciente}</td>                
-                <td>${row.apellidopaciente}</td> 
+                <td>${row.apellidopaciente}</td>
                 <td>${row.fechanacimiento}</td> 
                 <td>${row.duipaciente}</td> 
                 <td>${row.telefonopaciente}</td> 
@@ -40,6 +40,7 @@ function fillTable(dataset) {
                     <a href="#" onclick="openDeleteDialog(${row.idpaciente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                     <a href="#" onclick="openInsertDoctor(${row.idpaciente})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Doctor"><i class="material-icons">assignment</i></a>
                     <a href="#" onclick="openAssignements(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a>                    
+                    <a href="../../app/reports/expedientes.php?id=${row.idpaciente}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Expedientes"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
         `;

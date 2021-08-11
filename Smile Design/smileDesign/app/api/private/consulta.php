@@ -288,6 +288,54 @@ if (isset($_GET['action'])) {
                 } else {
                       $result['exception'] = 'Paciente incorrecto';
                 }							
+                break;
+                case 'readAllAgenda':
+                    if ($result['dataset'] = $consulta->readAllAgenda()) {
+                         $result['status'] = 1;
+                    } else {
+                         if (Database::getException()) {
+                               $result['exception'] = Database::getException();
+                         } else {
+                               $result['exception'] = 'No hay Consultas registradas';
+                         }
+                    }					 
+                   break;
+                   case 'searchOneConsultasCantidad':
+                    $_POST = $consulta->validateForm($_POST);
+                    if ($_POST['codigos'] != '') {
+                        if ($result['dataset'] = $consulta->searchOneConsultasC($_POST['codigos'])) {
+                            $result['status'] = 1;
+                            $rows = count($result['dataset']);
+                            if ($rows > 1) {
+                                $result['message'] = 'Se encontraron ' . $rows . ' coincidencias';
+                            } else {
+                                $result['message'] = 'Solo existe una coincidencia';
+                            }
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'No hay coincidencias';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Ingrese un valor para buscar';
+                    }
+                    break;
+            case 'readOneConsultasCantidad':      
+                if ($consulta->setId($_POST['id_tratamientos'])) {                            
+                    if ($result['dataset'] = $consulta->readOneConsultasC()) {
+                        $result['status'] = 1;                                
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Cliente inexistente Orden';
+                        }
+                    }                           
+                } else {
+                    $result['exception'] = 'Cliente incorrecto Orden';
+                }                    
                 break;    
 			default:
 			$result['exception'] = 'Acción no disponible dentro de la sesión';

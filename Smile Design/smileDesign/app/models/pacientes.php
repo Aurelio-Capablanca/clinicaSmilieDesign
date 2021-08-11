@@ -500,10 +500,10 @@ class Pacientes extends Validator{
 
     public function readAll()
     {
-        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
+        $sql = "SELECT idpaciente, nombrepaciente , apellidopaciente , fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
                 FROM pacientes
-                INNER JOIN estadopaciente USING (idestadopaciente)                                                               
-                ORDER BY nombrepaciente'; 
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                ORDER BY nombrepaciente"; 
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -518,19 +518,19 @@ class Pacientes extends Validator{
 
     public function readAllDOCTOR()
     {
-        $sql = 'SELECT iddoctor, nombredoctor
+        $sql = "SELECT iddoctor, nombredoctor ||' '|| apellidodoctor As NombreDoctor
                 FROM doctores
-                INNER JOIN estadodoctor USING (idestadodoctor)'; 
+                INNER JOIN estadodoctor USING (idestadodoctor)"; 
         $params = null;
         return Database::getRows($sql, $params);
     }
     
     public function readAllDOCTORI()
     {
-        $sql = 'SELECT iddoctor, nombredoctor
+        $sql = "SELECT iddoctor, nombredoctor ||' '|| apellidodoctor As NombreDoctor
                 FROM doctores
                 INNER JOIN estadodoctor USING (idestadodoctor)
-                WHERE idestadodoctor=1'; 
+                WHERE idestadodoctor=1"; 
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -688,4 +688,19 @@ class Pacientes extends Validator{
         $params = array($this->r1,$this->p1,$this->r2,$this->p2,$this->r3,$this->p3,$this->r4,$this->p4,$this->r5,$this->p5,$this->r6,$this->p6,$this->r7,$this->p7,$this->r8,$this->p8,$this->respuesta,$this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readExpedientes()
+    {
+        $sql = "SELECT ah.idarchivo, ex.idexpediente, aa.idpacienteasignado ,nombrepaciente ||' '|| apellidopaciente as nombrepaciente, notas, 
+                        		observacionesperiodontograma, odontograma, periodontograma, nombredoctor ||' '|| apellidodoctor as nombredoctor
+                From pacientes pc
+                inner join expedientes ex on ex.idpaciente = pc.idpaciente
+                inner join archivos ah on ah.idexpediente = ex.idexpediente
+                inner join pacienteasignado aa on aa.idpaciente = pc.idpaciente
+                inner join doctores dr on dr.iddoctor = aa.iddoctor
+                Where pc.idpaciente= ?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
 }

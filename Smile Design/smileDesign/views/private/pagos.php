@@ -61,12 +61,12 @@ Dashboard_Page::headerTemplate('Pagos');
                     <div class="row">
                         <table class="responsive-table highlight">                           
                             <thead>
-                                <tr>
-                                    <th>Fecha Registro</th>
+                                <tr>                                    
                                     <th>Debe</th>
                                     <th>Abono</th>
                                     <th>Total</th>
-                                    <th>Saldo</th>                                                                    
+                                    <th>Saldo</th>  
+                                    <th class="actions-column">Acciones</th>                                                                          
                                 </tr>
                             </thead>                            
                             <tbody id="count-rows">

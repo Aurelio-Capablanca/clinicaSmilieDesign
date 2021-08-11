@@ -19,9 +19,9 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td>${row.notasconsulta}</td>                
-                <td>${row.costoconsulta}</td> 
-                <td>${row.fechaconsulta}</td> 
+                <td>${row.nombrepaciente}</td> 
+                <td>${row.fechaconsulta}</td>                
+                <td>${row.horaconsulta}</td>                 
                 <td>${row.causa}</td>                 
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.idconsulta})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>                    
@@ -145,20 +145,19 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     notas = document.getElementById('notas_consulta').value;
     precio = document.getElementById('precio_consulta').values;
     
-    exnotas = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+    //exnotas = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
         
     if(notas === " " || precio === " "){
-        sweetAlert(2, 'Todos los campos son obligatorios', null);        
+        sweetAlert(2, 'Todos los campos son obligatorios', null); 
+        return false;       
     }
     if(notas === " "){
         sweetAlert(2, 'no se puede dejar vacio el campo de las notas', null);
-    }
-    else if(!exnotas.test(notas)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados para notas', null);
         return false;
-    }
+    }   
     else if(precio === " "){
-        sweetAlert(2, 'no se puede dejar vacio el campo del precio', null); 
+        sweetAlert(2, 'no se puede dejar vacio el campo del precio', null);
+        return false; 
     }    
     else if (notas !== " " || precio !== " "){
         if (document.getElementById('id_consulta').value) {
@@ -252,6 +251,8 @@ function openInsertProcedures(id) {
         console.log(error);
     });
 }  
+
+
 
 function openProcedures(id) {
     // Se restauran los elementos del formulario.

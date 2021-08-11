@@ -107,12 +107,13 @@ class Productos extends Validator
 
     public function searchRows($value)
     {
-        $sql = 'SELECT idtratamiento, fechainicio, descripciontratamiento, p.nombrepaciente,p.apellidopaciente, p.duipaciente,ti.tipotratamiento, es.estadotratamiento
-        FROM tratamientos t
-        INNER JOIN pacientes p ON t.idpacienteasignado = p.idpaciente
-        INNER JOIN tipotratamiento ti ON ti.idtipotratamiento = t.idtipotratamiento
-        INNER JOIN estadotratamiento es ON es.idestadotratamiento = t.idestadotratamiento
-        WHERE p.nombrepaciente ILIKE ? OR p.apellidopaciente ILIKE ? OR p.duipaciente ILIKE ?
+        $sql = 'SELECT idtratamiento, fechainicio, descripciontratamiento, nombrepaciente, apellidopaciente , duipaciente ,idpacienteasignado ,idtipotratamiento, idestadotratamiento , tipotratamiento, estadotratamiento
+        FROM tratamientos
+		INNER JOIN pacienteasignado Using(idpacienteasignado)
+        INNER JOIN pacientes Using(idpaciente)
+        INNER JOIN tipotratamiento Using(idtipotratamiento)
+        INNER JOIN estadotratamiento Using(idestadotratamiento)
+        WHERE nombrepaciente ILIKE ? OR apellidopaciente ILIKE ? OR duipaciente ILIKE ?
         ORDER BY fechainicio';
         $params = array("%$value%", "%$value%", "%$value%");
         return Database::getRows($sql, $params);
@@ -127,13 +128,21 @@ class Productos extends Validator
         return Database::executeRow($sql, $params);
     }
 
+    public function createRowsCantidad()
+    {
+        $sql = 'SELECT * FROM Insertar_tratamiento (?)';
+        $params = array($this->id);
+        return Database::executeRow($sql, $params);
+    }
+
     public function readRows()
     {
-        $sql = 'SELECT idtratamiento, fechainicio, descripciontratamiento, p.nombrepaciente,p.apellidopaciente, p.duipaciente,ti.tipotratamiento, es.estadotratamiento
-        FROM tratamientos t
-        INNER JOIN pacientes p ON t.idpacienteasignado = p.idpaciente
-        INNER JOIN tipotratamiento ti ON ti.idtipotratamiento = t.idtipotratamiento
-        INNER JOIN estadotratamiento es ON es.idestadotratamiento = t.idestadotratamiento
+        $sql = 'SELECT idtratamiento, fechainicio, descripciontratamiento, nombrepaciente, apellidopaciente , duipaciente , idpacienteasignado ,idtipotratamiento, idestadotratamiento , tipotratamiento, estadotratamiento
+        FROM tratamientos
+		INNER JOIN pacienteasignado Using(idpacienteasignado)
+        INNER JOIN pacientes Using(idpaciente)
+        INNER JOIN tipotratamiento Using(idtipotratamiento)
+        INNER JOIN estadotratamiento Using(idestadotratamiento)
         order by fechainicio';
         $params = null;
         return Database::getRows($sql, $params);
@@ -141,11 +150,12 @@ class Productos extends Validator
 
     public function readRow()
     {
-        $sql = 'SELECT idtratamiento, fechainicio, descripciontratamiento, p.duipaciente,ti.tipotratamiento, es.estadotratamiento
-        FROM tratamientos t
-        INNER JOIN pacientes p ON t.idpacienteasignado = p.idpaciente
-        INNER JOIN tipotratamiento ti ON ti.idtipotratamiento = t.idtipotratamiento
-        INNER JOIN estadotratamiento es ON es.idestadotratamiento = t.idestadotratamiento
+        $sql = 'SELECT idtratamiento, fechainicio, descripciontratamiento, nombrepaciente, apellidopaciente , duipaciente , idpacienteasignado ,idtipotratamiento, idestadotratamiento , tipotratamiento, estadotratamiento
+        FROM tratamientos
+		INNER JOIN pacienteasignado Using(idpacienteasignado)
+        INNER JOIN pacientes Using(idpaciente)
+        INNER JOIN tipotratamiento Using(idtipotratamiento)
+        INNER JOIN estadotratamiento Using(idestadotratamiento)
 		WHERE idtratamiento = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
@@ -166,4 +176,7 @@ class Productos extends Validator
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    
+
 }
