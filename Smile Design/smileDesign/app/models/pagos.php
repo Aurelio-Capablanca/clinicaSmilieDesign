@@ -253,4 +253,12 @@ class Pagos extends Validator{
         return Database::getRow($sql, $params);
     }
 
+
+    public function suspenderPago()
+    {
+        $sql = 'UPDATE pagos Set idestadopago=3 Where idpago = ?';
+        $params = array($this->id);
+        return Database::executeRow($sql, $params);
+    }
+
 }

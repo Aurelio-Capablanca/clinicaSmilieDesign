@@ -271,7 +271,23 @@ if (isset($_GET['action'])) {
 		} else {
 			$result['exception'] = 'Pago incorrecto Orden';
 		}                    
-		break;	
+		break;
+		case 'suspenderPago':
+			if ($pagos->setId($_POST['id_pagoE'])) {
+				 if ($data = $pagos->readOnes()) {
+					   if ($pagos->suspenderPago()) {
+							$result['status'] = 1;									 
+						   $result['message'] = 'Pago Suspendido correctamente';									  
+					   } else {
+							$result['exception'] = Database::getException();
+					   }
+				 } else {
+					   $result['exception'] = 'Producto inexistente';
+				 }
+			} else {
+				 $result['exception'] = 'Producto incorrecto';
+			}
+			break;	
 			default:
 			$result['exception'] = 'Acción no disponible dentro de la sesión';
 		  }

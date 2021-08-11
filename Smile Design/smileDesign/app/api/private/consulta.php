@@ -173,6 +173,7 @@ if (isset($_GET['action'])) {
                         } else {
                              $result['exception'] = 'Producto incorrecto';
                         }
+                        break;
                         case 'searchOneProcedure':
                             $_POST = $consulta->validateForm($_POST);
                             if ($_POST['notas_consultaP'] != '') {

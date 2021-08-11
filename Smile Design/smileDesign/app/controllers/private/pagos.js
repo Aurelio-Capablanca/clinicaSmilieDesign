@@ -31,10 +31,11 @@ function fillTable(dataset) {
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.idpago})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="openInsertSaldo(${row.idpago})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Pago"><i class="material-icons">payments</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect yellow tooltipped" data-tooltip="Eliminar"><i class="material-icons">update</i></a>
                     <a href="#" onclick="openInsertCalculo(${row.idpago})" class="btn waves-effect green tooltipped" data-tooltip="Realizar Calculo"><i class="material-icons">credit_score</i></a>
                     <a href="#" onclick="openCount(${row.idpago})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Pagos"><i class="material-icons">search</i></a>
                     <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->
+                    <a href="#" onclick="openEstadoDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Suspender Pago"><i class="material-icons">delete</i></a>
                 </td>
             </tr>
         `;
@@ -72,6 +73,13 @@ function fillTables(dataset) {
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
 
+function openEstadoDialog(id) {
+    // Se define un objeto con los datos del registro seleccionado.
+    const data = new FormData();
+    data.append('id_pagoE', id);
+    // Se llama a la función que elimina un registro. Se encuentra en el archivo components.js
+    confirmSuspender(API_PAGOS, data);
+}
 
 
 document.getElementById('search-form').addEventListener('submit', function (event) {

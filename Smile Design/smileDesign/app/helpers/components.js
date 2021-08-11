@@ -466,6 +466,43 @@ function confirmDelete(api, data) {
     });
 }
 
+function confirmSuspender(api, data) {
+    swal({
+        title: 'Advertencia',
+        text: '¿Desea Suspender el Pago?',
+        icon: 'warning',
+        buttons: ['No', 'Sí'],
+        closeOnClickOutside: false,
+        closeOnEsc: false
+    }).then(function (value) {
+        // Se verifica si fue cliqueado el botón Sí para hacer la petición de borrado, de lo contrario no se hace nada.
+        if (value) {
+            fetch(api + 'suspenderPago', {
+                method: 'post',
+                body: data
+            }).then(function (request) {
+                // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+                if (request.ok) {
+                    request.json().then(function (response) {
+                        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                        if (response.status) {
+                            // Se cargan nuevamente las filas en la tabla de la vista después de borrar un registro.
+                            readRows(api);
+                            sweetAlert(1, response.message, null);
+                        } else {
+                            sweetAlert(2, response.exception, null);
+                        }
+                    });
+                } else {
+                    console.log(request.status + ' ' + request.statusText);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    });
+}
+
 /*
 *   Función para manejar los mensajes de notificación al usuario. Requiere el archivo sweetalert.min.js para funcionar.
 *

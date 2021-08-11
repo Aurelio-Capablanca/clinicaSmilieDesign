@@ -10,13 +10,13 @@ Dashboard_Page::headerTemplate('Clientes');
 <a href="#" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Cliente</a>
 <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>
     <form method="post" id="search-form">
-        <div class="input-field col s6 m4">
+        <div class="input-field col s6 m6">
             <i class="material-icons prefix">search</i>
-            <input id="search" type="text" name="search" required/>
+            <input id="search" type="text" name="search" required  placeholder="Buscar por Nombre, Apellido o DUI"/>
             <label for="search">Buscador</label>
         </div>
         <div class="input-field col s6 m4">
-            <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">check_circle</i></button>
+            <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar por Nombre, Apellido o DUI"><i class="material-icons">check_circle</i></button>
         </div>
     </form>
 </div>
