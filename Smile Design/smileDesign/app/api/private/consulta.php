@@ -78,11 +78,11 @@ if (isset($_GET['action'])) {
                                        if (Database::getException()) {
                                             $result['exception'] = Database::getException();
                                        } else {
-                                            $result['exception'] = 'Paciente inexistente';
+                                            $result['exception'] = 'Consulta inexistente';
                                        }
                                  }
                             } else {
-                                 $result['exception'] = 'Producto incorrecto';
+                                 $result['exception'] = 'identificador incorrecto';
                             }
                             break;
                         case 'create':
@@ -99,10 +99,10 @@ if (isset($_GET['action'])) {
 												$result['exception'] = Database::getException();;
 											}
                                         } else {
-                                            $result['exception'] = 'Consulta Incorrecta';
+                                            $result['exception'] = 'Causa Incorrecta';
                                            } 
                                         } else {
-                                       $result['exception'] = 'Consulta n Incorrecta';
+                                       $result['exception'] = 'Causa  Incorrecta';
                                       }      
                                   } else {
                                     $result['exception'] = 'Hora Incorrecta';
@@ -134,16 +134,16 @@ if (isset($_GET['action'])) {
                                         $result['exception'] = Database::getException();                                                        
                                         } 
                                     } else {
-                                    $result['exception'] = 'Hora Incorrecta';
+                                    $result['exception'] = 'Causa Incorrecta';
                                    }      
                                } else {
-                                 $result['exception'] = 'Hora Incorrecta';
+                                 $result['exception'] = 'Causa Incorrecta';
                                }  
                             } else {
                                 $result['exception'] = 'Hora Incorrecta';
                               }  
                             } else {
-                                $result['exception'] = 'Hora Incorrecta';
+                                $result['exception'] = 'fecha Incorrecta';
                               }                                   
                             } else {
                                 $result['exception'] = 'Precio no valido';
@@ -152,10 +152,10 @@ if (isset($_GET['action'])) {
                             $result['exception'] = 'Notas no reconocidas';
                             } 
                        } else {
-                          $result['exception'] = 'Precio no valido';
+                          $result['exception'] = 'Dato no valido';
                        }
                     } else {
-                      $result['exception'] = 'Notas no reconocidas';
+                      $result['exception'] = 'id no reconocido';
                     }                   
                     break;
                     case 'delete':
@@ -163,15 +163,15 @@ if (isset($_GET['action'])) {
                              if ($data = $consulta->readOne()) {
                                    if ($consulta->deleteRow()) {
                                         $result['status'] = 1;									 
-                                       $result['message'] = 'Datos del Paciente eliminados correctamente';									  
+                                       $result['message'] = 'Datos de la Consulta eliminados correctamente';									  
                                    } else {
                                         $result['exception'] = Database::getException();
                                    }
                              } else {
-                                   $result['exception'] = 'Producto inexistente';
+                                   $result['exception'] = 'Consulta inexistente';
                              }
                         } else {
-                             $result['exception'] = 'Producto incorrecto';
+                             $result['exception'] = 'Consulta incorrecto';
                         }
                         break;
                         case 'searchOneProcedure':
@@ -204,11 +204,11 @@ if (isset($_GET['action'])) {
                                 if (Database::getException()) {
                                     $result['exception'] = Database::getException();
                                 } else {
-                                    $result['exception'] = 'Cliente inexistente Orden';
+                                    $result['exception'] = 'Procedimiento inexistente';
                                 }
                             }                           
                         } else {
-                            $result['exception'] = 'Cliente incorrecto Orden';
+                            $result['exception'] = 'Procedimiento incorrecto';
                         }                    
                         break;
                         case 'readOneProcedure1':
@@ -219,11 +219,11 @@ if (isset($_GET['action'])) {
 									   if (Database::getException()) {
 											$result['exception'] = Database::getException();
 									   } else {
-											$result['exception'] = 'Paciente inexistente';
+											$result['exception'] = 'Procedimiento inexistente';
 									   }
 								  }
 							} else {
-								  $result['exception'] = 'Paciente incorrecto';
+								  $result['exception'] = 'Procedimiento incorrecto';
 							}							
 							break;
                          case 'updateRowprocedure':
@@ -241,16 +241,16 @@ if (isset($_GET['action'])) {
                                       }
 
                             } else {
-                                $result['exception'] = 'Paciente inexistente';
+                                $result['exception'] = 'Procedimiento inexistente';
                             }
                     } else {
-                      $result['exception'] = 'Paciente inexistente';
+                      $result['exception'] = 'Procedimiento inexistente';
                     }	
                 } else {
-                  $result['exception'] = 'Paciente inexistente';
+                  $result['exception'] = 'Procedimiento Invalido';
                 }
             } else {
-              $result['exception'] = 'Paciente inexistente';
+              $result['exception'] = 'Consulta inexistente';
             }           
             break;
             case 'createRowprocedure':
@@ -266,13 +266,13 @@ if (isset($_GET['action'])) {
                           }
 
                     } else {
-                        $result['exception'] = 'Paciente inexistente';
+                        $result['exception'] = 'Procedimiento inexistente';
                     }
                 } else {
-                $result['exception'] = 'Paciente inexistente';
+                $result['exception'] = 'Procedimiento inexistente';
                 }         
             } else {
-             $result['exception'] = 'Paciente inexistente';
+             $result['exception'] = 'Consulta inexistente';
             }                      
             break;
             case 'readOneAsignado2':
@@ -283,11 +283,11 @@ if (isset($_GET['action'])) {
                            if (Database::getException()) {
                                 $result['exception'] = Database::getException();
                            } else {
-                                $result['exception'] = 'Paciente inexistente';
+                                $result['exception'] = 'Consulta inexistente';
                            }
                       }
                 } else {
-                      $result['exception'] = 'Paciente incorrecto';
+                      $result['exception'] = 'Consulta incorrecto';
                 }							
                 break;
                 case 'readAllAgenda':
@@ -331,11 +331,11 @@ if (isset($_GET['action'])) {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
                         } else {
-                            $result['exception'] = 'Cliente inexistente Orden';
+                            $result['exception'] = 'Consulta inexistente';
                         }
                     }                           
                 } else {
-                    $result['exception'] = 'Cliente incorrecto Orden';
+                    $result['exception'] = 'Consulta incorrecto';
                 }                    
                 break;    
 			default:

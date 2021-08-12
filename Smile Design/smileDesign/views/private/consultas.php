@@ -55,8 +55,7 @@ Dashboard_Page::headerTemplate('Consultas');
                     <div class="row">
                         <table class="responsive-table highlight">                           
                             <thead>
-                                <tr>
-                                    <th>Hora Consulta</th>
+                                <tr>                                    
                                     <th>Nombre Procedimiento</th>                                    
                                     <th>Descripción Procedimiento</th>                                    
                                     <th class="actions-column">Acciones</th>                                  

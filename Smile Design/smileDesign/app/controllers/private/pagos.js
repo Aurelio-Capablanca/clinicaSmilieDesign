@@ -30,12 +30,12 @@ function fillTable(dataset) {
                 <td>${row.estadopago}</td>
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.idpago})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
-                    <a href="#" onclick="openInsertSaldo(${row.idpago})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Pago"><i class="material-icons">payments</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect yellow tooltipped" data-tooltip="Eliminar"><i class="material-icons">update</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect yellow tooltipped" data-tooltip="Cambiar Estado"><i class="material-icons">update</i></a>
+                    <a href="#" onclick="openEstadoDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Suspender Pago"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="openInsertSaldo(${row.idpago})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Pago"><i class="material-icons">payments</i></a>                    
                     <a href="#" onclick="openInsertCalculo(${row.idpago})" class="btn waves-effect green tooltipped" data-tooltip="Realizar Calculo"><i class="material-icons">credit_score</i></a>
                     <a href="#" onclick="openCount(${row.idpago})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Pagos"><i class="material-icons">search</i></a>
-                    <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->
-                    <a href="#" onclick="openEstadoDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Suspender Pago"><i class="material-icons">delete</i></a>
+                    <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->                    
                 </td>
             </tr>
         `;
@@ -58,9 +58,10 @@ function fillTables(dataset) {
                 <td>${row.pagodebeh}</td>
                 <td>${row.pagoabonoh}</td>
                 <td>${row.pagototalh}</td>
-                <td>${row.pagosaldoh}</td>
+                <td>${row.pagosaldoh}</td>                
                 <td>
-                <a href="../../app/reports/factura.php?id=${row.tratamiento}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
+                <a href="../../app/reports/factura.php?id=${row.codigotratamientoh}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
+                <a href="../../app/reports/facturapruebas.php?id=${row.codigotratamientoh}<?numero=${row.pagoabono}>" target="_blank" class="btn waves-effect green tooltipped" data-tooltip="Factura"><i class="material-icons">a</i></a>
                 </td>                
             </tr>
         `;

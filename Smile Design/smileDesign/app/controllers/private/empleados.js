@@ -118,6 +118,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if (nombre == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo nombre', null);
+        return false;
     }
     else if (!exnombre.test(nombre)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el nombre', null);
@@ -125,6 +126,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if (apellido == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo apellido', null);
+        return false;
     }
     else if (!exapellido.test(apellido)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el apellido', null);
@@ -132,6 +134,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if (telefono == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo telefono', null);
+        return false;
     }
     else if (!extelefono.test(telefono)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el teléfono', null);
@@ -139,9 +142,11 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if (alias == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo alias', null);
+        return false;
     }   
     if (clave === " "){
         sweetAlert(2, 'no se puede dejar vacio el campo alias', null);
+        return false;
     }
     else if (nombre !== " " || apellido !== " " || telefono !== " " || direccion !== " " ||  correo !== " " || alias !== " " || clave !== " " || conf !== " " || clave === conf) {
         if (document.getElementById('id_usuario').value) {

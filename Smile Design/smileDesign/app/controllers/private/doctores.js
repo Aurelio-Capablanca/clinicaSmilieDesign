@@ -125,6 +125,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     // Se define una variable para establecer la acción a realizar en la API.
     let action = '';
     // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
+    
     if (document.getElementById('id_doctor').value) {
         action = 'update';
     } else {

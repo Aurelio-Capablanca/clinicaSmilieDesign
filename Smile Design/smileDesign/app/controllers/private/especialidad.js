@@ -85,6 +85,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 
     if(especialidad === " "){
         sweetAlert(2, 'el campo es obligatorio', null);
+        return false;
     }
     if(!exespecialiadd.test(especialidad)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados, solo debe ingresar letras', null);        

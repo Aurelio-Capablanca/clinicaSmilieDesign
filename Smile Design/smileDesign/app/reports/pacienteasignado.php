@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
                 // Se establece un color de relleno para los encabezados.
                 $pdf->SetFillColor(225);
                 // Se establece la fuente para los encabezados.                
-                $pdf->Cell(176, 10, utf8_decode('Nombre Cliente:  '.$rowDoctor['nombredoctor'].' '.$rowDoctor['apellidodoctor']), 0, 0, 'C', 0);
+                $pdf->Cell(176, 10, utf8_decode('Nombre Doctor:  '.$rowDoctor['nombredoctor'].' '.$rowDoctor['apellidodoctor']), 0, 0, 'C', 0);
                 $pdf->Ln();
                 $pdf->Cell(176, 10, utf8_decode('Dirección:  '.$rowDoctor['direcciondoctor']), 0, 0, 'C', 0);
                 $pdf->Ln();

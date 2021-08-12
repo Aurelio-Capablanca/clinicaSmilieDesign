@@ -162,6 +162,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     
     if(tratamiento === " "){
         sweetAlert(2, 'Todos los campos son obligatorios', null);
+        return false;
     }    
     else if(tratamiento !== " "){
         if (document.getElementById('txtId').value) {

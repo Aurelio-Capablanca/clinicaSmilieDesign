@@ -1,6 +1,6 @@
 <?php
-// Se verifica si existe el parámetro id en la url, de lo contrario se direcciona a la página web de origen.
 if (isset($_GET['id'])) {
+    if (isset($_GET['numero'])) {
     require('../helpers/report.php');
     require('../models/pagos.php');
     
@@ -9,14 +9,15 @@ if (isset($_GET['id'])) {
     session_start();
     // Se verifica si el parámetro es un valor correcto, de lo contrario se direcciona a la página web de origen.
     if ($pagos->setCodigo($_GET['id'])) {
+        if ($pagos->setSaldo($_GET['numero'])) {
         // Se verifica si la categoría del parametro existe, de lo contrario se direcciona a la página web de origen.
-        if ($rowPago= $pagos->readOnepaciente()) {
+        if ($rowPago = $pagos->readOnepacientes()) {
             // Se instancia la clase para crear el reporte.
             $pdf = new Report;
             // Se inicia el reporte con el encabezado del documento.
             $pdf->startReport('Factura');
             // Se verifica si existen registros (productos) para mostrar, de lo contrario se imprime un mensaje.
-            if ($dataCuenta = $pagos->readOnePayment()) {
+            if ($dataCuenta = $pagos->readOnePayments()) {
                 // Se establece un color de relleno para los encabezados.
                 $pdf->SetFillColor(225);
                 // Se establece la fuente para los encabezados.                
@@ -50,12 +51,18 @@ if (isset($_GET['id'])) {
             }
             // Se envía el documento al navegador y se llama al método Footer()      
             $pdf->Output();
+            } else {
+                header('location: ../../views/private/pagos.php');
+            }        
         } else {
             header('location: ../../views/private/pagos.php');
         }
     } else {
         header('location: ../../views/private/pagos.php');
     }
+} else {
+    header('location: ../../views/private/pagos.php');
+}
 } else {
     header('location: ../../views/private/pagos.php');
 }

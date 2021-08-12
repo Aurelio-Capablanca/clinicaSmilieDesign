@@ -520,7 +520,8 @@ class Pacientes extends Validator{
     {
         $sql = "SELECT iddoctor, nombredoctor ||' '|| apellidodoctor As NombreDoctor
                 FROM doctores
-                INNER JOIN estadodoctor USING (idestadodoctor)"; 
+                INNER JOIN estadodoctor USING (idestadodoctor)
+                WHERE idestadodoctor=1"; 
         $params = null;
         return Database::getRows($sql, $params);
     }

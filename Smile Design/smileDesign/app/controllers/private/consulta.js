@@ -47,8 +47,7 @@ function fillTables(dataset) {
    dataset.map(function (row) {   
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `                           
-            <tr>
-                <td>${row.horaconsulta}</td>                                    
+            <tr>                                                  
                 <td>${row.nombreprocedimiento}</td> 
                 <td>${row.descripcionprocedimiento}</td>                                                
                 <td>
