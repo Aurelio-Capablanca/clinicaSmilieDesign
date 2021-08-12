@@ -56,12 +56,12 @@ if (isset($_GET['id'])) {
             // Se envía el documento al navegador y se llama al método Footer()      
             $pdf->Output();
         } else {
-            header('location: ../../../views/private/UsuarioAdminCli.php');
+            header('location: ../../views/private/doctores.php');
         }
     } else {
-        header('location: ../../../views/private/UsuarioAdminCli.php');
+        header('location: ../../views/private/doctores.php');
     }
 } else {
-    header('location: ../../../views/private/UsuarioAdminCli.php');
+    header('location: ../../views/private/doctores.php');
 }
 ?>

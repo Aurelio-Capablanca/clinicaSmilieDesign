@@ -35,7 +35,8 @@ function fillTable(dataset) {
                     <a href="#" onclick="openInsertSaldo(${row.idpago})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Pago"><i class="material-icons">payments</i></a>                    
                     <a href="#" onclick="openInsertCalculo(${row.idpago})" class="btn waves-effect green tooltipped" data-tooltip="Realizar Calculo"><i class="material-icons">credit_score</i></a>
                     <a href="#" onclick="openCount(${row.idpago})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Pagos"><i class="material-icons">search</i></a>
-                    <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->                    
+                    <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->
+                    <a href="../../app/reports/factura.php?id=${row.idpago}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
         `;
@@ -61,7 +62,6 @@ function fillTables(dataset) {
                 <td>${row.pagosaldoh}</td>                
                 <td>
                 <a href="../../app/reports/factura.php?id=${row.codigotratamientoh}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
-                <a href="../../app/reports/facturapruebas.php?id=${row.codigotratamientoh}<?numero=${row.pagoabono}>" target="_blank" class="btn waves-effect green tooltipped" data-tooltip="Factura"><i class="material-icons">a</i></a>
                 </td>                
             </tr>
         `;

@@ -228,7 +228,7 @@ class Pagos extends Validator{
     public function readOnePayment()
     {
         $sql = 'SELECT count(cc.idcantidadconsulta) as idconsulta, costoprocedimiento, descripcionprocedimiento, nombreprocedimiento ,
-                        nombrepaciente, tr.idtratamiento, codigotratamiento
+                        nombrepaciente, tr.idtratamiento, codigotratamiento, pagoabono, pagototal
                 from CantidadConsultas cc
                 inner join Tratamientos tr on tr.idTratamiento=cc.idTratamiento
                 inner join pagos pg on pg.idTratamiento=tr.idTratamiento							
@@ -237,53 +237,22 @@ class Pagos extends Validator{
                 inner join Procedimientos pr on pr.idProcedimiento=co.idProcedimiento
                 inner join pacienteasignado ap on ap.idpacienteasignado = tr.idpacienteasignado
                 inner join pacientes pc on pc.idpaciente = ap.idpaciente
-                Where codigotratamiento= ?
+                Where pg.idpago = ?
                 group by  costoprocedimiento, descripcionprocedimiento, nombreprocedimiento ,
-                        nombrepaciente, tr.idtratamiento, codigotratamiento';
+                        nombrepaciente, tr.idtratamiento, codigotratamiento, pagoabono, pagototal';
         $params = array($this->codigo);
         return Database::getRows($sql, $params);
-    }
-
-    public function readOnePayments()
-    {
-        $sql = 'SELECT count(cc.idcantidadconsulta) as idconsulta, costoprocedimiento, descripcionprocedimiento, nombreprocedimiento ,
-                        nombrepaciente, tr.idtratamiento, codigotratamiento
-                from CantidadConsultas cc
-                inner join Tratamientos tr on tr.idTratamiento=cc.idTratamiento
-                inner join pagos pg on pg.idTratamiento=tr.idTratamiento							
-                inner join Consultas cl on cl.idConsulta=cc.idConsulta
-                inner join ConsultaProcedimiento co on co.idConsulta=cl.idConsulta
-                inner join Procedimientos pr on pr.idProcedimiento=co.idProcedimiento
-                inner join pacienteasignado ap on ap.idpacienteasignado = tr.idpacienteasignado
-                inner join pacientes pc on pc.idpaciente = ap.idpaciente
-                Where codigotratamiento = ? and pagoabono = ?
-                group by  costoprocedimiento, descripcionprocedimiento, nombreprocedimiento ,
-                        nombrepaciente, tr.idtratamiento, codigotratamiento';
-        $params = array($this->codigo, $this->saldo);
-        return Database::getRows($sql, $params);
-    }
-
-    public function readOnepacientes()
-    {
-        $sql = 'SELECT pc.nombrepaciente as nombrepaciente, apellidopaciente, telefonopaciente, duipaciente, direccionpaciente, correopaciente, tratamiento, codigotratamientoh
-        from pacientes pc
-        inner join pacienteasignado pp on pp.idpaciente = pc.idpaciente
-        inner join tratamientos tr on tr.idpacienteasignado = pp.idpacienteasignado
-        inner join historialpagos hp on hp.tratamiento = tr.idtratamiento
-        Where codigotratamientoh = ? and pagoabonoh = ? limit 1';
-        $params = array($this->codigo);
-        return Database::getRow($sql, $params);
-    }
+    }      
 
 
     public function readOnepaciente()
     {
-        $sql = 'SELECT pc.nombrepaciente as nombrepaciente, apellidopaciente, telefonopaciente, duipaciente, direccionpaciente, correopaciente, tratamiento, codigotratamientoh
+        $sql = 'SELECT pc.nombrepaciente as nombrepaciente, apellidopaciente, telefonopaciente, duipaciente, direccionpaciente, correopaciente
         from pacientes pc
         inner join pacienteasignado pp on pp.idpaciente = pc.idpaciente
         inner join tratamientos tr on tr.idpacienteasignado = pp.idpacienteasignado
-        inner join historialpagos hp on hp.tratamiento = tr.idtratamiento
-        Where codigotratamientoh = ? limit 1';
+       	inner join pagos pg on pg.idtratamiento = tr.idtratamiento
+        Where pg.idpago = ?';
         $params = array($this->codigo);
         return Database::getRow($sql, $params);
     }

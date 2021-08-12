@@ -43,8 +43,11 @@ if (isset($_GET['id'])) {
                         $pdf->Cell(36, 10, utf8_decode($rows['costoprocedimiento']), 1, 0);
                         $pdf->Cell(56, 10, utf8_decode($rows['nombreprocedimiento']), 1, 0);
                         $pdf->Cell(78, 10, utf8_decode($rows['descripcionprocedimiento']), 1, 1);
-                       //$pdf->Cell(28, 10, utf8_decode('Total:'.$rows['pagoabonoh']), 0, 0);    
+                           
                 }
+                $pdf->Cell(175, 16, utf8_decode('SubTotal ($):'.$rows['pagototal']), 0, 0, 'R',0);
+                $pdf->Ln();  
+                $pdf->Cell(175, 16, utf8_decode('Cancela ($):'.$rows['pagoabono']), 0, 0, 'R',0);
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay Datos'), 1, 1);
             }

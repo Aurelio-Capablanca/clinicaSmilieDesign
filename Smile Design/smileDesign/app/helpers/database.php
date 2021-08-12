@@ -131,27 +131,28 @@ class Database
     */
     private static function setException($code, $message)
     {
-        self::$error = utf8_encode($message);
+        //self::$error = utf8_encode($message);
         // Se compara el código del error para establecer un error personalizado.        
         switch ($code) {
             case '7':
-                self::$error =  $message('Existe un problema al conectar con el servidor');
+                self::$error =  'Existe un problema al conectar con el servidor';
                 break;
             case '42703':
-                self::$error = $message('Nombre de campo desconocido');
+                self::$error = 'Nombre de campo desconocido';
                 break;
             case '23505':
-                self::$error = $message('Dato duplicado, no se puede guardar');
+                self::$error = 'Dato duplicado, no se puede guardar';
                 break;
             case '42P01':
-                self::$error = $message('Nombre de tabla desconocido');
+                self::$error = 'Nombre de tabla desconocido';
                 break;
             case '23503':
-                self::$error = $message('Registro ocupado, no se puede eliminar');
+                self::$error = 'Registro ocupado, no se puede eliminar';
                 break;
             default:
-                //self::$error = 'Ocurrió un problema en la base de datos';
-                //self::$error = $message;
+            //self::$error = 'Ocurrió un problema en la base de datos';
+            //self::$error = $message;
+            self::$error = utf8_encode($message);
                 
         }
     }
