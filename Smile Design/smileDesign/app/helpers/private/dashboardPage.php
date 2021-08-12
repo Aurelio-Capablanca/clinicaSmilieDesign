@@ -49,9 +49,9 @@ class Dashboard_Page {
                     <li>  
                         <div class="user-view">
                             <div class="background">
-                                <img src="../../resources/img/SmileDesign.jfif"> 
+                                <img src="../../resources/img/fonfo12.jpg"> 
                             </div>
-                            <a href="#user"><img class="circle" src="../../resources/img/default-user-image.png"></a>
+                            <a href="#user"><img class="circle" src="../../resources/img/SmileDesign.jfif"></a>
                             <a href="#name"><span class="white-text name">Usuario:<b> '. $_SESSION['aliasusuario'].'</b></span></a>
                             <br>                            
                             <br>
