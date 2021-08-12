@@ -65,8 +65,7 @@ Dashboard_Page::headerTemplate('Pagos');
                                     <th>Debe</th>
                                     <th>Abono</th>
                                     <th>Total</th>
-                                    <th>Saldo</th>  
-                                    <th class="actions-column">Acciones</th>                                                                          
+                                    <th>Saldo</th>                                                                                                               
                                 </tr>
                             </thead>                            
                             <tbody id="count-rows">

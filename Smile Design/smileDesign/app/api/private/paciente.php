@@ -452,15 +452,17 @@ if (isset($_GET['action'])) {
 						break;
 				case 'readOneDoctor':      
 					if ($paciente->setId($_POST['id_pacienteA'])) {                            
-						if ($result['dataset'] = $paciente->readOneDoctor()) {
-							$result['status'] = 1;                                
-						} else {
-							if (Database::getException()) {
-								$result['exception'] = Database::getException();
-							} else {
-								$result['exception'] = 'Paciente no posee doctores asignados';
-							}
-						}                           
+						// if ($result['dataset'] = $paciente->readOneDoctor()) {
+						// 	$result['status'] = 1;                                
+						// } else {
+						// 	if (Database::getException()) {
+						// 		$result['exception'] = Database::getException();
+						// 	} else {
+						// 		$result['exception'] = 'Paciente no posee doctores asignados';
+						// 	}
+						// }  
+						$result['dataset'] = $paciente->readOneDoctor();
+						$result['status'] = 1;                       
 					} else {
 						$result['exception'] = 'Paciente sin datos';
 					}                    

@@ -443,7 +443,8 @@ function openAssignements(id) {
                 if (response.status) {                    
                     document.getElementById('id_pacienteA').value = response.dataset.idpaciente;  
                     document.getElementById('nombre_pacienteA').value = response.dataset.nombrepaciente;                                                                               
-                    searchRows2(API_PACIENTES, 'show-a-form');                                                                      
+                    searchRows2(API_PACIENTES, 'show-a-form'); 
+                    M.updateTextFields();                                                                      
 
                 } else {
                     sweetAlert(2, response.exception, null);

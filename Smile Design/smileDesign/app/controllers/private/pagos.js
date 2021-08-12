@@ -59,10 +59,7 @@ function fillTables(dataset) {
                 <td>${row.pagodebeh}</td>
                 <td>${row.pagoabonoh}</td>
                 <td>${row.pagototalh}</td>
-                <td>${row.pagosaldoh}</td>                
-                <td>
-                <a href="../../app/reports/factura.php?id=${row.codigotratamientoh}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
-                </td>                
+                <td>${row.pagosaldoh}</td>                               
             </tr>
         `;
       });
@@ -190,7 +187,7 @@ function openInsertSaldo(id) {
 }
 
 function openCount(id) {
-    // Se restauran los elementos del formulario.
+    // Se restauran los elementos del formulario.    
     document.getElementById('show-a-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('show-cuenta-modal'));
@@ -213,7 +210,7 @@ function openCount(id) {
                 if (response.status) {                    
                     document.getElementById('id_pagoSD').value = response.dataset.tratamiento;
                     document.getElementById('nombre').value = response.dataset.codigotratamientoh;
-                    searchRowsCount(API_PAGOS, 'show-a-form');
+                    searchRowsCount(API_PAGOS, 'show-a-form');                    
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

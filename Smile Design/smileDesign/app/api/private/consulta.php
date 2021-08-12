@@ -198,15 +198,17 @@ if (isset($_GET['action'])) {
                             break;
                     case 'readOneProcedure':      
                         if ($consulta->setId($_POST['id_consultaP'])) {                            
-                            if ($result['dataset'] = $consulta->readOneProcedure()) {
-                                $result['status'] = 1;                                
-                            } else {
-                                if (Database::getException()) {
-                                    $result['exception'] = Database::getException();
-                                } else {
-                                    $result['exception'] = 'Procedimiento inexistente';
-                                }
-                            }                           
+                            // if ($result['dataset'] = $consulta->readOneProcedure()) {
+                            //     $result['status'] = 1;                                
+                            // } else {
+                            //     if (Database::getException()) {
+                            //         $result['exception'] = Database::getException();
+                            //     } else {
+                            //         $result['exception'] = 'Procedimiento inexistente';
+                            //     }
+                            // }      
+                            $result['dataset'] = $consulta->readOneProcedure();
+                            $result['status'] = 1;                    
                         } else {
                             $result['exception'] = 'Procedimiento incorrecto';
                         }                    
@@ -325,15 +327,17 @@ if (isset($_GET['action'])) {
                     break;
             case 'readOneConsultasCantidad':      
                 if ($consulta->setId($_POST['id_tratamientos'])) {                            
-                    if ($result['dataset'] = $consulta->readOneConsultasC()) {
-                        $result['status'] = 1;                                
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Consulta inexistente';
-                        }
-                    }                           
+                    // if ($result['dataset'] = $consulta->readOneConsultasC()) {
+                    //     $result['status'] = 1;                                
+                    // } else {
+                    //     if (Database::getException()) {
+                    //         $result['exception'] = Database::getException();
+                    //     } else {
+                    //         $result['exception'] = 'Consulta inexistente';
+                    //     }
+                    // } 
+                    $result['dataset'] = $consulta->readOneConsultasC();
+                    $result['status'] = 1;
                 } else {
                     $result['exception'] = 'Consulta incorrecto';
                 }                    

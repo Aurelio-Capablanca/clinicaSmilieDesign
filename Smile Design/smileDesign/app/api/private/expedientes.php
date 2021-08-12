@@ -252,15 +252,17 @@ if (isset($_GET['action'])) {
                     break;
             case 'readOneArchivo':      
                 if ($producto->setId($_POST['id_expedientes'])) {                            
-                    if ($result['dataset'] = $producto->readOneArchivo()) {
-                        $result['status'] = 1;                                
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Cliente inexistente Orden';
-                        }
-                    }                           
+                    // if ($result['dataset'] = $producto->readOneArchivo()) {
+                    //     $result['status'] = 1;                                
+                    // } else {
+                    //     if (Database::getException()) {
+                    //         $result['exception'] = Database::getException();
+                    //     } else {
+                    //         $result['exception'] = 'Cliente inexistente Orden';
+                    //     }
+                    // }      
+                    $result['dataset'] = $producto->readOneArchivo();
+                    $result['status'] = 1;                     
                 } else {
                     $result['exception'] = 'Cliente incorrecto Orden';
                 }                    
