@@ -119,10 +119,10 @@ class Productos extends Validator
     public function searchRows($value)
     {
         $sql = 'SELECT idexpediente, odontograma,periodontograma,
-        observacionesperiodontograma,p.nombrepaciente,p.apellidopaciente
-        from expedientes e
-        INNER JOIN pacientes p ON p.idpaciente = e.idpaciente
-        WHERE p.nombrepaciente ILIKE ? OR p.apellidopaciente ILIKE ?
+        nombrepaciente,apellidopaciente, idpaciente
+        from expedientes 
+        INNER JOIN pacientes Using(idpaciente)
+        WHERE nombrepaciente ILIKE ? OR apellidopaciente ILIKE ?
         order by idexpediente';
         $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
@@ -130,18 +130,18 @@ class Productos extends Validator
 
     public function createRow()
     {
-        $sql = 'INSERT INTO expedientes(notasmedicas, odontograma, periodontograma, observacionesperiodontograma, idpaciente)
-            VALUES (?, ?, ?, ?, ?);';
-        $params = array($this->notas, $this->odontograma, $this->periodontograma, $this->observaciones,$this->paciente);
+        $sql = 'INSERT INTO expedientes( odontograma, periodontograma, idpaciente)
+            VALUES (?, ?, ?);';
+        $params = array( $this->odontograma, $this->periodontograma, $this->paciente);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
         $sql = 'SELECT idexpediente, odontograma,periodontograma,
-        observacionesperiodontograma,p.nombrepaciente,p.apellidopaciente
-        from expedientes e
-        INNER JOIN pacientes p ON p.idpaciente = e.idpaciente
+        nombrepaciente,apellidopaciente, idpaciente
+        from expedientes 
+        INNER JOIN pacientes Using(idpaciente)
         order by idexpediente';
         $params = null;
         return Database::getRows($sql, $params);
@@ -150,9 +150,9 @@ class Productos extends Validator
     public function readRow()
     {
         $sql = 'SELECT idexpediente, odontograma,periodontograma,
-        notasmedicas,observacionesperiodontograma,p.nombrepaciente,p.apellidopaciente,p.duipaciente
-        from expedientes e
-        INNER JOIN pacientes p ON p.idpaciente = e.idpaciente
+        nombrepaciente,apellidopaciente,duipaciente, idpaciente
+        from expedientes 
+        INNER JOIN pacientes Using(idpaciente)
         WHERE idexpediente = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
@@ -164,9 +164,9 @@ class Productos extends Validator
         ($this->odontograma) ? $this->deleteFile($this->getRutaOdontograma(), $current_image2) : $this->odontograma = $current_image2;
 
         $sql = 'UPDATE expedientes
-        SET notasmedicas = ? , odontograma = ? , periodontograma = ? , observacionesperiodontograma = ? , idpaciente = ?
+        SET odontograma = ? , periodontograma = ? , idpaciente = ?
         WHERE idexpediente = ?;';
-        $params = array($this->notas, $this->odontograma, $this->periodontograma, $this->observaciones, $this->paciente, $this->id);
+        $params = array($this->odontograma, $this->periodontograma, $this->paciente, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -175,5 +175,84 @@ class Productos extends Validator
         $sql = 'DELETE FROM expedientes where idexpediente = ? ';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
+    }
+
+    public function createRowArchivo()
+    {
+        $sql = 'INSERT INTO archivos(notas, observacionesperiodontograma, idexpediente)
+                VALUES (?, ?, ?);';
+        $params = array($this->notas,$this->observaciones,$this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function readOneArchivo()
+    {
+        $sql = 'SELECT idarchivo, notas, observacionesperiodontograma, idpaciente, idexpediente, odontograma
+                From archivos 
+                inner join expedientes Using(idexpediente)
+                Where idexpediente = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function readOneArchivo1()
+    {
+        $sql = 'SELECT idarchivo, notas, observacionesperiodontograma, idpaciente, idexpediente, odontograma
+                From archivos 
+                inner join expedientes Using(idexpediente)
+                Where idarchivo = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function searchOneArchivo($value)
+    {
+        $sql = 'SELECT idarchivo, notas, observacionesperiodontograma, idpaciente, idexpediente, odontograma
+                From archivos 
+                inner join expedientes Using(idexpediente)
+                Where odontograma ILIKE ?';
+        $params = array("%$value%");
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllArchivo()
+    {
+        $sql = 'SELECT idarchivo, notas, observacionesperiodontograma, idpaciente, idexpediente, odontograma
+                From archivos 
+                inner join expedientes Using(idexpediente)';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function updateRowArchivo()
+    {        
+        $sql = 'UPDATE archivos
+                SET  notas = ?, observacionesperiodontograma = ?
+                WHERE idarchivo = ?';
+        $params = array( $this->notas,$this -> observaciones ,$this->id);
+        return Database::executeRow($sql, $params);
+    }
+
+
+    public function readArchivos()
+    {
+        $sql = "SELECT notas, observacionesperiodontograma, idarchivo, nombrepaciente||' '||apellidopaciente as nombrepaciente, ex.idexpediente
+                from archivos ar
+                inner join expedientes ex on ex.idexpediente = ar.idexpediente
+                inner join pacientes pa on pa.idpaciente = ex.idpaciente
+                Where ar.idarchivo = ?";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readOneArchivo2()
+    {
+        $sql = 'SELECT idarchivo, notas, observacionesperiodontograma, idpaciente, idexpediente, odontograma
+                From archivos 
+                inner join expedientes Using(idexpediente)
+                Where idarchivo = ?';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
     }
 }

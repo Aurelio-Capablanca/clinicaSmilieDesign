@@ -9,13 +9,13 @@ Dashboard_Page::headerTemplate('Consultas');
      <h4 style="text-align:center;"> Gestion de Consultas </h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
-        <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Consultas</a>
+        <!-- <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Consultas</a> -->
         <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
         
         <form method="post" id="search-form">
-        <div class="input-field col s6 m4">
+        <div class="input-field col s12 m8">
             <i class="material-icons prefix">search</i>
-            <input id="search" type="text" name="search" required/>
+            <input id="search" type="text" name="search" placeholder="Buscar por Nombre o Apellido del Paciente" required/>
             <label for="search">Buscador</label>
         </div>
         <div class="input-field col s6 m4">
@@ -31,8 +31,8 @@ Dashboard_Page::headerTemplate('Consultas');
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>
-        <th>Costo Consulta</th>      
-        <th>Procedimiento</th>                   
+        <th>Nombre Paciente</th>      
+        <th>Fecha Consulta</th>                   
         <th>Hora Consulta</th>
         <th>Causa Consulta</th>
         <th class="actions-column">Acciones</th>
@@ -55,8 +55,7 @@ Dashboard_Page::headerTemplate('Consultas');
                     <div class="row">
                         <table class="responsive-table highlight">                           
                             <thead>
-                                <tr>
-                                    <th>Hora Consulta</th>
+                                <tr>                                    
                                     <th>Nombre Procedimiento</th>                                    
                                     <th>Descripción Procedimiento</th>                                    
                                     <th class="actions-column">Acciones</th>                                  
@@ -157,7 +156,7 @@ Dashboard_Page::headerTemplate('Consultas');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-procedimientos-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="" type="number" id="id_consultasPr" name="id_consultasPr"/>                    
+                    <input class="hide" type="number" id="id_consultasPr" name="id_consultasPr"/>                    
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">cake</i>

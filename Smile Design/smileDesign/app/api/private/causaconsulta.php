@@ -18,7 +18,7 @@ if (isset($_GET['action'])) {
                     if (Database::getException()) {
                         $result['exception'] = Database::getException();
                     } else {
-                        $result['exception'] = 'No hay expedientes registrados';
+                        $result['exception'] = 'No hay Causas registradas';
                     }
                 }
                 break;
@@ -84,7 +84,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = Database::getException();;
                             }
                         } else {
-                            $result['exception'] = 'Especialidad incorrecta';
+                            $result['exception'] = 'Causa incorrecta';
                         } 
                     } else {
                         $result['exception'] = 'ID incorrecto';
@@ -101,10 +101,10 @@ if (isset($_GET['action'])) {
                             $result['exception'] = Database::getException();
                         }
                     } else {
-                        $result['exception'] = 'Especialidad inexistente';
+                        $result['exception'] = 'Causa inexistente';
                     }
                 } else {
-                    $result['exception'] = 'Especialidad  incorrecto';
+                    $result['exception'] = 'Causa  incorrecto';
                 }
                 break;
             default: 

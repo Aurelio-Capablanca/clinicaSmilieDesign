@@ -31,9 +31,10 @@ class Dashboard_Page {
                         <i class="material-icons">menu</i>
                         </a>  
                         <ul class="left left hide-on-med-and-down">
-                           <li><a href="index.php"><i class="material-icons left">home</i>Home</a></li>
+                           <li><a href="main.php"><i class="material-icons left">home</i>Home</a></li>
                         </ul>                       
                             <ul class="right right hide-on-med-and-down">
+                                <li><a href="calendario.php"><i class="material-icons left">schedule</i>Agenda</a></li>
                                 <li><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
                                 <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
                                 <li><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
@@ -50,7 +51,9 @@ class Dashboard_Page {
                             <div class="background">
                                 <img src="../../resources/img/fonfo12.jpg"> 
                             </div>
-                            <a href="#user"><img class="circle" src="../../resources/img/default-user-image.png"></a>                            
+                            <a href="#user"><img class="circle" src="../../resources/img/SmileDesign.jfif"></a>
+                            <a href="#name"><span class="white-text name">Usuario:<b> '. $_SESSION['aliasusuario'].'</b></span></a>
+                            <br>                            
                             <br>
                         </div>                                         
                     <li>

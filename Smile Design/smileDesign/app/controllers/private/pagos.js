@@ -30,11 +30,13 @@ function fillTable(dataset) {
                 <td>${row.estadopago}</td>
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.idpago})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
-                    <a href="#" onclick="openInsertSaldo(${row.idpago})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Pago"><i class="material-icons">payments</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.idpago})" class="btn waves-effect yellow tooltipped" data-tooltip="Cambiar Estado"><i class="material-icons">update</i></a>
+                    <a href="#" onclick="openEstadoDialog(${row.idpago})" class="btn waves-effect red tooltipped" data-tooltip="Suspender Pago"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="openInsertSaldo(${row.idpago})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Pago"><i class="material-icons">payments</i></a>                    
                     <a href="#" onclick="openInsertCalculo(${row.idpago})" class="btn waves-effect green tooltipped" data-tooltip="Realizar Calculo"><i class="material-icons">credit_score</i></a>
                     <a href="#" onclick="openCount(${row.idpago})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Pagos"><i class="material-icons">search</i></a>
                     <!-- <a href="#" onclick="openActualizarCuenta(${row.idpago})" class="btn waves-effect orange tooltipped" data-tooltip="Actualizar Cuenta"><i class="material-icons">paid</i></a> -->
+                    <a href="../../app/reports/factura.php?id=${row.idpago}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Factura"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
         `;
@@ -53,12 +55,11 @@ function fillTables(dataset) {
    dataset.map(function (row) {   
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `                           
-            <tr>
-                <td>${row.fecharegistro}</td>
+            <tr>                
                 <td>${row.pagodebeh}</td>
                 <td>${row.pagoabonoh}</td>
                 <td>${row.pagototalh}</td>
-                <td>${row.pagosaldoh}</td>                
+                <td>${row.pagosaldoh}</td>                               
             </tr>
         `;
       });
@@ -70,6 +71,13 @@ function fillTables(dataset) {
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
 
+function openEstadoDialog(id) {
+    // Se define un objeto con los datos del registro seleccionado.
+    const data = new FormData();
+    data.append('id_pagoE', id);
+    // Se llama a la función que elimina un registro. Se encuentra en el archivo components.js
+    confirmSuspender(API_PAGOS, data);
+}
 
 
 document.getElementById('search-form').addEventListener('submit', function (event) {
@@ -179,7 +187,7 @@ function openInsertSaldo(id) {
 }
 
 function openCount(id) {
-    // Se restauran los elementos del formulario.
+    // Se restauran los elementos del formulario.    
     document.getElementById('show-a-form').reset();
     // Se abre la caja de dialogo (modal) que contiene el formulario.
     let instance = M.Modal.getInstance(document.getElementById('show-cuenta-modal'));
@@ -202,7 +210,7 @@ function openCount(id) {
                 if (response.status) {                    
                     document.getElementById('id_pagoSD').value = response.dataset.tratamiento;
                     document.getElementById('nombre').value = response.dataset.codigotratamientoh;
-                    searchRowsCount(API_PAGOS, 'show-a-form');
+                    searchRowsCount(API_PAGOS, 'show-a-form');                    
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

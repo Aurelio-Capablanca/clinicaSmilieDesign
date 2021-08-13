@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
                 if (Database::getException()) {
                     $result['exception'] = Database::getException();
                 } else {
-                    $result['exception'] = 'No hay productos registrados';
+                    $result['exception'] = 'No hay Doctores registrados';
                 }
             }
             break;
@@ -195,7 +195,7 @@ if (isset($_GET['action'])) {
             } else {
                 $result['exception'] = 'Producto incorrecto';
             }
-            break;
+            break;            
         default:
             $result['exception'] = 'Acción no disponible dentro de la sesión';
     }

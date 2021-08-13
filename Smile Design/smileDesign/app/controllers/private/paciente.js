@@ -15,7 +15,7 @@ const ENDPOINT_P8 = '../../app/api/private/paciente.php?action=readAllP8';
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Se llama a la función que obtiene los registros para llenar la tabla. Se encuentra en el archivo components.js 
-    readRows(API_PACIENTES);
+    readRows(API_PACIENTES);    
 });
 
 
@@ -28,7 +28,7 @@ function fillTable(dataset) {
         content += `
             <tr>
                 <td>${row.nombrepaciente}</td>                
-                <td>${row.apellidopaciente}</td> 
+                <td>${row.apellidopaciente}</td>
                 <td>${row.fechanacimiento}</td> 
                 <td>${row.duipaciente}</td> 
                 <td>${row.telefonopaciente}</td> 
@@ -40,6 +40,7 @@ function fillTable(dataset) {
                     <a href="#" onclick="openDeleteDialog(${row.idpaciente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                     <a href="#" onclick="openInsertDoctor(${row.idpaciente})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Doctor"><i class="material-icons">assignment</i></a>
                     <a href="#" onclick="openAssignements(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a>                    
+                    <a href="../../app/reports/expedientes.php?id=${row.idpaciente}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Expedientes"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
         `;
@@ -152,12 +153,12 @@ document.getElementById('save-preguntas-form').addEventListener('submit', functi
     let action = 'createRowAnswers';
    
     if(s1.checked==true && n1.checked==false){        
-        document.getElementById('respuesta1').value="Si";                
+        document.getElementById('respuesta1').value="Si";                   
     }
     if(s1.checked==false && n1.checked==true){
-        document.getElementById('respuesta1').value="No";
+        document.getElementById('respuesta1').value="No";        
     }
-    if(s2.checked==true && n2.checked==false){
+     if(s2.checked==true && n2.checked==false){
         document.getElementById('respuesta2').value="Si";
     }
     if(s2.checked==false && n2.checked==true){
@@ -281,9 +282,11 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 
     if(nombre === " " || apellido === " " || dui === " " || direccion === " " || telefono === " " || email === " "){
         sweetAlert(2, 'Todos los campos son obligatorios', null);
+        return false;
     }
      if(nombre === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo nombre', null);
+        return false;
     }
     else if (!exnombre.test(nombre)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el nombre', null);
@@ -291,6 +294,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if(apellido === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo apellido', null);
+        return false;
     }
     else if (!exapellido.test(apellido)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el apellido', null);
@@ -298,6 +302,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if(dui === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo dui', null);
+        return false;
     }
     else if (!exdui.test(dui)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el DUI', null);
@@ -305,9 +310,11 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if(direccion === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo direccion', null);
+        return false;
     }    
     if(telefono === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo telefono', null);
+        return false;
     }
     else if (!extelefono.test(telefono)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados en Telefono', null);
@@ -315,6 +322,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     }
     if(email === " " ){
         sweetAlert(2, 'no se puede dejar vacio el campo correo', null);
+        return false;
     }
     else if (!exemail.test(email)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el Correo', null);
@@ -435,7 +443,8 @@ function openAssignements(id) {
                 if (response.status) {                    
                     document.getElementById('id_pacienteA').value = response.dataset.idpaciente;  
                     document.getElementById('nombre_pacienteA').value = response.dataset.nombrepaciente;                                                                               
-                    searchRows2(API_PACIENTES, 'show-a-form');                                                                      
+                    searchRows2(API_PACIENTES, 'show-a-form'); 
+                    M.updateTextFields();                                                                      
 
                 } else {
                     sweetAlert(2, response.exception, null);

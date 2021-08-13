@@ -46,8 +46,6 @@ if (isset($_GET['action'])) {
                 break;
             case 'create': 
                 $_POST = $producto->validateForm($_POST);
-                if ($producto->setNotas($_POST['notas_medicas'])) {
-                    if ($producto->setObservaciones($_POST['observaciones'])) {
                         if (isset($_POST['ide_paciente'])) {
                             if ($producto->setPaciente($_POST['ide_paciente'])) {                 
                                 if (is_uploaded_file($_FILES['odontograma']['tmp_name'])) {
@@ -86,13 +84,7 @@ if (isset($_GET['action'])) {
                         } else {
                             $result['exception'] = 'Seleccione un paciente';
                         }                                                                                     
-                    } else {
-                        $result['exception'] = 'Observaciones incorrectas';
-                    }
-                } else {
-                    $result['exception'] = 'Notas incorrectas';
-                }
-                break;
+                    break;
             case 'readOne': 
                 if ($producto->setId($_POST['id'])) {
                     if ($result['dataset'] = $producto->readRow()) {
@@ -112,10 +104,8 @@ if (isset($_GET['action'])) {
                 case 'update': 
                     $_POST = $producto->validateForm($_POST);
                     if ($producto->setId($_POST['txtId'])) {
-                        if ($data = $producto->readRow()) {
-                            if ($producto->setNotas($_POST['notas_medicas'])) {
-                                if ($producto->setObservaciones($_POST['observaciones'])) {
-                                    if (isset($_POST['ide_paciente'])) {
+                        if ($data = $producto->readRow()) {                           
+                                if (isset($_POST['ide_paciente'])) {
                                         if ($producto->setPaciente($_POST['ide_paciente'])) { 
                                                 if (is_uploaded_file($_FILES['odontograma']['tmp_name'])) {
                                                     if ($producto->setOdontograma($_FILES['odontograma'])) {
@@ -171,13 +161,7 @@ if (isset($_GET['action'])) {
                                         } else {
                                         $result['exception'] = 'Seleccione un paciente';
                                     }         
-                                } else {
-                                    $result['exception'] = 'Observaciones incorrectas';
-                                }
-                            } else {
-                                $result['exception'] = 'Notas incorrectas';
-                            }
-                        } else {
+                             } else {
                             $result['exception'] = 'Producto inexistente';
                         }
                     } else {
@@ -209,6 +193,122 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Producto incorrecto';
                 }
                 break;
+                case 'readOneA': 
+                    if ($producto->setId($_POST['idArchivoT'])) {
+                        if ($result['dataset'] = $producto->readRow()) {
+                            $result['status'] = 1;
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Expediente inexistente';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Expediente incorrecto';
+                    }
+                    break;
+                case 'createArchivo':
+                 if($producto ->setNotas($_POST['notas_medicas'])) {
+                    if($producto ->setObservaciones($_POST['observaciones'])) {
+                        if($producto ->setId($_POST['idArchivoT'])) {   
+                            if ($producto->createRowArchivo()) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Archivo  Creado Correctamente';                                                        
+                              } else {
+                                  $result['exception'] = Database::getException();                                                        
+                              }
+                    }else{
+                      $result['exception'] = 'Observaciones invalidas';
+                    }        
+                  }else{
+                    $result['exception'] = 'Observaciones invalidas';
+                  } 
+                }else{
+                 $result['exception'] = 'Notas invalidas';
+                }  
+                break;
+                case 'searchOneArchivo':
+                    $_POST = $producto->validateForm($_POST);
+                    if ($_POST['odontogrma'] != '') {
+                        if ($result['dataset'] = $producto->searchOneArchivo($_POST['odontogrma'])) {
+                            $result['status'] = 1;
+                            $rows = count($result['dataset']);
+                            if ($rows > 1) {
+                                $result['message'] = 'Se encontraron ' . $rows . ' coincidencias';
+                            } else {
+                                $result['message'] = 'Solo existe una coincidencia';
+                            }
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'No hay coincidencias';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Ingrese un valor para buscar';
+                    }
+                    break;
+            case 'readOneArchivo':      
+                if ($producto->setId($_POST['id_expedientes'])) {                            
+                    // if ($result['dataset'] = $producto->readOneArchivo()) {
+                    //     $result['status'] = 1;                                
+                    // } else {
+                    //     if (Database::getException()) {
+                    //         $result['exception'] = Database::getException();
+                    //     } else {
+                    //         $result['exception'] = 'Cliente inexistente Orden';
+                    //     }
+                    // }      
+                    $result['dataset'] = $producto->readOneArchivo();
+                    $result['status'] = 1;                     
+                } else {
+                    $result['exception'] = 'Cliente incorrecto Orden';
+                }                    
+                break;
+                case 'readOneArchivo1':      
+                    if ($producto->setId($_POST['idArchivoTr'])) {                            
+                        if ($result['dataset'] = $producto->readOneArchivo1()) {
+                            $result['status'] = 1;                                
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Cliente inexistente Orden';
+                            }
+                        }                           
+                    } else {
+                        $result['exception'] = 'Cliente incorrecto Orden';
+                    }                    
+                    break;
+                    case 'updateRowArchivo':
+                        $_POST = $producto->validateForm($_POST); 
+                        if ($producto->setId($_POST['idArchivoTr'])) {
+                         if ($data = $producto->readOneArchivo1()) { 
+                            if ($producto->setNotas($_POST['notas_medicass'])) {
+                                if ($producto->setObservaciones($_POST['observacioness'])) {
+
+                                    if ($producto->updateRowArchivo()) {
+                                        $result['status'] = 1;
+                                        $result['message'] = 'Archivo Actualizado Correctamente';                                                        
+                                      } else {
+                                          $result['exception'] = Database::getException();                                                        
+                                      }
+
+                                } else {
+                                    $result['exception'] = 'observaciones invalidas';
+                                }
+                            } else {
+                                $result['exception'] = 'Notas invalidas';
+                            }
+                        } else {
+                            $result['exception'] = 'Datos inexistente';
+                        } 
+                    } else {
+                        $result['exception'] = 'Archivo inexistente';
+                    }    
+                   break;
             default: 
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

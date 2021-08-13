@@ -81,7 +81,8 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     excausa = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
 
     if(causa === " "){
-        sweetAlert(2, 'Todos los campos son obligatorios', null);  
+        sweetAlert(2, 'Todos los campos son obligatorios', null);
+        return false;  
     }
     if (!excausa.test(causa)){
         sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con la causa', null);

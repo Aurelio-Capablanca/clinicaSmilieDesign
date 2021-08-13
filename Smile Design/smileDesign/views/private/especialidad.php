@@ -12,9 +12,9 @@ Dashboard_Page::headerTemplate('Especialidad');
         <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Especialidad</a>
         <a class="waves-effect waves-light btn-small" onclick="cargarDatos()"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
         <form method="post" id="search-form">
-        <div class="input-field col s6 m4">
+        <div class="input-field col s12 m8">
             <i class="material-icons prefix">search</i>
-            <input id="search" type="text" name="search" required/>
+            <input id="search" type="text" name="search" placeholder="Buscar por Nombre de Especialidad" required/>
             <label for="search">Buscador</label>
         </div>
         <div class="input-field col s6 m4">

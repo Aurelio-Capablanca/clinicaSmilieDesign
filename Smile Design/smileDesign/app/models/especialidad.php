@@ -95,5 +95,17 @@ class Especialidad extends Validator {
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+
+    public function readespecialidades()
+    {
+        $sql = "SELECT nombredoctor ||' '|| apellidodoctor as nombredoctor, especialidad, ed.idespecialidad as idespecialidad
+        from doctores dr
+        inner join especialidaddoctor dd on dd.iddoctor = dr.iddoctor
+        inner join especialidad ed on ed.idespecialidad = dd.idespecialidad
+        Where ed.idespecialidad = ?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }
 ?>

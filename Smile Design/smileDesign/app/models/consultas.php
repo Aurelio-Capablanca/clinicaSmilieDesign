@@ -119,21 +119,44 @@ private $idprocedimiento = null;
 
     public function readAll()
     {
-        $sql = 'SELECT idconsulta, notasconsulta, costoconsulta, fechaconsulta ,horaconsulta, idcausaconsulta, causa
-                FROM consultas 
-                INNER JOIN causaconsulta USING(idcausaconsulta)                                                              
-                ORDER BY horaconsulta DESC'; 
+        $sql = "SELECT idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, 
+                            fechaconsulta, horaconsulta ,causa, idcausaconsulta                            
+                From consultas 
+                inner join causaconsulta using(idcausaconsulta)
+                inner join cantidadconsultas using(idconsulta)
+                inner join tratamientos using(idtratamiento)
+                inner join pacienteasignado using(idpacienteasignado)
+                inner join pacientes using(idpaciente)"; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllAgenda()
+    {
+        $sql = "SELECT idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, 
+                        fechaconsulta, horaconsulta ,causa, idcausaconsulta , extract(day from fechaconsulta) as fechaconsultas
+        From consultas 
+        inner join causaconsulta using(idcausaconsulta)
+        inner join cantidadconsultas using(idconsulta)
+        inner join tratamientos using(idtratamiento)
+        inner join pacienteasignado using(idpacienteasignado)
+        inner join pacientes using(idpaciente)"; 
         $params = null;
         return Database::getRows($sql, $params);
     }
 
     public function searchRows($value)
     {
-        $sql = 'SELECT idconsulta, notasconsulta, costoconsulta, fechaconsulta, horaconsulta, idcausaconsulta, causa
-                FROM consultas 
-                INNER JOIN causaconsulta USING(idcausaconsulta) 
-                WHERE notasconsulta ILIKE ?';
-        $params = array("%$value%");
+        $sql = "SELECT idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, 
+                            fechaconsulta, horaconsulta ,causa, idcausaconsulta , notasconsulta,extract(day from fechaconsulta) as fechaconsultas
+                From consultas 
+                inner join causaconsulta using(idcausaconsulta)
+                inner join cantidadconsultas using(idconsulta)
+                inner join tratamientos using(idtratamiento)
+                inner join pacienteasignado using(idpacienteasignado)
+                inner join pacientes using(idpaciente) 
+                WHERE nombrepaciente ILIKE ? OR  apellidopaciente ILIKE ?";
+        $params = array("%$value%","%$value%");
         return Database::getRows($sql, $params);
     }
 
@@ -245,4 +268,38 @@ private $idprocedimiento = null;
         $params = array($this->id, $this->idprocedimiento);
         return Database::executeRow($sql, $params);
     }
+
+    public function readOneConsultasC()
+    {
+        $sql = 'SELECT fechaconsulta, horaconsulta, idtratamiento, codigotratamiento, idcantidadconsulta 
+                from cantidadconsultas 
+                inner join tratamientos Using(idtratamiento)
+                inner join consultas Using(idconsulta)
+                where idtratamiento = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function searchOneConsultasC($value)
+    {
+        $sql = 'SELECT fechaconsulta, horaconsulta,idtratamiento, codigotratamiento, idcantidadconsulta 
+                from cantidadconsultas 
+                inner join tratamientos Using(idtratamiento)
+                inner join consultas Using(idconsulta)
+                where codigotratamiento ILIKE ?';
+        $params = array("%$value%");
+        return Database::getRows($sql, $params);
+    }
+
+    public function readAllConsultasC()
+    {
+        $sql = 'SELECT fechaconsulta, horaconsulta, idtratamiento, codigotratamiento, idcantidadconsulta 
+                from cantidadconsultas 
+                inner join tratamientos Using(idtratamiento)
+                inner join consultas Using(idconsulta)';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+
 }
