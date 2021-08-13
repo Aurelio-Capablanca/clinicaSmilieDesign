@@ -31,7 +31,7 @@ class Dashboard_Page {
                         <i class="material-icons">menu</i>
                         </a>  
                         <ul class="left left hide-on-med-and-down">
-                           <li><a href="index.php"><i class="material-icons left">home</i>Home</a></li>
+                           <li><a href="main.php"><i class="material-icons left">home</i>Home</a></li>
                         </ul>                       
                             <ul class="right right hide-on-med-and-down">
                                 <li><a href="calendario.php"><i class="material-icons left">schedule</i>Agenda</a></li>
