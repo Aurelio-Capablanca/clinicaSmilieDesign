@@ -114,7 +114,7 @@ class Productos extends Validator
         INNER JOIN tipotratamiento Using(idtipotratamiento)
         INNER JOIN estadotratamiento Using(idestadotratamiento)
         WHERE nombrepaciente ILIKE ? OR apellidopaciente ILIKE ? OR duipaciente ILIKE ?
-        ORDER BY fechainicio';
+        ORDER BY fechainicio ASC';
         $params = array("%$value%", "%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }
@@ -143,7 +143,7 @@ class Productos extends Validator
         INNER JOIN pacientes Using(idpaciente)
         INNER JOIN tipotratamiento Using(idtipotratamiento)
         INNER JOIN estadotratamiento Using(idestadotratamiento)
-        order by fechainicio';
+        order by fechainicio ASC';
         $params = null;
         return Database::getRows($sql, $params);
     }

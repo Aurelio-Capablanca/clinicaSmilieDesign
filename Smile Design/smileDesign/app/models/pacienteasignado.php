@@ -6,9 +6,10 @@ class Categorias extends Validator
 {
     public function readAll()
     {
-        $sql = "SELECT idpacienteasignado, duipaciente ||', '|| nombrepaciente ||' '|| apellidopaciente 
+        $sql = "SELECT idpacienteasignado, nombrepaciente ||' '|| apellidopaciente ||' ,'|| nombredoctor ||' '|| apellidodoctor
         from pacienteasignado
         inner join pacientes using(idpaciente)
+        inner join doctores using(iddoctor)
         Order by nombrepaciente ASC";
         $params = null;
         return Database::getRows($sql, $params);

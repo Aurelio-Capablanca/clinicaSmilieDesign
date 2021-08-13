@@ -126,7 +126,8 @@ private $idprocedimiento = null;
                 inner join cantidadconsultas using(idconsulta)
                 inner join tratamientos using(idtratamiento)
                 inner join pacienteasignado using(idpacienteasignado)
-                inner join pacientes using(idpaciente)"; 
+                inner join pacientes using(idpaciente)
+                order by idconsulta DESC"; 
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -155,7 +156,8 @@ private $idprocedimiento = null;
                 inner join tratamientos using(idtratamiento)
                 inner join pacienteasignado using(idpacienteasignado)
                 inner join pacientes using(idpaciente) 
-                WHERE nombrepaciente ILIKE ? OR  apellidopaciente ILIKE ?";
+                WHERE nombrepaciente ILIKE ? OR  apellidopaciente ILIKE ?
+                order by idconsulta DESC";
         $params = array("%$value%","%$value%");
         return Database::getRows($sql, $params);
     }

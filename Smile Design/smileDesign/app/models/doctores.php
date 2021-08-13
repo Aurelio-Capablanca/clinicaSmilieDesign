@@ -259,5 +259,60 @@ class Doctores extends Validator {
         return Database::getRows($sql, $params);
     }
 
+    public function readGananciasDoctor()
+    {
+        $sql = 'SELECT sum(costoprocedimiento) as costoprocedimiento
+        From doctores dr
+        inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor
+        inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
+        inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
+        inner join consultas cl on cl.idconsulta = cc.idconsulta
+        inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
+        inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
+        Where dr.iddoctor= ?';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readDataDoctor()
+    {
+        $sql = "SELECT fechainicio, fechaconsulta, horaconsulta, nombreprocedimiento, costoprocedimiento, nombrepaciente ||' '|| apellidopaciente as nombrepaciente
+        From doctores dr
+        inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor
+        inner join pacientes ep on ep.idpaciente= pa.idpaciente
+        inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
+        inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
+        inner join consultas cl on cl.idconsulta = cc.idconsulta
+        inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
+        inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
+        Where dr.iddoctor= ?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readpacientesasignados()
+    {
+        $sql = "SELECT nombrepaciente ||' '|| apellidopaciente as nombrepaciente,telefonopaciente, correopaciente, idtratamiento, dr.iddoctor
+        From pacienteasignado pa
+        inner join pacientes pc on pc.idpaciente = pa.idpaciente
+        inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
+        inner join doctores dr on dr.iddoctor = pa.iddoctor
+        Where dr.iddoctor= ?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function readespecialidades()
+    {
+        $sql = "SELECT especialidad
+        from doctores dr
+        inner join especialidaddoctor dd on dd.iddoctor = dr.iddoctor
+        inner join especialidad ed on ed.idespecialidad = dd.idespecialidad
+        Where dr.iddoctor = ?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
 
 }
