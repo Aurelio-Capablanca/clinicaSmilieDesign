@@ -127,7 +127,7 @@ if (isset($_GET['action'])) {
         case 'update':
             $_POST = $doctores->validateForm($_POST);  
             // print_r($_POST);
-            if ($doctores->setId($_POST["id_doctor"]))  {
+            if ($doctores->setId($_POST[0]))  {
                 if ($data = $doctores->readOne()) {
                     if ($doctores->setNombres($_POST['nombre_doctor'])) {
                         if ($doctores->setApellidos($_POST['apellido_doctor'])) {

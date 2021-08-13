@@ -18,7 +18,7 @@ class Database
         $server = 'localhost';
         $database = 'dbclinica';   
         $username = 'postgres';
-        $password = 'jkl555';
+        $password = '123456';
    
         // Se crea la conexión mediante la extensión PDO y el controlador para PostgreSQL.
         self::$connection = new PDO('pgsql:host='.$server.';dbname='.$database.';port=5432', $username, $password);
@@ -40,12 +40,12 @@ class Database
             // Se anula la conexión con el servidor de base de datos.
             self::$connection = null;            
             return $state;
-            error_log('se conecta');
+            // error_log('se conecta');
         } catch (PDOException $error) {
             // Se obtiene el código y el mensaje de la excepción para establecer un error personalizado.           
             self::setException($error->getCode(), $error->getMessage());
             return false;
-            error_log('no se conecta');
+            // error_log('no se conecta');
         }
     }
 
@@ -131,6 +131,7 @@ class Database
     */
     private static function setException($code, $message)
     {
+        self::$error = utf8_encode($message);        
         // Se compara el código del error para establecer un error personalizado.
         switch ($code) {
             case '7':
@@ -149,8 +150,7 @@ class Database
                 self::$error = 'Registro ocupado, no se puede eliminar';
                 break;
             default:
-                //self::$error = 'Ocurrió un problema en la base de datos';
-                self::$error = $message;
+                //self::$error = 'Ocurrió un problema en la base de datos';                
         }
     }
 

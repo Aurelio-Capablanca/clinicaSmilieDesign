@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         sweetAlert(2, response.exception, null);
                     } else {
                         sweetAlert(1, response.message, 'register.php');
-
                     }
                 }
             });

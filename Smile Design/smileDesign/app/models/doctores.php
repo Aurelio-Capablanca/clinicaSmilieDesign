@@ -242,7 +242,22 @@ class Doctores extends Validator {
         return Database::executeRow($sql, $params);
     }
 
+    public function readAll2()
+    {
+        $sql = 'SELECT idestadodoctor, estadodoctor
+                FROM estadodoctor ORDER BY estadodoctor';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 
+    public function readDoctoresEstado()
+    {
+        $sql = 'SELECT d.iddoctor, e.idestadodoctor, d.nombredoctor, d.apellidodoctor, d.direcciondoctor
+                FROM doctores d, estadodoctor e WHERE d.idestadodoctor = e.idestadodoctor
+                AND d.idestadodoctor = ?';
+        $params = array($this->estado);
+        return Database::getRows($sql, $params);
+    }
 
 
 }

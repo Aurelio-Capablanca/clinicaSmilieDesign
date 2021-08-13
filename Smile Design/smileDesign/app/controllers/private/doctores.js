@@ -1,5 +1,5 @@
 // Constantes para establecer las rutas y parámetros de comunicación con la API.
-const API_DOCTORES = '../../app/api/private/doctores.php?action=';
+const API_DOCTORES = '../../app/api/private/doctor.php?action=';
 const ENDPOINT_ESTADO = '../../app/api/private/estado_doctor.php?action=readAll';
 
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
@@ -91,7 +91,7 @@ function openUpdateDialog(id) {
         if (request.ok) {
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.status) {                    
                     // Se inicializan los campos del formulario con los datos del registro seleccionado.
                     document.getElementById('id_doctor').value = response.dataset.iddoctor;
                     document.getElementById('nombre_doctor').value = response.dataset.nombredoctor;
