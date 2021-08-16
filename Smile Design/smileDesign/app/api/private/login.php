@@ -243,6 +243,30 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'No se puede eliminar a sí mismo';
                 }
                 break;
+                case 'logIn':
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($usuario->checkUser($_POST['usuario'])) {
+                        if ($usuario->checkPassword($_POST['clave'])) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Autenticación correcta';
+                            $_SESSION['idusuario'] = $usuario->getId();
+                            $_SESSION['aliasusuario'] = $usuario->getUsuario();
+    
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Clave incorrecta';
+                            }
+                        }
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Usuario incorrecto';
+                        }
+                    }
+                    break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
