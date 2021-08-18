@@ -246,7 +246,7 @@ class Usuarios extends Validator
         $hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'INSERT INTO usuarios(
             nombreusuario, apellidousuario, direccionusuario, telefonousuario, correousuario, aliasusuario, claveusuario, idestadousuario, idtipousuario)
-            VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1)';
+            VALUES (?, ?, ?, ?, ?, ?, ?, 3, 4)';
         $params = array($this->nombres, $this->apellidos, $this->direccion, $this->telefono, $this->correo, $this->usuario, $hash);
         return Database::executeRow($sql, $params);
     }
@@ -294,4 +294,22 @@ class Usuarios extends Validator
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readTipo()
+    {
+        $sql = 'SELECT idtipousuario,tipousuario 
+        FROM tipousuario';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+     // Funcion para cargar registros de un tipo de usuario en especifico
+     public function readUsuariosTipo()
+     {
+         // Creamos la sentencia SQL que contiene la consulta que mandaremos a la base
+         $sql = "SELECT idusuario, concat(nombreusuario,' ',apellidousuario) as nombres, direccionusuario, telefonousuario, correousuario, aliasusuario, claveusuario, idestadousuario, idtipousuario
+         FROM usuarios where idtipousuario=?";
+         $params = array($this->tipo);
+         return Database::getRows($sql, $params);
+     }
 }

@@ -39,7 +39,7 @@ class Report extends FPDF
             $this->AliasNbPages();
             // Se obtiene el numero de paginas para mostrar o no la cabecera
         } else {
-            header('location: ../../../views/dashboard/index.php');
+            header('location: ../../../views/private/index.php');
         }
     }   
 
@@ -62,7 +62,6 @@ class Report extends FPDF
             // Se setea el usuario de la sesión en el reporte.
             $this->Cell(20);
             $this->SetFont('Arial', '', 12);
-            $this->Cell(166, 10, utf8_decode('Usuario que solicita el reporte: '), 0, 1, 'C');
             // Se agrega un salto de línea para mostrar el contenido principal del documento.
             $this->Ln(10);
           
