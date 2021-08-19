@@ -192,7 +192,37 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['exception'] = 'Producto incorrecto';
                 }
-                break;                
+                break;
+                case 'readTratamientoConsulta':
+                    if ($producto->setId($_POST['id_causaconsulta'])) {
+                        if ($result['dataset'] = $producto->readTratamientoConsulta()) {
+                            $result['status'] = 1;
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Tratamiento inexistente';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Tratamiento incorrecto';
+                    }     
+                break;
+                case 'readOnes':
+                    if ($producto->setId($_POST['id_causaconsulta'])) {
+                        if ($result['dataset'] = $producto->readRow()) {
+                            $result['status'] = 1;
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Tratamiento inexistente';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Tratamiento incorrecto';
+                    }
+                    break;
             default: 
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }

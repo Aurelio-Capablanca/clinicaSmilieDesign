@@ -39,7 +39,8 @@ function fillTable(dataset) {
                     <a href="#" onclick="openAnswerDialog(${row.idpaciente})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Preguntas"><i class="material-icons">quiz</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.idpaciente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                     <a href="#" onclick="openInsertDoctor(${row.idpaciente})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Doctor"><i class="material-icons">assignment</i></a>
-                    <a href="#" onclick="openAssignements(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a>                    
+                    <a href="#" onclick="openAssignements(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a>
+                    <a href="#" onclick="graficaPastelTipo(${row.idpaciente})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a>
                     <a href="../../app/reports/expedientes.php?id=${row.idpaciente}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Expedientes"><i class="material-icons">assignment</i></a>
                 </td>
             </tr>
@@ -542,4 +543,75 @@ function validar(){
     }
 
 
+}
+
+function graficaPastelTipo(id) {
+    document.getElementById('send-form').reset();
+    // Se abre la caja de dialogo (modal) que contiene el formulario.
+    let instance = M.Modal.getInstance(document.getElementById('send-modal'));
+    instance.open();
+    // Se asigna el título para la caja de dialogo (modal).
+    document.getElementById('modal-s-title').textContent = 'Gráfica';
+    // Se deshabilitan los campos de alias y contraseña.    
+    // Se define un objeto con los datos del registro seleccionado.
+    const data = new FormData();
+    data.append('id_pacientetratamiento', id);
+
+    fetch(API_PACIENTES + 'readOnes', {
+        method: 'post',
+        body: data
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    // Se inicializan los campos del formulario con los datos del registro seleccionado.
+                    document.getElementById('id_pacientetratamiento').value = response.dataset.idpaciente;
+
+                    fetch(API_PACIENTES + 'readPacientesTipos', {
+                        method: 'post',
+                        body: data
+                    }).then(function (request) {
+                        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+                        if (request.ok) {
+                            request.json().then(function (response) {
+                                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
+                                if (response.status) {                    
+                                    // Se declaran los arreglos para guardar los datos por gráficar.                    
+                                    let tipotratamiento = [];
+                                    let cantidad = [];
+                                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                                    response.dataset.map(function (row) {
+                                        // Se asignan los datos a los arreglos.
+                                        tipotratamiento.push(row.tipotratamiento);
+                                        cantidad.push(row.cantidad);
+                                    });
+                                    // Se llama a la función que genera y muestra una gráfica de pastel en porcentajes. Se encuentra en el archivo components.js
+                                    pieGraph('chart1', tipotratamiento, cantidad, 'Porcentaje de Tratamientos por Tipo');
+                                } else {
+                                    document.getElementById('chart1').remove();
+                                    console.log(response.exception);
+                                }
+                            });
+                        } else {
+                            console.log(request.status + ' ' + request.statusText);
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+
+
+                    // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
+                    //document.getElementById('chart1').reset();
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
 }

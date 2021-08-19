@@ -73,19 +73,39 @@ document.getElementById('search-form').addEventListener('submit', function (even
     searchRows(API_CONSULTAS, 'search-form');
 });
 
-function openCreateDialog() {
-    // Se restauran los elementos del formulario.
-    document.getElementById('save-form').reset();
-    // Se abre la caja de dialogo (modal) que contiene el formulario.
-    let instance = M.Modal.getInstance(document.getElementById('save-modal'));
-    instance.open();
-    // Se asigna el título para la caja de dialogo (modal).
-    document.getElementById('modal-title').textContent = 'Ingresar Consulta';
-    // Se llama a la función para llenar el select del estado cliente         
-    fillSelect(ENDPOINT_CAUSA, 'causa_consulta', null);
-} 
+// function openSendDialog() {
+//     // Se restauran los elementos del formulario.
+//     document.getElementById('send-form').reset();
+//     // Se abre la caja de dialogo (modal) que contiene el formulario.
+//     let instance = M.Modal.getInstance(document.getElementById('send-modal'));
+//     instance.open();
+//     // Se asigna el título para la caja de dialogo (modal).
+//     document.getElementById('modal-s-title').textContent = 'Generar Gráfica de Consulta';    
+// }
+// // function Send() {    
+// //     // Se restauran los elementos del formulario.
+// //     var fecha1 = document.getElementById('fecha_s1').value;
+// //     var fecha2 = document.getElementById('fecha_s2').value;
+// //     url = `causasconsultasgrafico.php?id=${fecha1}&nombre=${fecha2}`;
 
-// Función para preparar el formulario al momento de modificar un registro.
+// // }
+// // document.getElementById('send-form').addEventListener('submit', function (event) {
+// //     // Se evita recargar la página web después de enviar el formulario.
+// //     event.preventDefault();
+// //     // Se define una variable para establecer la acción a realizar en la API.
+// //     //let action = '';
+// //     // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
+    
+// //     var fecha1 = document.getElementById('fecha_s1').value;
+// //     var fecha2 = document.getElementById('fecha_s2').value;
+
+// //     url = `causasconsultasgrafico.php?id=${fecha1}&nombre=${fecha2}`;
+
+// // });
+
+
+// // Función para preparar el formulario al momento de modificar un registro.
+
 
 function openUpdateDialog(id) {
     // Se restauran los elementos del formulario.

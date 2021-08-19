@@ -70,10 +70,10 @@ if (isset($_GET['action'])) {
                                                                     $result['message'] = 'El producto fue creado, pero la imagen no fue guardada';
                                                                 }
                                                             } else {
-                                                                $result['exception'] = 'Talla incorrecta';
+                                                                $result['exception'] = Database::getException();
                                                             }
                                                         } else {
-                                                            $result['exception'] = 'Talla incorrecta';
+                                                            $result['exception'] = 'Talla incorrecta 3 ';
                                                         }
                                                     } else {
                                                         $result['exception'] = 'Seleccione una imagen';
@@ -82,10 +82,10 @@ if (isset($_GET['action'])) {
                                                     $result['exception'] = 'Seleccione una imagen';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Talla incorrecta';
+                                                $result['exception'] = 'Talla incorrecta 2 ';
                                             }
                                         } else {
-                                            $result['exception'] = 'Talla incorrecta';
+                                            $result['exception'] = 'Talla incorrecta 1';
                                         }
                                     } else {
                                         $result['exception'] = 'Seleccione una talla';
@@ -126,8 +126,8 @@ if (isset($_GET['action'])) {
             break;
         case 'update':
             $_POST = $doctores->validateForm($_POST);  
-            // print_r($_POST);
-            if ($doctores->setId($_POST[0]))  {
+            //print_r($_POST);
+            if ($doctores->setId($_POST['id_doctor']))  {
                 if ($data = $doctores->readOne()) {
                     if ($doctores->setNombres($_POST['nombre_doctor'])) {
                         if ($doctores->setApellidos($_POST['apellido_doctor'])) {
@@ -144,7 +144,7 @@ if (isset($_GET['action'])) {
                                                 }
                                             } else {
                                                 echo Database::getException();
-                                                $result['exception'] = Database::getException();
+                                                //$result['exception'] = Database::getException();
                                             }
                                         } else {
                                             if ($doctores->updateRow($data['fotodoctor'])) {
@@ -196,6 +196,36 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'Producto incorrecto';
             }
             break;
+            case 'readTratamientoTipo':
+                if ($doctores->setId($_POST['id_doctorestr'])) {
+                    if ($result['dataset'] = $doctores->readTratamientoTipo()) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Procedimiento inexistente';
+                        }
+                    }
+                } else {
+                    $result['exception'] = 'Procedimiento incorrecto';
+                }     
+            break;
+            case 'readOnes':
+                if ($doctores->setId($_POST['id_doctorestr'])) {
+                    if ($result['dataset'] = $doctores->readOne()) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'Procedimiento inexistente';
+                        }
+                    }
+                } else {
+                    $result['exception'] = 'Procedimiento incorrecto';
+                }
+                break;
         default:
             $result['exception'] = 'Acción no disponible dentro de la sesión';
     }

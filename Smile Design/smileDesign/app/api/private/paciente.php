@@ -560,7 +560,36 @@ if (isset($_GET['action'])) {
 					      $result['exception'] = 'Paciente inexistente';
 					    }
 						break;
-							
+						case 'readPacientesTipos':
+							if ($paciente->setId($_POST['id_pacientetratamiento'])) {
+								if ($result['dataset'] = $paciente->readPacientesTipos()) {
+									$result['status'] = 1;
+								} else {
+									if (Database::getException()) {
+										$result['exception'] = Database::getException();
+									} else {
+										$result['exception'] = 'Identificador inexistente';
+									}
+								}
+							} else {
+								$result['exception'] = 'Identificador incorrecto';
+							}     
+						break;
+						case 'readOnes':
+							if ($paciente->setId($_POST['id_pacientetratamiento'])) {
+								if ($result['dataset'] = $paciente->readOne()) {
+									  $result['status'] = 1;
+								} else {
+									  if (Database::getException()) {
+										   $result['exception'] = Database::getException();
+									  } else {
+										   $result['exception'] = 'Paciente inexistente';
+									  }
+								}
+						   } else {
+								$result['exception'] = 'Producto incorrecto';
+						   }	
+						break;							
 					default:
 					 $result['exception'] = 'Acción no disponible dentro de la sesión';
 		  }

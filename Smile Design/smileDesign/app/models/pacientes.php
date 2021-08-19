@@ -704,4 +704,18 @@ class Pacientes extends Validator{
         return Database::getRows($sql, $params);
     }
 
+    public function readPacientesTipos()
+    {
+        $sql = "SELECT count(idtratamiento) as cantidad , tipotratamiento, idpaciente
+                from pacientes 
+                inner join pacienteasignado using(idpaciente)
+                inner join tratamientos using(idpacienteasignado)
+                inner join tipotratamiento using(idtipotratamiento)
+                where idpaciente = ?
+                group by tipotratamiento, idpaciente
+                order by idpaciente";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
 }

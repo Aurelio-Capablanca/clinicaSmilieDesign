@@ -49,6 +49,7 @@ Dashboard_Page::headerTemplate('Pacientes');
 </table>
 </div>
 
+
 <div id="show-pregunta-modal" class="modal">
             <div class="modal-content center-align">
             <h4> </h4>                
@@ -74,6 +75,7 @@ Dashboard_Page::headerTemplate('Pacientes');
             </div>            
         </div>
     </div>
+
 
 <div id="show-asignado-modal" class="modal">
             <div class="modal-content center-align">
@@ -412,10 +414,30 @@ Dashboard_Page::headerTemplate('Pacientes');
   	</div>
 </div>
 
-
+<div id="send-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4></h4>
+                <!-- Título para la caja de dialogo -->
+                <h4 id="modal-s-title" class="center-align"></h4>
+                <!-- Formulario para crear o actualizar un registro -->
+                <form method="post" id="send-form">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input class="hide" type="number" id="id_pacientetratamiento" name="id_pacientetratamiento" />
+                    <div class="row">
+                            <div class="col s12 m6">                                    
+                                    <canvas id="chart1"></canvas>
+                            </div>                        
+                    </div>           
+                </form>
+            </div>            
+        </div>
+  	</div>
+</div>
 
 </div>
 </div>
+<!-- Importación del archivo para generar gráficas en tiempo real. Para más información https://www.chartjs.org/ -->
+<script type="text/javascript" src="../../resources/js/chart.js"></script>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
 Dashboard_Page::footerTemplate('paciente.js');

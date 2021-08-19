@@ -21,6 +21,7 @@ function fillTable(dataset) {
                 <td>
                     <a href="#" onclick="openUpdateDialog(${row.idprocedimiento})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.idprocedimiento})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="graficaPastelCausa(${row.idprocedimiento})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a>
                 </td>
             </tr>
         `;
@@ -119,3 +120,74 @@ function openDeleteDialog(id) {
     confirmDelete(API_PROCEDIMIENTOS, data);
 }
 
+
+function graficaPastelCausa(id) {
+    document.getElementById('send-form').reset();
+    // Se abre la caja de dialogo (modal) que contiene el formulario.
+    let instance = M.Modal.getInstance(document.getElementById('send-modal'));
+    instance.open();
+    // Se asigna el título para la caja de dialogo (modal).
+    document.getElementById('modal-s-title').textContent = 'Gráfica';
+    // Se deshabilitan los campos de alias y contraseña.    
+    // Se define un objeto con los datos del registro seleccionado.
+    const data = new FormData();
+    data.append('id_causaconsulta', id);
+
+    fetch(API_PROCEDIMIENTOS + 'readOnes', {
+        method: 'post',
+        body: data
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    // Se inicializan los campos del formulario con los datos del registro seleccionado.
+                    document.getElementById('id_causaconsulta').value = response.dataset.idprocedimiento;
+
+                    fetch(API_PROCEDIMIENTOS + 'readCausaProcedimiento', {
+                        method: 'post',
+                        body: data
+                    }).then(function (request) {
+                        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+                        if (request.ok) {
+                            request.json().then(function (response) {
+                                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
+                                if (response.status) {                    
+                                    // Se declaran los arreglos para guardar los datos por gráficar.                    
+                                    let causa = [];
+                                    let cantidad = [];
+                                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                                    response.dataset.map(function (row) {
+                                        // Se asignan los datos a los arreglos.
+                                        causa.push(row.causa);
+                                        cantidad.push(row.cantidad);
+                                    });
+                                    // Se llama a la función que genera y muestra una gráfica de pastel en porcentajes. Se encuentra en el archivo components.js
+                                    pieGraph('chart1', causa, cantidad, 'Porcentaje de Consultas por Causa');
+                                } else {
+                                    document.getElementById('chart1').remove();
+                                    console.log(response.exception);
+                                }
+                            });
+                        } else {
+                            console.log(request.status + ' ' + request.statusText);
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+
+
+                    // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
+                    M.updateTextFields();
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}

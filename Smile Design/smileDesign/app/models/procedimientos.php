@@ -153,4 +153,18 @@ class Procedimientos extends Validator
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readCausaProcedimiento()
+    {
+        $sql = 'SELECT count(idconsulta) as Cantidad , causa, idprocedimiento
+        from procedimientos
+        inner join consultaprocedimiento USING(idprocedimiento)
+        inner join consultas USING(idconsulta)
+        inner join causaconsulta USING(idcausaconsulta)
+        where idprocedimiento = ?
+        group by causa, idprocedimiento';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
 }

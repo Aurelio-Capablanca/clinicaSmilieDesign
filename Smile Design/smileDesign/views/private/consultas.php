@@ -9,7 +9,7 @@ Dashboard_Page::headerTemplate('Consultas');
      <h4 style="text-align:center;"> Gestion de Consultas </h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
-        <!-- <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Consultas</a> -->
+        <!-- <a href="#send-modal" onclick="openSendDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Generar Gráfico Consultas</a> -->
         <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
         
         <form method="post" id="search-form">
@@ -117,6 +117,28 @@ Dashboard_Page::headerTemplate('Consultas');
         </div>
   	</div>
 </div>
+
+<div id="send-modal" class="modal">
+            <div class="modal-content center-align">
+            <h4></h4>
+                <!-- Título para la caja de dialogo -->
+                <h4 id="modal-s-title" class="center-align"></h4>
+                <!-- Formulario para crear o actualizar un registro -->
+                <form method="post" id="send-form">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <!-- <input class="hide" type="number" id="id_causaconsulta" name="id_consulta"/> -->
+                    <div class="row">                                          
+                            <div class="col s12 m6">
+                                    <input class="hide" type="number" id="id_causaconsulta" name="id_consulta"/>
+                                    <canvas id="chart1"></canvas>
+                            </div>                        
+                    </div>           
+                </form>
+            </div>            
+        </div>
+  	</div>
+</div>
+
 
 <div id="save-procedimiento-modal" class="modal">
             <div class="modal-content center-align">
