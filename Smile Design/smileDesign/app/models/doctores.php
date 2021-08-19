@@ -276,10 +276,9 @@ class Doctores extends Validator {
 
     public function readDataDoctor()
     {
-        $sql = "SELECT fechainicio, fechaconsulta, horaconsulta, nombreprocedimiento, costoprocedimiento, nombrepaciente ||' '|| apellidopaciente as nombrepaciente
+        $sql = "SELECT fechainicio, fechaconsulta, horaconsulta, nombreprocedimiento, costoprocedimiento
         From doctores dr
-        inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor
-        inner join pacientes ep on ep.idpaciente= pa.idpaciente
+        inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor        
         inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
         inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
         inner join consultas cl on cl.idconsulta = cc.idconsulta
@@ -292,10 +291,9 @@ class Doctores extends Validator {
 
     public function readpacientesasignados()
     {
-        $sql = "SELECT nombrepaciente ||' '|| apellidopaciente as nombrepaciente,telefonopaciente, correopaciente, idtratamiento, dr.iddoctor
+        $sql = "SELECT nombrepaciente ||' '|| apellidopaciente as nombrepaciente,telefonopaciente, correopaciente, dr.iddoctor
         From pacienteasignado pa
-        inner join pacientes pc on pc.idpaciente = pa.idpaciente
-        inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
+        inner join pacientes pc on pc.idpaciente = pa.idpaciente        
         inner join doctores dr on dr.iddoctor = pa.iddoctor
         Where dr.iddoctor= ?";
         $params = array($this->id);

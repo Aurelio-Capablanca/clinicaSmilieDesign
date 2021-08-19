@@ -23,6 +23,8 @@ if (isset($_GET['id'])) {
                 // Se establece la fuente para los encabezados.                
                 $pdf->Cell(176, 10, utf8_decode('Nombre Doctor:  '.$rowDoctor['nombredoctor'].' '.$rowDoctor['apellidodoctor']), 0, 1, 'C', 0);
                 $pdf->Ln();
+                $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
+                $pdf->Ln();
                 $pdf->SetFont('Times', 'B', 11);
                 // Se imprimen las celdas con los encabezados.                
                 // Se establece la fuente para los datos de los productos.
@@ -30,15 +32,14 @@ if (isset($_GET['id'])) {
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataTratamiento as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                                            
-                        $pdf->Cell(176, 10, utf8_decode('Total: '.$rows['costoprocedimiento']), 0, 1, 'C', 0);                        
+                        $pdf->Cell(176, 10, utf8_decode('Total ($ USD): '.$rows['costoprocedimiento']), 0, 1, 'C', 0);                        
                 }
 
                 $pdf->Cell(49, 10, utf8_decode('Fecha de inicio Tratamiento'), 1, 0, 'C', 1);
                 $pdf->Cell(36, 10, utf8_decode('Fecha de la Consulta'), 1, 0, 'C', 1);
                 $pdf->Cell(28, 10, utf8_decode('Hora de Consulta'), 1, 0, 'C', 1);
                 $pdf->Cell(50, 10, utf8_decode('Procedimiento'), 1, 0, 'C', 1);
-                $pdf->Cell(36, 10, utf8_decode('Costo de la Consulta'), 1, 0, 'C', 1);
-                $pdf->Cell(56, 10, utf8_decode('Nombre del Paciente'), 1, 1, 'C', 1);
+                $pdf->Cell(36, 10, utf8_decode('Costo de la Consulta'), 1, 1, 'C', 1);                
                 $pdf->SetFont('Times', '', 11);
 
                 foreach ($dataConsultas as $rows) {
@@ -47,8 +48,7 @@ if (isset($_GET['id'])) {
                         $pdf->Cell(36, 10, utf8_decode($rows['fechaconsulta']), 1, 0);
                         $pdf->Cell(28, 10, utf8_decode($rows['horaconsulta']), 1, 0);
                         $pdf->Cell(50, 10, utf8_decode($rows['nombreprocedimiento']), 1, 0);
-                        $pdf->Cell(36, 10, $rows['costoprocedimiento'], 1, 0); 
-                        $pdf->Cell(56, 10, utf8_decode($rows['nombrepaciente']), 1, 1);
+                        $pdf->Cell(36, 10, $rows['costoprocedimiento'], 1, 1);                         
                 }
 
             } else {

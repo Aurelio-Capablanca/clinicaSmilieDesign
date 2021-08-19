@@ -27,6 +27,8 @@ if (isset($_GET['id'])) {
                 $pdf->Cell(176, 10, utf8_decode('Contacto:  '.$rowPago['telefonopaciente'].' /Correo:  '.$rowPago['correopaciente']), 0, 0, 'C', 0);
                 $pdf->Ln();
                 $pdf->Cell(176, 10, utf8_decode('DUI:  '.$rowPago['duipaciente']), 0, 0, 'C', 0);
+                $pdf->Ln();
+                $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
                 $pdf->Ln();                
                 $pdf->SetFont('Times', 'B', 11);
                 // Se imprimen las celdas con los encabezados.

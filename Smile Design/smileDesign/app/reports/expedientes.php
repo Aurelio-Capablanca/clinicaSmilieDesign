@@ -21,7 +21,9 @@ if (isset($_GET['id'])) {
                 $pdf->SetFillColor(225);
                 // Se establece la fuente para los encabezados.                
                 $pdf->Cell(176, 10, utf8_decode('Nombre Paciente:  '.$rowPaciente['nombrepaciente'].' '.$rowPaciente['apellidopaciente']), 0, 1, 'C', 0);
-                $pdf->Ln();               
+                $pdf->Ln(); 
+                $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
+                $pdf->Ln();              
                 $pdf->SetFont('Times', 'B', 11);
                 // Se imprimen las celdas con los encabezados.                
                 // Se establece la fuente para los datos de los productos.
