@@ -20,6 +20,11 @@ Dashboard_Page::headerTemplate('Usuarios');
         <div class="input-field col s6 m4">
             <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">check_circle</i></button>
         </div>
+        <div class="input-field col s6 m4">
+                    <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">search</i></button>
+                    <a href="../../app/reports/usuarios.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de usuarios por tipo"><i class="material-icons">assignment</i></a>
+
+                </div>
     </form>
     </div>
     </div>
