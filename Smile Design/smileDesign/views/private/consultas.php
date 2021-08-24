@@ -20,7 +20,10 @@ Dashboard_Page::headerTemplate('Consultas');
         </div>
         <div class="input-field col s6 m4">
             <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">check_circle</i></button>
+            <a href="../../app/reports/consultas_paciente.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de consultas por paciente"><i class="material-icons">assignment</i></a>
+
         </div>
+        
 
     </form>
     </div>

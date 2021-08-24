@@ -718,4 +718,26 @@ class Pacientes extends Validator{
         return Database::getRows($sql, $params);
     }
 
+    
+    public function readPaciente()
+    {
+        $sql = "SELECT idpaciente, CONCAT(nombrepaciente,' ',apellidopaciente) as paciente from pacientes";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    
+    public function readConsultas()
+    {
+        $sql = " SELECT CONCAT(p.nombrepaciente,' ', p.apellidopaciente) as paciente, CONCAT(d.nombredoctor,' ',d.apellidodoctor) as doctor,
+        t.fechainicio, pa.idpacienteasignado, t.descripciontratamiento,cc.causa, ct.idcantidadconsulta, c.idconsulta, c.fechaconsulta,
+        c.costoconsulta, c.notasconsulta, c.horaconsulta
+        from pacienteasignado pa, tratamientos t, pacientes p, doctores d,cantidadconsultas ct, consultas c, causaconsulta cc
+        where pa.idpaciente=p.idpaciente and pa.iddoctor=pa.iddoctor and t.idpacienteasignado=pa.idpacienteasignado
+        and ct.idconsulta=c.idconsulta and ct.idtratamiento=t.idtratamiento and c.idcausaconsulta=cc.idcausaconsulta
+        and p.idpaciente=?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
 }
