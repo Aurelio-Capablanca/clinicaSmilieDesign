@@ -30,9 +30,9 @@ if ($dataDoctores = $doctores->readPaciente()) {
                 $pdf->SetTextColor(9,9,9);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->Cell(60, 10, utf8_decode('Doctor asignado'), 1, 0, 'C', 1);
-                $pdf->Cell(30, 10, utf8_decode('Causa'), 1, 0, 'C', 1);
+                $pdf->Cell(46, 10, utf8_decode('Causa'), 1, 0, 'C', 1);
                 $pdf->Cell(30, 10, utf8_decode('Hora'), 1, 0, 'C', 1);
-                $pdf->Cell(46, 10, utf8_decode('Fecha'), 1, 0, 'C', 1);
+                $pdf->Cell(30, 10, utf8_decode('Fecha'), 1, 0, 'C', 1);
                 $pdf->Cell(19.9, 10, utf8_decode('Costo'), 1, 1, 'C', 1);
                 // Se establece la fuente para los datos de los productos.
                 $pdf->SetFont('Helvetica', '', 11);
@@ -41,12 +41,14 @@ if ($dataDoctores = $doctores->readPaciente()) {
                     // Se imprimen las celdas con los datos de los clientes.
                     $pdf->SetTextColor(9,9,9);
                     $pdf->Cell(60, 10, utf8_decode($rowVar['doctor']), 1, 0,'C');
-                    $pdf->Cell(30, 10, utf8_decode($rowVar['causa']), 1, 0,'C');
+                    $pdf->Cell(46, 10, utf8_decode($rowVar['causa']), 1, 0,'C');
                     $pdf->Cell(30, 10, utf8_decode($rowVar['horaconsulta']), 1, 0,'C');
-                    $pdf->Cell(46, 10, $rowVar['fechaconsulta'], 1, 0,'C');
+                    $pdf->Cell(30, 10, $rowVar['fechaconsulta'], 1, 0,'C');
                     $pdf->Cell(19.9, 10, $rowVar['costoconsulta'], 1, 1,'C');
 
                 }
+                $pdf->Ln(10);
+
             } else {
                 $pdf->SetTextColor(9,9,9);
                 $pdf->Cell(0, 10, utf8_decode('No hay datos para el paciente'), 1, 1);
