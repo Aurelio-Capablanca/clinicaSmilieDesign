@@ -19,6 +19,8 @@ Dashboard_Page::headerTemplate('Pagos');
         <div class="input-field col s6 m4">
             <button type="submit" class="btn waves-effect green tooltipped" data-tooltip="Buscar"><i class="material-icons">check_circle</i></button>
         </div>
+        <!-- Enlace para generar un reporte en formato PDF -->
+        <a href="../../app/reports/Pagosportipo.php" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de pagos por tipo"><i class="material-icons">assignment</i></a>
     </form>
     </div>
     </div>

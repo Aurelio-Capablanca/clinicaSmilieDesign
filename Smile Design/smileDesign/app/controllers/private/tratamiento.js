@@ -9,6 +9,7 @@ const ENDPOINT_PROCEDIMIENTO = '../../app/api/private/consulta.php?action=readAl
 
 document.addEventListener('DOMContentLoaded', function () {
     readRows(API_PRODUCTOS);
+    graficaBarrasTratamiento();
 });
 
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().
@@ -339,4 +340,36 @@ function graficaPastelCausa(id) {
     });
 }
 
-
+// Función para mostrar la cantidad de productos por categoría en una gráfica de barras.
+function graficaBarrasTratamiento() {
+    fetch(API_PRODUCTOS + 'Tratamiento', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas de la gráfica.
+                if (response.status) {
+                    // Se declaran los arreglos para guardar los datos por gráficar.
+                    let categorias = [];
+                    let cantidad = [];
+                    // Se recorre el conjunto de registros devuelto por la API (dataset) fila por fila a través del objeto row.
+                    response.dataset.map(function (row) {
+                        // Se asignan los datos a los arreglos.
+                        categorias.push(row.categoria);
+                        cantidad.push(row.cantidad);
+                    });
+                    // Se llama a la función que genera y muestra una gráfica de barras. Se encuentra en el archivo components.js
+                    barGraph('chart', categorias, cantidad, 'Cantidad de tratamientos', '');
+                } else {
+                    document.getElementById('chart').remove();
+                    console.log(response.exception);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}

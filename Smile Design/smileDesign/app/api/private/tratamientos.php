@@ -44,6 +44,8 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
+
+
                 
             case 'create': 
                 $_POST = $producto->validateForm($_POST);
@@ -86,6 +88,19 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Fecha incorrecta';
                 }
                 break;
+                //Codigo para retornar los datos de la grafica.
+                case 'graficaBarrasTratamiento':
+                    if ($result['dataset'] = $producto->graficaBarrasTratamiento()) {
+                        $result['status'] = 1;
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No hay datos disponibles';
+                        }
+                    }
+                    break;
+
             case 'readOne': 
                 if ($producto->setId($_POST['id'])) {
                     if ($result['dataset'] = $producto->readRow()) {
@@ -193,9 +208,8 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Producto incorrecto';
                 }
                 break;
-                case 'readTratamientoConsulta':
-                    if ($producto->setId($_POST['id_causaconsulta'])) {
-                        if ($result['dataset'] = $producto->readTratamientoConsulta()) {
+                case 'Tratamiento':
+                        if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
                             $result['status'] = 1;
                         } else {
                             if (Database::getException()) {
@@ -204,9 +218,7 @@ if (isset($_GET['action'])) {
                                 $result['exception'] = 'Tratamiento inexistente';
                             }
                         }
-                    } else {
-                        $result['exception'] = 'Tratamiento incorrecto';
-                    }     
+     
                 break;
                 case 'readOnes':
                     if ($producto->setId($_POST['id_causaconsulta'])) {

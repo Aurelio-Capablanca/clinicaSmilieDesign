@@ -161,17 +161,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Procedimiento incorrecto';
                 }
                 break;
-                case 'top3Procedimientos':
-                    if ($result['dataset'] = $procedimiento->top3Procedimientos()) {
-                        $result['status'] = 1;
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'No hay datos disponibles';
-                        }
-                    }
-                    break;
         default:
             $result['exception'] = 'Acción no disponible dentro de la sesión';
     }

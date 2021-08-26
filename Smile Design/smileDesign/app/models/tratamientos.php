@@ -22,6 +22,7 @@ class Productos extends Validator
         }
     }
 
+
     public function setInicio($value)
     {
         if ($this->validateDate($value)) {
@@ -187,6 +188,18 @@ class Productos extends Validator
         Where idtratamiento = ?
         group by causa';
         $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    
+    //   Metodo para generar la grafica
+
+    public function cantidadProductosCategoria()
+    {
+        $sql = 'SELECT tipotratamiento AS categoria, COUNT(t.idtipotratamiento) cantidad
+                FROM tratamientos t INNER JOIN tipotratamiento USING(idtipotratamiento)
+                 GROUP BY descripciontratamiento ORDER BY cantidad DESC LIMIT 3';
+        $params = null;
         return Database::getRows($sql, $params);
     }
 

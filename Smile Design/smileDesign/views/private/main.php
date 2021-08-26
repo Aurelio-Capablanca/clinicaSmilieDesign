@@ -9,19 +9,9 @@ Dashboard_Page::headerTemplate('Home');
 <div class="container center-align">
 <p style="color: red; font-size:40px">¡Bienvenid@!</p>
 <img  width="250" src="../../resources/img/SmileDesign.jfif">
-<br>
-<div class="row">
-    <div class="col s12 m12 l12 xl8 push-xl2">
-        <canvas id="chart1"></canvas>
-    </div>
 </div>
-<script type="text/javascript" src="../../resources/js/chart.js"></script>
-</div>
-
-
-
 
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('main.js');
+Dashboard_Page::footerTemplate('init.js');
 ?>

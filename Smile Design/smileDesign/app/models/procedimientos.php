@@ -167,13 +167,4 @@ class Procedimientos extends Validator
         return Database::getRows($sql, $params);
     }
 
-    public function top3Procedimientos()
-    {
-        $sql = 'SELECT  count(idprocedimiento) as cantidad, nombreprocedimiento from consultaprocedimiento
-        inner join procedimientos using(idprocedimiento) group by nombreprocedimiento LIMIT 3';
-        $params = null;
-        return Database::getRows($sql, $params);
-    }
-
-
 }

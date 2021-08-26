@@ -265,4 +265,19 @@ class Pagos extends Validator{
         return Database::executeRow($sql, $params);
     }
 
+
+    public function readPago()
+    {
+        $sql = 'SELECT idtipopago,tipopago from tipopago';
+        return Database::getRows($sql, null);
+    }
+
+    public function readCantidad()
+    {
+        $sql = 'SELECT pagodebe,pagoabono,pagototal,pagosaldo
+        from pagos p
+        where idtipopago = ?';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
 }

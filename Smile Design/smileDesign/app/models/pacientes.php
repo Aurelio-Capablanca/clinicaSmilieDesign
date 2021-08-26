@@ -731,10 +731,10 @@ class Pacientes extends Validator{
     {
         $sql = " SELECT CONCAT(p.nombrepaciente,' ', p.apellidopaciente) as paciente, CONCAT(d.nombredoctor,' ',d.apellidodoctor) as doctor,
         t.fechainicio, pa.idpacienteasignado, t.descripciontratamiento,cc.causa, ct.idcantidadconsulta, c.idconsulta, c.fechaconsulta,
-        c.costoconsulta, c.notasconsulta, c.horaconsulta, pc.idconsultaprocedimiento
-        from pacienteasignado pa, tratamientos t, pacientes p, doctores d,cantidadconsultas ct, consultas c, causaconsulta cc, consultaprocedimiento pc, procedimientos prc
+        c.costoconsulta, c.notasconsulta, c.horaconsulta
+        from pacienteasignado pa, tratamientos t, pacientes p, doctores d,cantidadconsultas ct, consultas c, causaconsulta cc
         where pa.idpaciente=p.idpaciente and pa.iddoctor=pa.iddoctor and t.idpacienteasignado=pa.idpacienteasignado
-        and ct.idconsulta=c.idconsulta and ct.idtratamiento=t.idtratamiento and c.idcausaconsulta=cc.idcausaconsulta and pc.idconsulta=c.idconsulta and pc.idprocedimiento=prc.idprocedimiento
+        and ct.idconsulta=c.idconsulta and ct.idtratamiento=t.idtratamiento and c.idcausaconsulta=cc.idcausaconsulta
         and p.idpaciente=?";
         $params = array($this->id);
         return Database::getRows($sql, $params);
