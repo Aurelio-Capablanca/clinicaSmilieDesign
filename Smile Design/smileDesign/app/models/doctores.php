@@ -276,7 +276,7 @@ class Doctores extends Validator {
 
     public function readDataDoctor()
     {
-        $sql = "SELECT fechainicio, fechaconsulta, horaconsulta, nombreprocedimiento, costoprocedimiento
+        $sql = "SELECT fechaconsulta, sum(costoprocedimiento) AS costoprocedimientos
         From doctores dr
         inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor        
         inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
@@ -284,7 +284,8 @@ class Doctores extends Validator {
         inner join consultas cl on cl.idconsulta = cc.idconsulta
         inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
         inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
-        Where dr.iddoctor= ?";
+        Where dr.iddoctor = ?
+        group by  fechaconsulta";
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
@@ -322,6 +323,26 @@ class Doctores extends Validator {
         where iddoctor = ?
         Group by tipotratamiento, iddoctor';
         $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readTopDoctores()
+    {
+        $sql = "SELECT sum(dr.iddoctor) as cantidad, nombredoctor ||' '|| apellidodoctor as nombredoctor 
+        from tratamientos tr
+        inner join pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
+        inner join doctores dr on dr.iddoctor=pa.iddoctor
+		inner join estadotratamiento te on te.idestadotratamiento = tr.idestadotratamiento
+        where (select count(dr.iddoctor) 
+               from tratamientos
+               inner join pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
+               inner join doctores dr on dr.iddoctor=pa.iddoctor
+			   inner join estadotratamiento te on te.idestadotratamiento = tr.idestadotratamiento) > 1
+		And  te.idestadotratamiento = 1 			   
+        group by  nombredoctor , apellidodoctor 
+        order by cantidad DESC
+        limit 10";
+        $params = null;
         return Database::getRows($sql, $params);
     }
 

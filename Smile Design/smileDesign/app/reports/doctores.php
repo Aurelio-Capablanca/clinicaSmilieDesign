@@ -1,5 +1,5 @@
 <?php
-require('../helpers//private/report.php');
+require('../helpers/report.php');
 require('../models/doctores.php');
 
 // Se instancia la clase para crear el reporte.

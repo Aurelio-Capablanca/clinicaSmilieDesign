@@ -266,18 +266,18 @@ class Pagos extends Validator{
     }
 
 
-    public function readPago()
+    public function readTipoPagos()
     {
-        $sql = 'SELECT idtipopago,tipopago from tipopago';
-        return Database::getRows($sql, null);
-    }
-
-    public function readCantidad()
-    {
-        $sql = 'SELECT pagodebe,pagoabono,pagototal,pagosaldo
-        from pagos p
-        where idtipopago = ?';
+        $sql = "SELECT Round(count(idpago) * 100.0 / (select count(idpago) from pagos)::numeric,2) ||' '|| '%' as pagodebe, tipopago
+        from pagos 
+        inner join tipopago Using(idtipopago)
+        where idtipopago = ?
+        group by tipopago";
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    
+
+
 }

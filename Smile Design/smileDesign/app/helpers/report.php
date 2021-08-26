@@ -40,7 +40,7 @@ class Report extends FPDF
             // } else {
             //   header('location: ../../../views/private/index.php');
             //  }      
-    }
+    }   
 
 
     public function startReports($title)
@@ -72,8 +72,7 @@ class Report extends FPDF
     */
     public function Header()
     {
-        // Se establece el logo.
-        
+        // Se establece el logo.        
         $this->Image('../../resources/img/Logos1.PNG', 15, 15, 40);
         $this->Ln(20);
         // Se ubica el título.

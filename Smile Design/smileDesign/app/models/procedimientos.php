@@ -167,4 +167,25 @@ class Procedimientos extends Validator
         return Database::getRows($sql, $params);
     }
 
+    public function readTopProcedimientos()
+    {
+        $sql = 'SELECT sum(idprocedimiento) as Cantidad , nombreprocedimiento
+        from procedimientos 
+        inner join consultaprocedimiento USING(idprocedimiento)
+        inner join consultas USING(idconsulta)
+        inner join cantidadconsultas USING(idconsulta)
+        inner join tratamientos USING(idtratamiento)
+            where (SELECT sum(idprocedimiento)
+            from procedimientos 
+            inner join consultaprocedimiento USING(idprocedimiento)
+            inner join consultas USING(idconsulta)
+            inner join cantidadconsultas USING(idconsulta)
+            inner join tratamientos USING(idtratamiento)) > 1        
+        group by nombreprocedimiento
+        order by cantidad DESC    
+        limit 3';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
 }

@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
             // Se instancia la clase para crear el reporte.
             $pdf = new Report;
             // Se inicia el reporte con el encabezado del documento.
-            $pdf->startReports('Ganancías por Doctor');
+            $pdf->startReport('Ganancías por Doctor');
             // Se verifica si existen registros (productos) para mostrar, de lo contrario se imprime un mensaje.
             if ($dataTratamiento = $doctores->readGananciasDoctor()) {
                 if ($dataConsultas = $doctores->readDataDoctor()) {  
@@ -25,30 +25,24 @@ if (isset($_GET['id'])) {
                 $pdf->Ln();
                 $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
                 $pdf->Ln();
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->SetFont('Helvetica', 'B', 11);
                 // Se imprimen las celdas con los encabezados.                
                 // Se establece la fuente para los datos de los productos.
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Helvetica', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataTratamiento as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                                            
                         $pdf->Cell(176, 10, utf8_decode('Total ($ USD): '.$rows['costoprocedimiento']), 0, 1, 'C', 0);                        
                 }
-
-                $pdf->Cell(49, 10, utf8_decode('Fecha de inicio Tratamiento'), 1, 0, 'C', 1);
-                $pdf->Cell(36, 10, utf8_decode('Fecha de la Consulta'), 1, 0, 'C', 1);
-                $pdf->Cell(28, 10, utf8_decode('Hora de Consulta'), 1, 0, 'C', 1);
-                $pdf->Cell(50, 10, utf8_decode('Procedimiento'), 1, 0, 'C', 1);
-                $pdf->Cell(36, 10, utf8_decode('Costo de la Consulta'), 1, 1, 'C', 1);                
-                $pdf->SetFont('Times', '', 11);
+                
+                $pdf->Cell(90, 10, utf8_decode('Fecha de la Consulta'), 1, 0, 'C', 1);                
+                $pdf->Cell(90, 10, utf8_decode('Costo Consulta($)'), 1, 1, 'C', 1);                
+                $pdf->SetFont('Helvetica', '', 11);
 
                 foreach ($dataConsultas as $rows) {
-                    // Se imprimen las celdas con los datos de los productos.                                        
-                        $pdf->Cell(49, 10, utf8_decode($rows['fechainicio']), 1, 0); 
-                        $pdf->Cell(36, 10, utf8_decode($rows['fechaconsulta']), 1, 0);
-                        $pdf->Cell(28, 10, utf8_decode($rows['horaconsulta']), 1, 0);
-                        $pdf->Cell(50, 10, utf8_decode($rows['nombreprocedimiento']), 1, 0);
-                        $pdf->Cell(36, 10, $rows['costoprocedimiento'], 1, 1);                         
+                    // Se imprimen las celdas con los datos de los productos.                                                             
+                        $pdf->Cell(90, 10, utf8_decode($rows['fechaconsulta']), 1, 0);                        
+                        $pdf->Cell(90, 10, $rows['costoprocedimientos'], 1, 1);                         
                 }
 
             } else {
@@ -60,12 +54,12 @@ if (isset($_GET['id'])) {
             // Se envía el documento al navegador y se llama al método Footer()      
             $pdf->Output();
         } else {
-            header('location: ../../../views/private/UsuarioAdminCli.php');
+            header('location: ../../views/doctores.php');
         }
     } else {
-        header('location: ../../../views/private/UsuarioAdminCli.php');
+        header('location: ../../views/doctores.php');
     }
 } else {
-    header('location: ../../../views/private/UsuarioAdminCli.php');
+    header('location: ../../views/doctores.php');
 }
 ?>

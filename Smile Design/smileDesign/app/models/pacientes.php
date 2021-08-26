@@ -718,7 +718,6 @@ class Pacientes extends Validator{
         return Database::getRows($sql, $params);
     }
 
-    
     public function readPaciente()
     {
         $sql = "SELECT idpaciente, CONCAT(nombrepaciente,' ',apellidopaciente) as paciente from pacientes";

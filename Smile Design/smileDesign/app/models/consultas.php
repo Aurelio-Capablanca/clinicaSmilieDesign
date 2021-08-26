@@ -141,7 +141,8 @@ private $idprocedimiento = null;
         inner join cantidadconsultas using(idconsulta)
         inner join tratamientos using(idtratamiento)
         inner join pacienteasignado using(idpacienteasignado)
-        inner join pacientes using(idpaciente)"; 
+        inner join pacientes using(idpaciente)
+        Order by fechaconsulta DESC"; 
         $params = null;
         return Database::getRows($sql, $params);
     }

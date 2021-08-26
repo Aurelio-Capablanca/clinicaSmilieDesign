@@ -28,11 +28,11 @@ if (isset($_GET['id'])) {
                 $pdf->Ln();
                 $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
                 $pdf->Ln();                
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->SetFont('Helvetica', 'B', 11);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->Cell(176, 10, utf8_decode('Especialidad'), 1, 1, 'C', 1);                              
                 // Se establece la fuente para los datos de los productos.
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Helvetica', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataAsig as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                    
@@ -46,12 +46,12 @@ if (isset($_GET['id'])) {
             // Se envía el documento al navegador y se llama al método Footer()      
             $pdf->Output();
         } else {
-            header('location: ../../../views/private/UsuarioAdminCli.php');
+            header('location: ../../views/doctores.php');
         }
     } else {
-        header('location: ../../../views/private/UsuarioAdminCli.php');
+        header('location: ../../views/doctores.php');
     }
 } else {
-    header('location: ../../../views/private/UsuarioAdminCli.php');
+    header('location: ../../views/doctores.php');
 }
 ?>

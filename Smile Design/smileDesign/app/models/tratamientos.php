@@ -22,7 +22,6 @@ class Productos extends Validator
         }
     }
 
-
     public function setInicio($value)
     {
         if ($this->validateDate($value)) {
@@ -191,14 +190,29 @@ class Productos extends Validator
         return Database::getRows($sql, $params);
     }
 
-    
-    //   Metodo para generar la grafica
 
-    public function cantidadProductosCategoria()
+    public function readTratamientosPorcentajes()
     {
-        $sql = 'SELECT tipotratamiento AS categoria, COUNT(t.idtipotratamiento) cantidad
-                FROM tratamientos t INNER JOIN tipotratamiento USING(idtipotratamiento)
-                 GROUP BY descripciontratamiento ORDER BY cantidad DESC LIMIT 3';
+        $sql = 'SELECT count(idtratamiento) as cantidad, tipotratamiento
+        from tratamientos
+        inner join tipotratamiento USING(idtipotratamiento)
+        group by tipotratamiento
+        order by cantidad ASC';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function readTopTratamientos()
+    {
+        $sql = 'SELECT sum(idtratamiento) as cantidad, tipotratamiento
+        from tratamientos
+        inner join tipotratamiento USING(idtipotratamiento)
+            where (Select sum(idtratamiento) as cantidad
+            from tratamientos
+            inner join tipotratamiento USING(idtipotratamiento))>1
+        group by tipotratamiento
+        order by cantidad DESC';
         $params = null;
         return Database::getRows($sql, $params);
     }

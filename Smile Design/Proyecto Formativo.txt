@@ -1,7 +1,18 @@
 dbClinica 
-
+---------------------------------------------------------
 Procedimientos Almacenados 
   - Calculo_Consultas
   - Calculo_Saldo
 	
 Posibles funciones para calculos futuros en otras interfaces 
+---------------------------------------------------------
+Sistema 
+
+Agregar todos los reportes y gráficas restantes 
+
+agregar buscador a Agenda 
+
+reporte de nota de abono
+
+reestructurar sistema 
+--------------------------------------------------------
