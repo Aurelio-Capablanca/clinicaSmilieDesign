@@ -9,12 +9,13 @@ Dashboard_Page::headerTemplate('Home');
 <div class="row">
     <h4 class="center-align blue-text" id="greeting"></h4>
 </div>
+
 <!-- Se agrega un elemento de reloj analógico como un decorativo -->
-<table>
+<!-- <table>
      <tr><td style="text-align: center;"><canvas id="canvas_tt6121668f69210" width="175" height="175"></canvas></td></tr>
      <tr><td style="text-align: center; font-weight: bold"><a href="//24timezones.com/San-Salvador/hora" style="text-decoration: none" class="clock24" 
             id="tz24-1629578895-c1228-eyJzaXplIjoiMTc1IiwiYmdjb2xvciI6IjAwOTlGRiIsImxhbmciOiJlcyIsInR5cGUiOiJhIiwiY2FudmFzX2lkIjoiY2FudmFzX3R0NjEyMTY2OGY2OTIxMCJ9" title="hora San Salvador" target="_blank">Hora actual en San Salvador</a></td></tr>
-</table>
+</table> -->
 
 <!--Contenedor para mostrar una tabla con datos-->
 <div class="container center-align">
