@@ -54,7 +54,7 @@ Dashboard_Page::headerTemplate('Home');
 </div>
 
 <script type="text/javascript" src="../resources/js/chart.js"></script>
-<script type="text/javascript" src="//w.24timezones.com/l.js" async></script>
+<!-- <script type="text/javascript" src="//w.24timezones.com/l.js" async></script> -->
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
 Dashboard_Page::footerTemplate('principal.js');

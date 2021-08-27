@@ -169,13 +169,13 @@ class Procedimientos extends Validator
 
     public function readTopProcedimientos()
     {
-        $sql = 'SELECT sum(idprocedimiento) as Cantidad , nombreprocedimiento
+        $sql = 'SELECT Count(idprocedimiento) as Cantidad , nombreprocedimiento
         from procedimientos 
         inner join consultaprocedimiento USING(idprocedimiento)
         inner join consultas USING(idconsulta)
         inner join cantidadconsultas USING(idconsulta)
         inner join tratamientos USING(idtratamiento)
-            where (SELECT sum(idprocedimiento)
+            where (SELECT Count(idprocedimiento)
             from procedimientos 
             inner join consultaprocedimiento USING(idprocedimiento)
             inner join consultas USING(idconsulta)

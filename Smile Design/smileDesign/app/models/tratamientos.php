@@ -205,10 +205,10 @@ class Productos extends Validator
 
     public function readTopTratamientos()
     {
-        $sql = 'SELECT sum(idtratamiento) as cantidad, tipotratamiento
+        $sql = 'SELECT count(idtratamiento) as cantidad, tipotratamiento
         from tratamientos
         inner join tipotratamiento USING(idtipotratamiento)
-            where (Select sum(idtratamiento) as cantidad
+            where (Select count(idtratamiento) as cantidad
             from tratamientos
             inner join tipotratamiento USING(idtipotratamiento))>1
         group by tipotratamiento

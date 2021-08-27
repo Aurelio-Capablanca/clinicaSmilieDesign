@@ -328,7 +328,7 @@ class Doctores extends Validator {
 
     public function readTopDoctores()
     {
-        $sql = "SELECT sum(dr.iddoctor) as cantidad, nombredoctor ||' '|| apellidodoctor as nombredoctor 
+        $sql = "SELECT count(dr.iddoctor) as cantidad, nombredoctor ||' '|| apellidodoctor as nombredoctor 
         from tratamientos tr
         inner join pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
         inner join doctores dr on dr.iddoctor=pa.iddoctor
