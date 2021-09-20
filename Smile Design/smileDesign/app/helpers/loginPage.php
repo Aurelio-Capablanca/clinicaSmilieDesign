@@ -78,13 +78,9 @@ class Dashboard_Page {
                     <div class="container">
                         <div class="row">
                             <div class="col l6 s12">
-                                <h5 class="white-text">Farmastuff Administrativo</h5>                               
+                                <h5 class="white-text">Smile Design</h5>                               
                             </div>
-                            <div class="col l4 offset-l2 s12">
-                                <h5 class="white-text">Sitio Público</h5>
-                                <ul>
-                                    <a href="../public/index.php" class="card-title center-align white-text">Ir</a>
-                                </ul>
+                            <div class="col l4 offset-l2 s12">                                                                
                             </div>
                         </div>
                     </div>

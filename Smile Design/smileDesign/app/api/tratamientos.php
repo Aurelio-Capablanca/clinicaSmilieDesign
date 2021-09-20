@@ -5,11 +5,11 @@ require_once('../models/tratamientos.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
-    //session_start();
+    session_start();
     $producto = new Productos;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-    //if (isset($_SESSION['id_usuario'])) {
+    if (isset($_SESSION['id_usuario'])) {
         switch ($_GET['action']) {
             case 'readAll': // METODO READ CARGAR TODOS LOS DATOS 
                 if ($result['dataset'] = $producto->readRows()) {
@@ -250,9 +250,9 @@ if (isset($_GET['action'])) {
         }
         header('content-type: application/json; charset=utf-8');
         print(json_encode($result));
-    /*} else {
+     } else {
         print(json_encode('Acceso denegado'));
-    }*/
+    }
 } else {
     print(json_encode('Recurso no disponible'));
 }

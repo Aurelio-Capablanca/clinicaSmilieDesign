@@ -6,13 +6,13 @@ require_once('../models/pacientes.php');
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
 	 // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
-//session_start();
+     session_start();
 	 // Se instancia la clase correspondiente. 
 	 $paciente = new Pacientes;
 	 // Se declara e inicializa un arreglo para guardar el resultado que retorna la API. 
 	 $result = array('status' => 0, 'message' => null, 'exception' => null);
 	 // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-//if (isset($_SESSION['id_usuario'])) {
+     if (isset($_SESSION['idusuario'])) {
 		  // Se compara la acción a realizar cuando un administrador ha iniciado sesión. El socialismo no funciona 
 		  switch ($_GET['action']) {
 				case 'readAll':
@@ -158,12 +158,26 @@ if (isset($_GET['action'])) {
 						  $result['exception'] = 'Ingrese un valor para buscar';
 					 }
 					 break;
+					 case 'readOneDUI':
+						if ($paciente->setDUI($_POST['dui_paciente'])) {
+							 if ($result['dataset'] = $paciente->readOneDUI()) {
+								   $result['status'] = 1;
+							 } else {
+								   if (Database::getException()) {
+										$result['exception'] = Database::getException();
+								   } else {
+										$result['exception'] = 'DUI repetido';
+								   }
+							 }
+						} else {
+							 $result['exception'] = 'DUI Inexistente';
+						}	 					  
 				case 'create':
-					 $_POST = $paciente->validateForm($_POST);
+					 $_POST = $paciente->validateForm($_POST);					 	
 					 if ($paciente->setNombre($_POST['nombre_paciente'])) {
 						if ($paciente->setApellido($_POST['apellido_paciente'])) {
 							if ($paciente->setFecha($_POST['fecha_nacimiento'])) {
-							 if ($paciente->setDUI($_POST['dui_paciente'])) {
+							 if ($paciente->setDUI($_POST['dui_paciente'])) {								
 								if ($paciente->setDireccion($_POST['direccion_paciente'])) { 
 								if ($paciente->setTelefono($_POST['telefono_paciente'])) {
 									if ($paciente->setCorreo($_POST['correo_cliente'])) 
@@ -200,12 +214,12 @@ if (isset($_GET['action'])) {
 								} else {
 									$result['exception'] = 'Dirección incorrecto';
 								}	
-							   } else {
-									$result['exception'] = 'Teléfono incorrecto';
-								}
-								} else {
-									$result['exception'] = 'DUI incorrecto';
-								}																																																																																			
+									} else {
+										$result['exception'] = 'Teléfono incorrecto';
+									}
+									} else {
+										$result['exception'] = 'DUI incorrecto';
+									}																																																																																											
 								  } else {
 									$result['exception'] = 'Fecha incorrecto';
 								  }
@@ -215,6 +229,7 @@ if (isset($_GET['action'])) {
 							} else {
 							 $result['exception'] = 'Nombre incorrecto';
 							}
+							
 					 break;
 					case 'readOne':
 					 if ($paciente->setId($_POST['id_paciente'])) {
@@ -597,9 +612,9 @@ if (isset($_GET['action'])) {
 		  header('content-type: application/json; charset=utf-8');
 		  // Se imprime el resultado en formato JSON y se retorna al controlador.
 		  print(json_encode($result));
-	 // } else {
-	 //     print(json_encode('Acceso denegado'));
-	 // }
+		} else {
+			print(json_encode('Acceso denegado'));
+		}
 } else {
 	 print(json_encode('Recurso no disponible'));
 }

@@ -7,7 +7,7 @@ if (isset($_GET['action'])) {
     session_start();
     $categoria = new Categorias;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-    //if (isset($_SESSION['id_usuario'])) {
+    if (isset($_SESSION['idusuario'])) {
         switch ($_GET['action']) {
             case 'readAll':
                 if ($result['dataset'] = $categoria->readAll()) {
@@ -36,9 +36,9 @@ if (isset($_GET['action'])) {
         }
         header('content-type: application/json; charset=utf-8');
         print(json_encode($result));
-    /*} else {
+    } else {
         print(json_encode('Acceso denegado'));
-    }*/
+    }
 } else {
     print(json_encode('Recurso no disponible'));
 }

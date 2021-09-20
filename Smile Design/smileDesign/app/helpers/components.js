@@ -85,6 +85,31 @@ function readRowsCuenta(api) {
     });
 }
 
+function readRowsAgenda(api) {
+    fetch(api + 'readAllAgenda', {
+        method: 'get'
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let data = [];
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    data = response.dataset;
+                } else {
+                    sweetAlert(4, response.exception, null);
+                }
+                // Se envían los datos a la función del controlador para que llene la tabla en la vista.
+                fillTable(data);
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
 
 /*
 *   Función para obtener los resultados de una búsqueda en los mantenimientos de tablas (operación search).
@@ -274,6 +299,32 @@ function searchOneArchivo(api, form) {
     });
 }
 
+
+function searchAgendas(api, form) {
+    fetch(api + 'searchagenda', {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let data = [];
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    data = response.dataset;                                        
+                    sweetAlert(1, response.message, null);
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+                fillTable(data);
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
 
 /*
 *   Función para crear o actualizar un registro en los mantenimientos de tablas (operación create y update).

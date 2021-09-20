@@ -72,7 +72,7 @@ Dashboard_Page::headerTemplate('Pagos');
                             <tbody id="count-rows">
                             </tbody>
                         </table>
-                    <div class="row center-align">                    
+                        <div class="row center-align">                    
                     </div>           
                 </form>
             </div>            

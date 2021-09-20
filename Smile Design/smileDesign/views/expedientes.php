@@ -161,12 +161,12 @@ Dashboard_Page::headerTemplate('Expedientes');
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">how_to_reg</i>
-                            <input id="notas_medicass" type="text" name="notas_medicass" class="validate"  required/>
+                            <textarea  id="notas_medicass" cols="30" rows="10" type="text" name="notas_medicass" class="validate"  required></textarea>
                             <label for="notas_medicass">Notas Médicas</label>
                         </div>
-                        <div class="input-field col s12 m6">
+                        <div class="col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <input id="observacioness" type="text" name="observacioness" class="validate"  required/>
+                            <textarea id="observacioness" type="text" cols="30" rows="10" name="observacioness" class="validate"  required></textarea>
                             <label for="observacioness">Observaciones periodontograma</label>
                         </div>
                          <div>

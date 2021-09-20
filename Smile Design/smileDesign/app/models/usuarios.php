@@ -42,7 +42,7 @@ class Usuarios extends Validator
 
     public function setDireccion($value)
     {
-        if ($this->validateAlphabetic($value, 1, 50)) {
+        if ($this->validateString($value, 1, 50)) {
             $this->direccion = $value;
             return true;
         } else {
@@ -82,7 +82,7 @@ class Usuarios extends Validator
 
     public function setTelefono($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 50)) {
+        if ($this->validatePhone($value, 1, 50)) {
             $this->telefono = $value;
             return true;
         } else {
@@ -211,7 +211,7 @@ class Usuarios extends Validator
 
     public function readProfile()
     {
-        $sql = 'SELECT idusuario, nombresusuario, apellidosusuario, usuario, correousuario, usuario
+        $sql = 'SELECT idusuario, nombreusuario, apellidousuario, aliasusuario, correousuario, direccionusuario
                 FROM usuarios
                 WHERE idusuario = ?';
         $params = array($_SESSION['idusuario']);
@@ -221,9 +221,9 @@ class Usuarios extends Validator
     public function editProfile()
     {
         $sql = 'UPDATE usuarios
-                SET nombresusuario = ?, apellidosusuario = ?, correousuario = ?, usuario = ?
+                SET nombreusuario = ?, apellidousuario = ?, correousuario = ?, aliasusuario = ?, direccionusuario = ?
                 WHERE idusuario = ?';
-        $params = array($this->nombres, $this->apellidos, $this->correo, $this->usuario, $_SESSION['idusuario']);
+        $params = array($this->nombres, $this->apellidos, $this->correo, $this->usuario, $this->direccion, $_SESSION['idusuario']);
         return Database::executeRow($sql, $params);
     }
 

@@ -23,7 +23,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
-            case 'readProfile'://se usa para mostrar los datos a editar del usuario de la sesion
+            case 'readProfile': //se usa para mostrar los datos a editar del usuario de la sesion
                 if ($result['dataset'] = $usuario->readProfile()) {
                     $result['status'] = 1;
                 } else {
@@ -36,16 +36,20 @@ if (isset($_GET['action'])) {
                 break;
             case 'editProfile':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['nombres_perfil'])) {
-                    if ($usuario->setApellidos($_POST['apellidos_perfil'])) {
-                        if ($usuario->setCorreo($_POST['correo_perfil'])) {
-                            if ($usuario->setUsuario($_POST['alias_perfil'])) {
-                                if ($usuario->editProfile()) {
-                                    $result['status'] = 1;
-                                    $_SESSION['usuario'] = $usuario->getUsuario();
-                                    $result['message'] = 'Perfil modificado correctamente';
+                if ($usuario->setNombres($_POST['nombre_usuario'])) {
+                    if ($usuario->setApellidos($_POST['apellido_usuario'])) {
+                        if ($usuario->setCorreo($_POST['correo_usuario'])) {
+                            if ($usuario->setUsuario($_POST['alias_usuario'])) {
+                                if ($usuario->setDireccion($_POST['direccion_usuario'])) {
+                                    if ($usuario->editProfile()) {
+                                        $result['status'] = 1;
+                                        $_SESSION['usuario'] = $usuario->getUsuario();
+                                        $result['message'] = 'Perfil modificado correctamente';
+                                    } else {
+                                        $result['exception'] = Database::getException();
+                                    }
                                 } else {
-                                    $result['exception'] = Database::getException();
+                                    $result['exception'] = 'Alias incorrecto';
                                 }
                             } else {
                                 $result['exception'] = 'Alias incorrecto';
@@ -268,35 +272,33 @@ if (isset($_GET['action'])) {
                     if ($usuario->setApellidos($_POST['apellidos'])) {
                         if ($usuario->setDireccion($_POST['txtDireccion'])) {
                             if ($usuario->setTelefono($_POST['txtTel'])) {
-                        if ($usuario->setCorreo($_POST['correo'])) {
-                            if ($usuario->setUsuario($_POST['alias'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->createRow()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Usuario registrado correctamente';
+                                if ($usuario->setCorreo($_POST['correo'])) {
+                                    if ($usuario->setUsuario($_POST['alias'])) {
+                                        if ($_POST['clave1'] == $_POST['clave2']) {
+                                            if ($usuario->setClave($_POST['clave1'])) {
+                                                if ($usuario->createRow()) {
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Usuario registrado correctamente';
+                                                } else {
+                                                    $result['exception'] = Database::getException();
+                                                }
+                                            } else {
+                                                $result['exception'] = $usuario->getPasswordError();
+                                            }
                                         } else {
-                                            $result['exception'] = Database::getException();
+                                            $result['exception'] = 'Claves diferentes';
                                         }
                                     } else {
-                                        $result['exception'] = $usuario->getPasswordError();
+                                        $result['exception'] = 'Usuario incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Telefono incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Usuario incorrecto';
+                                $result['exception'] = 'Correo incorrecto';
                             }
-                        }else{
-                            $result['exception'] = 'Telefono incorrecto';
-
-                        }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
-                        }
-                        }else{
                             $result['exception'] = 'Direccion incorrecta';
-
                         }
                     } else {
                         $result['exception'] = 'Apellidos incorrectos';
@@ -313,7 +315,6 @@ if (isset($_GET['action'])) {
                         $result['message'] = 'Autenticación correcta';
                         $_SESSION['idusuario'] = $usuario->getId();
                         $_SESSION['aliasusuario'] = $usuario->getUsuario();
-
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();

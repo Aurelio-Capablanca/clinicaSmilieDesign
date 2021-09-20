@@ -14,7 +14,7 @@ if (isset($_GET['id'])) {
             // Se instancia la clase para crear el reporte.
             $pdf = new Report;
             // Se inicia el reporte con el encabezado del documento.
-            $pdf->startReport('Factura');
+            $pdf->startReports('Factura');
             // Se verifica si existen registros (productos) para mostrar, de lo contrario se imprime un mensaje.
             if ($dataCuenta = $pagos->readOnePayment()) {
                 // Se establece un color de relleno para los encabezados.
@@ -35,7 +35,8 @@ if (isset($_GET['id'])) {
                 $pdf->Cell(26, 10, utf8_decode('Cantidad'), 1, 0, 'C', 1);
                 $pdf->Cell(36, 10, utf8_decode('Precio Unitario'), 1, 0, 'C', 1);
                 $pdf->Cell(56, 10, utf8_decode('Procedimiento'), 1, 0, 'C', 1);
-                $pdf->Cell(78, 10, utf8_decode('Descripcion'), 1, 1, 'C', 1);                
+                $pdf->Cell(78, 10, utf8_decode('Descripcion'), 1, 0, 'C', 1);
+                $pdf->Cell(56, 10, utf8_decode('Sub Total'), 1, 1, 'C', 1);                
                 // Se establece la fuente para los datos de los productos.
                 $pdf->SetFont('Helvetica', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
@@ -44,12 +45,13 @@ if (isset($_GET['id'])) {
                         $pdf->Cell(26, 10, utf8_decode($rows['idconsulta']), 1, 0);
                         $pdf->Cell(36, 10, utf8_decode($rows['costoprocedimiento']), 1, 0);
                         $pdf->Cell(56, 10, utf8_decode($rows['nombreprocedimiento']), 1, 0);
-                        $pdf->Cell(78, 10, utf8_decode($rows['descripcionprocedimiento']), 1, 1);
+                        $pdf->Cell(78, 10, utf8_decode($rows['descripcionprocedimiento']), 1, 0);
+                        $pdf->Cell(56, 10, utf8_decode($rows['pagosaldo']), 1, 1);
                            
                 }
-                $pdf->Cell(175, 16, utf8_decode('SubTotal ($):'.$rows['pagototal']), 0, 0, 'R',0);
-                $pdf->Ln();  
-                $pdf->Cell(175, 16, utf8_decode('Cancela ($):'.$rows['pagoabono']), 0, 0, 'R',0);
+                $pdf->Cell(75, 16, utf8_decode('Total ($):'.$rows['pagototal']), 0, 0, 'R',0);
+                //$pdf->Ln();  
+                $pdf->Cell(75, 16, utf8_decode('Cancela ($):'.$rows['pagoabono']), 0, 0, 'R',0);
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay Datos'), 1, 1);
             }

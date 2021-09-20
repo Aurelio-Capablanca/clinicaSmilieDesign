@@ -127,7 +127,7 @@ function graficaPastelCausa(id) {
     let instance = M.Modal.getInstance(document.getElementById('send-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
-    document.getElementById('modal-s-title').textContent = 'Gráfica';
+    document.getElementById('modal-s-title').textContent = 'Gráfica Según Consultas por Causas';
     // Se deshabilitan los campos de alias y contraseña.    
     // Se define un objeto con los datos del registro seleccionado.
     const data = new FormData();

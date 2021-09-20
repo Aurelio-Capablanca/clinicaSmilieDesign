@@ -546,6 +546,16 @@ class Pacientes extends Validator{
         return Database::getRow($sql, $params);
     }
 
+    public function readOneDUI()
+    {
+        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                WHERE duipaciente != ?';
+        $params = array($this->dui);
+        return Database::getRow($sql, $params);
+    }
+
     public function updateRow()
     {        
         $sql = 'UPDATE pacientes
