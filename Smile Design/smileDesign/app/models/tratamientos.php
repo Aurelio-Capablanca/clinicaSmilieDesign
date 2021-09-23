@@ -177,6 +177,44 @@ class Productos extends Validator
         return Database::executeRow($sql, $params);
     }
 
-    
+    public function readTratamientoConsulta()
+    {
+        $sql = 'SELECT count(idconsulta) as Cantidad, causa
+        from tratamientos
+        inner join cantidadconsultas USING(idtratamiento)
+        inner join consultas USING(idconsulta)
+        inner join causaconsulta USING(idcausaconsulta)
+        Where idtratamiento = ?
+        group by causa';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function readTratamientosPorcentajes()
+    {
+        $sql = 'SELECT count(idtratamiento) as cantidad, tipotratamiento
+        from tratamientos
+        inner join tipotratamiento USING(idtipotratamiento)
+        group by tipotratamiento
+        order by cantidad ASC';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function readTopTratamientos()
+    {
+        $sql = 'SELECT count(idtratamiento) as cantidad, tipotratamiento
+        from tratamientos
+        inner join tipotratamiento USING(idtipotratamiento)
+            where (Select count(idtratamiento) as cantidad
+            from tratamientos
+            inner join tipotratamiento USING(idtipotratamiento))>1
+        group by tipotratamiento
+        order by cantidad DESC';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 
 }

@@ -21,27 +21,29 @@ if (isset($_GET['id'])) {
                 $pdf->SetFillColor(225);
                 // Se establece la fuente para los encabezados.                
                 $pdf->Cell(176, 10, utf8_decode('Nombre Paciente:  '.$rowPaciente['nombrepaciente'].' '.$rowPaciente['apellidopaciente']), 0, 1, 'C', 0);
-                $pdf->Ln();               
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->Ln(); 
+                $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
+                $pdf->Ln();              
+                $pdf->SetFont('Helvetica', 'B', 11);
                 // Se imprimen las celdas con los encabezados.                
                 // Se establece la fuente para los datos de los productos.
                 $pdf->Cell(195, 10, utf8_decode('Notas'), 1, 1, 'C', 1);                              
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Helvetica', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataExpedientes as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                                            
                     $pdf->MultiCell(195, 10, utf8_decode($rows['notas']), 1, 1);                    
                 }
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->SetFont('Helvetica', 'B', 11);
                 $pdf->Cell(195, 10, utf8_decode('Observaciones'), 1, 1, 'C', 1);              
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Helvetica', '', 11);
                 foreach ($dataExpedientes as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                    
                     $pdf->MultiCell(195, 10, utf8_decode($rows['observacionesperiodontograma']), 1, 1);
                 } 
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->SetFont('Helvetica', 'B', 11);
                 $pdf->Cell(195, 10, utf8_decode('Doctor'), 1, 1, 'C', 1);              
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Helvetica', '', 11);
                 foreach ($dataExpedientes as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                    
                     $pdf->MultiCell(195, 10, utf8_decode($rows['nombredoctor']), 1, 1);
@@ -52,12 +54,12 @@ if (isset($_GET['id'])) {
             // Se envía el documento al navegador y se llama al método Footer()      
             $pdf->Output();
         } else {
-            header('location: ../../../views/private/UsuarioAdminCli.php');
+            header('location: ../../views/pacientes.php');
         }
     } else {
-        header('location: ../../../views/private/UsuarioAdminCli.php');
+        header('location: ../../views/pacientes.php');
     }
 } else {
-    header('location: ../../../views/private/UsuarioAdminCli.php');
+    header('location: ../../views/pacientes.php');
 }
 ?>

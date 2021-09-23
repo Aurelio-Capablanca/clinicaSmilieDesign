@@ -237,13 +237,24 @@ class Productos extends Validator
 
     public function readArchivos()
     {
-        $sql = "SELECT notas, observacionesperiodontograma, idarchivo, nombrepaciente||' '||apellidopaciente as nombrepaciente, ex.idexpediente
-                from archivos ar
-                inner join expedientes ex on ex.idexpediente = ar.idexpediente
-                inner join pacientes pa on pa.idpaciente = ex.idpaciente
-                Where ar.idarchivo = ?";
-        $params = null;
+        $sql = "SELECT idarchivo ,notas, observacionesperiodontograma,  nombrepaciente , apellidopaciente , idexpediente
+        from archivos
+        inner join expedientes USING(idexpediente)
+        inner join pacientes USING(idpaciente)
+        Where idarchivo = ?";
+        $params =  array($this->id);
         return Database::getRows($sql, $params);
+    }
+
+    public function readArchivosall()
+    {
+        $sql = "SELECT idarchivo ,nombrepaciente , apellidopaciente , idexpediente
+        from archivos
+        inner join expedientes USING(idexpediente)
+        inner join pacientes USING(idpaciente)
+        Where idarchivo = ?";
+        $params =  array($this->id);
+        return Database::getRow($sql, $params);
     }
 
     public function readOneArchivo2()
@@ -255,4 +266,6 @@ class Productos extends Validator
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
+
+    
 }

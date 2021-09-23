@@ -546,6 +546,16 @@ class Pacientes extends Validator{
         return Database::getRow($sql, $params);
     }
 
+    public function readOneDUI()
+    {
+        $sql = 'SELECT idpaciente, nombrepaciente, apellidopaciente, fechanacimiento, duipaciente, direccionpaciente, telefonopaciente, correopaciente, fotopaciente, idestadopaciente, estadopaciente
+                FROM pacientes
+                INNER JOIN estadopaciente USING (idestadopaciente)
+                WHERE duipaciente != ?';
+        $params = array($this->dui);
+        return Database::getRow($sql, $params);
+    }
+
     public function updateRow()
     {        
         $sql = 'UPDATE pacientes
@@ -700,6 +710,41 @@ class Pacientes extends Validator{
                 inner join pacienteasignado aa on aa.idpaciente = pc.idpaciente
                 inner join doctores dr on dr.iddoctor = aa.iddoctor
                 Where pc.idpaciente= ?";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readPacientesTipos()
+    {
+        $sql = "SELECT count(idtratamiento) as cantidad , tipotratamiento, idpaciente
+                from pacientes 
+                inner join pacienteasignado using(idpaciente)
+                inner join tratamientos using(idpacienteasignado)
+                inner join tipotratamiento using(idtipotratamiento)
+                where idpaciente = ?
+                group by tipotratamiento, idpaciente
+                order by idpaciente";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readPaciente()
+    {
+        $sql = "SELECT idpaciente, CONCAT(nombrepaciente,' ',apellidopaciente) as paciente from pacientes";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    
+    public function readConsultas()
+    {
+        $sql = " SELECT CONCAT(p.nombrepaciente,' ', p.apellidopaciente) as paciente, CONCAT(d.nombredoctor,' ',d.apellidodoctor) as doctor,
+        t.fechainicio, pa.idpacienteasignado, t.descripciontratamiento,cc.causa, ct.idcantidadconsulta, c.idconsulta, c.fechaconsulta,
+        c.costoconsulta, c.notasconsulta, c.horaconsulta
+        from pacienteasignado pa, tratamientos t, pacientes p, doctores d,cantidadconsultas ct, consultas c, causaconsulta cc
+        where pa.idpaciente=p.idpaciente and pa.iddoctor=pa.iddoctor and t.idpacienteasignado=pa.idpacienteasignado
+        and ct.idconsulta=c.idconsulta and ct.idtratamiento=t.idtratamiento and c.idcausaconsulta=cc.idcausaconsulta
+        and p.idpaciente=?";
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }

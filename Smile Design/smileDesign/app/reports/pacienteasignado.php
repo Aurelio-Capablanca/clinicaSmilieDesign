@@ -25,15 +25,17 @@ if (isset($_GET['id'])) {
                 $pdf->Cell(176, 10, utf8_decode('Dirección:  '.$rowDoctor['direcciondoctor']), 0, 0, 'C', 0);
                 $pdf->Ln();
                 $pdf->Cell(176, 10, utf8_decode('Contacto:  '.$rowDoctor['telefonodoctor'].' /Correo:  '.$rowDoctor['correodoctor']), 0, 0, 'C', 0);
-                $pdf->Ln();                
-                $pdf->SetFont('Times', 'B', 11);
+                $pdf->Ln();      
+                $pdf->Cell(176, 10, utf8_decode('Usuario que imprime: '.$_SESSION['aliasusuario']), 0, 0, 'C', 0);
+                $pdf->Ln();          
+                $pdf->SetFont('Helvetica', 'B', 11);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->Cell(56, 10, utf8_decode('Nombre Paciente'), 1, 0, 'C', 1);
                 $pdf->Cell(36, 10, utf8_decode('Teléfono'), 1, 0, 'C', 1);
-                $pdf->Cell(78, 10, utf8_decode('Correo Paciente'), 1, 0, 'C', 1);
-                $pdf->Cell(28, 10, utf8_decode('N# Tratamiento'), 1, 1, 'C', 1);                
+                $pdf->Cell(78, 10, utf8_decode('Correo Paciente'), 1, 1, 'C', 1);
+                               
                 // Se establece la fuente para los datos de los productos.
-                $pdf->SetFont('Times', '', 11);
+                $pdf->SetFont('Helvetica', '', 11);
                 // Se recorren los registros ($dataProductos) fila por fila ($rowProducto).
                 foreach ($dataAsig as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                    
@@ -44,11 +46,11 @@ if (isset($_GET['id'])) {
                         $pdf->Cell(36, 10, utf8_decode($rows['telefonopaciente']), 1, 0);
                     }                    
                     if(isset($rows['correopaciente'])){
-                        $pdf->Cell(78, 10, utf8_decode($rows['correopaciente']), 1, 0);
+                        $pdf->Cell(78, 10, utf8_decode($rows['correopaciente']), 1, 1);
                     }
-                    if(isset($rows['idtratamiento'])){
-                        $pdf->Cell(28, 10, utf8_decode($rows['idtratamiento']), 1, 1);
-                    }                                      
+                    // if(isset($rows['idtratamiento'])){
+                    //     $pdf->Cell(28, 10, utf8_decode($rows['idtratamiento']), 1, 1);
+                    // }                                      
                 }
             } else {
                 $pdf->Cell(0, 10, utf8_decode('No hay Datos'), 1, 1);

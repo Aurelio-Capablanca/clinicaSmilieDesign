@@ -90,7 +90,7 @@ class Pagos extends Validator{
 
     public function readAll()
     {
-        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago
+        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
                 From Pagos  ps
                 Inner join Tipopago tg on tg.idtipopago=ps.idtipopago
                 Inner join EstadoPago eg on eg.idestadopago = ps.idestadopago
@@ -120,7 +120,7 @@ class Pagos extends Validator{
 
     public function readOnes()
     {
-        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago
+        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
                 From Pagos  ps
                 Inner join Tipopago tg on tg.idtipopago=ps.idtipopago
                 Inner join EstadoPago eg on eg.idestadopago = ps.idestadopago
@@ -142,7 +142,7 @@ class Pagos extends Validator{
 
     public function searchRows($value)
     {
-        $sql = 'SELECT idpago ,nombrepaciente , apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago
+        $sql = 'SELECT idpago ,nombrepaciente , apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
                 From Pagos  ps
                 Inner join Tipopago tg on tg.idtipopago=ps.idtipopago
                 Inner join EstadoPago eg on eg.idestadopago = ps.idestadopago
@@ -228,7 +228,7 @@ class Pagos extends Validator{
     public function readOnePayment()
     {
         $sql = 'SELECT count(cc.idcantidadconsulta) as idconsulta, costoprocedimiento, descripcionprocedimiento, nombreprocedimiento ,
-                        nombrepaciente, tr.idtratamiento, codigotratamiento, pagoabono, pagototal
+                        nombrepaciente, tr.idtratamiento, codigotratamiento, pagoabono, pagototal, count(cc.idcantidadconsulta)*costoprocedimiento as pagosaldo
                 from CantidadConsultas cc
                 inner join Tratamientos tr on tr.idTratamiento=cc.idTratamiento
                 inner join pagos pg on pg.idTratamiento=tr.idTratamiento							
@@ -257,6 +257,29 @@ class Pagos extends Validator{
         return Database::getRow($sql, $params);
     }
 
+    public function readOneAbonos()
+    {
+        $sql = 'SELECT nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        from historialpagos
+        where pagoabonoh>=1 And codigotratamientoh = ?
+        group by nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento , codigotratamientoh
+        having count(pagoabonoh)>=1';
+        $params = array($this->codigo);
+        return Database::getRows($sql, $params);
+    } 
+    
+    
+    public function readOneAbonosNombres()
+    {
+        $sql = 'SELECT nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        from historialpagos
+        where pagoabonoh>=1 And codigotratamientoh = ?
+        group by nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento , codigotratamientoh
+        having count(pagoabonoh)>=1';
+        $params = array($this->codigo);
+        return Database::getRow($sql, $params);
+    } 
+
 
     public function suspenderPago()
     {
@@ -264,5 +287,20 @@ class Pagos extends Validator{
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+
+    public function readTipoPagos()
+    {
+        $sql = "SELECT Round(count(idpago) * 100.0 / (select count(idpago) from pagos)::numeric,2) ||' '|| '%' as pagodebe, tipopago
+        from pagos 
+        inner join tipopago Using(idtipopago)
+        where idtipopago = ?
+        group by tipopago";
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    
+
 
 }

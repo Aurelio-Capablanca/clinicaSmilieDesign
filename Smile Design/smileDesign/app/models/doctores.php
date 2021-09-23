@@ -276,26 +276,25 @@ class Doctores extends Validator {
 
     public function readDataDoctor()
     {
-        $sql = "SELECT fechainicio, fechaconsulta, horaconsulta, nombreprocedimiento, costoprocedimiento, nombrepaciente ||' '|| apellidopaciente as nombrepaciente
+        $sql = "SELECT fechaconsulta, sum(costoprocedimiento) AS costoprocedimientos
         From doctores dr
-        inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor
-        inner join pacientes ep on ep.idpaciente= pa.idpaciente
+        inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor        
         inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
         inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
         inner join consultas cl on cl.idconsulta = cc.idconsulta
         inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
         inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
-        Where dr.iddoctor= ?";
+        Where dr.iddoctor = ?
+        group by  fechaconsulta";
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
 
     public function readpacientesasignados()
     {
-        $sql = "SELECT nombrepaciente ||' '|| apellidopaciente as nombrepaciente,telefonopaciente, correopaciente, idtratamiento, dr.iddoctor
+        $sql = "SELECT nombrepaciente ||' '|| apellidopaciente as nombrepaciente,telefonopaciente, correopaciente, dr.iddoctor
         From pacienteasignado pa
-        inner join pacientes pc on pc.idpaciente = pa.idpaciente
-        inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
+        inner join pacientes pc on pc.idpaciente = pa.idpaciente        
         inner join doctores dr on dr.iddoctor = pa.iddoctor
         Where dr.iddoctor= ?";
         $params = array($this->id);
@@ -314,5 +313,37 @@ class Doctores extends Validator {
         return Database::getRows($sql, $params);
     }
 
+    public function readTratamientoTipo()
+    {
+        $sql = 'SELECT count(idtratamiento) as Cantidad, tipotratamiento, iddoctor
+        from Doctores 
+        inner join pacienteasignado Using(iddoctor)
+        inner join tratamientos Using(idpacienteasignado)
+        inner join tipotratamiento Using(idtipotratamiento)
+        where iddoctor = ?
+        Group by tipotratamiento, iddoctor';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readTopDoctores()
+    {
+        $sql = "SELECT count(dr.iddoctor) as cantidad, nombredoctor ||' '|| apellidodoctor as nombredoctor 
+        from tratamientos tr
+        inner join pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
+        inner join doctores dr on dr.iddoctor=pa.iddoctor
+		inner join estadotratamiento te on te.idestadotratamiento = tr.idestadotratamiento
+        where (select count(dr.iddoctor) 
+               from tratamientos
+               inner join pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
+               inner join doctores dr on dr.iddoctor=pa.iddoctor
+			   inner join estadotratamiento te on te.idestadotratamiento = tr.idestadotratamiento) > 1
+		And  te.idestadotratamiento = 1 			   
+        group by  nombredoctor , apellidodoctor 
+        order by cantidad DESC
+        limit 10";
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 
 }

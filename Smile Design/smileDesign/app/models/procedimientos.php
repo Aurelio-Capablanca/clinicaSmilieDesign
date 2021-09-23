@@ -54,7 +54,7 @@ class Procedimientos extends Validator
 
     public function setDescripcion($value)
     {
-        if ($this->validateAlphanumeric($value, 1, 250)) {
+        if ($this->validateString($value, 1, 250)) {
             $this->descripcion = $value;
             return true;
         } else {
@@ -153,4 +153,39 @@ class Procedimientos extends Validator
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readCausaProcedimiento()
+    {
+        $sql = 'SELECT count(idconsulta) as Cantidad , causa, idprocedimiento
+        from procedimientos
+        inner join consultaprocedimiento USING(idprocedimiento)
+        inner join consultas USING(idconsulta)
+        inner join causaconsulta USING(idcausaconsulta)
+        where idprocedimiento = ?
+        group by causa, idprocedimiento';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
+    }
+
+    public function readTopProcedimientos()
+    {
+        $sql = 'SELECT Count(idprocedimiento) as Cantidad , nombreprocedimiento
+        from procedimientos 
+        inner join consultaprocedimiento USING(idprocedimiento)
+        inner join consultas USING(idconsulta)
+        inner join cantidadconsultas USING(idconsulta)
+        inner join tratamientos USING(idtratamiento)
+            where (SELECT Count(idprocedimiento)
+            from procedimientos 
+            inner join consultaprocedimiento USING(idprocedimiento)
+            inner join consultas USING(idconsulta)
+            inner join cantidadconsultas USING(idconsulta)
+            inner join tratamientos USING(idtratamiento)) > 1        
+        group by nombreprocedimiento
+        order by cantidad DESC    
+        limit 3';
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
 }
