@@ -7,7 +7,7 @@ if (isset($_GET['action'])) {
     session_start();
     $categoria = new Categorias;
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-    if (isset($_SESSION['id_usuario'])) {
+    if (isset($_SESSION['idusuario'])) {
         switch ($_GET['action']) {
             case 'readAll':
                 if ($result['dataset'] = $categoria->readAll()) {

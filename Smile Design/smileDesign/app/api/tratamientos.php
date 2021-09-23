@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $producto = new Productos;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-    if (isset($_SESSION['id_usuario'])) {
+    if (isset($_SESSION['idusuario'])) {
         switch ($_GET['action']) {
             case 'readAll': // METODO READ CARGAR TODOS LOS DATOS 
                 if ($result['dataset'] = $producto->readRows()) {
