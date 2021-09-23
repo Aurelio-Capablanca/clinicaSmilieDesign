@@ -6,7 +6,7 @@ Dashboard_Page::headerTemplate('Causas de Consultas');
 ?> 
 <div class="container">
   <div class="row">
-     <h4 style="text-align:center;"> Gestion de Causas de consultas</h4>
+     <h4 style="text-align:center;"> Gestion de Causas de Consultas</h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
         <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Causas de consultas</a>
