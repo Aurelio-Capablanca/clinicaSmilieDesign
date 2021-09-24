@@ -46,18 +46,18 @@ if (isset($_GET['action'])) {
                 break;
             case 'create': 
                 $_POST = $producto->validateForm($_POST);
-                if ($producto->setNombres($_POST['nombre_usuario'])) {
-                    if ($producto->setApellidos($_POST['apellido_usuario'])) {
-                        if ($producto->setDireccion($_POST['direccion_usuario'])) {
-                            if ($producto->setCorreo($_POST['correo_usuario'])) {
-                                if ($producto->setUsuario($_POST['alias_usuario'])) {
-                                    if ($producto->setTelefono($_POST['telefono_usuario'])) {
-                                        if (isset($_POST['tipo_usuario'])) {
-                                            if ($producto->setTipo($_POST['tipo_usuario'])) {               
-                                                if (isset($_POST['estado_usuario'])) {
-                                                    if ($producto->setEstado($_POST['estado_usuario'])) {               
-                                                        if ($_POST['clave_cliente'] == $_POST['confirmar_clave']) {
-                                                            if ($producto->setClave($_POST['confirmar_clave'])) {
+                if ($producto->setNombres($_POST['nombre_usuario1'])) {
+                    if ($producto->setApellidos($_POST['apellido_usuario1'])) {
+                        if ($producto->setDireccion($_POST['direccion_usuario1'])) {
+                            if ($producto->setCorreo($_POST['correo_usuario1'])) {
+                                if ($producto->setUsuario($_POST['alias_usuario1'])) {
+                                    if ($producto->setTelefono($_POST['telefono_usuario1'])) {
+                                        if (isset($_POST['tipo_usuario1'])) {
+                                            if ($producto->setTipo($_POST['tipo_usuario1'])) {               
+                                                if (isset($_POST['estado_usuario1'])) {
+                                                    if ($producto->setEstado($_POST['estado_usuario1'])) {               
+                                                        if ($_POST['clave_cliente1'] == $_POST['confirmar_clave1']) {
+                                                            if ($producto->setClave($_POST['confirmar_clave1'])) {
                                                                 if ($producto->createRow()) {
                                                                     $result['status'] = 1;
                                                                     $result['message'] = 'Usuario creado correctamente';
@@ -102,7 +102,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne': 
-                if ($producto->setId($_POST['id'])) {
+                if ($producto->setId($_POST['id_usuario1'])) {
                     if ($result['dataset'] = $producto->readOne()) {
                         $result['status'] = 1;
                     } else {
@@ -118,19 +118,19 @@ if (isset($_GET['action'])) {
                 break;
                 case 'update': 
                     $_POST = $producto->validateForm($_POST);
-                    if ($producto->setId($_POST['id_usuario'])) {
-                        if ($producto->setNombres($_POST['nombre_usuario'])) {
-                            if ($producto->setApellidos($_POST['apellido_usuario'])) {
-                                if ($producto->setDireccion($_POST['direccion_usuario'])) {
-                                    if ($producto->setCorreo($_POST['correo_usuario'])) {
-                                        if ($producto->setUsuario($_POST['alias_usuario'])) {
-                                            if ($producto->setTelefono($_POST['telefono_usuario'])) {
-                                                if (isset($_POST['tipo_usuario'])) {
-                                                    if ($producto->setTipo($_POST['tipo_usuario'])) {               
-                                                        if (isset($_POST['estado_usuario'])) {
-                                                            if ($producto->setEstado($_POST['estado_usuario'])) {               
-                                                                if ($_POST['clave_cliente'] == $_POST['confirmar_clave']) {
-                                                                    if ($producto->setClave($_POST['confirmar_clave'])) {
+                    if ($producto->setId($_POST['id_usuario1'])) {
+                        if ($producto->setNombres($_POST['nombre_usuario1'])) {
+                            if ($producto->setApellidos($_POST['apellido_usuario1'])) {
+                                if ($producto->setDireccion($_POST['direccion_usuario1'])) {
+                                    if ($producto->setCorreo($_POST['correo_usuario1'])) {
+                                        if ($producto->setUsuario($_POST['alias_usuario1'])) {
+                                            if ($producto->setTelefono($_POST['telefono_usuario1'])) {
+                                                if (isset($_POST['tipo_usuario1'])) {
+                                                    if ($producto->setTipo($_POST['tipo_usuario1'])) {               
+                                                        if (isset($_POST['estado_usuario1'])) {
+                                                            if ($producto->setEstado($_POST['estado_usuario1'])) {               
+                                                                if ($_POST['clave_cliente1'] == $_POST['confirmar_clave1']) {
+                                                                    if ($producto->setClave($_POST['confirmar_clave1'])) {
                                                                         if ($producto->updateRow()) {
                                                                             $result['status'] = 1;
                                                                             $result['message'] = 'Usuario actualizado correctamente';
@@ -180,7 +180,7 @@ if (isset($_GET['action'])) {
                 break;
 
             case 'delete': 
-                if ($producto->setId($_POST['id'])) {
+                if ($producto->setId($_POST['id_usuario1'])) {
                     if ($data = $producto->readOne()) {
                         if ($producto->deleteRow()) {
                             $result['status'] = 1;

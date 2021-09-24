@@ -60,7 +60,7 @@ Dashboard_Page::headerTemplate('Tratamientos');
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                     <input class="hide" type="number" id="id_causaconsulta" name="id_causaconsulta" />
                     <div class="row">
-                            <div class="col s12 m6" id="charts">                                    
+                            <div class="col s12" id="charts">                                    
                                     <!-- <canvas id="chart1"></canvas> -->
                             </div>                        
                     </div>           

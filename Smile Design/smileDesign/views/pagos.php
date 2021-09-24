@@ -35,7 +35,7 @@ Dashboard_Page::headerTemplate('Pagos');
         <tr>
         <th>Nombre Paciente</th>
         <th>Apellido Paciente</th>
-        <th>Fecha Inicio</th>        
+        <th>Fecha Consulta</th>        
         <th>Pago Debe</th>
         <th>Pago Abono</th>
         <th>Pago Total</th>            

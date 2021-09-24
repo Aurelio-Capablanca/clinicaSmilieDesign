@@ -48,6 +48,7 @@ document.getElementById('session-form').addEventListener('submit', function (eve
                 if (response.status) {
                     sweetAlert(1, response.message, 'main.php');
                 } else {
+                    sweetAlert(2, response.exception, null);
                 }
             });
         } else {

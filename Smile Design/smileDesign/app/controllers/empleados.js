@@ -56,11 +56,11 @@ function openUpdateDialog(id) {
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     document.getElementById('modal-title').textContent = 'Actualizar usuario';
-    document.getElementById('id_usuario').value = id;
+    document.getElementById('id_usuario1').value = id;
     const data = new FormData();
-    data.append('id', id);
-    document.getElementById('clave_cliente').required = false;
-    document.getElementById('confirmar_clave').required = false;
+    data.append('id_usuario1', id);
+    document.getElementById('clave_cliente1').required = false;
+    document.getElementById('confirmar_clave1').required = false;
 
     fetch(API_PRODUCTOS + 'readOne', {
         method: 'post',
@@ -69,14 +69,14 @@ function openUpdateDialog(id) {
         if (request.ok) {
             request.json().then(function (response) {
                 if (response.status) {
-                    document.getElementById('nombre_usuario').value = response.dataset.nombreusuario;
-                    document.getElementById('apellido_usuario').value = response.dataset.apellidousuario;
-                    document.getElementById('direccion_usuario').value = response.dataset.direccionusuario;
-                    document.getElementById('telefono_usuario').value = response.dataset.telefonousuario;
-                    document.getElementById('correo_usuario').value = response.dataset.correousuario;
-                    document.getElementById('alias_usuario').value = response.dataset.aliasusuario;
-                    fillSelect(ENDPOINT_CATEGORIAS, 'estado_usuario', response.dataset.idestadousuario);
-                    fillSelect(ENDPOINT_CATEGORIAS2, 'tipo_usuario', response.dataset.idtipousuario);
+                    document.getElementById('nombre_usuario1').value = response.dataset.nombreusuario;
+                    document.getElementById('apellido_usuario1').value = response.dataset.apellidousuario;
+                    document.getElementById('direccion_usuario1').value = response.dataset.direccionusuario;
+                    document.getElementById('telefono_usuario1').value = response.dataset.telefonousuario;
+                    document.getElementById('correo_usuario1').value = response.dataset.correousuario;
+                    document.getElementById('alias_usuario1').value = response.dataset.aliasusuario;
+                    fillSelect(ENDPOINT_CATEGORIAS, 'estado_usuario1', response.dataset.idestadousuario);
+                    fillSelect(ENDPOINT_CATEGORIAS2, 'tipo_usuario1', response.dataset.idtipousuario);
                     M.updateTextFields();
                 } else {
                     sweetAlert(2, response.exception, null);
@@ -98,19 +98,19 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     var nombre, apellido, direccion, telefono, correo, alias, clave, conf;
     var exnombre, exapellido, exdireccion, extelefono, excorreo, exalias, exclave, exconf;
 
-    nombre = document.getElementById('nombre_usuario').value;
-    apellido = document.getElementById('apellido_usuario').value;
-    telefono = document.getElementById('telefono_usuario').value;
-    direccion = document.getElementById('direccion_usuario').value;
-    correo = document.getElementById('correo_usuario').value;
-    alias = document.getElementById('alias_usuario').value;
-    clave = document.getElementById('clave_cliente').value;
-    conf = document.getElementById('confirmar_clave').value;
+    nombre = document.getElementById('nombre_usuario1').value;
+    apellido = document.getElementById('apellido_usuario1').value;
+    telefono = document.getElementById('telefono_usuario1').value;
+    direccion = document.getElementById('direccion_usuario1').value;
+    correo = document.getElementById('correo_usuario1').value;
+    alias = document.getElementById('alias_usuario1').value;
+    clave = document.getElementById('clave_cliente1').value;
+    conf = document.getElementById('confirmar_clave1').value;
 
-    exnombre = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-    exapellido = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;    
+    exnombre = /^[a-zA-ZÀ-ÿ\s]{1,400}$/;
+    exapellido = /^[a-zA-ZÀ-ÿ\s]{1,400}$/;    
     extelefono = /^[2,6,7]{1}[0-9]{3}[-][0-9]{4}$/;
-    exalias = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
+    exalias = /^[a-zA-ZÀ-ÿ\s]{1,400}$/;
 
     if(nombre === " " || apellido === " " || telefono === " " || direccion === " " ||  correo === " " || alias === " " || clave === " " || conf === " "){
         sweetAlert(2, 'Todos los campos son obligatorios', null);
@@ -119,27 +119,15 @@ document.getElementById('save-form').addEventListener('submit', function (event)
     if (nombre == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo nombre', null);
         return false;
-    }
-    else if (!exnombre.test(nombre)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el nombre', null);
-        return false;
-    }
+    }    
     if (apellido == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo apellido', null);
         return false;
-    }
-    else if (!exapellido.test(apellido)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el apellido', null);
-        return false;
-    }
+    }    
     if (telefono == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo telefono', null);
         return false;
-    }
-    else if (!extelefono.test(telefono)){
-        sweetAlert(2, 'no coinciden los caracteres ingresados con los solicitados con el teléfono', null);
-        return false;
-    }
+    }   
     if (alias == " "){
         sweetAlert(2, 'no se puede dejar vacio el campo alias', null);
         return false;
@@ -162,7 +150,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 // Función para establecer el registro a eliminar y abrir una caja de dialogo de confirmación.
 function openDeleteDialog(id) {
     const data = new FormData();
-    data.append('id', id);
+    data.append('id_usuario', id);
     confirmDelete(API_PRODUCTOS, data);
 }
 

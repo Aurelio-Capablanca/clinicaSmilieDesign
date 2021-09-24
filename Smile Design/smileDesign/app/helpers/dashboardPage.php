@@ -34,7 +34,7 @@ class Dashboard_Page
                 <ul class="right right hide-on-med-and-down">
                     <li><a href="calendario.php"><i class="material-icons left">schedule</i>Agenda</a></li>
                     <li><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
-                    <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
+                    <!-- <li><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li> -->
                     <li><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
                     <li><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a></li>
                     <li><a href="#" onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>
@@ -43,7 +43,7 @@ class Dashboard_Page
             </div> 
             <div class="nav-content">
             <ul class="tabs tabs-transparent">
-                <li class="tab"><a href="usuarioss.php">Empleados</a></li>
+                <li class="tab"><a href="usuarioss.php">Usuarios</a></li>
                 <li class="tab"><a href="expedientes.php">Expedientes</a></li>
                 <li class="tab"><a href="doctores.php">Doctores</a></li>
                 <li class="tab"><a href="pacientes.php">Pacientes</a></li>
@@ -71,7 +71,7 @@ class Dashboard_Page
                     </li>              
                         <li><a href="#"  onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>                              
                         <li class="hide-on-large-only" ><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
-                        <li class="hide-on-large-only" ><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li>
+                       <!-- <li class="hide-on-large-only" ><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li> -->
                         <li class="hide-on-large-only" ><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
                         <li class="hide-on-large-only" ><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a>
                 </ul> 

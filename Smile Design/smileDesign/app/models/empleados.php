@@ -217,7 +217,7 @@ class Usuarios extends Validator
     {
         $sql = 'SELECT idusuario,nombreusuario,apellidousuario,direccionusuario,telefonousuario,correousuario,
                 aliasusuario,estadousuario,tipousuario, idestadousuario,idtipousuario
-                from usuarios u
+                from usuarios
                 INNER JOIN estadousuario USING(idestadousuario)
                 INNER JOIN tipousuario USING(idtipousuario)
                 WHERE idusuario = ?';

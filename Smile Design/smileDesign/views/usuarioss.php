@@ -56,55 +56,55 @@ Dashboard_Page::headerTemplate('Usuarios');
                 <!-- Formulario para crear o actualizar un registro -->
                 <form method="post" id="save-form">
                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input class="hide" type="number" id="id_usuario" name="id_usuario"/>
+                    <input class="hide" type="number" id="id_usuario1" name="id_usuario1"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <input id="nombre_usuario" type="text" name="nombre_usuario" class="validate"  required/>
-                            <label for="nombre_usuario">Nombre Usuario</label>
+                            <input id="nombre_usuario1" type="text" name="nombre_usuario1" class="validate"  required/>
+                            <label for="nombre_usuario1">Nombre Usuario</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <input id="apellido_usuario" type="text" name="apellido_usuario" class="validate"  required/>
-                            <label for="apellido_usuario">Apellido Usuario</label>
+                            <input id="apellido_usuario1" type="text" name="apellido_usuario1" class="validate"  required/>
+                            <label for="apellido_usuario1">Apellido Usuario</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">place</i>
-                            <input type="text" id="direccion_usuario" name="direccion_usuario" maxlength="200" class="validate" required/>
-                            <label for="direccion_usuario">Dirección</label>
+                            <input type="text" id="direccion_usuario1" name="direccion_usuario1" maxlength="200" class="validate" required/>
+                            <label for="direccion_usuario1">Dirección</label>
                         </div>                        
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">phone</i>
-                            <input type="text" id="telefono_usuario" name="telefono_usuario" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required/>
-                            <label for="telefono_usuario">Teléfono</label>
+                            <input type="text" id="telefono_usuario1" name="telefono_usuario1" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required/>
+                            <label for="telefono_usuario1">Teléfono</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">email</i>
-                            <input type="email" id="correo_usuario" name="correo_usuario" maxlength="100" class="validate" required/>
-                            <label for="correo_usuario">Correo electrónico</label>
+                            <input type="email" id="correo_usuario1" name="correo_usuario1" maxlength="100" class="validate" required/>
+                            <label for="correo_usuario1">Correo electrónico</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">person</i>
-                            <input type="text" id="alias_usuario" name="alias_usuario" maxlength="200" class="validate" required/>
-                            <label for="alias_usuario">Alias</label>
+                            <input type="text" id="alias_usuario1" name="alias_usuario1" maxlength="200" class="validate" required/>
+                            <label for="alias_usuario1">Alias</label>
                         </div> 
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">security</i>
-                            <input type="password" id="clave_cliente" name="clave_cliente" class="validate" required/>
-                            <label for="clave_cliente">Clave</label>
+                            <input type="password" id="clave_cliente1" name="clave_cliente1" class="validate" required/>
+                            <label for="clave_cliente1">Clave</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">security</i>
-                            <input type="password" id="confirmar_clave" name="confirmar_clave" class="validate" required/>
-                            <label for="confirmar_clave">Confirmar clave</label>
+                            <input type="password" id="confirmar_clave1" name="confirmar_clave1" class="validate" required/>
+                            <label for="confirmar_clave1">Confirmar clave</label>
                         </div>                        
                         <div class="input-field col s12 m6">
-                            <select id="estado_usuario" name="estado_usuario">
+                            <select id="estado_usuario1" name="estado_usuario1">
                             </select>
                             <label>Estado</label>                            
                         </div>
                         <div class="input-field col s12 m6">
-                            <select id="tipo_usuario" name="tipo_usuario">
+                            <select id="tipo_usuario1" name="tipo_usuario1">
                             </select>
                             <label>Tipo</label>                            
                         </div>

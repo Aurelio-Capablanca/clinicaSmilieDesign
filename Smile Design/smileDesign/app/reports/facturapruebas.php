@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
                 $pdf->SetFont('Times', 'B', 11);
                 // Se imprimen las celdas con los encabezados.
                 $pdf->Cell(36, 10, utf8_decode('Abono (USD $)'), 1, 0, 'C', 1);
-                $pdf->Cell(58, 10, utf8_decode('Fecha de Pago'), 1, 0, 'C', 1);
+                //$pdf->Cell(58, 10, utf8_decode('Fecha de Pago'), 1, 0, 'C', 1);
                 $pdf->Cell(36, 10, utf8_decode('Saldo (USD $)'), 1, 1, 'C', 1);
                 // $pdf->Cell(56, 10, utf8_decode('Procedimiento'), 1, 0, 'C', 1);
                 // $pdf->Cell(78, 10, utf8_decode('Descripcion'), 1, 1, 'C', 1);
@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
                 foreach ($dataCuenta as $rows) {
                     // Se imprimen las celdas con los datos de los productos.                    
                     $pdf->Cell(36, 10, utf8_decode($rows['pagoabonoh']), 1, 0);
-                    $pdf->Cell(58, 10, utf8_decode($rows['fecharegistro']), 1, 0);
+                    //$pdf->Cell(58, 10, utf8_decode($rows['fecharegistro']), 1, 0);
                     $pdf->Cell(36, 10, utf8_decode($rows['pagosaldoh']), 1, 1);
                 }
             } else {

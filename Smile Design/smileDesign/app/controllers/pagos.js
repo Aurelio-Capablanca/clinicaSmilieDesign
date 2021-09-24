@@ -21,7 +21,7 @@ function fillTable(dataset) {
             <tr>
                 <td>${row.nombrepaciente}</td>
                 <td>${row.apellidopaciente}</td> 
-                <td>${row.fechainicio}</td>
+                <td>${row.fechaconsulta}</td>
                 <td>${row.pagodebe}</td>
                 <td>${row.pagoabono}</td>
                 <td>${row.pagototal}</td>

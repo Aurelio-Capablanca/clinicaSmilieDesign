@@ -25,7 +25,7 @@ class Productos extends Validator
 
     public function setNotas($value)
     {
-        if ($this->validateString($value, 1, 250)) {
+        if ($this->validateString($value, 1, 1250)) {
             $this->notas = $value;
             return true;
         } else {
@@ -55,7 +55,7 @@ class Productos extends Validator
 
     public function setObservaciones($value)
     {
-        if ($this->validateString($value, 1, 250)) {
+        if ($this->validateString($value, 1, 1250)) {
             $this->observaciones = $value;
             return true;
         } else {

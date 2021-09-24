@@ -9,7 +9,7 @@ Dashboard_Page::headerTemplate('Expedientes');
      <h4 style="text-align:center;"> Gestion de Expedientes </h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
-        <a href="#" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Expediente</a>
+        <!-- <a href="#" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Expediente</a> -->
         <a onclick="cargarDatos()" class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>        
             <form method="post" id="search-form">
                 <div class="input-field col s12 m8">
@@ -132,12 +132,12 @@ Dashboard_Page::headerTemplate('Expedientes');
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">how_to_reg</i>
-                            <input id="notas_medicas" type="text" name="notas_medicas" class="validate"  required/>
+                            <textarea id="notas_medicas" type="text" name="notas_medicas" cols="30" rows="10" class="validate"  required></textarea>
                             <label for="notas_medicas">Notas Médicas</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <input id="observaciones" type="text" name="observaciones" class="validate"  required/>
+                            <textarea id="observaciones" type="text" name="observaciones" cols="30" rows="10" class="validate"  required></textarea>
                             <label for="observaciones">Observaciones periodontograma</label>
                         </div>
                          <div>
@@ -164,7 +164,7 @@ Dashboard_Page::headerTemplate('Expedientes');
                             <textarea  id="notas_medicass" cols="30" rows="10" type="text" name="notas_medicass" class="validate"  required></textarea>
                             <label for="notas_medicass">Notas Médicas</label>
                         </div>
-                        <div class="col s12 m6">
+                        <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
                             <textarea id="observacioness" type="text" cols="30" rows="10" name="observacioness" class="validate"  required></textarea>
                             <label for="observacioness">Observaciones periodontograma</label>

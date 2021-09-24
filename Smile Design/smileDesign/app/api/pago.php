@@ -107,22 +107,7 @@ if (isset($_GET['action'])) {
 						} else {
 							 $result['exception'] = 'Pago incorrecto';
 						}
-					break;
-					case 'readOneCuentas':
-						if ($pagos->setId($_POST['id_pagoSD'])) {
-							 if ($result['dataset'] = $pagos->readOneCuentas()) {
-								   $result['status'] = 1;
-							 } else {
-								   if (Database::getException()) {
-										$result['exception'] = Database::getException();
-								   } else {
-										$result['exception'] = 'Pagos inexistente';
-								   }
-							 }
-						} else {
-							 $result['exception'] = 'Pago incorrecto';
-						}
-					break;
+					break;					
                     case 'search':
                         $_POST = $pagos->validateForm($_POST);
                         if ($_POST['search'] != '') {

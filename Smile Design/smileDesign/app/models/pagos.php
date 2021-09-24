@@ -90,11 +90,13 @@ class Pagos extends Validator{
 
     public function readAll()
     {
-        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
+        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechaconsulta, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
                 From Pagos  ps
                 Inner join Tipopago tg on tg.idtipopago=ps.idtipopago
                 Inner join EstadoPago eg on eg.idestadopago = ps.idestadopago
-                Inner join Tratamientos tr on tr.idtratamiento = ps.idtratamiento
+                Inner join Consultas cl on cl.idconsulta = ps.idconsulta
+				inner join CantidadConsultas cc on cc.idconsulta = cl.idconsulta
+				inner join Tratamientos tr on tr.idtratamiento = cc.idtratamiento
                 Inner join Pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
                 Inner join pacientes tp on tp.idpaciente = pa.idpaciente
                 Order By idpago ASC';
@@ -120,33 +122,29 @@ class Pagos extends Validator{
 
     public function readOnes()
     {
-        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
+        $sql = 'SELECT idpago ,nombrepaciente, apellidopaciente , fechaconsulta, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
                 From Pagos  ps
                 Inner join Tipopago tg on tg.idtipopago=ps.idtipopago
                 Inner join EstadoPago eg on eg.idestadopago = ps.idestadopago
-                Inner join Tratamientos tr on tr.idtratamiento = ps.idtratamiento
+                Inner join Consultas cl on cl.idconsulta = ps.idconsulta
+				inner join CantidadConsultas cc on cc.idconsulta = cl.idconsulta
+				inner join Tratamientos tr on tr.idtratamiento = cc.idtratamiento
                 Inner join Pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
                 Inner join pacientes tp on tp.idpaciente = pa.idpaciente
                 WHERE idpago = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
-    }
-
-
-    public function readOneCuentas()
-    {
-        $sql = 'SELECT tr, fecha, debe, abono, saldo From Buscar_cuentas (?)';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
+    }   
 
     public function searchRows($value)
     {
-        $sql = 'SELECT idpago ,nombrepaciente , apellidopaciente , fechainicio, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
+        $sql = 'SELECT idpago ,nombrepaciente , apellidopaciente , fechaconsulta, pagodebe, pagoabono, pagototal, pagosaldo, tipopago ,estadopago, codigotratamiento
                 From Pagos  ps
                 Inner join Tipopago tg on tg.idtipopago=ps.idtipopago
                 Inner join EstadoPago eg on eg.idestadopago = ps.idestadopago
-                Inner join Tratamientos tr on tr.idtratamiento = ps.idtratamiento
+                Inner join Consultas cl on cl.idconsulta = ps.idconsulta
+				inner join CantidadConsultas cc on cc.idconsulta = cl.idconsulta
+				inner join Tratamientos tr on tr.idtratamiento = cc.idtratamiento
                 Inner join Pacienteasignado pa on pa.idpacienteasignado = tr.idpacienteasignado
                 Inner join pacientes tp on tp.idpaciente = pa.idpaciente
                 WHERE nombrepaciente ILIKE ? or apellidoPaciente ILIKE ? 
@@ -231,8 +229,8 @@ class Pagos extends Validator{
                         nombrepaciente, tr.idtratamiento, codigotratamiento, pagoabono, pagototal, count(cc.idcantidadconsulta)*costoprocedimiento as pagosaldo
                 from CantidadConsultas cc
                 inner join Tratamientos tr on tr.idTratamiento=cc.idTratamiento
-                inner join pagos pg on pg.idTratamiento=tr.idTratamiento							
-                inner join Consultas cl on cl.idConsulta=cc.idConsulta
+				inner join Consultas cl on cl.idConsulta=cc.idConsulta
+                inner join pagos pg on pg.idconsulta=cl.idconsulta							                
                 inner join ConsultaProcedimiento co on co.idConsulta=cl.idConsulta
                 inner join Procedimientos pr on pr.idProcedimiento=co.idProcedimiento
                 inner join pacienteasignado ap on ap.idpacienteasignado = tr.idpacienteasignado
@@ -251,7 +249,9 @@ class Pagos extends Validator{
         from pacientes pc
         inner join pacienteasignado pp on pp.idpaciente = pc.idpaciente
         inner join tratamientos tr on tr.idpacienteasignado = pp.idpacienteasignado
-       	inner join pagos pg on pg.idtratamiento = tr.idtratamiento
+       	inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
+		inner join consultas cl on cl.idconsulta = cc.idconsulta
+		inner join pagos pg on pg.idconsulta = cl.idconsulta
         Where pg.idpago = ?';
         $params = array($this->codigo);
         return Database::getRow($sql, $params);
@@ -259,11 +259,11 @@ class Pagos extends Validator{
 
     public function readOneAbonos()
     {
-        $sql = 'SELECT nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
+        $sql = 'SELECT nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento, codigotratamientoh
         from historialpagos
-        where pagoabonoh>=1 And codigotratamientoh = ?
-        group by nombrepaciente, fecharegistro, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento , codigotratamientoh
-        having count(pagoabonoh)>=1';
+        where  pagoabonoh >0  and pagosaldoh >=0 and codigotratamientoh = ?
+        group by nombrepaciente, pagodebeh, pagoabonoh, pagototalh, pagosaldoh, tratamiento , codigotratamientoh
+        having count(pagoabonoh)>=1 and count(pagodebeh)>=1';
         $params = array($this->codigo);
         return Database::getRows($sql, $params);
     } 
