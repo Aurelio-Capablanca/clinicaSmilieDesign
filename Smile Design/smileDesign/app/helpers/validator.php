@@ -44,7 +44,7 @@ class Validator
     public function validateForm($fields)
     {
         foreach ($fields as $index => $value) {
-            $value = trim($value);
+            $value = strip_tags(trim($value));
             $fields[$index] = $value;
         }
         return $fields;
@@ -151,7 +151,17 @@ class Validator
     public function validateString($value, $minimum, $maximum)
     {
         // Se verifica el contenido y la longitud de acuerdo con la base de datos.
-        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\ \:\#\-\@]{'.$minimum.','.$maximum.'}$/', $value)) {
+        if (preg_match('/^[a-zA-Z0-9ñÑáÁéÉíÍóÓúÚ\s\,\;\.\:\/\_\#\-]{'.$minimum.','.$maximum.'}$/', $value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function validateIp($value)
+    {
+        // Se verifica el contenido y la longitud de acuerdo con la base de datos.
+        if (filter_var($value, FILTER_VALIDATE_IP)) {
             return true;
         } else {
             return false;
@@ -219,10 +229,10 @@ class Validator
     public function validatePassword($value)
     {
         // Se verifica la longitud mínima de la contraseña.
-        if (strlen($value) >= 6) {
-            return true;
+        if (preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%&]{8,75}$/',$value)) {
+            return true;           
         } else {
-            $this->passwordError = 'Clave menor a 6 caracteres';
+            $this->passwordError = 'Clave menor a 8 caracteres o No cumple con los requisitos de seguridad';
             return false;
         }
     }

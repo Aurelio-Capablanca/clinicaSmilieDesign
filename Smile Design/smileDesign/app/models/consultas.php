@@ -134,22 +134,7 @@ private $idprocedimiento = null;
 
     public function readAllAgenda()
     {
-        $sql = "SELECT idcantidadconsulta,idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, 
-                        fechaconsulta, horaconsulta ,causa, idcausaconsulta , extract(day from fechaconsulta) as fechaconsultas
-        From consultas 
-        inner join causaconsulta using(idcausaconsulta)
-        inner join cantidadconsultas using(idconsulta)
-        inner join tratamientos using(idtratamiento)
-        inner join pacienteasignado using(idpacienteasignado)
-        inner join pacientes using(idpaciente)
-        Order by fechaconsulta DESC"; 
-        $params = null;
-        return Database::getRows($sql, $params);
-    }
-
-    public function SearchAgenda($value)
-    {
-        $sql = "SELECT idcantidadconsulta,idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, 
+        $sql = "SELECT idcantidadconsulta,idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, nombredoctor||' '||apellidodoctor as nombredoctor, 
         fechaconsulta, horaconsulta ,causa, idcausaconsulta , extract(day from fechaconsulta) as fechaconsultas
         From consultas 
         inner join causaconsulta using(idcausaconsulta)
@@ -157,6 +142,23 @@ private $idprocedimiento = null;
         inner join tratamientos using(idtratamiento)
         inner join pacienteasignado using(idpacienteasignado)
         inner join pacientes using(idpaciente)
+        inner join doctores Using(iddoctor)	
+        Order by fechaconsulta DESC"; 
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+
+    public function SearchAgenda($value)
+    {
+        $sql = "SELECT idcantidadconsulta,idconsulta,nombrepaciente ||' '|| apellidopaciente as Nombrepaciente, nombredoctor||' '||apellidodoctor as nombredoctor, 
+        fechaconsulta, horaconsulta ,causa, idcausaconsulta , extract(day from fechaconsulta) as fechaconsultas
+        From consultas 
+        inner join causaconsulta using(idcausaconsulta)
+        inner join cantidadconsultas using(idconsulta)
+        inner join tratamientos using(idtratamiento)
+        inner join pacienteasignado using(idpacienteasignado)
+        inner join pacientes using(idpaciente)
+        inner join doctores Using(iddoctor)	
         Where nombrepaciente ILIKE ? or apellidopaciente ILIKE ?
         Order by fechaconsulta DESC"; 
         $params = array("%$value%","%$value%");
@@ -181,9 +183,9 @@ private $idprocedimiento = null;
 
     public function createRow()
     {
-        $sql = 'INSERT INTO consultas(notasconsulta, costoconsulta, fechaconsulta, horaconsulta, idcausaconsulta)
-                VALUES (?, ?, ?, ?, ?);';
-        $params = array($this->notasconsulta,$this->costoconsulta,$this->fechaconsulta,$this->horaconsulta,$this->causa);
+        $sql = "INSERT INTO consultas(notasconsulta, costoconsulta, fechaconsulta, horaconsulta, idcausaconsulta)
+                VALUES ('notas', ?, ?, ?, ?)";
+        $params = array($this->costoconsulta,$this->fechaconsulta,$this->horaconsulta,$this->causa);
         return Database::executeRow($sql, $params);
     }
 

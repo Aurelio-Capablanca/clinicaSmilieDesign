@@ -72,12 +72,12 @@ Dashboard_Page::headerTemplate('Procedimientos');
                     <input class="hide" type="number" id="id_procedimiento" name="id_procedimiento"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">how_to_reg</i>
+                            <i class="material-icons prefix">description</i>
                             <input id="nombre_procedimiento" type="text" name="nombre_procedimiento" class="validate"  required/>
                             <label for="nombre_procedimiento">Nombre Procedimiento</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">account_box</i>
+                            <i class="material-icons prefix">text_snippet</i>
                             <input id="descripcion" type="text" name="descripcion" class="validate"  required/>
                             <label for="descripcion">Descripción Procedimiento</label>
                         </div>                                                

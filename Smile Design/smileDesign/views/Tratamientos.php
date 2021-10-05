@@ -110,11 +110,11 @@ Dashboard_Page::headerTemplate('Tratamientos');
                     <input class="hide" type="number" id="id_t" name="id_t"/>
                     <input class="hide" type="number" id="id_consulta" name="id_consulta"/>
                     <div class="row">                        
-                    <div class="input-field col s12">
-                            <i class="material-icons prefix">place</i>
+                    <!-- <div class="input-field col s12">
+                            <i class="material-icons prefix">post_add</i>
                             <input type="text" id="notas_consulta" name="notas_consulta" maxlength="1000" class="validate" required/>
                             <label for="notas_consulta">Notas Consulta</label>
-                        </div>
+                        </div> -->
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
                             <input id="nombre_paciente" type="text" name="nombre_paciente" class="validate"  required/>
@@ -126,12 +126,12 @@ Dashboard_Page::headerTemplate('Tratamientos');
                             <label for="precio_consulta">Precio</label>
                         </div>                        
                         <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">cake</i>
+                            <i class="material-icons prefix">insert_invitation</i>
                             <input id="fecha_consulta" type="date" name="fecha_consulta" class="validate"  required/>
                             <label for="fecha_consulta">Fecha Consulta</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">cake</i>
+                            <i class="material-icons prefix">alarm</i>
                             <input id="hora_consulta" type="time" name="hora_consulta" class="validate"  required/>
                             <label for="hora_consulta">Hora Consulta</label>
                         </div>
@@ -161,7 +161,7 @@ Dashboard_Page::headerTemplate('Tratamientos');
             <input class="hide" type="number" id="txtId" name="txtId"/>
                     <div class="row">                        
                     <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">cake</i>
+                            <i class="material-icons prefix">calendar_today</i>
                             <input id="fecha_nacimiento" type="date" name="fecha_nacimiento" class="validate"  required/>
                             <label for="fecha_nacimiento">Fecha Nacimiento</label>
                         </div>    

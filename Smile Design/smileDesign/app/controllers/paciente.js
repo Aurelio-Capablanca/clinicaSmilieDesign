@@ -15,7 +15,18 @@ const ENDPOINT_P8 = '../app/api/paciente.php?action=readAllP8';
 // Método manejador de eventos que se ejecuta cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', function () {
     // Se llama a la función que obtiene los registros para llenar la tabla. Se encuentra en el archivo components.js 
-    readRows(API_PACIENTES);    
+    readRows(API_PACIENTES);
+    let today = new Date();
+    // Se declara e inicializa una variable para guardar el día en formato de 2 dígitos.
+    let day = ('0' + today.getDate()).slice(-2);
+    // Se declara e inicializa una variable para guardar el mes en formato de 2 dígitos.
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    // Se declara e inicializa una variable para guardar el año con la mayoría de edad.
+    let year = today.getFullYear() - 18;
+    // Se declara e inicializa una variable para establecer el formato de la fecha.
+    let date = `${year}-${month}-${day}`;
+    // Se asigna la fecha como valor máximo en el campo del formulario.
+    document.getElementById('fecha_nacimiento').setAttribute('max', date);    
 });
 
 
@@ -35,13 +46,17 @@ function fillTable(dataset) {
                 <td>${row.correopaciente}</td> 
                 <td>${row.estadopaciente}</td>                
                 <td>
-                    <a href="#" onclick="openUpdateDialog(${row.idpaciente})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
+                  <ul>
+                    <li><a href="#" onclick="openUpdateDialog(${row.idpaciente})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>                    
                     <a href="#" onclick="openAnswerDialog(${row.idpaciente})" class="btn waves-effect purple tooltipped" data-tooltip="Ingresar Preguntas"><i class="material-icons">quiz</i></a>
                     <a href="#" onclick="openDeleteDialog(${row.idpaciente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
                     <a href="#" onclick="openInsertDoctor(${row.idpaciente})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Doctor"><i class="material-icons">assignment</i></a>
-                    <a href="#" onclick="openAssignements(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a>
-                    <a href="#" onclick="graficaPastelTipo(${row.idpaciente})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a>
-                    <a href="../app/reports/expedientes.php?id=${row.idpaciente}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Expedientes"><i class="material-icons">assignment</i></a>
+                    <a href="#" onclick="openAssignements(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Doctores"><i class="material-icons">search</i></a></li>
+                    <br>
+                    <li><a href="#" onclick="graficaPastelTipo(${row.idpaciente})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a></li>
+                    <a href="../app/reports/expedientes.php?id=${row.idpaciente}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Expedientes"><i class="material-icons">assignment</i></a></li>
+                    <a href="#" onclick="openQuestions(${row.idpaciente})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Preguntas"><i class="material-icons">search</i></a></li>                    
+                  <ul>  
                 </td>
             </tr>
         `;
@@ -79,6 +94,44 @@ function fillTables(dataset) {
     M.Tooltip.init(document.querySelectorAll('.tooltipped'));
 }
 
+function fillTables2(dataset) {
+    let content = '';
+    // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+   dataset.map(function (row) {   
+        // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+        content += `                           
+            <tr>                                    
+                <td>${row.pregunta1}</td> 
+                <td>${row.respuesta1}</td>
+                <td>${row.pregunta2}</td>
+                <td>${row.respuesta2}</td>
+                <td>${row.pregunta3}</td>
+                <td>${row.respuesta3}</td>
+                <td>${row.pregunta4}</td>
+                <td>${row.respuesta4}</td>
+                <td>${row.pregunta5}</td>
+                <td>${row.respuesta5}</td>
+                <td>${row.pregunta6}</td>
+                <td>${row.respuesta6}</td>
+                <td>${row.pregunta7}</td>
+                <td>${row.respuesta7}</td>
+                <td>${row.pregunta8}</td>
+                <td>${row.respuesta8}</td>
+                <td>${row.pacientemedicamento}</td>
+                <td>
+                <a href="#" onclick="openUpdateQuestion(${row.idrespuesta})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
+                </td>
+            </tr>
+        `;
+      });
+    // Se agregan las filas al cuerpo de la tabla mediante su id para mostrar los registros.
+    document.getElementById('preguntas-rows').innerHTML = content;
+    // Se inicializa el componente Material Box asignado a las imagenes para que funcione el efecto Lightbox.
+    M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+    // Se inicializa el componente Tooltip asignado a los enlaces para que funcionen las sugerencias textuales.
+    M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+}
+
 
 document.getElementById('search-form').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
@@ -94,7 +147,7 @@ function openCreateDialog() {
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
-    document.getElementById('modal-title').textContent = 'Ingresar Paciente';
+    document.getElementById('modals-title').textContent = 'Ingresar Paciente';
     // Se llama a la función para llenar el select del estado cliente         
     fillSelect(ENDPOINT_ESTADO, 'estado_paciente', null);
 } 
@@ -150,9 +203,7 @@ function openAnswerDialog(id) {
 document.getElementById('save-preguntas-form').addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se define una variable para establecer la acción a realizar en la API.
-    let action = 'createRowAnswers';
-   
+    // Se define una variable para establecer la acción a realizar en la API.      
     if(s1.checked==true && n1.checked==false){        
         document.getElementById('respuesta1').value="Si";                   
     }
@@ -201,11 +252,20 @@ document.getElementById('save-preguntas-form').addEventListener('submit', functi
     if(s8.checked==false && n8.checked==true){
         document.getElementById('respuesta8').value="No";
     }
-    // if(document.getElementById('notas').value=""){
-    //     document.getElementById('notas').value="-"
-    // }
     
-    saveRow(API_PACIENTES, action, 'save-preguntas-form', 'save-preguntas-modal');
+    let action = '';
+
+    if(document.getElementById('id_pacientesP').value){
+
+        action = 'createRowAnswers'
+        saveRow(API_PACIENTES, action, 'save-preguntas-form', 'save-preguntas-modal');
+    }
+    else if(document.getElementById('id_pacientesU').value){
+        action = 'updateRowAnswers'
+        saveRow(API_PACIENTES, action, 'save-preguntas-form', 'save-preguntas-modal');
+    }
+    
+    
 });
 
 
@@ -443,7 +503,7 @@ function openAssignements(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
                 if (response.status) {                    
                     document.getElementById('id_pacienteA').value = response.dataset.idpaciente;  
-                    document.getElementById('nombre_pacienteA').value = response.dataset.nombrepaciente;                                                                               
+                    document.getElementById('nombre_pacienteA').value = response.dataset.duipaciente;                                                                               
                     searchRows2(API_PACIENTES, 'show-a-form'); 
                     M.updateTextFields();                                                                      
 
@@ -608,6 +668,117 @@ function graficaPastelTipo(id) {
 
                     // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.
                     //document.getElementById('chart1').reset();
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+
+function openQuestions(id) {
+    // Se restauran los elementos del formulario.
+    document.getElementById('show-p-form').reset();
+    // Se abre la caja de dialogo (modal) que contiene el formulario.
+    let instance = M.Modal.getInstance(document.getElementById('show-preguntas-modal'));
+    instance.open();
+    // Se asigna el título para la caja de dialogo (modal).
+    document.getElementById('modal-preguntas-title').textContent = 'Preguntas';
+    // Se deshabilitan los campos de alias y contraseña.    
+    // Se define un objeto con los datos del registro seleccionado.
+    const data = new FormData();
+    data.append('id_pacientepr', id);
+
+    fetch(API_PACIENTES + 'readOneQuestion', {
+        method: 'post',
+        body: data
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {               
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
+                if (response.status) {                    
+                    document.getElementById('id_pacientepr').value = response.dataset.idpaciente;  
+                    document.getElementById('nombre_pacientepr').value = response.dataset.duipaciente;                                                                               
+                    searchRowsQuestions(API_PACIENTES, 'show-p-form'); 
+                    M.updateTextFields();                                                                      
+
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+
+function openUpdateQuestion(id) {
+    // Se restauran los elementos del formulario.
+    document.getElementById('save-preguntas-form').reset();    
+    // Se abre la caja de dialogo (modal) que contiene el formulario. 
+    let instance = M.Modal.getInstance(document.getElementById('save-preguntas-modal'));
+    instance.open();
+    // Se asigna el título para la caja de dialogo (modal).
+    document.getElementById('modal-title-pr').textContent = 'Actualizar Datos';        
+    // Se define un objeto con los datos del registro seleccionado.     
+    const data = new FormData();
+    data.append('id_pacientesU', id);
+    document.getElementById('s1').disabled = true;
+    document.getElementById('s2').disabled=true;
+    document.getElementById('s3').disabled=true;
+    document.getElementById('s4').disabled=true;
+    document.getElementById('s5').disabled=true;
+    document.getElementById('s6').disabled=true;
+    document.getElementById('s7').disabled=true;
+    document.getElementById('s8').disabled=true;
+    document.getElementById('n1').disabled=true;
+    document.getElementById('n2').disabled=true;
+    document.getElementById('n3').disabled=true;
+    document.getElementById('n4').disabled=true;
+    document.getElementById('n5').disabled=true;
+    document.getElementById('n6').disabled=true;
+    document.getElementById('n7').disabled=true;
+    document.getElementById('n8').disabled=true;
+    document.getElementById('respuesta1').disabled=true;
+    document.getElementById('respuesta2').disabled=true;
+    document.getElementById('respuesta3').disabled=true;
+    document.getElementById('respuesta4').disabled=true;
+    document.getElementById('respuesta5').disabled=true;
+    document.getElementById('respuesta6').disabled=true;
+    document.getElementById('respuesta7').disabled=true;
+    document.getElementById('respuesta8').disabled=true; 
+    document.getElementById('pregunta1').disabled=true;
+    document.getElementById('pregunta2').disabled=true;
+    document.getElementById('pregunta3').disabled=true;
+    document.getElementById('pregunta4').disabled=true;
+    document.getElementById('pregunta5').disabled=true;
+    document.getElementById('pregunta6').disabled=true;
+    document.getElementById('pregunta7').disabled=true;
+    document.getElementById('pregunta8').disabled=true;    
+
+    fetch(API_PACIENTES + 'readOneQuestion1', {
+        method: 'post',
+        body: data
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
+                if (response.status) {
+                    // Se inicializan los campos del formulario con los datos del registro seleccionado.
+                    document.getElementById('id_pacientesU').value = response.dataset.idrespuesta;  
+                    document.getElementById('notas').value = response.dataset.pacientemedicamento;   
+                    // Se actualizan los campos para que las etiquetas (labels) no queden sobre los datos.                    
+                    M.updateTextFields();                    
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

@@ -9,6 +9,15 @@ Dashboard_Page::headerTemplate('Login');
     <div class="row">
         <!-- Formulario para iniciar sesión -->
         <form method="post" id="session-form">
+        <input id="ipdata" type="text" name="ipdata" class="hide" />        
+        <input id="region" type="text" name="region" class="hide" />
+        <input id="zona" type="text" name="zona" class="hide" />
+        <input id="distribuidor" type="text" name="distribuidor" class="hide" />
+        <input id="codigovalidar" type="text" name="codigovalidar" class="hide" />
+        <input id="contador" type="text" name="contador" class="hide"/>
+        <input id="pais" type="text" name="pais" class="hide" />
+        <input id="dias" type="text" name="dias" class="hide" />
+
             <div class="input-field col s12 m6 offset-m3">
                 <i class="material-icons prefix">person_pin</i>
                 <input id="usuario" type="text" name="usuario" class="validate" required/>
@@ -21,6 +30,8 @@ Dashboard_Page::headerTemplate('Login');
             </div>
             <div class="col s12 center-align">
                 <button type="submit" class="btn waves-effect blue tooltipped" data-tooltip="Ingresar"><i class="material-icons">send</i></button>
+                <br>
+                <a href="restaurarcontraseña.php" >Restaurar Contraseña</a>
             </div>
         </form>  
     </div>

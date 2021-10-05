@@ -67,8 +67,8 @@ if (isset($_GET['action'])) {
             case 'changePassword':
                 if ($usuario->setId($_SESSION['idusuario'])) {
                     $_POST = $usuario->validateForm($_POST);
-                    if ($usuario->checkPassword($_POST['clave_actual'])) {
-                        if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                    if ($_POST['clave_nueva_1'] == $_POST['clave_nueva_2']) {
+                        if ($usuario->validatePassword($_POST['clave_nueva_1'])) {
                             if ($usuario->setClave($_POST['clave_nueva_1'])) {
                                 if ($usuario->changePassword()) {
                                     $result['status'] = 1;
@@ -78,12 +78,13 @@ if (isset($_GET['action'])) {
                                 }
                             } else {
                                 $result['exception'] = $usuario->getPasswordError();
+                                $result['exception'] = 'Clave no aceptada';
                             }
                         } else {
-                            $result['exception'] = 'Claves nuevas diferentes';
+                            $result['exception'] = 'La contraseña no puede ser igual al correo y a la contraseña anterior';
                         }
                     } else {
-                        $result['exception'] = 'Clave actual incorrecta';
+                        $result['exception'] = 'Claves nuevas diferentes';
                     }
                 } else {
                     $result['exception'] = 'Usuario incorrecto';
@@ -267,54 +268,61 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'register':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['nombres'])) {
-                    if ($usuario->setApellidos($_POST['apellidos'])) {
-                        if ($usuario->setDireccion($_POST['txtDireccion'])) {
-                            if ($usuario->setTelefono($_POST['txtTel'])) {
-                                if ($usuario->setCorreo($_POST['correo'])) {
-                                    if ($usuario->setUsuario($_POST['alias'])) {
-                                        if ($_POST['clave1'] == $_POST['clave2']) {
-                                            if ($usuario->setClave($_POST['clave1'])) {
-                                                if ($usuario->createRow()) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Usuario registrado correctamente';
+                if (!$usuario->readAll()) {
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($usuario->setNombres($_POST['nombres'])) {
+                        if ($usuario->setApellidos($_POST['apellidos'])) {
+                            if ($usuario->setDireccion($_POST['txtDireccion'])) {
+                                if ($usuario->setTelefono($_POST['txtTel'])) {
+                                    if ($usuario->setCorreo($_POST['correo'])) {
+                                        if ($usuario->setUsuario($_POST['alias'])) {
+                                            if ($_POST['clave1'] == $_POST['clave2']) {
+                                                if ($usuario->setClave($_POST['clave1'])) {
+                                                    if ($usuario->createRow()) {
+                                                        $result['status'] = 1;
+                                                        $result['message'] = 'Usuario registrado correctamente';
+                                                    } else {
+                                                        $result['exception'] = Database::getException();
+                                                    }
                                                 } else {
-                                                    $result['exception'] = Database::getException();
+                                                    $result['exception'] = $usuario->getPasswordError();
                                                 }
                                             } else {
-                                                $result['exception'] = $usuario->getPasswordError();
+                                                $result['exception'] = 'Claves diferentes';
                                             }
                                         } else {
-                                            $result['exception'] = 'Claves diferentes';
+                                            $result['exception'] = 'Usuario incorrecto';
                                         }
                                     } else {
-                                        $result['exception'] = 'Usuario incorrecto';
+                                        $result['exception'] = 'Telefono incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Telefono incorrecto';
+                                    $result['exception'] = 'Correo incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Correo incorrecto';
+                                $result['exception'] = 'Direccion incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Direccion incorrecta';
+                            $result['exception'] = 'Apellidos incorrectos';
                         }
                     } else {
-                        $result['exception'] = 'Apellidos incorrectos';
+                        $result['exception'] = 'Nombres incorrectos';
                     }
                 } else {
-                    $result['exception'] = 'Nombres incorrectos';
+                    $result['exception'] = 'Ya existen usuarios registrados';
+                    $result['users'] = 1;
                 }
                 break;
             case 'logIn':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->checkUser($_POST['usuario'])) {
                     if ($usuario->checkPassword($_POST['clave'])) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Autenticación correcta';
                         $_SESSION['idusuario'] = $usuario->getId();
                         $_SESSION['aliasusuario'] = $usuario->getUsuario();
+                        $_SESSION['idtipousuario'] = $usuario->getTipo();
+                        $_SESSION['correousuario'] = $usuario->getCorreos();
+                        $result['status'] = 1;
+                        $result['message'] = 'Autenticación correcta';
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();

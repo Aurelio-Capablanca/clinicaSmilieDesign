@@ -185,7 +185,7 @@ class Usuarios extends Validator
                 INNER JOIN estadousuario USING(idestadousuario)
                 INNER JOIN tipousuario USING(idtipousuario)
                 WHERE apellidousuario ILIKE ? OR nombreusuario ILIKE ?
-                order by estadousuario desc';
+                order by nombreusuario ASC';
         $params = array("%$value%", "%$value%");
         return Database::getRows($sql, $params);
     }
@@ -208,7 +208,7 @@ class Usuarios extends Validator
         from usuarios u
         INNER JOIN estadousuario USING(idestadousuario)
         INNER JOIN tipousuario USING(idtipousuario)
-        order by estadousuario desc';
+        order by nombreusuario ASC';
         $params = null;
         return Database::getRows($sql, $params);
     }
@@ -228,11 +228,11 @@ class Usuarios extends Validator
     public function updateRow()
     {
         // Se encripta la clave por medio del algoritmo bcrypt que genera un string de 60 caracteres.
-        $hash = password_hash($this->clave, PASSWORD_DEFAULT);
+        //$hash = password_hash($this->clave, PASSWORD_DEFAULT);
         $sql = 'UPDATE usuarios
-        SET nombreusuario=?, apellidousuario=?, direccionusuario=?, telefonousuario=?, correousuario=?, aliasusuario=?, claveusuario=?, idestadousuario=?, idtipousuario=?
+        SET nombreusuario=?, apellidousuario=?, direccionusuario=?, telefonousuario=?, correousuario=?, aliasusuario=?, idestadousuario=?, idtipousuario=?
         WHERE idusuario=?;';
-        $params = array($this->nombres, $this->apellidos,$this->direccion,$this->telefono, $this->correo, $this->usuario, $hash, $this->estado,$this->tipo, $this->id);
+        $params = array($this->nombres, $this->apellidos,$this->direccion,$this->telefono, $this->correo, $this->usuario, $this->estado, $this->tipo, $this->id);
         return Database::executeRow($sql, $params);
     }
 

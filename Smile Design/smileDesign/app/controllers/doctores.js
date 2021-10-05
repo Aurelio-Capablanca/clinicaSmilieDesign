@@ -16,7 +16,7 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td><img src="../../resources/img/fotodoctor/${row.fotodoctor}" class="materialboxed" height="100"></td>
+                <td><img src="../../resources/img/fotodoctores/${row.fotodoctor}" class="materialboxed" height="100"></td>
                 <td>${row.nombredoctor}</td>
                 <td>${row.apellidodoctor}</td>
                 <td>${row.direcciondoctor}</td>
@@ -24,12 +24,16 @@ function fillTable(dataset) {
                 <td>${row.correodoctor}</td>
                 <td>${row.estadodoctor}</td>
                 <td>
-                <a href="#" onclick="openUpdateDialog(${row.iddoctor})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
-                <a href="#" onclick="openDeleteDialog(${row.iddoctor})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                <a href="#" onclick="graficaPastelCausa(${row.iddoctor})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a>
-                <a href="../app/reports/doctorescantidad.php?id=${row.iddoctor}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Ganancias"><i class="material-icons">assignment</i></a>
-                <a href="../app/reports/pacienteasignado.php?id=${row.iddoctor}" target="_blank" class="btn waves-effect grey tooltipped" data-tooltip="Reporte de Asignaciones"><i class="material-icons">assignment</i></a>
-                <a href="../app/reports/especialidad.php?id=${row.iddoctor}" target="_blank" class="btn waves-effect purple tooltipped" data-tooltip="Reporte de Especialidades"><i class="material-icons">assignment</i></a>
+                <ul>                    
+                    <li><a href="#" onclick="openUpdateDialog(${row.iddoctor})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.iddoctor})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <a href="#" onclick="graficaPastelCausa(${row.iddoctor})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a></li>
+                    <br>
+                    <li><a href="../app/reports/doctorescantidad.php?id=${row.iddoctor}" target="_blank" class="btn waves-effect amber tooltipped" data-tooltip="Reporte de Ganancias"><i class="material-icons">assignment</i></a>                    
+                    <a href="../app/reports/pacienteasignado.php?id=${row.iddoctor}" target="_blank" class="btn waves-effect grey tooltipped" data-tooltip="Reporte de Asignaciones"><i class="material-icons">assignment</i></a>
+                    <a href="../app/reports/especialidad.php?id=${row.iddoctor}" target="_blank" class="btn waves-effect purple tooltipped" data-tooltip="Reporte de Especialidades"><i class="material-icons">assignment</i></a></li>
+                    <br>
+                </ul>
                 </td>
             </tr>
         `;

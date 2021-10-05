@@ -23,7 +23,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al cerrar la sesión';
                 }
                 break;
-            case 'readProfile'://se usa para mostrar los datos a editar del usuario de la sesion
+            case 'readProfile': //se usa para mostrar los datos a editar del usuario de la sesion
                 if ($result['dataset'] = $usuario->readProfile()) {
                     $result['status'] = 1;
                 } else {
@@ -85,28 +85,62 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Usuario incorrecto';
                 }
                 break;
-            case 'readAll':
-                if ($result['dataset'] = $usuario->readAll()) {
-                    $result['status'] = 1;
-                } else {
-                    if (Database::getException()) {
-                        $result['exception'] = Database::getException();
+            case 'HistorialSesiones':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setIp($_POST['ipdata'])) {
+                    if ($usuario->setRegion($_POST['region'])) {
+                        if ($usuario->setZona($_POST['zona'])) {
+                            if ($usuario->setUser($_POST['usuario'])) {
+                                if ($usuario->setDistribuidor($_POST['distribuidor'])) {
+                                    if ($usuario->setPais($_POST['pais'])) {
+                                        if ($usuario->HistorialSesiones()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Pais incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Distribuidor incorrecto';
+                                }
+                            } else {
+                                $result['exception'] = 'Usuario incorrecto';
+                            }
+                        } else {
+                            $result['exception'] = 'Zona incorrecto';
+                        }
                     } else {
-                        $result['exception'] = 'No hay usuarios registrados';
+                        $result['exception'] = 'Region incorrecta';
                     }
+                } else {
+                    $result['exception'] = 'IP incorrecto';
                 }
                 break;
-            case 'search':
+            case 'GuardarCodigoValidacion':
                 $_POST = $usuario->validateForm($_POST);
-                if ($_POST['search'] != '') {
-                    if ($result['dataset'] = $usuario->searchRows($_POST['search'])) {
-                        $result['status'] = 1;
-                        $rows = count($result['dataset']);
-                        if ($rows > 1) {
-                            $result['message'] = 'Se encontraron ' . $rows . ' coincidencias';
+                if ($usuario->setCodigo($_POST['codigovalidar'])) {
+                    if ($usuario->setId($_SESSION['idusuario'])) {
+                        if ($usuario->createCodigoSesiones()) {
+                            $result['status'] = 1;
                         } else {
-                            $result['message'] = 'Solo existe una coincidencia';
+                            $result['exception'] = Database::getException();
                         }
+                    } else {
+                        $result['exception'] = 'Ingrese un valor para validar identidad';
+                    }
+                } else {
+                    $result['exception'] = 'Ingrese un valor para enviar codigo';
+                }
+                break;
+            case 'searchCodigoValidar':
+                $_POST = $usuario->validateForm($_POST);
+                if ($_POST['codigoos'] != '') {
+                    if ($result['dataset'] = $usuario->validateCodigo($_POST['codigoos'])) {
+                        $result['status'] = 1;
+                        //$rows = count($result['dataset']);
+                        $_SESSION['codigo'] = $usuario->getCodigo();
+                        $result['message'] = 'Codigo Correcto';
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
@@ -118,155 +152,6 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            case 'create':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setNombres($_POST['nombres_usuario'])) {
-                    if ($usuario->setApellidos($_POST['apellidos_usuario'])) {
-                        if ($usuario->setCorreo($_POST['correo_usuario'])) {
-                            if ($usuario->setUsuario($_POST['alias_usuario'])) {
-                                if ($_POST['clave_usuario'] == $_POST['confirmar_clave']) {
-                                    if ($usuario->setClave($_POST['clave_usuario'])) {
-                                        if (isset($_POST['cmbTipo'])) {
-                                            if ($usuario->setTipo($_POST['cmbTipo'])) {
-                                                if (isset($_POST['cmbEstado'])) {
-                                                    if ($usuario->setEstado($_POST['cmbEstado'])) {
-                                                        if ($usuario->addUser()) {
-                                                            $result['status'] = 1;
-                                                            $result['message'] = 'Usuario creado correctamente';
-                                                        } else {
-                                                            $result['exception'] = Database::getException();
-                                                        }
-                                                    } else {
-                                                        $result['exception'] = 'Categoria incorrecta';
-                                                    }
-                                                } else {
-                                                    $result['exception'] = 'Seleccione una categoria';
-                                                }
-                                            } else {
-                                                $result['exception'] = 'Categoria incorrecta';
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Seleccione una categoria';
-                                        }
-                                    } else {
-                                        $result['exception'] = $usuario->getPasswordError();
-                                    }
-                                } else {
-                                    $result['exception'] = 'Claves diferentes';
-                                }
-                            } else {
-                                $result['exception'] = 'Alias incorrecto';
-                            }
-                        } else {
-                            $result['exception'] = 'Correo incorrecto';
-                        }
-                    } else {
-                        $result['exception'] = 'Apellidos incorrectos';
-                    }
-                } else {
-                    $result['exception'] = 'Nombres incorrectos';
-                }
-                break;
-            case 'readOne':
-                if ($usuario->setId($_POST['idusuario'])) {
-                    if ($result['dataset'] = $usuario->readOne()) {
-                        $result['status'] = 1;
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Usuario inexistente';
-                        }
-                    }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
-                break;
-            case 'update':
-                $_POST = $usuario->validateForm($_POST);
-                if ($usuario->setId($_POST['idusuario'])) {
-                    if ($usuario->readOne()) {
-                        if ($usuario->setNombres($_POST['nombres_usuario'])) {
-                            if ($usuario->setApellidos($_POST['apellidos_usuario'])) {
-                                if ($usuario->setCorreo($_POST['correo_usuario'])) {
-                                    if ($usuario->setUsuario($_POST['alias_usuario'])) {
-                                        if ($usuario->setTipo($_POST['cmbTipo'])) {
-                                            if ($usuario->setEstado($_POST['cmbEstado'])) {
-                                                if ($usuario->updateRow()) {
-                                                    $result['status'] = 1;
-                                                    $result['message'] = 'Usuario modificado correctamente';
-                                                } else {
-                                                    $result['exception'] = Database::getException();
-                                                }
-                                            } else {
-                                                $result['exception'] = 'Categoria incorrecta';
-                                            }
-                                        } else {
-                                            $result['exception'] = 'Categoria incorrecta';
-                                        }
-                                    } else {
-                                        $result['exception'] = 'Alias incorrecto';
-                                    }
-                                } else {
-                                    $result['exception'] = 'Correo incorrecto';
-                                }
-                            } else {
-                                $result['exception'] = 'Apellidos incorrectos';
-                            }
-                        } else {
-                            $result['exception'] = 'Nombres incorrectos';
-                        }
-                    } else {
-                        $result['exception'] = 'Usuario inexistente';
-                    }
-                } else {
-                    $result['exception'] = 'Usuario incorrecto';
-                }
-                break;
-            case 'delete':
-                if ($_POST['idusuario'] != $_SESSION['idusuario']) {
-                    if ($usuario->setId($_POST['idusuario'])) {
-                        if ($usuario->readOne()) {
-                            if ($usuario->deleteRow()) {
-                                $result['status'] = 1;
-                                $result['message'] = 'Usuario eliminado correctamente';
-                            } else {
-                                $result['exception'] = Database::getException();
-                            }
-                        } else {
-                            $result['exception'] = 'Usuario inexistente';
-                        }
-                    } else {
-                        $result['exception'] = 'Usuario incorrecto';
-                    }
-                } else {
-                    $result['exception'] = 'No se puede eliminar a sí mismo';
-                }
-                break;
-                case 'logIn':
-                    $_POST = $usuario->validateForm($_POST);
-                    if ($usuario->checkUser($_POST['usuario'])) {
-                        if ($usuario->checkPassword($_POST['clave'])) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
-                            $_SESSION['idusuario'] = $usuario->getId();
-                            $_SESSION['aliasusuario'] = $usuario->getUsuario();
-    
-                        } else {
-                            if (Database::getException()) {
-                                $result['exception'] = Database::getException();
-                            } else {
-                                $result['exception'] = 'Clave incorrecta';
-                            }
-                        }
-                    } else {
-                        if (Database::getException()) {
-                            $result['exception'] = Database::getException();
-                        } else {
-                            $result['exception'] = 'Usuario incorrecto';
-                        }
-                    }
-                    break;
             default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
@@ -286,41 +171,73 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
+            case 'GuardarCodigoValidacion':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setCodigo($_POST['codigovalidar'])) {
+                    if ($usuario->setId($_SESSION['idusuario'])) {
+                        if ($usuario->createCodigoSesiones()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = 'Ingrese un valor para validar identidad';
+                    }
+                } else {
+                    $result['exception'] = 'Ingrese un valor para enviar codigo';
+                }
+                break;
+            case 'readOneMails':
+                $_POST = $usuario->validateForm($_POST);
+                if ($_POST['correo_enviar'] != '') {
+                    if ($result['dataset'] = $usuario->searchCorreo($_POST['correo_enviar'])) {
+                        $result['status'] = 1;
+                        $rows = count($result['dataset']);
+                        $result['message'] = 'Correo Encontrado en el registro';
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No hay coincidencias';
+                        }
+                    }
+                } else {
+                    $result['exception'] = 'Ingrese un valor para buscar';
+                }
+                break;
             case 'register':
                 $_POST = $usuario->validateForm($_POST);
                 if ($usuario->setNombres($_POST['nombres'])) {
                     if ($usuario->setApellidos($_POST['apellidos'])) {
                         if ($usuario->setDireccion($_POST['txtDireccion'])) {
                             if ($usuario->setTelefono($_POST['txtTel'])) {
-                        if ($usuario->setCorreo($_POST['correo'])) {
-                            if ($usuario->setUsuario($_POST['alias'])) {
-                                if ($_POST['clave1'] == $_POST['clave2']) {
-                                    if ($usuario->setClave($_POST['clave1'])) {
-                                        if ($usuario->createRow()) {
-                                            $result['status'] = 1;
-                                            $result['message'] = 'Usuario registrado correctamente';
+                                if ($usuario->setCorreo($_POST['correo'])) {
+                                    if ($usuario->setUsuario($_POST['alias'])) {
+                                        if ($_POST['clave1'] == $_POST['clave2']) {
+                                            if ($usuario->setClave($_POST['clave1'])) {
+                                                if ($usuario->createRow()) {
+                                                    $result['status'] = 1;
+                                                    $result['message'] = 'Usuario registrado correctamente';
+                                                } else {
+                                                    $result['exception'] = Database::getException();
+                                                }
+                                            } else {
+                                                $result['exception'] = $usuario->getPasswordError();
+                                            }
                                         } else {
-                                            $result['exception'] = Database::getException();
+                                            $result['exception'] = 'Claves diferentes';
                                         }
                                     } else {
-                                        $result['exception'] = $usuario->getPasswordError();
+                                        $result['exception'] = 'Usuario incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Claves diferentes';
+                                    $result['exception'] = 'Telefono incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Usuario incorrecto';
+                                $result['exception'] = 'Correo incorrecto';
                             }
-                        }else{
-                            $result['exception'] = 'Telefono incorrecto';
-
-                        }
                         } else {
-                            $result['exception'] = 'Correo incorrecto';
-                        }
-                        }else{
                             $result['exception'] = 'Direccion incorrecta';
-
                         }
                     } else {
                         $result['exception'] = 'Apellidos incorrectos';
@@ -331,28 +248,164 @@ if (isset($_GET['action'])) {
                 break;
             case 'logIn':
                 $_POST = $usuario->validateForm($_POST);
-                if ($usuario->checkUser($_POST['usuario'])) {
-                    if ($usuario->checkPassword($_POST['clave'])) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Autenticación correcta';
-                        $_SESSION['idusuario'] = $usuario->getId();
-                        $_SESSION['aliasusuario'] = $usuario->getUsuario();
-
+                if ($usuario->checkTipo($_POST['usuario'])) {
+                    if ($usuario->checkUser($_POST['usuario'])) {
+                        if ($usuario->checkPassword($_POST['clave'])) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Autenticación correcta';
+                            $_SESSION['idusuario'] = $usuario->getId();
+                            $_SESSION['aliasusuario'] = $usuario->getUsuario();
+                            $_SESSION['idtipousuario'] = $usuario->getTipo();
+                            $_SESSION['correousuario'] = $usuario->getCorreo();
+                            if ($result['dataset'] = $usuario->createCodigo($_POST['usuario'])) {
+                                $result['status'] = 1;
+                            } else {
+                                if (Database::getException()) {
+                                    $result['exception'] = Database::getException();
+                                } else {
+                                    $result['exception'] = 'No hay coincidencias';
+                                }
+                            }
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'Clave incorrecta';
+                            }
+                        }
                     } else {
                         if (Database::getException()) {
                             $result['exception'] = Database::getException();
                         } else {
-                            $result['exception'] = 'Clave incorrecta';
+                            $result['exception'] = 'Usuario incorrecto';
                         }
                     }
                 } else {
                     if (Database::getException()) {
                         $result['exception'] = Database::getException();
                     } else {
-                        $result['exception'] = 'Usuario incorrecto';
+                        $result['exception'] = 'Usuario Bloqueado';
                     }
                 }
+                break;            
+            case 'HistorialSesiones':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setIp($_POST['ipdata'])) {
+                    if ($usuario->setRegion($_POST['region'])) {
+                        if ($usuario->setZona($_POST['zona'])) {
+                            if ($usuario->setUser($_POST['usuario'])) {
+                                if ($usuario->setDistribuidor($_POST['distribuidor'])) {
+                                    if ($usuario->setPais($_POST['pais'])) {
+                                        if ($usuario->HistorialSesiones()) {
+                                            $result['status'] = 1;
+                                        } else {
+                                            $result['exception'] = Database::getException();
+                                        }
+                                    } else {
+                                        $result['exception'] = 'Pais incorrecto';
+                                    }
+                                } else {
+                                    $result['exception'] = 'Distribuidor incorrecto';
+                                }
+                            } else {
+                                $result['exception'] = 'Usuario incorrecto';
+                            }
+                        } else {
+                            $result['exception'] = 'Zona incorrecto';
+                        }
+                    } else {
+                        $result['exception'] = 'Region incorrecta';
+                    }
+                } else {
+                    $result['exception'] = 'IP incorrecto';
+                }
                 break;
+            case 'pasarcodigo':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setCodigo($_POST['codigosenviar'])) {
+                    if ($usuario->setCorreos($_POST['correo'])) {
+                        if ($usuario->InsertCodigo()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = 'Correo incorrecto';
+                    }
+                } else {
+                    $result['exception'] = 'Codigo incorrecto';
+                }
+                break;
+            case 'searchCodigo':
+                $_POST = $usuario->validateForm($_POST);
+                if ($_POST['codigos'] != '') {
+                    if ($result['dataset'] = $usuario->searchCodigo($_POST['codigos'])) {
+                        $result['status'] = 1;
+                        $rows = count($result['dataset']);
+                        $result['message'] = 'Codigo Correcto';
+                    } else {
+                        if (Database::getException()) {
+                            $result['exception'] = Database::getException();
+                        } else {
+                            $result['exception'] = 'No hay coincidencias';
+                        }
+                    }
+                } else {
+                    $result['exception'] = 'Ingrese un valor para buscar';
+                }
+                break;
+            case 'restorePassword':
+                $_POST = $usuario->validateForm($_POST);
+                if ($_POST['clave'] == $_POST['confirmacion']) {
+                    if ($usuario->setClave($_POST['clave'])) {
+                        if ($usuario->restorePassword()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Clare restaurada correctamente';
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = $usuario->getPasswordError();
+                    }
+                } else {
+                    $result['exception'] = 'Claves distintas';
+                }
+                break;
+            case 'intentosFallidos':
+                $_POST = $usuario->validateForm($_POST);
+                if ($usuario->setIntentos($_POST['contador'])) {
+                    if ($usuario->setUser($_POST['usuario'])) {
+                        if ($usuario->validarIntentos()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Su Usuario ha sido bloqueado debido a que ha intentado demasiados intentos de inicio de sesion, Comuniquese con su supervisor para resolver el caso';
+                        } else {
+                            $result['exception'] = Database::getException();
+                        }
+                    } else {
+                        $result['exception'] = 'usuario no reconocido';
+                    }
+                } else {
+                    $result['exception'] = 'Cantidad de intentos no reconocida';
+                }
+                break;
+                case 'searchDays':
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($_POST['usuario'] != '') {
+                        if ($result['dataset'] = $usuario->prueba90Dias($_POST['usuario'])) {
+                            $result['status'] = 1;
+                            //$rows = count($result['dataset']);
+                            //$result['message'] = 'Codigo Correcto';
+                        } else {
+                            if (Database::getException()) {
+                                $result['exception'] = Database::getException();
+                            } else {
+                                $result['exception'] = 'No hay coincidencias';
+                            }
+                        }
+                    } else {
+                        $result['exception'] = 'Ingrese un valor para buscar';
+                    }
+                    break;
             default:
                 $result['exception'] = 'Acción no disponible fuera de la sesión';
         }

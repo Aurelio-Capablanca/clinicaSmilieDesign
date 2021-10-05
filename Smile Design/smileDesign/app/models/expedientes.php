@@ -9,8 +9,8 @@ class Productos extends Validator
     private $periodontograma = null;
     private $observaciones = null;
     private $paciente = null;
-    private $rutaOdontograma = '../../../resources/img/odontograma/';
-    private $rutaPeriodontograma = '../../../resources/img/periodontograma/';
+    private $rutaOdontograma = '../../resources/img/odontograma/';
+    private $rutaPeriodontograma = '../../resources/img/periodontograma/';
 
     //METODOS PARA ASIGNAR EL VALOR A LOS ATRIBUTOS
     public function setId($value)

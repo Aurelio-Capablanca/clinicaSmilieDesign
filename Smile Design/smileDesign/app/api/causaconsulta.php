@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $producto = new Causa;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-    if (isset($_SESSION['idusuario'])) {
+    if (isset($_SESSION['idusuario']) && $_SESSION['idtipousuario'] == 2  && isset($_SESSION['codigo'])) {
         switch ($_GET['action']) {
             case 'readAll': 
                 if ($result['dataset'] = $producto->readAll()) {

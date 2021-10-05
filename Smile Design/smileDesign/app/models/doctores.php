@@ -15,7 +15,7 @@ class Doctores extends Validator {
     private $alias = null;
     private $clave = null;
     private $estado = null;
-    private $ruta = '../../../resources/img/fotodoctor/';
+    private $ruta = '../../resources/img/fotodoctores';
 
     /*
     *   Métodos para asignar valores a los atributos.

@@ -573,9 +573,10 @@ class Pacientes extends Validator{
         return Database::executeRow($sql, $params);
     }
 
+    //-------------------------------
     public function readOneDoctor()
     {
-        $sql = 'SELECT idpaciente, idpacienteasignado, nombrepaciente, nombredoctor, apellidodoctor 
+        $sql = 'SELECT idpaciente, idpacienteasignado, nombrepaciente, nombredoctor, apellidodoctor , duipaciente
                 FROM pacientes
                 INNER JOIN estadopaciente USING (idestadopaciente)
                 INNER JOIN pacienteasignado USING (idpaciente)
@@ -584,15 +585,16 @@ class Pacientes extends Validator{
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
+    //-------------------------
 
     public function searchOneDoctor($value)
     {
-        $sql = 'SELECT idpaciente, idpacienteasignado, nombrepaciente, nombredoctor, apellidodoctor 
+        $sql = 'SELECT idpaciente, idpacienteasignado, nombrepaciente, nombredoctor, apellidodoctor, duipaciente 
                 FROM pacientes
                 INNER JOIN estadopaciente USING (idestadopaciente)
                 INNER JOIN pacienteasignado USING (idpaciente)
                 INNER JOIN doctores USING (iddoctor)
-                WHERE  nombrepaciente ILIKE ?';
+                WHERE  duipaciente ILIKE ?';
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
@@ -749,4 +751,89 @@ class Pacientes extends Validator{
         return Database::getRows($sql, $params);
     }
 
+    public function readOneQuestion()
+    {
+        $sql = 'SELECT idrespuesta,pr1.pregunta as pregunta1, respuesta1, 
+                        pr2.pregunta as pregunta2, respuesta2, 
+                        pr3.pregunta as pregunta3, respuesta3, 
+                        pr4.pregunta as pregunta4,respuesta4, 
+                        pr5.pregunta as pregunta5,respuesta5, 
+                        pr6.pregunta as pregunta6,respuesta6, 
+                        pr7.pregunta as pregunta7,respuesta7, 
+                        pr8.pregunta as pregunta8,respuesta8,
+                        pacientemedicamento,idpaciente,duipaciente
+                        from pacientes pt
+                Inner join respuestas rp using(idpaciente)
+                Inner join preguntas pr1 on pr1.idpregunta = rp.idpregunta1
+                Inner join preguntas pr2 on pr2.idpregunta = rp.idpregunta2
+                Inner join preguntas pr3 on pr3.idpregunta = rp.idpregunta3
+                Inner join preguntas pr4 on pr4.idpregunta = rp.idpregunta4
+                Inner join preguntas pr5 on pr5.idpregunta = rp.idpregunta5
+                Inner join preguntas pr6 on pr6.idpregunta = rp.idpregunta6
+                Inner join preguntas pr7 on pr7.idpregunta = rp.idpregunta7
+                Inner join preguntas pr8 on pr8.idpregunta = rp.idpregunta8
+                Where pt.idpaciente = ? Order by idrespuesta ASC';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function readOneQuestion1()
+    {
+        $sql = 'SELECT  rp.idrespuesta,
+                        pr1.pregunta as pregunta1, respuesta1, 
+                        pr2.pregunta as pregunta2, respuesta2, 
+                        pr3.pregunta as pregunta3, respuesta3, 
+                        pr4.pregunta as pregunta4,respuesta4, 
+                        pr5.pregunta as pregunta5,respuesta5, 
+                        pr6.pregunta as pregunta6,respuesta6, 
+                        pr7.pregunta as pregunta7,respuesta7, 
+                        pr8.pregunta as pregunta8,respuesta8,
+                        pacientemedicamento,idpaciente,duipaciente
+                    from pacientes pt
+                    Inner join respuestas rp using(idpaciente)
+                    Inner join preguntas pr1 on pr1.idpregunta = rp.idpregunta1
+                    Inner join preguntas pr2 on pr2.idpregunta = rp.idpregunta2
+                    Inner join preguntas pr3 on pr3.idpregunta = rp.idpregunta3
+                    Inner join preguntas pr4 on pr4.idpregunta = rp.idpregunta4
+                    Inner join preguntas pr5 on pr5.idpregunta = rp.idpregunta5
+                    Inner join preguntas pr6 on pr6.idpregunta = rp.idpregunta6
+                    Inner join preguntas pr7 on pr7.idpregunta = rp.idpregunta7
+                    Inner join preguntas pr8 on pr8.idpregunta = rp.idpregunta8
+                    Where rp.idrespuesta = ? Order by idrespuesta ASC';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    public function searchOneQuestion($value)
+    {
+        $sql = 'SELECT idrespuesta,pr1.pregunta as pregunta1, respuesta1, 
+                       pr2.pregunta as pregunta2, respuesta2, 
+                       pr3.pregunta as pregunta3, respuesta3, 
+                       pr4.pregunta as pregunta4,respuesta4, 
+                       pr5.pregunta as pregunta5,respuesta5, 
+                       pr6.pregunta as pregunta6,respuesta6, 
+                       pr7.pregunta as pregunta7,respuesta7, 
+                       pr8.pregunta as pregunta8,respuesta8,
+                       pacientemedicamento,idpaciente,duipaciente	   
+                from pacientes pt
+                Inner join respuestas rp using(idpaciente)
+                Inner join preguntas pr1 on pr1.idpregunta = rp.idpregunta1
+                Inner join preguntas pr2 on pr2.idpregunta = rp.idpregunta2
+                Inner join preguntas pr3 on pr3.idpregunta = rp.idpregunta3
+                Inner join preguntas pr4 on pr4.idpregunta = rp.idpregunta4
+                Inner join preguntas pr5 on pr5.idpregunta = rp.idpregunta5
+                Inner join preguntas pr6 on pr6.idpregunta = rp.idpregunta6
+                Inner join preguntas pr7 on pr7.idpregunta = rp.idpregunta7
+                Inner join preguntas pr8 on pr8.idpregunta = rp.idpregunta8
+                Where pt.duipaciente ILIKE ? Order by idrespuesta ASC';
+        $params = array("%$value%");
+        return Database::getRows($sql, $params);
+    }
+
+    public function updateRowRespuesta()
+    {
+        $sql = 'UPDATE respuestas set pacientemedicamento = ? Where idrespuesta = ?';
+        $params = array($this->respuesta,$this->id);
+        return Database::executeRow($sql, $params);
+    }
 }

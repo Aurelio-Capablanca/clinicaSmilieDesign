@@ -9,9 +9,9 @@ if (isset($_GET['action'])) {
     $producto = new Usuarios;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'exception' => null);
-     if (isset($_SESSION['idusuario'])) {
+    if (isset($_SESSION['idusuario'])) {
         switch ($_GET['action']) {
-            case 'readAll': 
+            case 'readAll':
                 if ($result['dataset'] = $producto->readAll()) {
                     $result['status'] = 1;
                 } else {
@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
                     }
                 }
                 break;
-            case 'search': 
+            case 'search':
                 $_POST = $producto->validateForm($_POST);
                 if ($_POST['search'] != '') {
                     if ($result['dataset'] = $producto->searchRows($_POST['search'])) {
@@ -44,7 +44,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ingrese un valor para buscar';
                 }
                 break;
-            case 'create': 
+            case 'create':
                 $_POST = $producto->validateForm($_POST);
                 if ($producto->setNombres($_POST['nombre_usuario1'])) {
                     if ($producto->setApellidos($_POST['apellido_usuario1'])) {
@@ -53,9 +53,9 @@ if (isset($_GET['action'])) {
                                 if ($producto->setUsuario($_POST['alias_usuario1'])) {
                                     if ($producto->setTelefono($_POST['telefono_usuario1'])) {
                                         if (isset($_POST['tipo_usuario1'])) {
-                                            if ($producto->setTipo($_POST['tipo_usuario1'])) {               
+                                            if ($producto->setTipo($_POST['tipo_usuario1'])) {
                                                 if (isset($_POST['estado_usuario1'])) {
-                                                    if ($producto->setEstado($_POST['estado_usuario1'])) {               
+                                                    if ($producto->setEstado($_POST['estado_usuario1'])) {
                                                         if ($_POST['clave_cliente1'] == $_POST['confirmar_clave1']) {
                                                             if ($producto->setClave($_POST['confirmar_clave1'])) {
                                                                 if ($producto->createRow()) {
@@ -75,7 +75,7 @@ if (isset($_GET['action'])) {
                                                     }
                                                 } else {
                                                     $result['exception'] = 'Seleccione un estado';
-                                                }       
+                                                }
                                             } else {
                                                 $result['exception'] = 'Tipo incorrecto';
                                             }
@@ -101,7 +101,7 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Nombre incorrecto';
                 }
                 break;
-            case 'readOne': 
+            case 'readOne':
                 if ($producto->setId($_POST['id_usuario1'])) {
                     if ($result['dataset'] = $producto->readOne()) {
                         $result['status'] = 1;
@@ -116,70 +116,60 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Causa incorrecto';
                 }
                 break;
-                case 'update': 
-                    $_POST = $producto->validateForm($_POST);
-                    if ($producto->setId($_POST['id_usuario1'])) {
-                        if ($producto->setNombres($_POST['nombre_usuario1'])) {
-                            if ($producto->setApellidos($_POST['apellido_usuario1'])) {
-                                if ($producto->setDireccion($_POST['direccion_usuario1'])) {
-                                    if ($producto->setCorreo($_POST['correo_usuario1'])) {
-                                        if ($producto->setUsuario($_POST['alias_usuario1'])) {
-                                            if ($producto->setTelefono($_POST['telefono_usuario1'])) {
-                                                if (isset($_POST['tipo_usuario1'])) {
-                                                    if ($producto->setTipo($_POST['tipo_usuario1'])) {               
-                                                        if (isset($_POST['estado_usuario1'])) {
-                                                            if ($producto->setEstado($_POST['estado_usuario1'])) {               
-                                                                if ($_POST['clave_cliente1'] == $_POST['confirmar_clave1']) {
-                                                                    if ($producto->setClave($_POST['confirmar_clave1'])) {
-                                                                        if ($producto->updateRow()) {
-                                                                            $result['status'] = 1;
-                                                                            $result['message'] = 'Usuario actualizado correctamente';
-                                                                        } else {
-                                                                            $result['exception'] = Database::getException();;
-                                                                        }
-                                                                    } else {
-                                                                        $result['exception'] = $producto->getPasswordError();
-                                                                    }
-                                                                } else {
-                                                                    $result['exception'] = 'Claves nuevas diferentes';
-                                                                }
+            case 'update':
+                $_POST = $producto->validateForm($_POST);
+                if ($producto->setId($_POST['id_usuario1'])) {
+                    if ($producto->setNombres($_POST['nombre_usuario1'])) {
+                        if ($producto->setApellidos($_POST['apellido_usuario1'])) {
+                            if ($producto->setDireccion($_POST['direccion_usuario1'])) {
+                                if ($producto->setCorreo($_POST['correo_usuario1'])) {
+                                    if ($producto->setUsuario($_POST['alias_usuario1'])) {
+                                        if ($producto->setTelefono($_POST['telefono_usuario1'])) {
+                                            if (isset($_POST['tipo_usuario1'])) {
+                                                if ($producto->setTipo($_POST['tipo_usuario1'])) {
+                                                    if (isset($_POST['estado_usuario1'])) {
+                                                        if ($producto->setEstado($_POST['estado_usuario1'])) {
+                                                            if ($producto->updateRow()) {
+                                                                $result['status'] = 1;
+                                                                $result['message'] = 'Usuario actualizado correctamente';
                                                             } else {
-                                                                $result['exception'] = 'Estado incorrecto';
+                                                                $result['exception'] = Database::getException();
                                                             }
                                                         } else {
-                                                            $result['exception'] = 'Seleccione un estado';
-                                                        }       
+                                                            $result['exception'] = 'Estado incorrecto';
+                                                        }
                                                     } else {
-                                                        $result['exception'] = 'Tipo incorrecto';
+                                                        $result['exception'] = 'Seleccione un estado';
                                                     }
                                                 } else {
-                                                    $result['exception'] = 'Seleccione un tipo';
+                                                    $result['exception'] = 'Tipo incorrecto';
                                                 }
                                             } else {
-                                                $result['exception'] = 'Telefono incorrecto';
+                                                $result['exception'] = 'Seleccione un tipo';
                                             }
                                         } else {
-                                            $result['exception'] = 'Usuario incorrecto';
+                                            $result['exception'] = 'Telefono incorrecto';
                                         }
                                     } else {
-                                        $result['exception'] = 'Correo incorrecto';
+                                        $result['exception'] = 'Usuario incorrecto';
                                     }
                                 } else {
-                                    $result['exception'] = 'Direccion incorrecta';
+                                    $result['exception'] = 'Correo incorrecto';
                                 }
                             } else {
-                                $result['exception'] = 'Apellido incorrecto';
+                                $result['exception'] = 'Direccion incorrecta';
                             }
                         } else {
-                            $result['exception'] = 'Nombre incorrecto';
-                        } 
+                            $result['exception'] = 'Apellido incorrecto';
+                        }
                     } else {
-                        $result['exception'] = 'ID incorrecto';
+                        $result['exception'] = 'Nombre incorrecto';
                     }
-                           
+                } else {
+                    $result['exception'] = 'ID incorrecto';
+                }
                 break;
-
-            case 'delete': 
+            case 'delete':
                 if ($producto->setId($_POST['id_usuario1'])) {
                     if ($data = $producto->readOne()) {
                         if ($producto->deleteRow()) {
@@ -195,12 +185,12 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Usuario  incorrecto';
                 }
                 break;
-            default: 
+            default:
                 $result['exception'] = 'Acción no disponible dentro de la sesión';
         }
         header('content-type: application/json; charset=utf-8');
         print(json_encode($result));
-   } else {
+    } else {
         print(json_encode('Acceso denegado'));
     }
 } else {

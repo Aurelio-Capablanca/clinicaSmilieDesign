@@ -24,11 +24,15 @@ function fillTable(dataset) {
             <td>${row.tipotratamiento}</td>
             <td>${row.estadotratamiento}</td>
             <td>
-                <a href="#" onclick="openUpdateDialog(${row.idtratamiento})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
-                <a href="#" onclick="openCreateDialogConsulta(${row.idtratamiento})" class="btn waves-effect green tooltipped" data-tooltip="Crear Consulta"><i class="material-icons">assignment</i></a>
-                <a href="#" onclick="openDeleteDialog(${row.idtratamiento})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
-                <a href="#" onclick="openDates(${row.idtratamiento})" class="btn waves-effect grey tooltipped" data-tooltip="Mostrar Consultas"><i class="material-icons">search</i></a>
-                <a href="#" onclick="graficaPastelCausa(${row.idtratamiento})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a>
+                <ul>    
+                    <li><a href="#" onclick="openUpdateDialog(${row.idtratamiento})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>                    
+                    <a href="#" onclick="openCreateDialogConsulta(${row.idtratamiento})" class="btn waves-effect green tooltipped" data-tooltip="Crear Consulta"><i class="material-icons">assignment</i></a>                    
+                    <a href="#" onclick="openDeleteDialog(${row.idtratamiento})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></li>
+                    <br>
+                    <li><a href="#" onclick="openDates(${row.idtratamiento})" class="btn waves-effect grey tooltipped" data-tooltip="Mostrar Consultas"><i class="material-icons">search</i></a>
+                    <a href="#" onclick="graficaPastelCausa(${row.idtratamiento})" class="btn waves-effect yellow tooltipped" data-tooltip="Generar Gráfica"><i class="material-icons">pie_chart</i></a></li>
+                    <br>
+                <ul>    
             </td>
             </tr>
         `;          
@@ -205,6 +209,8 @@ function openCreateDialogConsulta(id) {
     let instance = M.Modal.getInstance(document.getElementById('save-modal-consultas'));
     instance.open();
     document.getElementById('modal-title-consultas').textContent = 'Ingresar Consulta';
+    // document.getElementById('notas_consulta').disabled=true;
+    // document.getElementById('notas_consulta').value="notas";
     const data = new FormData();
     data.append('id_t', id);
     document.getElementById('nombre_paciente').disabled = true;
@@ -240,23 +246,19 @@ document.getElementById('save-form-consultas').addEventListener('submit', functi
     let action1 = 'createConsulta';    
     // Se comprueba si el campo oculto del formulario esta seteado para actualizar, de lo contrario será para crear.
     
-    var notas, precio;
-    notas = document.getElementById('notas_consulta').value;
+    var  precio;
+    //notas = document.getElementById('notas_consulta').value;
     precio = document.getElementById('precio_consulta').values;
         
-    if(notas === " " || precio === " "){
+    if(precio === " "){
         sweetAlert(2, 'Todos los campos son obligatorios', null); 
         return false;       
-    }
-    if(notas === " "){
-        sweetAlert(2, 'no se puede dejar vacio el campo de las notas', null);
-        return false;
-    }   
+    } 
     else if(precio === " "){
         sweetAlert(2, 'no se puede dejar vacio el campo del precio', null);
         return false; 
     }    
-    else if (notas !== " " || precio !== " "){
+    else if (precio !== " "){
         if (document.getElementById('id_consulta').value) {
             action = 'update';            
         } else {

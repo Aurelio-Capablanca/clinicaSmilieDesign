@@ -47,15 +47,20 @@ document.getElementById('register-form').addEventListener('submit', function (ev
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
-                    sweetAlert(1, response.message, 'login.php');
+                    sweetAlert(1, response.message, "index.php");
                 } else {
-                    sweetAlert(2, response.exception, null);
+                    if (response.users) {
+                        sweetAlert(2, response.exception, "index.php");
+                    } else {
+                        sweetAlert(2, response.exception, null);
+                    }
                 }
             });
         } else {
-            console.log(request.status + ' ' + request.statusText);
+            console.log(request.status + " " + request.statusText);
         }
-    }).catch(function (error) {
-        console.log(error);
-    });
+    })
+        .catch(function (error) {
+            console.log(error);
+        });
 });

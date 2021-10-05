@@ -221,6 +221,32 @@ function searchRows2(api, form) {
     });
 }
 
+function searchRowsQuestions(api, form) {
+    fetch(api + 'searchOneQuestion', {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let data = [];
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    data = response.dataset;                                        
+                    sweetAlert(1, response.message, null);
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+                fillTables2(data);
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
 function searchRowsCount(api, form) {
     fetch(api + 'searchOneCount', {
         method: 'post',
@@ -317,6 +343,97 @@ function searchAgendas(api, form) {
                     sweetAlert(2, response.exception, null);
                 }
                 fillTable(data);
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function searchRowsEmail(api, form) {
+    fetch(api + 'readOneMails', {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let data = [];
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    data = response.dataset;                    
+                    //Seteo de datos
+                    document.getElementById('nombres').value=response.dataset.nombreusuario;
+                    document.getElementById('correo').value=response.dataset.correousuario;
+                    document.getElementById('codigosenviar').value= response.dataset.claveusuario;
+                    //envío de codigo a la base de datos
+                    action = 'pasarcodigo';
+                    saveRowCodigo(API_LOGIN, action ,'mail-form');
+                    //Se envía el correo adjuntando el código aleatorio
+                    var correo = document.getElementById("correo_enviar").value;
+                    var codigo = document.getElementById("codigosenviar").value;
+                    confirmacion(correo, codigo);                    
+                    //sweet alert de exito
+                    sweetAlert(1, response.message, 'verificarcodigo.php');                    
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function searchRowscodigo(api, form) {    
+    
+    fetch(api + 'searchCodigo', {        
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let data = [];
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    data = response.dataset;
+                    document.getElementById('codigo-form').hidden = true;
+                    document.getElementById('pass-form').hidden = false;
+                    document.getElementById('correo').value=response.dataset.correodestinatario;
+                    sweetAlert(1, response.message, null);
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+}
+
+function searchRowsCodigoValidar(api, form) {
+    fetch(api + 'searchCodigoValidar', {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                let data = [];
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    data = response.dataset;                                        
+                    sweetAlert(1, response.message, 'main.php');
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }                
             });
         } else {
             console.log(request.status + ' ' + request.statusText);
@@ -472,6 +589,105 @@ function saveRow1(api, action, form, modal) {
     });
 }
 
+function saveRowhistorial(api, action, form) {
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    //document.getElementById("codigovalidar").value = validarc.value
+                    console.log(request.status + ' ' + request.message);
+                    //sweetAlert(1, response.message, null);
+                } else {
+                    console.log(request.status + ' ' + request.exception);
+                    //sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);     
+    });
+}
+
+function saveRowCodigo(api, action, form) {
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    console.log(request.status + ' ' + request.statusText);
+                    //sweetAlert(1, response.message, null);
+                } else {
+                    console.log(request.status + ' ' + request.statusText);
+                    //sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);     
+    });
+}
+
+function saveRow49(api, action, form) {
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {                   
+                    sweetAlert(1, response.message, 'index.php');
+                } else {
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);     
+    });
+}
+
+
+function saveRowIntentosFallidos(api, action, form) {
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    //console.log(request.status + ' ' + request.statusText);
+                    sweetAlert(2, response.message, null);
+                } else {
+                    //console.log(request.status + ' ' + request.statusText);
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);     
+    });
+}
 
 /*
 *   Función para eliminar un registro seleccionado en los mantenimientos de tablas (operación delete). Requiere el archivo sweetalert.min.js para funcionar.

@@ -15,11 +15,16 @@ function fillTable(dataset) {
         <div class="card">                                    
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">                                            
-                    ${row.nombrepaciente}
-                    <p>Día: </p><p>${row.fechaconsultas}</p>
-                    <p>${row.fechaconsulta}</p>
-                    <p>${row.horaconsulta}</p>
+                    <p>${row.nombrepaciente}</p>
+                    <br>
+                    <p>Día: ${row.fechaconsultas}</p>
+                    <br>
+                    <p>Fecha: ${row.fechaconsulta}</p>
+                    <br>
+                    <p>Hora: ${row.horaconsulta}</p>
+                    <br>
                     <p>${row.causa}</p>
+                    <br>
                     <i class="material-icons right">more_vert</i>
                 </span>
                 <p class="center">
@@ -28,12 +33,10 @@ function fillTable(dataset) {
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">
-                    <p>N# Consulta: </p>${row.idcantidadconsulta}
+                    <p>N# Consulta: ${row.idcantidadconsulta}</p>
+                    <p>Nombre Doctor: ${row.nombredoctor} </p> 
                     <i class="material-icons right">close</i>
-                </span>
-                <!-- <p>${row.fechaconsulta}</p> -->
-               <!-- <p>${row.horaconsulta}</p> -->
-               <!-- <p>${row.causa}</p> -->
+                </span>                
             </div>
         </div>
     </div>

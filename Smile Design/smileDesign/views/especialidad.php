@@ -51,7 +51,7 @@ Dashboard_Page::headerTemplate('Especialidad');
                     <input class="hide" type="number" id="id_especialidad" name="id_especialidad"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">account_box</i>
+                            <i class="material-icons prefix">note_add</i>
                             <input id="especialidad" type="text" name="especialidad" class="validate"  required/>
                             <label for="especialidad">Especialidad</label>
                         </div>

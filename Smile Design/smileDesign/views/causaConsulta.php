@@ -50,7 +50,7 @@ Dashboard_Page::headerTemplate('Causas de Consultas');
                     <input class="hide" type="number" id="id_causa" name="id_causa"/>
                     <div class="row">                        
                         <div class="input-field col s12 m6">
-                            <i class="material-icons prefix">account_box</i>
+                            <i class="material-icons prefix">note_add</i>
                             <input id="causa" type="text" name="causa" class="validate"  required/>
                             <label for="causa">Causa</label>
                         </div>

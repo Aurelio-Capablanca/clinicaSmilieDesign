@@ -15,14 +15,16 @@ function fillTable(dataset) {
                 <td><img src="../../resources/img/odontograma/${row.odontograma}" class="materialboxed" height="100"></td>
                 <td><img src="../../resources/img/periodontograma/${row.periodontograma}" class="materialboxed" height="100"></td>                
                 <td>${row.nombrepaciente}</td>
-                <td>${row.apellidopaciente}</td>
+                <td>${row.apellidopaciente}</td>                    
                 <td>
-                    <a href="#" onclick="openUpdateDialog(${row.idexpediente})" class="waves-effect waves-yellow btn updateButton"><i class="material-icons left">update</i></a>
-                </td>
-                <td>
-                    <a href="#" onclick="openDeleteDialog(${row.idexpediente})" class="waves-effect waves btn deleteButton"><i class="material-icons left">delete</i></a>
-                    <a href="#" onclick="openCreateArchivo(${row.idexpediente})" class="btn waves-effect green tooltipped" data-tooltip="Insertar Archivos"><i class="material-icons">assignment</i></a>
-                    <a href="#" onclick="openArchives(${row.idexpediente})" class="btn waves-effect grey tooltipped" data-tooltip="Mostrar Documentos"><i class="material-icons">search</i></a>
+                    <ul>
+                    <li><a href="#" onclick="openUpdateDialog(${row.idexpediente})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">update</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.idexpediente})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></li>
+                    <br>
+                    <li><a href="#" onclick="openCreateArchivo(${row.idexpediente})" class="btn waves-effect green tooltipped" data-tooltip="Insertar Archivos"><i class="material-icons">assignment</i></a>                    
+                    <a href="#" onclick="openArchives(${row.idexpediente})" class="btn waves-effect grey tooltipped" data-tooltip="Mostrar Documentos"><i class="material-icons">search</i></a></li>
+                    <br>
+                    <ul>
                 </td>
             </tr>
         `;          
@@ -77,7 +79,8 @@ function openUpdateDialog(id) {
     document.getElementById('save-form').reset();
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
-    document.getElementById('modal-title').textContent = 'Actualizar cliente';
+    document.getElementById('modal-title').textContent = 'Actualizar Expediente';
+    document.getElementById('ide_paciente').disabled = true;
     const data = new FormData();
     data.append('id', id);
 

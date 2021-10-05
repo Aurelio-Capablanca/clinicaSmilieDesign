@@ -22,8 +22,11 @@ function fillTable(dataset) {
                 <td>${row.estadousuario}</td>
                 <td>${row.tipousuario}</td>
                 <td>
-                    <a href="#" onclick="openUpdateDialog(${row.idusuario})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
-                    <a href="#" onclick="openDeleteDialog(${row.idusuario})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a>
+                    <ul>
+                    <li><a href="#" onclick="openUpdateDialog(${row.idusuario})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a></li>
+                    <br>
+                    <li><a href="#" onclick="openDeleteDialog(${row.idusuario})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></li>
+                   </ul> 
                 </td>
             </tr>
         `;          
@@ -45,8 +48,8 @@ function openCreateDialog() {
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     document.getElementById('modal-title').textContent = 'Registrar usuario'; 
-    fillSelect(ENDPOINT_CATEGORIAS, 'estado_usuario', null);
-    fillSelect(ENDPOINT_CATEGORIAS2, 'tipo_usuario', null);
+    fillSelect(ENDPOINT_CATEGORIAS, 'estado_usuario1', null);
+    fillSelect(ENDPOINT_CATEGORIAS2, 'tipo_usuario1', null);
 
 }
 
@@ -137,7 +140,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
         return false;
     }
     else if (nombre !== " " || apellido !== " " || telefono !== " " || direccion !== " " ||  correo !== " " || alias !== " " || clave !== " " || conf !== " " || clave === conf) {
-        if (document.getElementById('id_usuario').value) {
+        if (document.getElementById('id_usuario1').value) {
             action = 'update';
         } else {
             action = 'create';
@@ -150,7 +153,7 @@ document.getElementById('save-form').addEventListener('submit', function (event)
 // Función para establecer el registro a eliminar y abrir una caja de dialogo de confirmación.
 function openDeleteDialog(id) {
     const data = new FormData();
-    data.append('id_usuario', id);
+    data.append('id_usuario1', id);
     confirmDelete(API_PRODUCTOS, data);
 }
 
