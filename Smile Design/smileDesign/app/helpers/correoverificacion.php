@@ -25,13 +25,13 @@ try {
     $mail->setFrom('farmastuffsv@gmail.com');
     $mail->addAddress($_SESSION['correousuario']); 
     $mail->isHTML(true);              
-    $mail->Subject = 'FarmaStuff codigo de confirmacion '.$codigoos;
-    $mail->Body    = 'Hola, le saludamos de FarmaStuff, le enviamos este correo para corroborar su usuario. 
+    $mail->Subject = 'Smile Design codigo de confirmacion '.$codigoos;
+    $mail->Body    = 'Hola, le saludamos de Smile Design, le enviamos este correo para corroborar su usuario. 
     Su código de seguridad es: <h2>'.$codigoos.'</h2>'.' 
     --
     <br><p>
-    𝕔 FarmaStuff - 2021, El Salvador';
-    $mail->AltBody = '𝕔 FarmaStuff - 2021, El Salvador';
+    𝕔 Smile Design - 2021, El Salvador';
+    $mail->AltBody = '𝕔 Smile Design - 2021, El Salvador';
 
     $mail->send();
     echo 'El mensaje se ha enviado correctamente';
