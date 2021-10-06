@@ -103,7 +103,8 @@ class Dashboard_Page {
                 <script type="text/javascript" src="../../app/helpers/components.js"></script>                
                 <script type="text/javascript" src="../../resources/js/materialize.min.js"></script>              
                 <script src="../../resources/js/init.js"></script>        
-                <script type="text/javascript" src="../../app/controllers/private/account.js"></script>        
+                <script type="text/javascript" src="../../app/controllers/private/account.js"></script>     
+                <script type="text/javascript" src="../../app/controllers/private/logout.js"></script>           
                 <script type="text/javascript" src="../../app/controllers/private/' . $controller . '"></script>
             </body>
             </html>
