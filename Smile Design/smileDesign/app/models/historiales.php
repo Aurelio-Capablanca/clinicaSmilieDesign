@@ -19,6 +19,6 @@ class Historial extends Validator{
                 Order by fecharegistro DESC'; 
         $params = null;
         return Database::getRows($sql, $params);
-    }
+    }    
 
 }

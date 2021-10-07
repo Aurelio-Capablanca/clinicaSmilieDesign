@@ -25,6 +25,7 @@ class Usuarios extends Validator
     private $pais = null;
     private $codigo = null;
     private $intentos = null;
+    private $intentosenvio = null;
 
 
     /*
@@ -220,6 +221,16 @@ class Usuarios extends Validator
         }
     }
 
+    public function setIntentosenvio($value)
+    {
+        if ($this->validateNaturalNumber($value)) {
+            $this->intentosenvio = $value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /*
     *   Métodos para obtener valores de los atributos.
     */
@@ -317,6 +328,11 @@ class Usuarios extends Validator
     public function getIntentos()
     {
         return $this->intentos;
+    }
+
+    public function getIntentosEnvios()
+    {
+        return $this->intentosenvio;
     }
 
     /*
@@ -448,6 +464,13 @@ class Usuarios extends Validator
         $params = array($this->intentos, $this->user);
         return Database::executeRow($sql, $params);
     }
+
+    public function validarIntentosEnvios()
+    {       
+        $sql = 'INSERT INTO conteointentosfallidos(intentosfallidos, usuario, fecharegistro) VALUES (? , ? , current_date )';
+        $params = array($this->intentosenvio, $this->user);
+        return Database::executeRow($sql, $params);
+    }    
 
     public function readProfile()
     {

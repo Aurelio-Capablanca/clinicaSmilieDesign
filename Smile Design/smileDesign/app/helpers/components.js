@@ -689,6 +689,31 @@ function saveRowIntentosFallidos(api, action, form) {
     });
 }
 
+function saveRowIntentosFallidosConteo(api, action, form) {
+    fetch(api + action, {
+        method: 'post',
+        body: new FormData(document.getElementById(form))
+    }).then(function (request) {
+        // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje indicando el problema.
+        if (request.ok) {
+            request.json().then(function (response) {
+                // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+                if (response.status) {
+                    console.log(request.status + ' ' + request.statusText);
+                    //sweetAlert(2, response.message, null);
+                } else {
+                    console.log(request.status + ' ' + request.statusText);
+                    //sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            console.log(request.status + ' ' + request.statusText);
+        }
+    }).catch(function (error) {
+        console.log(error);     
+    });
+}
+
 /*
 *   Función para eliminar un registro seleccionado en los mantenimientos de tablas (operación delete). Requiere el archivo sweetalert.min.js para funcionar.
 *

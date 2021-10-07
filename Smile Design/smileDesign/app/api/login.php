@@ -388,6 +388,23 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Cantidad de intentos no reconocida';
                 }
                 break;
+                case 'intentosFallidosenvio':
+                    $_POST = $usuario->validateForm($_POST);
+                    if ($usuario->setIntentosenvio($_POST['contador'])) {
+                        if ($usuario->setUser($_POST['usuario'])) {
+                            if ($usuario->validarIntentosEnvios()) {
+                                $result['status'] = 1;
+                                //$result['message'] = 'Su Usuario ha sido bloqueado debido a que ha intentado demasiados intentos de inicio de sesion, Comuniquese con su supervisor para resolver el caso';
+                            } else {
+                                $result['exception'] = Database::getException();
+                            }
+                        } else {
+                            $result['exception'] = 'usuario no reconocido';
+                        }
+                    } else {
+                        $result['exception'] = 'Cantidad de intentos no reconocida';
+                    }
+                    break;
                 case 'searchDays':
                     $_POST = $usuario->validateForm($_POST);
                     if ($_POST['usuario'] != '') {

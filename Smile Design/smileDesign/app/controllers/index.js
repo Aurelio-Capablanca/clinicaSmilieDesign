@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción
                 if (response.status) {
-                    //sweetAlert(1, response.message, 'main.php');
+                    sweetAlert(1, response.message, null);
                 } else {
                     // Se verifica si ocurrió un problema en la base de datos, de lo contrario se continua normalmente.
                     if (response.error) {
@@ -146,7 +146,9 @@ document.getElementById('session-form').addEventListener('submit', function (eve
                                             if (validarintentos==3){
                                              action = 'intentosFallidos';
                                              saveRowIntentosFallidos(API_LOGIN, action, 'session-form');
-                                            }                    
+                                            }
+                                            action = 'intentosFallidosenvio';
+                                            saveRowIntentosFallidosConteo(API_LOGIN, action, 'session-form');
                                             sweetAlert(2, response.exception, null);
                                         }
                                     });

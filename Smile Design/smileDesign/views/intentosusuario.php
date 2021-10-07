@@ -2,12 +2,12 @@
 //Se incluye la clase con las plantillas del documento
 include('../app/helpers/dashboardPage.php');
 //Se imprime la plantilla del encabezado y se envía el titulo para la página web 
-Dashboard_Page::headerTemplate('Historial de Sesiones');
+Dashboard_Page::headerTemplate('Intentos de Inicio de Sesión Fallidos');
 ?> 
 <div class="container">
 <div class="row">
 <div class="row">
-     <h4 style="text-align:center;"> Historial de Sesiones </h4>
+     <h4 style="text-align:center;"> Intentos de Inicio de Sesión Fallidos </h4>
     <div class="section container">
         <div class="row card-panel" style="text-align:center;">
         <!-- <a href="#" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Expediente</a> -->
@@ -30,13 +30,9 @@ Dashboard_Page::headerTemplate('Historial de Sesiones');
     <!-- Cabeza de la tabla para mostrar los títulos de las columnas -->
     <thead>
         <tr>
-        <th>IP</th>      
-        <th>Usuario</th>                 
-        <th>Region</th>
-        <th>Zona Horaria</th>
-        <th>Distribuidor de Red</th>
-        <th>Pais</th>
-        <th>Fecha de Ingreso</th>
+        <th>Numero de Intentos</th>      
+        <th>Usuario</th>        
+        <th>Fecha de Registro</th>
         </tr>
     </thead>
     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
@@ -49,5 +45,5 @@ Dashboard_Page::headerTemplate('Historial de Sesiones');
 </div>
 <?php
 //Se imprime la plantilla del pie y se envía el nombre del controlador para la página web
-Dashboard_Page::footerTemplate('historial.js');
+Dashboard_Page::footerTemplate('intentousuario.js');
 ?>  

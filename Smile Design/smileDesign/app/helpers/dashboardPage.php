@@ -65,8 +65,7 @@ class Dashboard_Page
                         <li class="tab"><a href="pacientes.php">Pacientes</a></li>
                         <li class="tab"><a href="tratamientos.php">Tratamientos</a></li>
                         <li class="tab"><a href="causaConsulta.php">Causa Consultas</a></li>
-                        <li class="tab"><a href="especialidad.php">Especialidades</a></li>
-                        <li class="tab"><a href="historialsesion.php">Historial de Sesiones</a></li>
+                        <li class="tab"><a href="especialidad.php">Especialidades</a></li>                        
                     </ul>
                     </div>
                 </nav>
@@ -85,14 +84,17 @@ class Dashboard_Page
                             <li>
                                 <li><a href="#" onclick="openProfileDialog()"><i class="material-icons">face</i>Editar perfil</a></li>
                                 <li><a href="#" onclick="openPasswordDialog()"><i class="material-icons">lock</i>Cambiar clave</a></li>
+                                <li><a href="intentosusuario.php"><i class="material-icons left">gpp_maybe</i>Intentos Usuario</a></li>
+                                <li><a href="historialsesion.php"><i class="material-icons left">verified_user</i>Historial de Sesiones</a></li>
                                 <div class="divider"></div>
                             </li>              
                                 <li><a href="#"  onclick="logOut()"><i class="material-icons left">highlight_off</i>Cerrar sesión</a></li>                              
                                 <li class="hide-on-large-only" ><a href="consultas.php"><i class="material-icons left">check</i>Consultas</a></li>
                                <!-- <li class="hide-on-large-only" ><a href="mantenimientos.php"><i class="material-icons left">desktop_mac</i>Mantenimientos</a></li> -->
                                 <li class="hide-on-large-only" ><a href="pagos.php"><i class="material-icons left">assignment</i>Pagos</a></li>
-                                <li class="hide-on-large-only" ><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a>
+                                <li class="hide-on-large-only" ><a href="procedimientos.php"><i class="material-icons left">health_and_safety</i>Procedimientos</a>                                
                         </ul>
+
                       <main>                    
                         <!-- <h3 class="center-align">' . $title . '</h3> -->
                 '); 

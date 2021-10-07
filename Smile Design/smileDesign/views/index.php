@@ -14,7 +14,7 @@ Dashboard_Page::headerTemplate('Login');
         <input id="zona" type="text" name="zona" class="hide" />
         <input id="distribuidor" type="text" name="distribuidor" class="hide" />
         <input id="codigovalidar" type="text" name="codigovalidar" class="hide" />
-        <input id="contador" type="text" name="contador" class="hide"/>
+        <input id="contador" type="text" name="contador" class=""/>
         <input id="pais" type="text" name="pais" class="hide" />
         <input id="dias" type="text" name="dias" class="hide" />
 
