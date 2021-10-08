@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
     readRows(API_CONSULTAS);
 });
 
+function cargarDatos() {
+    readRows(API_CONSULTAS);
+}
 
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().
 function fillTable(dataset) {
@@ -25,13 +28,11 @@ function fillTable(dataset) {
                 <td>${row.causa}</td>                 
                 <td>
                    <ul> 
-                    <li><a href="#" onclick="openUpdateDialog(${row.idconsulta})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a></li>
+                    <li><a href="#" onclick="openUpdateDialog(${row.idconsulta})" class="btn waves-effect blue tooltipped" data-tooltip="Actualizar"><i class="material-icons">mode_edit</i></a>
+                    <a href="#" onclick="openDeleteDialog(${row.idconsulta})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></li>
                     <br>
-                    <li><a href="#" onclick="openDeleteDialog(${row.idconsulta})" class="btn waves-effect red tooltipped" data-tooltip="Eliminar"><i class="material-icons">delete</i></a></li>
-                    <br>
-                    <li><a href="#" onclick="openInsertProcedures(${row.idconsulta})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Procedimientos"><i class="material-icons">assignment</i></a></li>
-                    <br>
-                    <li><a href="#" onclick="openProcedures(${row.idconsulta})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Procedimientos"><i class="material-icons">search</i></a></li>
+                    <li><a href="#" onclick="openInsertProcedures(${row.idconsulta})" class="btn waves-effect green tooltipped" data-tooltip="Asignar Procedimientos"><i class="material-icons">assignment</i></a>                    
+                    <a href="#" onclick="openProcedures(${row.idconsulta})" class="btn waves-effect grey tooltipped" data-tooltip="Buscar Procedimientos"><i class="material-icons">search</i></a></li>
                     <br>
                     </ul>
                 </td>

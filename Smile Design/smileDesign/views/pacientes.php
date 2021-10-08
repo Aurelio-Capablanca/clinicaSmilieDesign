@@ -10,7 +10,7 @@ Dashboard_Page::headerTemplate('Pacientes');
         <div class="section container">
             <div class="row card-panel" style="text-align:center;">
                 <a href="#save-modal" onclick="openCreateDialog()" class="waves-effect waves-light btn-small modal-trigger"><i class="material-icons left">publish</i>Ingresar Paciente</a>
-                <a class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>
+                <a onclick="cargarDatos()" class="waves-effect waves-light btn-small"><i class="material-icons left">rotate_left</i>Actualizar lista</a>
                 <form method="post" id="search-form">
                     <div class="input-field col s12 m8">
                         <i class="material-icons prefix">search</i>

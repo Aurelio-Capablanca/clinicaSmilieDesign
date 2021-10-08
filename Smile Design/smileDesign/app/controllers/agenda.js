@@ -5,6 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     readRowsAgenda(API_CONSULTA);
 });
 
+function cargarDatos() {
+    readRows(API_CONSULTA);
+}
+
 function fillTable(dataset) {
     let content = '';
     // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.

@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
     readRows(API_PAGOS);
 });
 
+function cargarDatos() {
+    readRows(API_PAGOS);
+}
 
 // Función para llenar la tabla con los datos de los registros. Se manda a llamar en la función readRows().
 function fillTable(dataset) {
