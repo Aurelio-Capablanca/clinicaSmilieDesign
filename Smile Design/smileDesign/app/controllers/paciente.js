@@ -281,7 +281,7 @@ function openUpdateDialog(id) {
     let instance = M.Modal.getInstance(document.getElementById('save-modal'));
     instance.open();
     // Se asigna el título para la caja de dialogo (modal).
-    document.getElementById('modal-title').textContent = 'Actualizar Información del Paciente';        
+    document.getElementById('modals-title').textContent = 'Actualizar Información del Paciente';        
     // Se define un objeto con los datos del registro seleccionado.
     document.getElementById('archivo_paciente').required = false;
 

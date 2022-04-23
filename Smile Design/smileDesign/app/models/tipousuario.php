@@ -7,7 +7,8 @@ class Categorias extends Validator
     public function readAll()
     {
         $sql = 'SELECT idtipousuario,tipousuario 
-        FROM tipousuario';
+        FROM tipousuario
+        Where idtipousuario != 1';
         $params = null;
         return Database::getRows($sql, $params);
     }

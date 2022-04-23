@@ -2,7 +2,6 @@
 require('../helpers/database.php');
 require('../helpers/validator.php');
 require('../../libraries/fpdf182/fpdf.php');
-
 /**
 *   Clase para definir las plantillas de los reportes del sitio privado. Para más información http://www.fpdf.org/
 */
@@ -10,7 +9,7 @@ class Report extends FPDF
 {
     // Propiedad para guardar el título del reporte.
     private $title = null;
-
+    
     /*
     *   Método para iniciar el reporte con el encabezado del documento.
     *
@@ -24,21 +23,21 @@ class Report extends FPDF
         ini_set('date.timezone', 'America/El_Salvador');
        
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
-        // session_start();
+            
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a main.php
-        //    if (isset($_SESSION['idempleado'])) {
+            //if (isset($_SESSION['idusuario'])) {
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
             $this->SetTitle('Dashboard - Reporte', true);
             // Se establecen los margenes del documento (izquierdo, superior y derecho).
-            $this->setMargins(9, 15, 15);
+            $this->setMargins(15, 15, 15);
             // Se añade una nueva página al documento (orientación vertical y formato carta) y se llama al método Header()
             $this->AddPage('p', 'letter');
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->AliasNbPages();
             // } else {
-            //   header('location: ../../../views/private/index.php');
+            //   header('location: ../../views/index.php');
             //  }      
     }   
 
@@ -46,11 +45,11 @@ class Report extends FPDF
     public function startReports($title)
     {
         // Se establece la zona horaria a utilizar durante la ejecución del reporte.
-        ini_set('date.timezone', 'America/El_Salvador');
+            ini_set('date.timezone', 'America/El_Salvador');
         // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
-        // session_start();
+             
         // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a main.php
-        //    if (isset($_SESSION['idempleado'])) {
+           //if (isset($_SESSION['idusuario'])) {
             // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
             // Se establece el título del documento (true = utf-8).
@@ -62,7 +61,7 @@ class Report extends FPDF
             // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->AliasNbPages();
             // } else {
-            //   header('location: ../../../views/private/index.php');
+            //   header('location: ../../views/index.php');
             //  }      
     }
 
@@ -73,7 +72,7 @@ class Report extends FPDF
     public function Header()
     {
         // Se establece el logo.        
-        $this->Image('../../resources/img/Logos1.PNG', 15, 15, 40);
+        //$this->Image('../../resources/img/Logos1.PNG', 15, 15, 40);
         $this->Ln(20);
         // Se ubica el título.
         $this->Cell(20);

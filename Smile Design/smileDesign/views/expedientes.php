@@ -132,12 +132,12 @@ Dashboard_Page::headerTemplate('Expedientes');
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">how_to_reg</i>
-                            <textarea id="notas_medicas" type="text" name="notas_medicas" cols="30" rows="10" class="validate"  required></textarea>
+                            <textarea id="notas_medicas" type="text" name="notas_medicas" cols="30" rows="10" class="validate" oncopy="return false" oncut="return false" required></textarea>
                             <label for="notas_medicas">Notas Médicas</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <textarea id="observaciones" type="text" name="observaciones" cols="30" rows="10" class="validate"  required></textarea>
+                            <textarea id="observaciones" type="text" name="observaciones" cols="30" rows="10" class="validate" oncopy="return false" oncut="return false" required></textarea>
                             <label for="observaciones">Observaciones periodontograma</label>
                         </div>
                          <div>
@@ -161,12 +161,12 @@ Dashboard_Page::headerTemplate('Expedientes');
                     <div class="row">
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">how_to_reg</i>
-                            <textarea  id="notas_medicass" cols="30" rows="10" type="text" name="notas_medicass" class="validate"  required></textarea>
+                            <textarea  id="notas_medicass" cols="30" rows="10" type="text" name="notas_medicass" class="validate" oncopy="return false" oncut="return false"  required></textarea>
                             <label for="notas_medicass">Notas Médicas</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">account_box</i>
-                            <textarea id="observacioness" type="text" cols="30" rows="10" name="observacioness" class="validate"  required></textarea>
+                            <textarea id="observacioness" type="text" cols="30" rows="10" name="observacioness" class="validate" oncopy="return false" oncut="return false"  required></textarea>
                             <label for="observacioness">Observaciones periodontograma</label>
                         </div>
                          <div>

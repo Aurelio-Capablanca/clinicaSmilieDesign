@@ -229,7 +229,7 @@ class Usuarios extends Validator
         $data = Database::getRow($sql, $params);
         if (password_verify($password, $data['claveusuario']) ) {
             return false;
-        }else if ($password==$data['aliasusuario'] && $password==$data['correousuario']){
+        }else if ($password==$data['aliasusuario']){
             return false;
         } 
         else {

@@ -20,7 +20,7 @@ Dashboard_Page::headerTemplate('Home');
 <!--Contenedor para mostrar una tabla con datos-->
 <div class="container center-align">
 <p style="color: red; font-size:40px">¡Bienvenid@!</p>
-<img  width="250" src="../resources/img/SmileDesign.jfif">
+<img  width="250" class="circle " src="../resources/img/SmileDesign.jfif">
 </div>
 <br>
 <!-- Se muestran las gráficas de acuerdo con algunos datos disponibles en la base de datos -->

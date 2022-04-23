@@ -15,7 +15,7 @@ class Doctores extends Validator {
     private $alias = null;
     private $clave = null;
     private $estado = null;
-    private $ruta = '../../resources/img/fotodoctores';
+    private $ruta = '../../resources/img/fotodoctores/';
 
     /*
     *   Métodos para asignar valores a los atributos.
@@ -261,31 +261,31 @@ class Doctores extends Validator {
 
     public function readGananciasDoctor()
     {
-        $sql = 'SELECT sum(costoprocedimiento) as costoprocedimiento
+        $sql = 'SELECT Sum(Greatest(costoconsulta,costoprocedimiento)) as costoprocedimiento
         From doctores dr
         inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor
         inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
         inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
         inner join consultas cl on cl.idconsulta = cc.idconsulta
-        inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
-        inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
-        Where dr.iddoctor= ?';
+        Full Outer join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
+        Full Outer join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
+        Where dr.iddoctor=?';
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
 
     public function readDataDoctor()
     {
-        $sql = "SELECT fechaconsulta, sum(costoprocedimiento) AS costoprocedimientos
+        $sql = "SELECT fechaconsulta, Greatest(costoconsulta,sum(costoprocedimiento)) AS costoprocedimientos
         From doctores dr
         inner join pacienteasignado pa on dr.iddoctor = pa.iddoctor        
         inner join tratamientos tr on tr.idpacienteasignado = pa.idpacienteasignado
         inner join cantidadconsultas cc on cc.idtratamiento = tr.idtratamiento
         inner join consultas cl on cl.idconsulta = cc.idconsulta
-        inner join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
-        inner join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
+        full outer join consultaprocedimiento pc on pc.idconsulta = cl.idconsulta
+        full outer join procedimientos pr on pr.idprocedimiento = pc.idprocedimiento
         Where dr.iddoctor = ?
-        group by  fechaconsulta";
+        group by  fechaconsulta, costoconsulta ";
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }

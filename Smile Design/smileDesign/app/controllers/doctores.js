@@ -20,7 +20,7 @@ function fillTable(dataset) {
         // Se crean y concatenan las filas de la tabla con los datos de cada registro.
         content += `
             <tr>
-                <td><img src="../../resources/img/fotodoctores/${row.fotodoctor}" class="materialboxed" height="100"></td>
+                <td><img src="../resources/img/fotodoctores/${row.fotodoctor}" class="materialboxed" height="100"></td>
                 <td>${row.nombredoctor}</td>
                 <td>${row.apellidodoctor}</td>
                 <td>${row.direcciondoctor}</td>

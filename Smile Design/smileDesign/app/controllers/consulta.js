@@ -87,7 +87,7 @@ document.getElementById('search-form').addEventListener('submit', function (even
 //     let instance = M.Modal.getInstance(document.getElementById('send-modal'));
 //     instance.open();
 //     // Se asigna el título para la caja de dialogo (modal).
-//     document.getElementById('modal-s-title').textContent = 'Generar Gráfica de Consulta';    
+//     document.getElementById('modal-s-title').textContent = 'Generar Gráfica de Consulta';
 // }
 // // function Send() {    
 // //     // Se restauran los elementos del formulario.
@@ -303,7 +303,7 @@ function openProcedures(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
                 if (response.status) {                    
                     document.getElementById('id_consultaP').value = response.dataset.idconsulta;  
-                    document.getElementById('notas_consultaP').value = response.dataset.notasconsulta;                                                                               
+                    document.getElementById('notas_consultaP').value = response.dataset.codigoconsulta;                                                                               
                     searchRows1(API_CONSULTAS, 'show-a-form');                                                                      
 
                 } else {

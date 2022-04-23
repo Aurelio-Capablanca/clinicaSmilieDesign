@@ -1,6 +1,6 @@
 <?php
 /*
-*   Clase para realizar las operaciones en la base de datos.
+*   Clase para realizar las operaciones en la base de datos. 
 */
 class Database
 {
@@ -150,6 +150,9 @@ class Database
             case '23503':
                 self::$error = 'Registro ocupado, no se puede eliminar';
                 break;
+            case 'P0001':
+                  self::$error = 'Operación no disponible';
+                  break;    
             default:
                 self::$error = 'Ocurrió un problema en la base de datos';     
         }

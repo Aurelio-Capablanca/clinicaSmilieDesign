@@ -12,8 +12,8 @@ function fillTable(dataset) {
     dataset.map(function (row) {
         content += `
             <tr>
-                <td><img src="../../resources/img/odontograma/${row.odontograma}" class="materialboxed" height="100"></td>
-                <td><img src="../../resources/img/periodontograma/${row.periodontograma}" class="materialboxed" height="100"></td>                
+                <td><img src="../resources/img/odontograma/${row.odontograma}" class="materialboxed" height="100"></td>
+                <td><img src="../resources/img/periodontograma/${row.periodontograma}" class="materialboxed" height="100"></td>                
                 <td>${row.nombrepaciente}</td>
                 <td>${row.apellidopaciente}</td>                    
                 <td>

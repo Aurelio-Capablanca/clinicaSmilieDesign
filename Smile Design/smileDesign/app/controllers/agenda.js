@@ -1,7 +1,7 @@
 const API_CONSULTA = '../app/api/consulta.php?action=';
 
 document.addEventListener('DOMContentLoaded', function () {
-    //Se declaran las variables necesarias para inicializar los componentes del framework   
+    //Se declaran las variables necesarias para inicializar los componentes del framework    
     readRowsAgenda(API_CONSULTA);
 });
 
@@ -162,7 +162,7 @@ function openProcedures(id) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.                
                 if (response.status) {
                     document.getElementById('id_consultaP').value = response.dataset.idconsulta;
-                    document.getElementById('notas_consultaP').value = response.dataset.notasconsulta;
+                    document.getElementById('notas_consultaP').value = response.dataset.codigoconsulta;
                     searchRows1(API_CONSULTA, 'show-a-form');
 
                 } else {

@@ -226,7 +226,7 @@ private $idprocedimiento = null;
 
     public function readOneProcedure()
     {
-        $sql = 'SELECT idconsulta, idprocedimiento, idconsultaprocedimiento ,notasconsulta, nombreprocedimiento, descripcionprocedimiento
+        $sql = 'SELECT idconsulta, idprocedimiento, idconsultaprocedimiento ,notasconsulta, nombreprocedimiento, descripcionprocedimiento, codigoconsulta
                 FROM consultaprocedimiento
                 INNER JOIN procedimientos USING(idprocedimiento)
                 INNER JOIN consultas USING(idconsulta)
@@ -237,18 +237,18 @@ private $idprocedimiento = null;
 
     public function searchOneProcedure($value)
     {
-        $sql = 'SELECT idconsulta, idprocedimiento, idconsultaprocedimiento, notasconsulta ,horaconsulta, nombreprocedimiento, descripcionprocedimiento
+        $sql = 'SELECT idconsulta, idprocedimiento, idconsultaprocedimiento, notasconsulta ,horaconsulta, nombreprocedimiento, descripcionprocedimiento, codigoconsulta
                 FROM consultaprocedimiento
                 INNER JOIN procedimientos USING(idprocedimiento)
                 INNER JOIN consultas USING(idconsulta)
-                WHERE notasconsulta ILIKE ?';
+                WHERE codigoconsulta ILIKE ?';
         $params = array("%$value%");
         return Database::getRows($sql, $params);
     }
     
     public function readAllProcedure()
     {
-        $sql = 'SELECT idconsulta, idprocedimiento, idconsultaprocedimiento, notasconsulta ,horaconsulta, nombreprocedimiento, descripcionprocedimiento
+        $sql = 'SELECT idconsulta, idprocedimiento, idconsultaprocedimiento, notasconsulta ,horaconsulta, nombreprocedimiento, descripcionprocedimiento, codigoconsulta
                 FROM consultaprocedimiento
                 INNER JOIN procedimientos USING(idprocedimiento)
                 INNER JOIN consultas USING(idconsulta)';

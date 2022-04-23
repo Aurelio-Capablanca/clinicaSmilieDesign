@@ -174,22 +174,22 @@ Dashboard_Page::headerTemplate('Pacientes');
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">how_to_reg</i>
-                    <input type="text" id="dui_paciente" name="dui_paciente" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" class="validate" required />
+                    <input type="text" id="dui_paciente" name="dui_paciente" placeholder="00000000-0" pattern="[0-9]{8}[-][0-9]{1}" oncopy="return false" oncut="return false"  class="validate" required />
                     <label for="dui_paciente">DUI</label>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">place</i>
-                    <input type="text" id="direccion_paciente" name="direccion_paciente" maxlength="200" class="validate" required />
+                    <input type="text" id="direccion_paciente" name="direccion_paciente" maxlength="200" class="validate" oncopy="return false" oncut="return false" required />
                     <label for="direccion_paciente">Dirección</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">phone</i>
-                    <input type="text" id="telefono_paciente" name="telefono_paciente" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required />
+                    <input type="text" id="telefono_paciente" name="telefono_paciente" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" oncopy="return false" oncut="return false" required />
                     <label for="telefono_paciente">Teléfono</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <i class="material-icons prefix">email</i>
-                    <input type="email" id="correo_cliente" name="correo_cliente" maxlength="100" class="validate" required />
+                    <input type="email" id="correo_cliente" name="correo_cliente" maxlength="100" class="validate" oncopy="return false" oncut="return false" onpaste="return false"  required />
                     <label for="correo_cliente">Correo electrónico</label>
                 </div>
                 <div class="input-field col s6">

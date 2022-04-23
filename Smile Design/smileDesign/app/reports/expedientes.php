@@ -41,13 +41,13 @@ if (isset($_GET['id'])) {
                     // Se imprimen las celdas con los datos de los productos.                    
                     $pdf->MultiCell(195, 10, utf8_decode($rows['observacionesperiodontograma']), 1, 1);
                 } 
-                $pdf->SetFont('Helvetica', 'B', 11);
-                $pdf->Cell(195, 10, utf8_decode('Doctor'), 1, 1, 'C', 1);              
-                $pdf->SetFont('Helvetica', '', 11);
-                foreach ($dataExpedientes as $rows) {
-                    // Se imprimen las celdas con los datos de los productos.                    
-                    $pdf->MultiCell(195, 10, utf8_decode($rows['nombredoctor']), 1, 1);
-                }                     
+                // $pdf->SetFont('Helvetica', 'B', 11);
+                // $pdf->Cell(195, 10, utf8_decode('Doctor'), 1, 1, 'C', 1);              
+                // $pdf->SetFont('Helvetica', '', 11);
+                // foreach ($dataExpedientes as $rows) {
+                //     // Se imprimen las celdas con los datos de los productos.                    
+                //     $pdf->MultiCell(195, 10, utf8_decode($rows['nombredoctor']), 1, 1);
+                // }                     
                 } else {
                     $pdf->Cell(0, 10, utf8_decode('No hay Datos'), 1, 1);
                 }

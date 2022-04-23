@@ -184,9 +184,9 @@ class Usuarios extends Validator
                 from usuarios u
                 INNER JOIN estadousuario USING(idestadousuario)
                 INNER JOIN tipousuario USING(idtipousuario)
-                WHERE apellidousuario ILIKE ? OR nombreusuario ILIKE ?
+                WHERE apellidousuario ILIKE ? OR nombreusuario ILIKE ? AND idusuario != ?
                 order by nombreusuario ASC';
-        $params = array("%$value%", "%$value%");
+        $params = array("%$value%", "%$value%", $_SESSION['idusuario']);
         return Database::getRows($sql, $params);
     }
 
@@ -208,8 +208,9 @@ class Usuarios extends Validator
         from usuarios u
         INNER JOIN estadousuario USING(idestadousuario)
         INNER JOIN tipousuario USING(idtipousuario)
+        Where idusuario != ?
         order by nombreusuario ASC';
-        $params = null;
+        $params = array($_SESSION['idusuario']);
         return Database::getRows($sql, $params);
     }
 

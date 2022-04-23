@@ -18,11 +18,11 @@ try {
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'farmastuffsv@gmail.com';                     //SMTP username
-    $mail->Password   = 'ftmztvmtmbyoftxb';                               //SMTP password
+    $mail->Username   = 'farmastuff.devteam@gmail.com';                     //SMTP username
+    $mail->Password   = 'NNo00081670%#';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;                                 
-    $mail->setFrom('farmastuffsv@gmail.com');
+    $mail->setFrom('farmastuff.devteam@gmail.com', 'Smile Design/ Departamento de Seguridad');
     $mail->addAddress($_SESSION['correousuario']); 
     $mail->isHTML(true);              
     $mail->Subject = 'Smile Design codigo de confirmacion '.$codigoos;

@@ -13,7 +13,7 @@ class Pacientes extends Validator{
     private $foto = null;
     private $estado = null;
     private $imagen = null;
-    private $ruta = '../../../resources/img/productos/';    
+    private $ruta = '../../resources/img/pacientes/';    
     private $iddoctor = null;
     private $r1 = null;
     private $p1 = null;
@@ -704,13 +704,11 @@ class Pacientes extends Validator{
 
     public function readExpedientes()
     {
-        $sql = "SELECT ah.idarchivo, ex.idexpediente, aa.idpacienteasignado ,nombrepaciente ||' '|| apellidopaciente as nombrepaciente, notas, 
-                        		observacionesperiodontograma, odontograma, periodontograma, nombredoctor ||' '|| apellidodoctor as nombredoctor
+        $sql = "SELECT ah.idarchivo, ex.idexpediente, nombrepaciente ||' '|| apellidopaciente as nombrepaciente, notas, 
+                       observacionesperiodontograma, odontograma, periodontograma
                 From pacientes pc
                 inner join expedientes ex on ex.idpaciente = pc.idpaciente
-                inner join archivos ah on ah.idexpediente = ex.idexpediente
-                inner join pacienteasignado aa on aa.idpaciente = pc.idpaciente
-                inner join doctores dr on dr.iddoctor = aa.iddoctor
+                inner join archivos ah on ah.idexpediente = ex.idexpediente                                
                 Where pc.idpaciente= ?";
         $params = array($this->id);
         return Database::getRows($sql, $params);

@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción
                 if (response.status) {
-                    sweetAlert(1, response.message, null);
+                    //sweetAlert(1, response.message, null);
                 } else {
                     // Se verifica si ocurrió un problema en la base de datos, de lo contrario se continua normalmente.
                     if (response.error) {

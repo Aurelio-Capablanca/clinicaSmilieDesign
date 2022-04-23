@@ -85,7 +85,7 @@ Dashboard_Page::headerTemplate('Consultas');
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">place</i>
-                        <input type="text" id="notas_consulta" name="notas_consulta" maxlength="1000" class="validate" required />
+                        <input type="text" id="notas_consulta" name="notas_consulta" maxlength="1000" class="validate" autocomplete="off" required />
                         <label for="notas_consulta">Notas Consulta</label>
                     </div>
                     <div class="input-field col s12 m6">

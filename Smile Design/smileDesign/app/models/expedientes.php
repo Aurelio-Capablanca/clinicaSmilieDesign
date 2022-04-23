@@ -164,9 +164,9 @@ class Productos extends Validator
         ($this->odontograma) ? $this->deleteFile($this->getRutaOdontograma(), $current_image2) : $this->odontograma = $current_image2;
 
         $sql = 'UPDATE expedientes
-        SET odontograma = ? , periodontograma = ? , idpaciente = ?
+        SET odontograma = ? , periodontograma = ?
         WHERE idexpediente = ?;';
-        $params = array($this->odontograma, $this->periodontograma, $this->paciente, $this->id);
+        $params = array($this->odontograma, $this->periodontograma, $this->id);
         return Database::executeRow($sql, $params);
     }
 

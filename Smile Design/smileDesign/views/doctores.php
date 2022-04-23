@@ -69,17 +69,17 @@ Dashboard_Page::headerTemplate('Doctores');
                         </div>
                         <div class="input-field col s12">
                             <i class="material-icons prefix">place</i>
-                            <input type="text" id="direccion_doctor" name="direccion_doctor" maxlength="200" class="validate" required />
+                            <input type="text" id="direccion_doctor" name="direccion_doctor" maxlength="200" class="validate" oncopy="return false" oncut="return false" autocomplete="off"  required />
                             <label for="direccion_doctor">Dirección</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">phone</i>
-                            <input type="text" id="telefono_doctor" name="telefono_doctor" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" required />
+                            <input type="text" id="telefono_doctor" name="telefono_doctor" placeholder="0000-0000" pattern="[2,6,7]{1}[0-9]{3}[-][0-9]{4}" class="validate" oncopy="return false" oncut="return false" autocomplete="off" required />
                             <label for="telefono_doctor">Teléfono</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">email</i>
-                            <input type="email" id="correo_doctor" name="correo_doctor" maxlength="100" class="validate" required />
+                            <input type="email" id="correo_doctor" name="correo_doctor" maxlength="100" class="validate" oncopy="return false" oncut="return false" autocomplete="off" required />
                             <label for="correo_doctor">Correo electrónico</label>
                         </div>
 
@@ -90,12 +90,12 @@ Dashboard_Page::headerTemplate('Doctores');
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">security</i>
-                            <input type="password" id="clave_doctor" name="clave_doctor" class="validate" required />
+                            <input type="password" id="clave_doctor" name="clave_doctor" class="validate" oncopy="return false" oncut="return false" required />
                             <label for="clave_doctor">Clave</label>
                         </div>
                         <div class="input-field col s12 m6">
                             <i class="material-icons prefix">security</i>
-                            <input type="password" id="confirmar_doctor" name="confirmar_doctor" class="validate" required />
+                            <input type="password" id="confirmar_doctor" name="confirmar_doctor" class="validate" oncopy="return false" oncut="return false" required />
                             <label for="confirmar_doctor">Confirmar clave</label>
                         </div>
                         <div class="input-field col s6">

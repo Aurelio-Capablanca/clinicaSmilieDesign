@@ -282,10 +282,10 @@ if (isset($_GET['action'])) {
                                                         $result['status'] = 1;
                                                         $result['message'] = 'Usuario registrado correctamente';
                                                     } else {
-                                                        $result['exception'] = Database::getException();
+                                                        $result['exception'] = 'Database::getException()';
                                                     }
                                                 } else {
-                                                    $result['exception'] = $usuario->getPasswordError();
+                                                    $result['exception'] = 'La clave no sigue las convenciones necesarias';
                                                 }
                                             } else {
                                                 $result['exception'] = 'Claves diferentes';
