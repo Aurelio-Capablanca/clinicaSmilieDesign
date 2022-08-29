@@ -49,34 +49,6 @@ Dashboard_Page::headerTemplate('Pacientes');
             </table>
         </div>
 
-
-        <!-- <div id="show-pregunta-modal" class="modal">
-            <div class="modal-content center-align">
-            <h4> </h4>                
-                <h4 id="modal-pregunta-title" class="center-align"></h4>                
-                <form method="post" id="show-form">                   
-                    <input class="hide" type="number" id="id_pacienteS" name="id_pacienteS"/> 
-                    <input class="hide" type="number" id="id_pacienteC" name="id_pacienteC"/>  
-                    <input id="nombre_pacienteS" type="text" name="nombre_pacienteS"  class="hide" />                        
-                    <div class="row">
-                        <table class="responsive-table highlight">                           
-                            <thead>
-                                <tr>
-                                    <th>Pregunta</th>                                          
-                                    <th class="actions-column">Acciones</th>                                  
-                                </tr>
-                            </thead>                            
-                            <tbody id="pregunta-rows">
-                            </tbody>
-                        </table>
-                    <div class="row center-align">                    
-                    </div>           
-                </form>
-            </div>            
-        </div>
-    </div> -->
-
-
         <div id="show-asignado-modal" class="modal">
             <div class="modal-content center-align">
                 <h4> </h4>
